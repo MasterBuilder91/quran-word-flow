@@ -71,7 +71,7 @@ export const HeroSection = () => {
             className="flex flex-wrap justify-center gap-8 md:gap-16 mb-10"
           >
             <div className="text-center">
-              <p className="font-arabic text-3xl md:text-4xl text-primary font-semibold">١٢٥</p>
+              <p className="font-arabic text-3xl md:text-4xl text-primary font-semibold">125</p>
               <p className="text-sm text-muted-foreground">Essential Words</p>
             </div>
             <div className="text-center">
