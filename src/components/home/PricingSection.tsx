@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
+import { StripeBuyButton } from "@/components/StripeBuyButton";
 
 const features = [
   "Access to all 6 learning modules",
@@ -94,15 +93,12 @@ export const PricingSection = () => {
             </ul>
 
             {/* CTA */}
-            <Link to="/subscribe">
-              <Button size="lg" className="w-full text-lg py-6 bg-primary hover:bg-primary/90">
-                Subscribe Now
-              </Button>
-            </Link>
-
-            <p className="text-xs text-muted-foreground text-center mt-4 font-ui">
-              Secure payment powered by Stripe
-            </p>
+            <div className="flex justify-center">
+              <StripeBuyButton
+                buyButtonId="buy_btn_1SiEWIGAtYKo4nymTylZrMgN"
+                publishableKey="pk_live_51R1aMZGAtYKo4nymurCYvAbK33ZFFHUHdHYV9mYihSf4ngtkxd6fthHvWwT0xk3WndJ1yMaKysicZ0HxboCeIUoB00faWxdgGL"
+              />
+            </div>
           </div>
         </motion.div>
 
