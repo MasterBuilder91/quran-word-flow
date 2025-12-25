@@ -65,7 +65,7 @@ export const PricingSection = () => {
             <div className="text-center mb-8">
               <p className="text-muted-foreground font-ui mb-2">Monthly Subscription</p>
               <div className="flex items-baseline justify-center gap-1">
-                <span className="text-5xl md:text-6xl font-english font-bold text-foreground">$5</span>
+                <span className="text-5xl md:text-6xl font-english font-bold text-foreground">$10</span>
                 <span className="text-muted-foreground font-ui">/month</span>
               </div>
               <p className="text-sm text-gold mt-2 font-ui">Less than a cup of coffee</p>

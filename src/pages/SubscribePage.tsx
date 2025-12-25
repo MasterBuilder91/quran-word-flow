@@ -13,7 +13,7 @@ const features = [
   "125 high-frequency Qur'anic words",
   "Interactive flashcards & quizzes",
   "Track your progress",
-  "Lifetime access",
+  "Cancel anytime",
 ];
 
 const SubscribePage = () => {
@@ -48,14 +48,14 @@ const SubscribePage = () => {
               Unlock Full Access
             </h1>
             <p className="text-muted-foreground">
-              Get lifetime access to all modules and start your journey to understanding the Qur'an.
+              Get full access to all modules and start your journey to understanding the Qur'an.
             </p>
           </div>
 
           <div className="bg-card border border-border rounded-2xl p-8">
             <div className="text-center mb-6">
-              <span className="text-5xl font-bold text-foreground">$12</span>
-              <span className="text-muted-foreground">/lifetime</span>
+              <span className="text-5xl font-bold text-foreground">$10</span>
+              <span className="text-muted-foreground">/month</span>
             </div>
 
             <ul className="space-y-3 mb-8">
