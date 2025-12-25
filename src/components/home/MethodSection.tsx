@@ -28,7 +28,7 @@ const methods = [
 
 export const MethodSection = () => {
   return (
-    <section className="py-24 bg-card/30 relative">
+    <section id="method" className="py-24 bg-card/30 relative scroll-mt-20">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">

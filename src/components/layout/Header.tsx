@@ -27,17 +27,17 @@ export const Header = () => {
             <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Modules
             </Link>
-            <Link to="/progress" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
-              Progress
+            <Link to="/#method" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              Method
             </Link>
-            <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
-              About
+            <Link to="/#pricing" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              Pricing
             </Link>
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/login">
+            <Link to="/auth">
               <Button variant="ghost" className="font-ui">
                 Sign In
               </Button>
@@ -78,21 +78,21 @@ export const Header = () => {
                 Modules
               </Link>
               <Link
-                to="/progress"
+                to="/#method"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
-                Progress
+                Method
               </Link>
               <Link
-                to="/about"
+                to="/#pricing"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
-                About
+                Pricing
               </Link>
               <div className="flex flex-col gap-3 pt-4">
-                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="outline" className="w-full">
                     Sign In
                   </Button>
