@@ -2244,6 +2244,183 @@ const verbForms: GrammarWord[] = [
 ];
 
 // =============================================
+// MODULE 13: المعرفة والنكرة - Definite & Indefinite
+// =============================================
+
+const definiteIndefinite: GrammarWord[] = [
+  {
+    id: 1301,
+    arabic: "نَكِرَة",
+    transliteration: "nakira",
+    english: "indefinite noun",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "رَجُلٌ",
+        english: "a man (any man, not specific)",
+        reference: "Indefinite singular"
+      },
+      {
+        arabic: "كِتَابٌ",
+        english: "a book (any book)",
+        reference: "Indefinite singular"
+      }
+    ],
+    notes: "نكرة means 'unknown' or 'unspecified'. When you say رَجُلٌ with tanween, it means 'a man' - any man, not a specific one. Just like 'a' or 'an' in English."
+  },
+  {
+    id: 1302,
+    arabic: "مَعْرِفَة",
+    transliteration: "maʿrifa",
+    english: "definite noun",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "الرَّجُلُ",
+        english: "the man (a specific man)",
+        reference: "Definite singular"
+      },
+      {
+        arabic: "الكِتَابُ",
+        english: "the book (a specific book)",
+        reference: "Definite singular"
+      }
+    ],
+    notes: "معرفة means 'known' or 'specified'. Adding ال (the definite article) makes a noun definite - like 'the' in English. الرَّجُلُ means 'the man' - a specific, known man."
+  },
+  {
+    id: 1303,
+    arabic: "تَنْوِين",
+    transliteration: "tanwīn",
+    english: "nunation (a/an marker)",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "بَيْتٌ",
+        english: "a house",
+        reference: "tanwīn ḍammah (ـٌ)"
+      },
+      {
+        arabic: "بَيْتًا",
+        english: "a house (accusative)",
+        reference: "tanwīn fatḥah (ـً)"
+      },
+      {
+        arabic: "بَيْتٍ",
+        english: "a house (genitive)",
+        reference: "tanwīn kasrah (ـٍ)"
+      }
+    ],
+    forms: [
+      { arabic: "ـٌ", transliteration: "un", meaning: "tanwīn ḍammah (nominative)" },
+      { arabic: "ـً", transliteration: "an", meaning: "tanwīn fatḥah (accusative)" },
+      { arabic: "ـٍ", transliteration: "in", meaning: "tanwīn kasrah (genitive)" }
+    ],
+    notes: "Tanween is the 'n' sound at the end of indefinite nouns. It signals that the noun is مفرد (singular) and نكرة (indefinite). Think of it as the Arabic way of saying 'a' or 'an'. When you see ـٌ ـً ـٍ, the noun is indefinite."
+  },
+  {
+    id: 1304,
+    arabic: "ال",
+    transliteration: "al-",
+    english: "the (definite article)",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "الحَمْدُ لِلَّهِ رَبِّ العَالَمِينَ",
+        english: "All praise is to Allah, Lord of the worlds",
+        reference: "Qur'an 1:2"
+      },
+      {
+        arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+        english: "In the name of Allah, the Most Gracious, the Most Merciful",
+        reference: "Qur'an 1:1"
+      }
+    ],
+    notes: "ال makes a noun definite (معرفة). Notice: definite nouns do NOT have tanween. You cannot have both ال and tanween on the same word - they are opposites!"
+  },
+  {
+    id: 1305,
+    arabic: "مُفْرَد",
+    transliteration: "mufrad",
+    english: "singular",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "مُسْلِمٌ",
+        english: "a Muslim (one person)",
+        reference: "Singular indefinite"
+      },
+      {
+        arabic: "المُسْلِمُ",
+        english: "the Muslim (one specific person)",
+        reference: "Singular definite"
+      }
+    ],
+    notes: "مفرد means 'singular' - referring to ONE thing. When a word has tanween (like مُسْلِمٌ), it typically indicates a single, unspecified thing - 'a Muslim' not 'the Muslim' or 'Muslims'."
+  },
+  {
+    id: 1306,
+    arabic: "كِتَابٌ / الكِتَابُ",
+    transliteration: "kitābun / al-kitābu",
+    english: "a book / the book",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "ذَٰلِكَ الكِتَابُ لَا رَيْبَ فِيهِ",
+        english: "This is the Book about which there is no doubt",
+        reference: "Qur'an 2:2"
+      },
+      {
+        arabic: "وَكَتَبْنَا لَهُ فِي الأَلْوَاحِ مِن كُلِّ شَيْءٍ",
+        english: "And We wrote for him on the tablets of all things",
+        reference: "Qur'an 7:145"
+      }
+    ],
+    notes: "Compare: كِتَابٌ (kitābun) = 'a book' (indefinite, with tanween) vs الكِتَابُ (al-kitābu) = 'the book' (definite, with ال, no tanween)"
+  },
+  {
+    id: 1307,
+    arabic: "رَسُولٌ / الرَّسُولُ",
+    transliteration: "rasūlun / ar-rasūlu",
+    english: "a messenger / the messenger",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "وَمَا مُحَمَّدٌ إِلَّا رَسُولٌ",
+        english: "Muhammad is not but a messenger",
+        reference: "Qur'an 3:144"
+      },
+      {
+        arabic: "وَأَطِيعُوا الرَّسُولَ",
+        english: "And obey the Messenger",
+        reference: "Qur'an 4:59"
+      }
+    ],
+    notes: "رَسُولٌ with tanween = 'a messenger' (any messenger). الرَّسُولُ with ال = 'the Messenger' (the specific, known Messenger ﷺ)"
+  },
+  {
+    id: 1308,
+    arabic: "نَبِيٌّ / النَّبِيُّ",
+    transliteration: "nabiyyun / an-nabiyyu",
+    english: "a prophet / the prophet",
+    category: "noun-state",
+    examples: [
+      {
+        arabic: "وَمَا كَانَ لِنَبِيٍّ أَن يَغُلَّ",
+        english: "It is not for a prophet to act dishonestly",
+        reference: "Qur'an 3:161"
+      },
+      {
+        arabic: "النَّبِيُّ أَوْلَىٰ بِالمُؤْمِنِينَ",
+        english: "The Prophet is more worthy of the believers",
+        reference: "Qur'an 33:6"
+      }
+    ],
+    notes: "نَبِيٍّ (in this verse with kasra tanween due to لِ) = 'a prophet' (indefinite). النَّبِيُّ = 'the Prophet' (definite, referring to Prophet Muhammad ﷺ)"
+  }
+];
+
+// =============================================
 // ALL GRAMMAR WORDS COMBINED
 // =============================================
 
@@ -2259,7 +2436,8 @@ export const allGrammarWords: GrammarWord[] = [
   ...soundFemininePlural,
   ...brokenPlural,
   ...nounCategories,
-  ...verbForms
+  ...verbForms,
+  ...definiteIndefinite
 ];
 
 // =============================================
@@ -2397,6 +2575,17 @@ export const grammarModules: GrammarModule[] = [
     wordIds: [1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208],
     coveragePercentage: 72.0,
     prerequisiteModuleId: 111
+  },
+  {
+    id: 113,
+    title: "Definite & Indefinite",
+    titleArabic: "المعرفة والنكرة",
+    description: "Understanding tanween as 'a/an' and ال as 'the'",
+    descriptionArabic: "الفرق بين الاسم المُعَرَّف والاسم النَّكِرَة",
+    grammarRule: "نكرة (indefinite) uses tanween (ـٌ ـً ـٍ) like 'a/an' in English. معرفة (definite) uses ال like 'the'. A singular noun (مفرد) with tanween means 'a [thing]' - indefinite and singular. You cannot have both ال and tanween on the same word.",
+    wordIds: [1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308],
+    coveragePercentage: 78.5,
+    prerequisiteModuleId: 112
   }
 ];
 
