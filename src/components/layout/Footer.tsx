@@ -35,35 +35,35 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/progress" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Your Progress
+                <Link to="/#method" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Our Method
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Methodology
+                <Link to="/subscribe" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Subscribe
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Support */}
+          {/* Account */}
           <div>
-            <h4 className="font-english font-semibold text-foreground mb-4">Support</h4>
+            <h4 className="font-english font-semibold text-foreground mb-4">Account</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/help" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Help Center
+                <Link to="/auth" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Sign In
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Privacy Policy
+                <Link to="/subscribe" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Get Started
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Terms of Service
+                <Link to="/#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Pricing
                 </Link>
               </li>
             </ul>

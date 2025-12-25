@@ -45,7 +45,7 @@ const plans = [
 
 export const PricingSection = () => {
   return (
-    <section className="py-24 bg-primary/5 relative overflow-hidden">
+    <section id="pricing" className="py-24 bg-primary/5 relative overflow-hidden scroll-mt-20">
       {/* Decorative patterns */}
       <div className="absolute inset-0 pattern-islamic opacity-20" />
       
