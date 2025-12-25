@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -6,7 +6,21 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        element?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
@@ -27,12 +41,18 @@ export const Header = () => {
             <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Modules
             </Link>
-            <Link to="/#method" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+            <button
+              onClick={() => scrollToSection("method")}
+              className="text-muted-foreground hover:text-foreground transition-colors font-ui"
+            >
               Method
-            </Link>
-            <Link to="/#pricing" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+            </button>
+            <button
+              onClick={() => scrollToSection("pricing")}
+              className="text-muted-foreground hover:text-foreground transition-colors font-ui"
+            >
               Pricing
-            </Link>
+            </button>
           </nav>
 
           {/* Desktop CTA */}
@@ -77,20 +97,24 @@ export const Header = () => {
               >
                 Modules
               </Link>
-              <Link
-                to="/#method"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-lg text-foreground py-2 border-b border-border/50"
+              <button
+                onClick={() => {
+                  scrollToSection("method");
+                  setIsMenuOpen(false);
+                }}
+                className="text-lg text-foreground py-2 border-b border-border/50 text-left"
               >
                 Method
-              </Link>
-              <Link
-                to="/#pricing"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-lg text-foreground py-2 border-b border-border/50"
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("pricing");
+                  setIsMenuOpen(false);
+                }}
+                className="text-lg text-foreground py-2 border-b border-border/50 text-left"
               >
                 Pricing
-              </Link>
+              </button>
               <div className="flex flex-col gap-3 pt-4">
                 <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="outline" className="w-full">
