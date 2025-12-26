@@ -1,115 +1,82 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Letter groups organized by articulation point (inspired by reference images)
+// Import articulation chart images
+import throatLettersImg from "@/assets/articulation/throat-letters.png";
+import tongueBackLettersImg from "@/assets/articulation/tongue-back-letters.png";
+import tongueTipLettersImg from "@/assets/articulation/tongue-tip-letters.png";
+import teethLettersImg from "@/assets/articulation/teeth-letters.png";
+import lipsLettersImg from "@/assets/articulation/lips-letters.png";
+
+// Letter groups organized by articulation point with English comparisons
 export const articulationGroups = [
   {
-    id: 'throat-deep',
-    name: 'Deep Throat',
-    nameArabic: 'أقصى الحَلق',
-    color: 'hsl(280, 60%, 60%)', // Purple
+    id: 'throat',
+    name: 'Throat Letters (الحَلق)',
+    image: throatLettersImg,
     letters: [
-      { arabic: 'ء', forms: 'أَ أِ أُ' },
-      { arabic: 'ه', forms: 'هَ هِ هُ' },
+      { arabic: 'ء', name: 'Hamza', english: 'Glottal stop - like the pause in "uh-oh"' },
+      { arabic: 'ه', name: 'Haa', english: 'Like "H" but from deeper in throat' },
+      { arabic: 'ع', name: 'Ayn', english: 'No English equivalent - squeeze middle throat' },
+      { arabic: 'ح', name: 'Haa', english: 'Breathy "H" - like fogging a mirror' },
+      { arabic: 'غ', name: 'Ghayn', english: 'Like French "R" or gargling' },
+      { arabic: 'خ', name: 'Khaa', english: 'Like "CH" in Scottish "loch" or German "Bach"' },
     ],
-    diagramType: 'throat',
-    description: 'Deepest part of the throat. Hamza is a glottal stop like "uh-oh". Haa is a soft breath.',
-  },
-  {
-    id: 'throat-mid',
-    name: 'Middle Throat',
-    nameArabic: 'وَسَط الحَلق',
-    color: 'hsl(320, 60%, 55%)', // Pink
-    letters: [
-      { arabic: 'ع', forms: 'عَ عِ عُ' },
-      { arabic: 'ح', forms: 'حَ حِ حُ' },
-    ],
-    diagramType: 'throat',
-    description: 'Ayn (ع) requires squeezing the throat - unique to Arabic. Haa (ح) is a breathy H.',
-  },
-  {
-    id: 'throat-upper',
-    name: 'Upper Throat',
-    nameArabic: 'أدنى الحَلق',
-    color: 'hsl(200, 70%, 55%)', // Blue
-    letters: [
-      { arabic: 'غ', forms: 'غَ غِ غُ' },
-      { arabic: 'خ', forms: 'خَ خِ خُ' },
-    ],
-    diagramType: 'throat',
-    description: 'Ghayn (غ) like French R. Khaa (خ) like Scottish "loch".',
+    description: 'These letters come from three areas of the throat: deep (ء ه), middle (ع ح), and upper (غ خ). Most are unique to Arabic.',
   },
   {
     id: 'tongue-back',
-    name: 'Back of Tongue',
-    nameArabic: 'أقصى اللِّسان',
-    color: 'hsl(150, 60%, 45%)', // Green
+    name: 'Back of Tongue (أقصى اللِّسان)',
+    image: tongueBackLettersImg,
     letters: [
-      { arabic: 'ق', forms: 'قَ قِ قُ' },
-      { arabic: 'ك', forms: 'كَ كِ كُ' },
+      { arabic: 'ق', name: 'Qaf', english: 'Deep "K" from very back of throat - no English equivalent' },
+      { arabic: 'ك', name: 'Kaf', english: '✓ Like "K" in "kite" - familiar!' },
+      { arabic: 'ج', name: 'Jeem', english: '✓ Like "J" in "jam" - familiar!' },
+      { arabic: 'ش', name: 'Sheen', english: '✓ Like "SH" in "ship" - familiar!' },
+      { arabic: 'ي', name: 'Yaa', english: '✓ Like "Y" in "yes" - familiar!' },
+      { arabic: 'ض', name: 'Daad', english: 'THE Arabic letter - tongue edge presses molars. Unique!' },
     ],
-    diagramType: 'tongue-back',
-    description: 'Qaf (ق) is a deep K from the very back. Kaf (ك) is like English K.',
+    description: 'The tongue presses against different parts of the roof of the mouth. ك ج ش ي are similar to English sounds. ض (Daad) is so unique that Arabic is called "the language of Daad".',
   },
   {
-    id: 'tongue-middle',
-    name: 'Middle of Tongue',
-    nameArabic: 'وَسَط اللِّسان',
-    color: 'hsl(180, 60%, 45%)', // Teal
+    id: 'tongue-tip',
+    name: 'Tip of Tongue (طَرَف اللِّسان)',
+    image: tongueTipLettersImg,
     letters: [
-      { arabic: 'ش', forms: 'شَ شِ شُ' },
-      { arabic: 'ي', forms: 'يَ يِ يُ' },
-      { arabic: 'ج', forms: 'جَ جِ جُ' },
-      { arabic: 'ض', forms: 'ضَ ضِ ضُ' },
+      { arabic: 'ل', name: 'Laam', english: '✓ Like "L" in "light" - tip touches gum ridge. Very familiar!' },
+      { arabic: 'ن', name: 'Noon', english: '✓ Like "N" in "noon" - familiar!' },
+      { arabic: 'ر', name: 'Raa', english: 'Rolled "R" like Spanish "rr" - NOT like English R' },
+      { arabic: 'ط', name: 'Taa', english: 'Emphatic/heavy "T" - tongue back raised' },
+      { arabic: 'د', name: 'Daal', english: '✓ Like "D" in "door" - familiar!' },
+      { arabic: 'ت', name: 'Taa', english: '✓ Like "T" in "tea" - familiar!' },
     ],
-    diagramType: 'tongue-middle',
-    description: 'Middle tongue against the roof. Daad (ض) is THE Arabic letter - tongue edge presses molars.',
+    description: 'The tongue tip touches the gum ridge behind the upper front teeth. ل (L), ن (N), د (D), ت (T) are just like English! ر is rolled like Spanish.',
   },
   {
-    id: 'tongue-tip-gum',
-    name: 'Tongue Tip to Gum',
-    nameArabic: 'طَرَف اللِّسان',
-    color: 'hsl(45, 80%, 50%)', // Gold
+    id: 'teeth',
+    name: 'Teeth Letters (الأسنان)',
+    image: teethLettersImg,
     letters: [
-      { arabic: 'ل', forms: 'لَ لِ لُ' },
-      { arabic: 'ن', forms: 'نَ نِ نُ' },
-      { arabic: 'ر', forms: 'رَ رِ رُ' },
-      { arabic: 'ط', forms: 'طَ طِ طُ' },
-      { arabic: 'د', forms: 'دَ دِ دُ' },
-      { arabic: 'ت', forms: 'تَ تِ تُ' },
+      { arabic: 'ص', name: 'Saad', english: 'Emphatic "S" - tongue back raised' },
+      { arabic: 'ز', name: 'Zaay', english: '✓ Like "Z" in "zoo" - familiar!' },
+      { arabic: 'س', name: 'Seen', english: '✓ Like "S" in "sun" - familiar!' },
+      { arabic: 'ظ', name: 'Dhaa', english: 'Emphatic "TH" (as in "this") - with raised tongue back' },
+      { arabic: 'ذ', name: 'Dhaal', english: '✓ Like "TH" in "this" or "the" - familiar!' },
+      { arabic: 'ث', name: 'Thaa', english: '✓ Like "TH" in "think" or "three" - familiar!' },
     ],
-    diagramType: 'tongue-tip',
-    description: 'Tongue tip touches the gum ridge behind upper teeth. Raa (ر) is rolled like Spanish R.',
-  },
-  {
-    id: 'tongue-teeth',
-    name: 'Tongue to Teeth',
-    nameArabic: 'الأسنان',
-    color: 'hsl(260, 60%, 60%)', // Purple
-    letters: [
-      { arabic: 'ص', forms: 'صَ صِ صُ' },
-      { arabic: 'ز', forms: 'زَ زِ زُ' },
-      { arabic: 'س', forms: 'سَ سِ سُ' },
-      { arabic: 'ظ', forms: 'ظَ ظِ ظُ' },
-      { arabic: 'ذ', forms: 'ذَ ذِ ذُ' },
-      { arabic: 'ث', forms: 'ثَ ثِ ثُ' },
-    ],
-    diagramType: 'teeth',
-    description: 'Tongue tip at or between teeth edges. Emphatic letters (ص ظ) have raised tongue back.',
+    description: 'The tongue tip touches or goes between the teeth. س (S), ز (Z), ث (TH-think), ذ (TH-this) are familiar English sounds!',
   },
   {
     id: 'lips',
-    name: 'The Lips',
-    nameArabic: 'الشَّفَتان',
-    color: 'hsl(0, 65%, 55%)', // Red
+    name: 'Lip Letters (الشَّفَتان)',
+    image: lipsLettersImg,
     letters: [
-      { arabic: 'ف', forms: 'فَ فِ فُ' },
-      { arabic: 'و', forms: 'وَ وِ وُ' },
-      { arabic: 'ب', forms: 'بَ بِ بُ' },
-      { arabic: 'م', forms: 'مَ مِ مُ' },
+      { arabic: 'ف', name: 'Faa', english: '✓ Like "F" in "fun" - upper teeth on lower lip. Familiar!' },
+      { arabic: 'و', name: 'Waw', english: '✓ Like "W" in "water" or "OO" in "moon" - familiar!' },
+      { arabic: 'ب', name: 'Baa', english: '✓ Like "B" in "book" - both lips together. Familiar!' },
+      { arabic: 'م', name: 'Meem', english: '✓ Like "M" in "moon" - both lips together. Familiar!' },
     ],
-    diagramType: 'lips',
-    description: 'Faa (ف) - upper teeth on lower lip. Others use both lips together.',
+    description: 'All lip letters have English equivalents! ف (F), و (W), ب (B), م (M) are exactly like their English counterparts.',
   },
 ];
 
@@ -126,185 +93,114 @@ export const ArticulationChart = ({ selectedGroup, onGroupSelect }: Articulation
     onGroupSelect?.(groupId);
   };
 
-  const activeData = articulationGroups.find(g => g.id === activeGroup);
-
   return (
-    <div className="space-y-8">
-      {/* Groups Display */}
-      <div className="grid gap-6">
+    <div className="space-y-6">
+      {/* Quick reference: English-like letters */}
+      <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30">
+        <h4 className="font-semibold text-green-400 mb-2">✓ Good News for English Speakers!</h4>
+        <p className="text-sm text-muted-foreground mb-3">
+          Many Arabic letters sound just like English! Look for the ✓ symbol below.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {['ب', 'ت', 'ث', 'ج', 'د', 'ذ', 'ز', 'س', 'ش', 'ف', 'ك', 'ل', 'م', 'ن', 'و', 'ي'].map(letter => (
+            <span key={letter} className="font-arabic text-lg px-2 py-1 rounded bg-green-500/20 text-green-300">
+              {letter}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Articulation Charts */}
+      <div className="space-y-6">
         {articulationGroups.map((group, index) => (
           <motion.div
             key={group.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            onClick={() => handleGroupClick(group.id)}
-            className={`relative rounded-2xl border-2 transition-all cursor-pointer overflow-hidden ${
+            transition={{ delay: index * 0.1 }}
+            className={`rounded-2xl border-2 overflow-hidden transition-all ${
               activeGroup === group.id 
                 ? 'border-primary bg-card shadow-lg' 
-                : 'border-border/50 bg-card/50 hover:border-border hover:bg-card/80'
+                : 'border-border/50 bg-card/50'
             }`}
           >
-            {/* Color indicator bar */}
-            <div 
-              className="absolute left-0 top-0 bottom-0 w-1.5"
-              style={{ backgroundColor: group.color }}
-            />
-            
-            <div className="p-5 pl-6">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="font-english font-semibold text-foreground">{group.name}</h3>
-                  <p className="font-arabic text-gold text-lg">{group.nameArabic}</p>
-                </div>
-                <div 
-                  className="w-4 h-4 rounded-full"
-                  style={{ backgroundColor: group.color }}
-                />
-              </div>
+            {/* Header - clickable */}
+            <button
+              onClick={() => handleGroupClick(group.id)}
+              className="w-full p-4 text-left flex items-center justify-between hover:bg-card/80 transition-colors"
+            >
+              <h3 className="font-english font-semibold text-foreground text-lg">{group.name}</h3>
+              <motion.span
+                animate={{ rotate: activeGroup === group.id ? 180 : 0 }}
+                className="text-muted-foreground"
+              >
+                ▼
+              </motion.span>
+            </button>
 
-              {/* Letters Row */}
-              <div className="flex flex-wrap gap-4 mb-4">
-                {group.letters.map((letter, i) => (
-                  <div key={i} className="text-center">
-                    {/* Main letter */}
-                    <div 
-                      className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl font-arabic mb-2"
-                      style={{ 
-                        backgroundColor: `${group.color}20`,
-                        border: `2px solid ${group.color}40`
-                      }}
-                    >
-                      <span className="text-foreground">{letter.arabic}</span>
+            {/* Expanded content */}
+            <AnimatePresence>
+              {activeGroup === group.id && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 pb-6 space-y-6">
+                    {/* Chart Image */}
+                    <div className="rounded-xl overflow-hidden bg-white">
+                      <img 
+                        src={group.image} 
+                        alt={group.name}
+                        className="w-full h-auto"
+                      />
                     </div>
-                    {/* Vowel forms */}
-                    <div 
-                      className="px-2 py-1 rounded-lg text-sm font-arabic"
-                      style={{ backgroundColor: `${group.color}15` }}
-                    >
-                      <span className="text-red-400">{letter.forms.split(' ')[0]}</span>
-                      {' '}
-                      <span className="text-green-400">{letter.forms.split(' ')[1]}</span>
-                      {' '}
-                      <span className="text-blue-400">{letter.forms.split(' ')[2]}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
 
-              {/* Expanded description */}
-              <AnimatePresence>
-                {activeGroup === group.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pt-4 border-t border-border/50">
-                      <div className="flex flex-col lg:flex-row gap-6">
-                        {/* Diagram */}
-                        <div className="flex-shrink-0">
-                          <ArticulationDiagram type={group.diagramType} color={group.color} />
-                        </div>
-                        {/* Description */}
-                        <div className="flex-1">
-                          <p className="text-muted-foreground leading-relaxed">{group.description}</p>
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            <span className="text-xs px-2 py-1 rounded bg-red-500/20 text-red-400">Fatha (َ)</span>
-                            <span className="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400">Kasra (ِ)</span>
-                            <span className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">Damma (ُ)</span>
+                    {/* Description */}
+                    <p className="text-muted-foreground">{group.description}</p>
+
+                    {/* Letter breakdown */}
+                    <div className="grid gap-3">
+                      {group.letters.map((letter, i) => (
+                        <div 
+                          key={i}
+                          className={`flex items-center gap-4 p-3 rounded-lg ${
+                            letter.english.includes('✓') 
+                              ? 'bg-green-500/10 border border-green-500/20' 
+                              : 'bg-card border border-border/50'
+                          }`}
+                        >
+                          <span className="font-arabic text-3xl text-gold w-12 text-center">
+                            {letter.arabic}
+                          </span>
+                          <div className="flex-1">
+                            <span className="font-semibold text-foreground">{letter.name}</span>
+                            <p className="text-sm text-muted-foreground">{letter.english}</p>
                           </div>
                         </div>
-                      </div>
+                      ))}
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         ))}
       </div>
-    </div>
-  );
-};
 
-// Mini diagram component showing mouth/tongue position
-const ArticulationDiagram = ({ type, color }: { type: string; color: string }) => {
-  return (
-    <div className="w-32 h-32 rounded-xl bg-background/50 border border-border/50 flex items-center justify-center overflow-hidden">
-      <svg viewBox="0 0 100 100" className="w-full h-full p-2">
-        {type === 'throat' && (
-          <>
-            {/* Side profile showing throat */}
-            <path
-              d="M 70 20 C 80 25, 85 35, 85 50 C 85 65, 75 80, 60 85 L 40 85 L 40 75 C 45 75, 50 70, 52 60 L 55 40 C 55 30, 60 22, 70 20"
-              fill="none"
-              stroke="hsl(var(--muted-foreground))"
-              strokeWidth="2"
-            />
-            {/* Throat highlight */}
-            <circle cx="45" cy="55" r="8" fill={`${color}40`} stroke={color} strokeWidth="2" />
-            <line x1="45" y1="55" x2="30" y2="45" stroke={color} strokeWidth="2" strokeDasharray="3,2" />
-          </>
-        )}
-        {type === 'tongue-back' && (
-          <>
-            {/* Open mouth view showing tongue */}
-            <ellipse cx="50" cy="50" rx="35" ry="40" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
-            {/* Teeth */}
-            <path d="M 25 35 Q 50 25 75 35" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" />
-            {/* Tongue */}
-            <ellipse cx="50" cy="60" rx="25" ry="20" fill="hsl(0, 40%, 55%)" opacity="0.7" />
-            {/* Back highlight */}
-            <ellipse cx="50" cy="48" rx="10" ry="8" fill={`${color}60`} stroke={color} strokeWidth="2" />
-          </>
-        )}
-        {type === 'tongue-middle' && (
-          <>
-            <ellipse cx="50" cy="50" rx="35" ry="40" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
-            <path d="M 25 35 Q 50 25 75 35" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" />
-            <ellipse cx="50" cy="60" rx="25" ry="20" fill="hsl(0, 40%, 55%)" opacity="0.7" />
-            {/* Middle line highlight */}
-            <line x1="35" y1="55" x2="65" y2="55" stroke={color} strokeWidth="4" strokeLinecap="round" />
-          </>
-        )}
-        {type === 'tongue-tip' && (
-          <>
-            <ellipse cx="50" cy="50" rx="35" ry="40" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
-            <path d="M 25 35 Q 50 25 75 35" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" />
-            <ellipse cx="50" cy="60" rx="25" ry="20" fill="hsl(0, 40%, 55%)" opacity="0.7" />
-            {/* Tip highlight near teeth */}
-            <circle cx="50" cy="42" r="6" fill={`${color}60`} stroke={color} strokeWidth="2" />
-            <path d="M 50 48 L 50 55" stroke={color} strokeWidth="2" />
-          </>
-        )}
-        {type === 'teeth' && (
-          <>
-            <ellipse cx="50" cy="50" rx="35" ry="40" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
-            {/* Upper teeth */}
-            <path d="M 25 35 Q 50 25 75 35" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
-            {/* Lower teeth */}
-            <path d="M 30 70 Q 50 75 70 70" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" />
-            <ellipse cx="50" cy="58" rx="20" ry="12" fill="hsl(0, 40%, 55%)" opacity="0.7" />
-            {/* Teeth edge highlight */}
-            <line x1="35" y1="35" x2="65" y2="35" stroke={color} strokeWidth="4" strokeLinecap="round" />
-          </>
-        )}
-        {type === 'lips' && (
-          <>
-            {/* Side profile of lips */}
-            <ellipse cx="50" cy="50" rx="30" ry="35" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
-            {/* Lips */}
-            <ellipse cx="50" cy="50" rx="20" ry="12" fill={`${color}40`} stroke={color} strokeWidth="2" />
-            {/* Upper lip */}
-            <path d="M 30 48 Q 50 40 70 48" fill="none" stroke={color} strokeWidth="2" />
-            {/* Lower lip */}
-            <path d="M 32 52 Q 50 60 68 52" fill="none" stroke={color} strokeWidth="2" />
-          </>
-        )}
-      </svg>
+      {/* Summary */}
+      <div className="p-4 rounded-xl bg-primary/10 border border-primary/30">
+        <h4 className="font-semibold text-primary mb-2">Summary</h4>
+        <ul className="text-sm text-muted-foreground space-y-1">
+          <li>• <strong>16 letters</strong> are similar to English sounds (marked with ✓)</li>
+          <li>• <strong>6 throat letters</strong> are unique to Arabic (ء ه ع ح غ خ)</li>
+          <li>• <strong>4 emphatic letters</strong> require raising the back of your tongue (ص ض ط ظ)</li>
+          <li>• <strong>ق (Qaf)</strong> is a deep K from the very back</li>
+          <li>• <strong>ر (Raa)</strong> is rolled like Spanish, not like English R</li>
+        </ul>
+      </div>
     </div>
   );
 };
