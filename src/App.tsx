@@ -15,6 +15,7 @@ import ForumCategoryPage from "./pages/ForumCategoryPage";
 import ForumThreadPage from "./pages/ForumThreadPage";
 import NewThreadPage from "./pages/NewThreadPage";
 import LearnToReadPage from "./pages/LearnToReadPage";
+import PracticePlaygroundPage from "./pages/PracticePlaygroundPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/subscribe" element={<SubscribePage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/learn-to-read" element={<LearnToReadPage />} />
+          <Route path="/practice" element={<PracticePlaygroundPage />} />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/forum/:categorySlug" element={<ForumCategoryPage />} />
           <Route path="/forum/:categorySlug/new" element={<NewThreadPage />} />
