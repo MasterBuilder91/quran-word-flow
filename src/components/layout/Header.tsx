@@ -44,6 +44,9 @@ export const Header = () => {
             <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Modules
             </Link>
+            <Link to="/practice" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              Practice
+            </Link>
             <Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Forum
             </Link>
@@ -97,11 +100,25 @@ export const Header = () => {
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
               <Link
+                to="/learn-to-read"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Learn to Read
+              </Link>
+              <Link
                 to="/modules"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Modules
+              </Link>
+              <Link
+                to="/practice"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Practice
               </Link>
               <Link
                 to="/forum"
