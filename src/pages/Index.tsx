@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { MethodSection } from "@/components/home/MethodSection";
 import { WhySectionApart } from "@/components/home/WhySectionApart";
 import { ModulePreview } from "@/components/home/ModulePreview";
+import { CommunitySection } from "@/components/home/CommunitySection";
 import { PricingSection } from "@/components/home/PricingSection";
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
         <MethodSection />
         <WhySectionApart />
         <ModulePreview />
+        <CommunitySection />
         <PricingSection />
       </main>
       <Footer />

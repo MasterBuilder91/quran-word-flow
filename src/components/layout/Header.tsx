@@ -41,6 +41,9 @@ export const Header = () => {
             <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Modules
             </Link>
+            <Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              Forum
+            </Link>
             <button
               onClick={() => scrollToSection("method")}
               className="text-muted-foreground hover:text-foreground transition-colors font-ui"
@@ -96,6 +99,13 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Modules
+              </Link>
+              <Link
+                to="/forum"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Forum
               </Link>
               <button
                 onClick={() => {
