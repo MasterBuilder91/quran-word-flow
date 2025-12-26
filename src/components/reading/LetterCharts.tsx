@@ -1,5 +1,7 @@
 import { arabicLetters, ArabicLetter } from "@/data/arabicReadingCourse";
 import { motion } from "framer-motion";
+import { Volume2 } from "lucide-react";
+import { useArabicAudio } from "@/hooks/useArabicAudio";
 
 interface LetterFormsChartProps {
   letterIds?: string[];
@@ -7,9 +9,15 @@ interface LetterFormsChartProps {
 }
 
 export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChartProps) => {
+  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
+  
   const letters = showAll 
     ? arabicLetters.filter(l => !['taa-marbuta', 'hamza'].includes(l.id))
     : arabicLetters.filter(l => letterIds?.includes(l.id));
+
+  const handleLetterClick = (arabic: string) => {
+    playLetter(arabic, 'sound');
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -34,10 +42,16 @@ export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChart
               className="border-b border-border/50 hover:bg-card/50 transition-colors"
             >
               <td className="p-3">
-                <div className="flex items-center gap-2">
-                  <span className="font-arabic text-2xl text-gold">{letter.arabic}</span>
+                <button
+                  onClick={() => handleLetterClick(letter.arabic)}
+                  className="flex items-center gap-2 group cursor-pointer hover:opacity-80 transition-opacity"
+                >
+                  <span className={`font-arabic text-2xl text-gold ${isPlaying && currentLetter === letter.arabic ? 'animate-pulse' : ''}`}>
+                    {letter.arabic}
+                  </span>
                   <span className="text-sm text-foreground">{letter.name}</span>
-                </div>
+                  <Volume2 className={`w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors ${isPlaying && currentLetter === letter.arabic ? 'text-primary' : ''}`} />
+                </button>
               </td>
               <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.isolated}</td>
               <td className="p-3 text-center font-arabic text-3xl text-foreground">
