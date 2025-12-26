@@ -15,8 +15,9 @@ export default {
     extend: {
       fontFamily: {
         arabic: ['Amiri', 'Noto Naskh Arabic', 'serif'],
-        english: ['Crimson Pro', 'Georgia', 'serif'],
-        ui: ['Crimson Pro', 'Georgia', 'serif'],
+        english: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        ui: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -62,9 +63,13 @@ export default {
           light: "hsl(var(--gold-light))",
           dark: "hsl(var(--gold-dark))",
         },
-        cream: {
-          DEFAULT: "hsl(var(--cream))",
-          dark: "hsl(var(--cream-dark))",
+        purple: {
+          DEFAULT: "hsl(var(--purple))",
+          light: "hsl(var(--purple-light))",
+        },
+        cosmic: {
+          DEFAULT: "hsl(var(--cosmic))",
+          light: "hsl(var(--cosmic-light))",
         },
         ink: {
           DEFAULT: "hsl(var(--ink))",
@@ -90,7 +95,8 @@ export default {
         'soft': 'var(--shadow-sm)',
         'medium': 'var(--shadow-md)',
         'large': 'var(--shadow-lg)',
-        'gold': 'var(--shadow-gold)',
+        'glow': 'var(--shadow-glow)',
+        'gold-glow': 'var(--shadow-gold-glow)',
       },
       keyframes: {
         "accordion-down": {
@@ -125,6 +131,14 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
         },
+        "orbit": {
+          "0%": { transform: "rotate(0deg) translateX(100px) rotate(0deg)" },
+          "100%": { transform: "rotate(360deg) translateX(100px) rotate(-360deg)" },
+        },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 20px hsl(175 70% 45% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(175 70% 45% / 0.5)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -135,6 +149,8 @@ export default {
         "shimmer": "shimmer 2s infinite linear",
         "float": "float 6s ease-in-out infinite",
         "pulse-soft": "pulse-soft 3s ease-in-out infinite",
+        "orbit": "orbit 20s linear infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
       },
     },
   },

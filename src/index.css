@@ -2,138 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Qur'anic Arabic Learning Platform - Islamic Design System */
+/* Quranic Arabic Lab - Observatory/Discovery Design System */
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Warm ivory/cream base - like parchment */
-    --background: 39 33% 97%;
-    --foreground: 200 25% 15%;
+    /* Deep cosmic dark - observatory at night */
+    --background: 230 25% 7%;
+    --foreground: 45 20% 95%;
 
-    /* Card surfaces - slightly warmer than background */
-    --card: 40 35% 95%;
-    --card-foreground: 200 25% 15%;
+    /* Card surfaces - slightly lighter cosmic */
+    --card: 230 22% 11%;
+    --card-foreground: 45 20% 95%;
 
     /* Popover */
-    --popover: 40 35% 98%;
-    --popover-foreground: 200 25% 15%;
+    --popover: 230 22% 9%;
+    --popover-foreground: 45 20% 95%;
 
-    /* Primary - Deep emerald green (Islamic association) */
-    --primary: 160 45% 25%;
-    --primary-foreground: 40 35% 98%;
+    /* Primary - Luminous cyan/teal (discovery, knowledge) */
+    --primary: 175 70% 45%;
+    --primary-foreground: 230 25% 7%;
 
-    /* Secondary - Muted sage green */
-    --secondary: 155 20% 90%;
-    --secondary-foreground: 160 45% 20%;
+    /* Secondary - Deep purple glow */
+    --secondary: 270 40% 20%;
+    --secondary-foreground: 45 20% 95%;
 
-    /* Muted - Soft warm gray */
-    --muted: 35 15% 90%;
-    --muted-foreground: 200 15% 45%;
+    /* Muted - Cosmic gray */
+    --muted: 230 15% 18%;
+    --muted-foreground: 230 10% 55%;
 
-    /* Accent - Rich gold */
-    --accent: 40 70% 50%;
-    --accent-foreground: 200 25% 15%;
+    /* Accent - Rich gold (wisdom, enlightenment) */
+    --accent: 42 85% 55%;
+    --accent-foreground: 230 25% 7%;
 
     /* Destructive */
     --destructive: 0 65% 50%;
-    --destructive-foreground: 40 35% 98%;
+    --destructive-foreground: 45 20% 95%;
 
     /* Borders & inputs */
-    --border: 35 20% 85%;
-    --input: 35 20% 88%;
-    --ring: 160 45% 35%;
+    --border: 230 20% 18%;
+    --input: 230 20% 15%;
+    --ring: 175 70% 45%;
 
     --radius: 0.75rem;
 
     /* Custom semantic colors */
-    --emerald: 160 45% 25%;
-    --emerald-light: 160 35% 45%;
-    --emerald-dark: 160 50% 15%;
-    --gold: 40 70% 50%;
-    --gold-light: 42 75% 65%;
-    --gold-dark: 38 70% 40%;
-    --cream: 39 33% 97%;
-    --cream-dark: 38 25% 92%;
-    --ink: 200 25% 15%;
-    --ink-light: 200 15% 35%;
+    --emerald: 175 70% 45%;
+    --emerald-light: 175 60% 55%;
+    --emerald-dark: 175 75% 35%;
+    --gold: 42 85% 55%;
+    --gold-light: 45 90% 65%;
+    --gold-dark: 40 80% 45%;
+    --cosmic: 230 25% 7%;
+    --cosmic-light: 230 22% 15%;
+    --ink: 45 20% 95%;
+    --ink-light: 230 10% 70%;
+    --purple: 270 50% 45%;
+    --purple-light: 270 45% 55%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(160 45% 25%) 0%, hsl(160 50% 15%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(40 70% 50%) 0%, hsl(38 70% 40%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(40 35% 98%) 0%, hsl(38 25% 94%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(40 35% 97%) 0%, hsl(38 25% 93%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(175 70% 35%) 0%, hsl(270 50% 35%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(42 85% 55%) 0%, hsl(40 80% 45%) 100%);
+    --gradient-cosmic: linear-gradient(180deg, hsl(230 25% 5%) 0%, hsl(230 22% 12%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(230 22% 13%) 0%, hsl(230 22% 9%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(175 70% 45% / 0.15) 0%, transparent 70%);
 
     /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(200 25% 15% / 0.06);
-    --shadow-md: 0 4px 20px hsl(200 25% 15% / 0.08);
-    --shadow-lg: 0 8px 40px hsl(200 25% 15% / 0.12);
-    --shadow-gold: 0 4px 20px hsl(40 70% 50% / 0.25);
+    --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 20px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 8px 40px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px hsl(175 70% 45% / 0.25);
+    --shadow-gold-glow: 0 0 30px hsl(42 85% 55% / 0.3);
 
     /* Typography */
     --font-arabic: 'Amiri', 'Noto Naskh Arabic', serif;
-    --font-english: 'Crimson Pro', Georgia, serif;
-    --font-ui: 'Crimson Pro', Georgia, serif;
+    --font-english: 'Space Grotesk', system-ui, sans-serif;
+    --font-ui: 'Space Grotesk', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 
     /* Sidebar */
-    --sidebar-background: 160 45% 22%;
-    --sidebar-foreground: 40 35% 95%;
-    --sidebar-primary: 40 70% 50%;
-    --sidebar-primary-foreground: 200 25% 15%;
-    --sidebar-accent: 160 40% 30%;
-    --sidebar-accent-foreground: 40 35% 95%;
-    --sidebar-border: 160 40% 18%;
-    --sidebar-ring: 40 70% 50%;
-  }
-
-  .dark {
-    --background: 200 30% 8%;
-    --foreground: 40 25% 92%;
-
-    --card: 200 28% 12%;
-    --card-foreground: 40 25% 92%;
-
-    --popover: 200 28% 10%;
-    --popover-foreground: 40 25% 92%;
-
-    --primary: 160 40% 45%;
-    --primary-foreground: 200 30% 8%;
-
-    --secondary: 160 25% 18%;
-    --secondary-foreground: 40 25% 90%;
-
-    --muted: 200 20% 18%;
-    --muted-foreground: 40 15% 60%;
-
-    --accent: 40 65% 55%;
-    --accent-foreground: 200 30% 8%;
-
-    --destructive: 0 60% 45%;
-    --destructive-foreground: 40 25% 95%;
-
-    --border: 200 20% 20%;
-    --input: 200 20% 18%;
-    --ring: 160 40% 45%;
-
-    --emerald: 160 40% 45%;
-    --emerald-light: 160 35% 55%;
-    --emerald-dark: 160 45% 35%;
-    --gold: 40 65% 55%;
-    --gold-light: 42 70% 65%;
-    --gold-dark: 38 65% 45%;
-
-    --gradient-hero: linear-gradient(135deg, hsl(160 40% 35%) 0%, hsl(160 45% 25%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(200 28% 10%) 0%, hsl(200 30% 8%) 100%);
-
-    --sidebar-background: 200 30% 10%;
-    --sidebar-foreground: 40 25% 92%;
-    --sidebar-primary: 40 65% 55%;
-    --sidebar-primary-foreground: 200 30% 8%;
-    --sidebar-accent: 160 30% 20%;
-    --sidebar-accent-foreground: 40 25% 92%;
-    --sidebar-border: 200 25% 15%;
-    --sidebar-ring: 40 65% 55%;
+    --sidebar-background: 230 25% 9%;
+    --sidebar-foreground: 45 20% 95%;
+    --sidebar-primary: 175 70% 45%;
+    --sidebar-primary-foreground: 230 25% 7%;
+    --sidebar-accent: 230 22% 15%;
+    --sidebar-accent-foreground: 45 20% 95%;
+    --sidebar-border: 230 20% 15%;
+    --sidebar-ring: 175 70% 45%;
   }
 }
 
@@ -179,9 +135,26 @@
 }
 
 @layer components {
-  /* Islamic geometric pattern background */
+  /* Star field background pattern */
+  .pattern-stars {
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, hsl(45 20% 95% / 0.4), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(45 20% 95% / 0.3), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(45 20% 95% / 0.5), transparent),
+      radial-gradient(2px 2px at 130px 80px, hsl(175 70% 45% / 0.4), transparent),
+      radial-gradient(1px 1px at 160px 120px, hsl(45 20% 95% / 0.3), transparent),
+      radial-gradient(2px 2px at 200px 50px, hsl(42 85% 55% / 0.3), transparent),
+      radial-gradient(1px 1px at 250px 90px, hsl(45 20% 95% / 0.4), transparent),
+      radial-gradient(2px 2px at 280px 140px, hsl(45 20% 95% / 0.2), transparent),
+      radial-gradient(1px 1px at 320px 30px, hsl(175 70% 45% / 0.3), transparent),
+      radial-gradient(2px 2px at 350px 110px, hsl(45 20% 95% / 0.35), transparent);
+    background-size: 400px 200px;
+    background-repeat: repeat;
+  }
+
+  /* Islamic geometric pattern - luminous version */
   .pattern-islamic {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30L30 0z' fill='none' stroke='%23c9a962' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M30 15L45 30L30 45L15 30L30 15z' fill='none' stroke='%23c9a962' stroke-width='0.3' opacity='0.1'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30L30 0z' fill='none' stroke='%2338bdf8' stroke-width='0.5' opacity='0.1'/%3E%3Cpath d='M30 15L45 30L30 45L15 30L30 15z' fill='none' stroke='%23fbbf24' stroke-width='0.3' opacity='0.08'/%3E%3C/svg%3E");
     background-size: 60px 60px;
   }
 
@@ -199,6 +172,58 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.4), transparent);
   }
+
+  /* Glass card effect */
+  .glass-card {
+    background: hsl(230 22% 11% / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(230 20% 20% / 0.5);
+  }
+
+  /* Luminous border effect */
+  .border-glow {
+    position: relative;
+  }
+
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(175 70% 45% / 0.5), hsl(270 50% 45% / 0.3), hsl(42 85% 55% / 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Lab badge styling */
+  .lab-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+    background: hsl(175 70% 45% / 0.15);
+    color: hsl(175 60% 55%);
+    border: 1px solid hsl(175 70% 45% / 0.3);
+  }
+
+  /* Discovery card hover effect */
+  .discovery-card {
+    @apply transition-all duration-300;
+  }
+
+  .discovery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0.4), 0 0 30px hsl(175 70% 45% / 0.1);
+  }
+
+  /* Forum category colors */
+  .forum-quran { --forum-color: 175 70% 45%; }
+  .forum-hadith { --forum-color: 42 85% 55%; }
+  .forum-poetry { --forum-color: 270 50% 50%; }
+  .forum-adab { --forum-color: 340 65% 55%; }
+  .forum-arabic { --forum-color: 145 60% 45%; }
+  .forum-general { --forum-color: 200 60% 50%; }
 }
 
 @layer utilities {
@@ -217,12 +242,73 @@
     background-clip: text;
   }
 
+  .text-gradient-cosmic {
+    background: linear-gradient(135deg, hsl(175 70% 55%) 0%, hsl(270 50% 55%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   /* Glow effects */
   .glow-gold {
-    box-shadow: 0 0 30px hsl(var(--gold) / 0.3);
+    box-shadow: 0 0 30px hsl(var(--gold) / 0.4);
   }
 
   .glow-emerald {
-    box-shadow: 0 0 30px hsl(var(--emerald) / 0.2);
+    box-shadow: 0 0 30px hsl(var(--emerald) / 0.3);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 30px hsl(var(--purple) / 0.3);
+  }
+
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(175 70% 45% / 0.5);
+  }
+
+  .text-glow-gold {
+    text-shadow: 0 0 20px hsl(42 85% 55% / 0.5);
+  }
+
+  /* Animated pulse glow */
+  .pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(175 70% 45% / 0.2); }
+    50% { box-shadow: 0 0 40px hsl(175 70% 45% / 0.4); }
+  }
+
+  /* Star twinkle animation */
+  .twinkle {
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* Genius mode - special highlight */
+  .genius-highlight {
+    position: relative;
+  }
+
+  .genius-highlight::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, hsl(175 70% 45% / 0.3), hsl(42 85% 55% / 0.3));
+    border-radius: inherit;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .genius-highlight:hover::after {
+    opacity: 1;
   }
 }
