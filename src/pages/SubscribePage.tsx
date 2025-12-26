@@ -27,7 +27,7 @@ const plans = [
     id: "complete",
     name: "Complete",
     price: "$7",
-    description: "Full learning experience",
+    description: "Vocabulary + Grammar combined",
     features: [
       "All vocabulary modules",
       "All grammar modules",
@@ -41,7 +41,7 @@ const plans = [
     id: "grammar",
     name: "Grammar",
     price: "$5",
-    description: "Master Qur'anic grammar",
+    description: "Understand sentence structure",
     features: [
       "12 grammar modules",
       "Pronouns, plurals & more",
