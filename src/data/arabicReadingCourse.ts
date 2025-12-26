@@ -40,7 +40,7 @@ export interface ReadingLesson {
 }
 
 export interface LessonContent {
-  type: 'text' | 'letters' | 'diagram' | 'chart' | 'practice' | 'audio-note';
+  type: 'text' | 'letters' | 'diagram' | 'chart' | 'practice' | 'audio-note' | 'drill';
   data: any;
 }
 
@@ -745,8 +745,475 @@ export const readingLessons: ReadingLesson[] = [
       },
     ],
   },
+  // ==========================================
+  // QAAIDA-STYLE DRILLS: Fatha Practice
+  // ==========================================
   {
     id: 6,
+    title: 'Fatha Drill: Single Letters',
+    titleArabic: 'تَدريب الفَتحة',
+    description: 'Practice reading letters with fatha (the "a" sound).',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Fatha (فَتحة) - The "a" Sound',
+          paragraphs: [
+            'Fatha is a small diagonal stroke above a letter. It gives the letter a short "a" sound like in "cat".',
+            'Read each syllable aloud, row by row. Focus on pronunciation, not meaning.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Single Letter Fatha Drill',
+          titleArabic: 'تَدريب الحُروف بالفَتحة',
+          rows: [
+            ['بَ', 'تَ', 'ثَ', 'جَ', 'حَ', 'خَ'],
+            ['دَ', 'ذَ', 'رَ', 'زَ', 'سَ', 'شَ'],
+            ['صَ', 'ضَ', 'طَ', 'ظَ', 'عَ', 'غَ'],
+            ['فَ', 'قَ', 'كَ', 'لَ', 'مَ', 'نَ'],
+            ['هَ', 'وَ', 'يَ', 'ءَ', 'أَ', 'إِ'],
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 7,
+    title: 'Kasra Drill: Single Letters',
+    titleArabic: 'تَدريب الكَسرة',
+    description: 'Practice reading letters with kasra (the "i" sound).',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Kasra (كَسرة) - The "i" Sound',
+          paragraphs: [
+            'Kasra is a small diagonal stroke below a letter. It gives the letter a short "i" sound like in "sit".',
+            'Read each syllable aloud. Notice how your mouth position changes from fatha.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Single Letter Kasra Drill',
+          titleArabic: 'تَدريب الحُروف بالكَسرة',
+          rows: [
+            ['بِ', 'تِ', 'ثِ', 'جِ', 'حِ', 'خِ'],
+            ['دِ', 'ذِ', 'رِ', 'زِ', 'سِ', 'شِ'],
+            ['صِ', 'ضِ', 'طِ', 'ظِ', 'عِ', 'غِ'],
+            ['فِ', 'قِ', 'كِ', 'لِ', 'مِ', 'نِ'],
+            ['هِ', 'وِ', 'يِ', 'ءِ', 'أِ', 'إِ'],
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 8,
+    title: 'Damma Drill: Single Letters',
+    titleArabic: 'تَدريب الضَّمة',
+    description: 'Practice reading letters with damma (the "u" sound).',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Damma (ضَمّة) - The "u" Sound',
+          paragraphs: [
+            'Damma is a small curl above a letter. It gives the letter a short "u" sound like in "put".',
+            'Round your lips when pronouncing damma.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Single Letter Damma Drill',
+          titleArabic: 'تَدريب الحُروف بالضَّمة',
+          rows: [
+            ['بُ', 'تُ', 'ثُ', 'جُ', 'حُ', 'خُ'],
+            ['دُ', 'ذُ', 'رُ', 'زُ', 'سُ', 'شُ'],
+            ['صُ', 'ضُ', 'طُ', 'ظُ', 'عُ', 'غُ'],
+            ['فُ', 'قُ', 'كُ', 'لُ', 'مُ', 'نُ'],
+            ['هُ', 'وُ', 'يُ', 'ءُ', 'أُ', 'إُ'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // TWO-LETTER COMBINATIONS
+  // ==========================================
+  {
+    id: 9,
+    title: 'Two-Letter Combinations',
+    titleArabic: 'تَركيب حَرفَين',
+    description: 'Read two-letter syllables with mixed vowels.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Combining Letters',
+          paragraphs: [
+            'Now we combine two letters. Read smoothly without pausing between letters.',
+            'These are practice syllables - they may or may not be real words.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Two-Letter Drill - Fatha + Fatha',
+          titleArabic: 'فَتحة + فَتحة',
+          rows: [
+            ['بَرَ', 'كَتَ', 'نَصَ', 'جَلَ', 'حَمَ', 'سَمَ'],
+            ['فَتَ', 'قَرَ', 'عَلَ', 'ذَهَ', 'خَلَ', 'طَبَ'],
+            ['رَكَ', 'مَشَ', 'صَدَ', 'ضَرَ', 'غَفَ', 'ثَبَ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Two-Letter Drill - Mixed Vowels',
+          titleArabic: 'حَركات مُختَلِفة',
+          rows: [
+            ['بِرُ', 'كَتِ', 'نُصَ', 'جِلُ', 'حُمَ', 'سِمُ'],
+            ['فَتِ', 'قُرَ', 'عِلُ', 'ذِهَ', 'خُلَ', 'طِبُ'],
+            ['رِكُ', 'مُشَ', 'صِدُ', 'ضَرِ', 'غُفِ', 'ثُبَ'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // SUKUN PRACTICE
+  // ==========================================
+  {
+    id: 10,
+    title: 'Sukun: Stopping Consonants',
+    titleArabic: 'السُّكون',
+    description: 'Learn to stop a consonant with sukun (no vowel).',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Sukun (سُكون) - The Stop',
+          paragraphs: [
+            'Sukun is a small circle above a letter. It means the consonant has NO vowel and stops.',
+            'Example: أَبْ (ab) - the ب has sukun so you stop after "b".',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Sukun Drill - Two Letters',
+          titleArabic: 'تَدريب السُّكون',
+          rows: [
+            ['أَبْ', 'أَتْ', 'أَثْ', 'أَجْ', 'أَحْ', 'أَخْ'],
+            ['أَدْ', 'أَذْ', 'أَرْ', 'أَزْ', 'أَسْ', 'أَشْ'],
+            ['أَصْ', 'أَضْ', 'أَطْ', 'أَظْ', 'أَعْ', 'أَغْ'],
+            ['أَفْ', 'أَقْ', 'أَكْ', 'أَلْ', 'أَمْ', 'أَنْ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Three-Letter with Sukun',
+          titleArabic: 'ثَلاثة أحرُف مَع سُكون',
+          rows: [
+            ['بَرْكَ', 'كَتْبَ', 'نَصْرَ', 'جَلْسَ', 'حَمْدَ', 'سَمْعَ'],
+            ['فَتْحَ', 'قَرْبَ', 'عَلْمَ', 'ذَهْبَ', 'خَلْقَ', 'طَبْعَ'],
+            ['رَكْضَ', 'مَشْيَ', 'صَدْقَ', 'ضَرْبَ', 'غَفْرَ', 'ثَبْتَ'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // MADD (LONG VOWELS)
+  // ==========================================
+  {
+    id: 11,
+    title: 'Madd: Long Vowels',
+    titleArabic: 'حُروف المَدّ',
+    description: 'Stretch the vowel sound with alif, waw, and ya.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Madd (مَدّ) - Stretching the Vowel',
+          paragraphs: [
+            'Madd means to stretch the vowel sound. There are three madd letters:',
+            'ا (Alif) after fatha = "aa" as in "father"',
+            'و (Waw) after damma = "oo" as in "moon"',
+            'ي (Ya) after kasra = "ee" as in "see"',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Alif Madd (aa)',
+          titleArabic: 'مَدّ الألِف',
+          rows: [
+            ['بَا', 'تَا', 'ثَا', 'جَا', 'حَا', 'خَا'],
+            ['دَا', 'ذَا', 'رَا', 'زَا', 'سَا', 'شَا'],
+            ['صَا', 'ضَا', 'طَا', 'ظَا', 'عَا', 'غَا'],
+            ['فَا', 'قَا', 'كَا', 'لَا', 'مَا', 'نَا'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Waw Madd (oo)',
+          titleArabic: 'مَدّ الواو',
+          rows: [
+            ['بُو', 'تُو', 'ثُو', 'جُو', 'حُو', 'خُو'],
+            ['دُو', 'ذُو', 'رُو', 'زُو', 'سُو', 'شُو'],
+            ['صُو', 'ضُو', 'طُو', 'ظُو', 'عُو', 'غُو'],
+            ['فُو', 'قُو', 'كُو', 'لُو', 'مُو', 'نُو'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Ya Madd (ee)',
+          titleArabic: 'مَدّ الياء',
+          rows: [
+            ['بِي', 'تِي', 'ثِي', 'جِي', 'حِي', 'خِي'],
+            ['دِي', 'ذِي', 'رِي', 'زِي', 'سِي', 'شِي'],
+            ['صِي', 'ضِي', 'طِي', 'ظِي', 'عِي', 'غِي'],
+            ['فِي', 'قِي', 'كِي', 'لِي', 'مِي', 'نِي'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // SHADDA (DOUBLED LETTERS)
+  // ==========================================
+  {
+    id: 12,
+    title: 'Shadda: Doubled Letters',
+    titleArabic: 'الشَّدّة',
+    description: 'Learn to pronounce doubled consonants.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Shadda (شَدّة) - Doubling',
+          paragraphs: [
+            'Shadda looks like a small "w" above a letter. It means the letter is pronounced twice.',
+            'Hold the consonant slightly longer. Example: رَبَّ (rabba) - hold the "b" sound.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Shadda Drill',
+          titleArabic: 'تَدريب الشَّدّة',
+          rows: [
+            ['رَبَّ', 'سَمَّ', 'حَقَّ', 'ضَلَّ', 'مَرَّ', 'فَرَّ'],
+            ['جَنَّ', 'شَكَّ', 'هَمَّ', 'عَمَّ', 'ظَنَّ', 'قَصَّ'],
+            ['رَبِّ', 'سُمِّ', 'حُقِّ', 'ضُلِّ', 'مُرِّ', 'فُرِّ'],
+            ['رَبُّ', 'سَمُّ', 'حَقُّ', 'ضَلُّ', 'مَرُّ', 'فَرُّ'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // TANWEEN (NUNATION)
+  // ==========================================
+  {
+    id: 13,
+    title: 'Tanween: Nunation',
+    titleArabic: 'التَّنوين',
+    description: 'Add the "n" sound at the end of words.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Tanween (تَنوين) - The "n" Ending',
+          paragraphs: [
+            'Tanween adds an "n" sound to the end of a word. There are three types:',
+            'Tanween Fatha (ـًا) = "an" | Tanween Kasra (ـٍ) = "in" | Tanween Damma (ـٌ) = "un"',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Tanween Drill',
+          titleArabic: 'تَدريب التَّنوين',
+          rows: [
+            ['كِتَابًا', 'بَابًا', 'قَلَمًا', 'وَلَدًا', 'بِنْتًا', 'بَيْتًا'],
+            ['كِتَابٍ', 'بَابٍ', 'قَلَمٍ', 'وَلَدٍ', 'بِنْتٍ', 'بَيْتٍ'],
+            ['كِتَابٌ', 'بَابٌ', 'قَلَمٌ', 'وَلَدٌ', 'بِنْتٌ', 'بَيْتٌ'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // COMPREHENSIVE READING DRILLS
+  // ==========================================
+  {
+    id: 14,
+    title: 'Multi-Syllable Reading',
+    titleArabic: 'قِراءة مُتَعَدِّدة المَقاطِع',
+    description: 'Practice reading longer combinations.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Putting It All Together',
+          paragraphs: [
+            'Now practice reading longer syllable combinations. Read smoothly from right to left.',
+            'These may or may not be real words - focus on smooth pronunciation.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Three-Syllable Drill',
+          titleArabic: 'تَدريب ثُلاثي المَقاطِع',
+          rows: [
+            ['بَرَكَ', 'كَتَبَ', 'نَصَرَ', 'جَلَسَ', 'حَمَدَ', 'سَمِعَ'],
+            ['فَتَحَ', 'قَرَأَ', 'عَلِمَ', 'ذَهَبَ', 'خَلَقَ', 'طَبَعَ'],
+            ['رَكَضَ', 'مَشَى', 'صَدَقَ', 'ضَرَبَ', 'غَفَرَ', 'ثَبَتَ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Four-Syllable Drill',
+          titleArabic: 'تَدريب رُباعي المَقاطِع',
+          rows: [
+            ['يَكْتُبُ', 'يَنْصُرُ', 'يَجْلِسُ', 'يَحْمَدُ', 'يَسْمَعُ', 'يَفْتَحُ'],
+            ['مَكْتَبَة', 'مَدْرَسَة', 'مَسْجِدَة', 'مَعْرِفَة', 'مَغْفِرَة', 'مَحَبَّة'],
+            ['كَاتِبُونَ', 'نَاصِرُونَ', 'جَالِسُونَ', 'حَامِدُونَ', 'سَامِعُونَ', 'فَاتِحُونَ'],
+          ],
+        },
+      },
+    ],
+  },
+  // ==========================================
+  // SIMILAR LETTER DISTINCTION
+  // ==========================================
+  {
+    id: 15,
+    title: 'Distinguishing Similar Letters',
+    titleArabic: 'تَمييز الحُروف المُتَشابِهة',
+    description: 'Train your eye and tongue to tell apart similar letters.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Similar Letters - Different Sounds',
+          paragraphs: [
+            'Many Arabic letters look similar but sound different. Practice reading these pairs carefully.',
+            'Focus on: dot positions, heavy vs light pronunciation.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'ب ت ث ن ي - Dot Differences',
+          titleArabic: 'فَرق النُّقَط',
+          rows: [
+            ['بَنَ', 'تَنَ', 'ثَنَ', 'نَبَ', 'يَبَ', 'بَيَ'],
+            ['بِيْتَ', 'تِيْنَ', 'ثِيْرَ', 'نِيْلَ', 'يِيْنَ', 'بِيْنَ'],
+            ['نَبْتَ', 'بَنْتَ', 'تَبَنَّ', 'ثَبَتَ', 'يَنْبُتْ', 'نَيَّبَ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'س ش - The "s" vs "sh" Sounds',
+          titleArabic: 'السين والشين',
+          rows: [
+            ['سَمَ', 'شَمَ', 'سِمَ', 'شِمَ', 'سُمَ', 'شُمَ'],
+            ['سَمْسَ', 'شَمْشَ', 'سَاشَ', 'شَاسَ', 'سِيشَ', 'شِيسَ'],
+            ['مَسَّ', 'مَشَّ', 'سَشَّ', 'شَسَّ', 'سُوشَ', 'شُوسَ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'ص س - Light vs Heavy "s"',
+          titleArabic: 'السين والصاد',
+          rows: [
+            ['سَبَ', 'صَبَ', 'سِبَ', 'صِبَ', 'سُبَ', 'صُبَ'],
+            ['سَالَ', 'صَالَ', 'سِيرَ', 'صِيرَ', 'سُورَ', 'صُورَ'],
+            ['بَسَّ', 'بَصَّ', 'نَسَّ', 'نَصَّ', 'فَسَّ', 'فَصَّ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'ح خ ج - Similar Shapes',
+          titleArabic: 'الحاء والخاء والجيم',
+          rows: [
+            ['حَمَ', 'خَمَ', 'جَمَ', 'حِمَ', 'خِمَ', 'جِمَ'],
+            ['حَالَ', 'خَالَ', 'جَالَ', 'حُولَ', 'خُولَ', 'جُولَ'],
+            ['مَحَّ', 'مَخَّ', 'مَجَّ', 'رَحَّ', 'رَخَّ', 'رَجَّ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'ط ت - Light vs Heavy "t"',
+          titleArabic: 'التاء والطاء',
+          rows: [
+            ['تَبَ', 'طَبَ', 'تِبَ', 'طِبَ', 'تُبَ', 'طُبَ'],
+            ['تَابَ', 'طَابَ', 'تِينَ', 'طِينَ', 'تُورَ', 'طُورَ'],
+            ['بَتَّ', 'بَطَّ', 'مَتَّ', 'مَطَّ', 'فَتَّ', 'فَطَّ'],
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'د ذ ض - D Variations',
+          titleArabic: 'الدال والذال والضاد',
+          rows: [
+            ['دَرَ', 'ذَرَ', 'ضَرَ', 'دِرَ', 'ذِرَ', 'ضِرَ'],
+            ['دَامَ', 'ذَامَ', 'ضَامَ', 'دِيمَ', 'ذِيمَ', 'ضِيمَ'],
+            ['رَدَّ', 'رَذَّ', 'رَضَّ', 'مَدَّ', 'مَذَّ', 'مَضَّ'],
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 16,
     title: 'Letters That Don\'t Connect',
     titleArabic: 'الحُروف غَير المُتَّصِلة',
     description: 'Six letters only connect to the letter before them.',
@@ -773,7 +1240,7 @@ export const readingLessons: ReadingLesson[] = [
     ],
   },
   {
-    id: 7,
+    id: 17,
     title: 'Letter Forms & Connections',
     titleArabic: 'أشكال الحُروف',
     description: 'See how each letter transforms based on its position.',
@@ -786,7 +1253,7 @@ export const readingLessons: ReadingLesson[] = [
     ],
   },
   {
-    id: 8,
+    id: 18,
     title: 'The Emphatic Letters',
     titleArabic: 'حُروف التَّفخيم',
     description: 'Master the heavy letters unique to Arabic: ص ض ط ظ',
@@ -813,13 +1280,25 @@ export const readingLessons: ReadingLesson[] = [
       },
     ],
   },
+  // ==========================================
+  // COMPREHENSIVE PRACTICE WORDS
+  // ==========================================
   {
-    id: 9,
+    id: 19,
     title: 'Reading Practice: Simple Words',
     titleArabic: 'تَدريب القِراءة',
     description: 'Put it all together and read your first Arabic words.',
     type: 'practice',
     content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Real Words',
+          paragraphs: [
+            'Now read actual Arabic words. These are common vocabulary.',
+          ],
+        },
+      },
       {
         type: 'practice',
         data: {
@@ -829,37 +1308,107 @@ export const readingLessons: ReadingLesson[] = [
             { arabic: 'بَيْت', transliteration: 'bayt', meaning: 'house' },
             { arabic: 'مَاء', transliteration: 'maaʾ', meaning: 'water' },
             { arabic: 'سَمَاء', transliteration: 'samaaʾ', meaning: 'sky' },
+            { arabic: 'شَمْس', transliteration: 'shams', meaning: 'sun' },
+            { arabic: 'قَمَر', transliteration: 'qamar', meaning: 'moon' },
+            { arabic: 'نَجْم', transliteration: 'najm', meaning: 'star' },
+            { arabic: 'أَرْض', transliteration: 'ard', meaning: 'earth' },
+            { arabic: 'نَار', transliteration: 'naar', meaning: 'fire' },
           ],
         },
       },
     ],
   },
   {
-    id: 10,
+    id: 20,
+    title: 'Advanced Reading Drill',
+    titleArabic: 'تَدريب مُتَقَدِّم',
+    description: 'Challenge yourself with complex syllable patterns.',
+    type: 'practice',
+    content: [
+      {
+        type: 'text',
+        data: {
+          title: 'Complex Patterns',
+          paragraphs: [
+            'These drills combine everything: sukun, madd, shadda, and tanween.',
+            'Read slowly and carefully. Accuracy over speed.',
+          ],
+        },
+      },
+      {
+        type: 'drill',
+        data: {
+          title: 'Mixed Complexity Drill',
+          titleArabic: 'تَدريب شامِل',
+          rows: [
+            ['مُسْتَقِيمٌ', 'مُتَشَابِهَاتٌ', 'يَسْتَغْفِرُونَ', 'الْمُؤْمِنُونَ'],
+            ['وَالصَّافَّاتِ', 'الْحَمْدُ لِلَّهِ', 'بِسْمِ اللَّهِ', 'رَبِّ الْعَالَمِينَ'],
+            ['الرَّحْمَٰنِ الرَّحِيمِ', 'مَالِكِ يَوْمِ الدِّينِ', 'إِيَّاكَ نَعْبُدُ', 'وَإِيَّاكَ نَسْتَعِينُ'],
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 21,
     title: 'Reading Quranic Text',
     titleArabic: 'قِراءة القُرآن',
     description: 'Apply your skills to read actual Quranic verses.',
     type: 'practice',
     content: [
       {
+        type: 'text',
+        data: {
+          title: 'Al-Fatiha - The Opening',
+          paragraphs: [
+            'Practice reading Surah Al-Fatiha, the most recited chapter of the Quran.',
+          ],
+        },
+      },
+      {
         type: 'practice',
         data: {
           quranic: true,
           verses: [
             {
-              arabic: 'بِسْمِ اللَّهِ',
-              transliteration: 'Bismillaah',
-              meaning: 'In the name of Allah',
-            },
-            {
-              arabic: 'الرَّحْمَـٰنِ الرَّحِيمِ',
-              transliteration: 'Ar-Rahmaanir-Raheem',
-              meaning: 'The Most Gracious, The Most Merciful',
+              arabic: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ',
+              transliteration: 'Bismillaahir-Rahmaanir-Raheem',
+              meaning: 'In the name of Allah, the Most Gracious, the Most Merciful',
             },
             {
               arabic: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
               transliteration: 'Alhamdulillaahi Rabbil-ʿAalameen',
               meaning: 'All praise is due to Allah, Lord of the worlds',
+            },
+            {
+              arabic: 'الرَّحْمَـٰنِ الرَّحِيمِ',
+              transliteration: 'Ar-Rahmaanir-Raheem',
+              meaning: 'The Most Gracious, the Most Merciful',
+            },
+            {
+              arabic: 'مَالِكِ يَوْمِ الدِّينِ',
+              transliteration: 'Maaliki Yawmid-Deen',
+              meaning: 'Master of the Day of Judgment',
+            },
+            {
+              arabic: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+              transliteration: 'Iyyaaka naʿbudu wa iyyaaka nastaʿeen',
+              meaning: 'You alone we worship, and You alone we ask for help',
+            },
+            {
+              arabic: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
+              transliteration: 'Ihdinas-Siraatal-Mustaqeem',
+              meaning: 'Guide us to the straight path',
+            },
+            {
+              arabic: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ',
+              transliteration: 'Siraatal-ladheena anʿamta ʿalayhim',
+              meaning: 'The path of those upon whom You have bestowed favor',
+            },
+            {
+              arabic: 'غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
+              transliteration: 'Ghayril-maghdoobi ʿalayhim wa lad-daaalleen',
+              meaning: 'Not of those who have earned anger or of those who are astray',
             },
           ],
         },

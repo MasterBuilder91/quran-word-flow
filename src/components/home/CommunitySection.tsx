@@ -72,36 +72,22 @@ export const CommunitySection = () => {
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple/20 rounded-full blur-3xl" />
 
-              {/* Fake forum preview */}
+              {/* Forum illustration */}
               <div className="space-y-4 relative z-10">
                 <div className="flex items-center gap-2 mb-6">
                   <Sparkles className="w-5 h-5 text-gold" />
-                  <span className="text-sm text-gold font-medium">Recent Discussions</span>
+                  <span className="text-sm text-gold font-medium">Community Awaits</span>
                 </div>
 
-                {[
-                  { title: "Understanding 'Taqwa' in different contexts", replies: 12, category: "Quranic Studies" },
-                  { title: "Beautiful verses from Imam Shafi'i", replies: 8, category: "Poetry" },
-                  { title: "The meaning of 'Khashya' vs 'Khawf'", replies: 15, category: "Arabic Language" },
-                ].map((thread, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + i * 0.1 }}
-                    className="p-4 rounded-xl bg-background/50 border border-border hover:border-primary/30 transition-colors"
-                  >
-                    <h4 className="font-medium text-foreground text-sm mb-2">{thread.title}</h4>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>{thread.category}</span>
-                      <span className="flex items-center gap-1">
-                        <MessageSquare className="w-3 h-3" />
-                        {thread.replies} replies
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+                <div className="text-center py-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border border-primary/20 mb-4">
+                    <Users className="w-10 h-10 text-primary" />
+                  </div>
+                  <p className="text-foreground font-medium mb-2">Join the Conversation</p>
+                  <p className="text-muted-foreground text-sm">
+                    Share insights, ask questions, and grow together with fellow students of knowledge.
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>
