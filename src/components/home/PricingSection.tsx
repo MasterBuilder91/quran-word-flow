@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
-import { StripeBuyButton } from "@/components/StripeBuyButton";
+import { Button } from "@/components/ui/button";
 
 const plans = [
   {
@@ -15,6 +15,7 @@ const plans = [
       "Progress tracking",
     ],
     popular: false,
+    stripeLink: "https://buy.stripe.com/6oU28rahqd0C5fXgChdIA01",
   },
   {
     name: "Complete",
@@ -28,6 +29,7 @@ const plans = [
       "Best value",
     ],
     popular: true,
+    stripeLink: "https://buy.stripe.com/6oUfZhblu1hU7o5adTdIA02",
   },
   {
     name: "Grammar",
@@ -40,6 +42,7 @@ const plans = [
       "Progress tracking",
     ],
     popular: false,
+    stripeLink: "https://buy.stripe.com/cNi8wP0GQbWyfUB71HdIA03",
   },
 ];
 
@@ -131,10 +134,14 @@ export const PricingSection = () => {
 
                 {/* CTA */}
                 <div className="flex justify-center">
-                  <StripeBuyButton
-                    buyButtonId="buy_btn_1SiEWIGAtYKo4nymTylZrMgN"
-                    publishableKey="pk_live_51R1aMZGAtYKo4nymurCYvAbK33ZFFHUHdHYV9mYihSf4ngtkxd6fthHvWwT0xk3WndJ1yMaKysicZ0HxboCeIUoB00faWxdgGL"
-                  />
+                  <Button
+                    asChild
+                    className={plan.popular ? "bg-gold hover:bg-gold/90 text-background" : ""}
+                  >
+                    <a href={plan.stripeLink} target="_blank" rel="noopener noreferrer">
+                      Subscribe
+                    </a>
+                  </Button>
                 </div>
               </div>
             </motion.div>
