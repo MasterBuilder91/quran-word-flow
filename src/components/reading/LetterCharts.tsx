@@ -16,7 +16,7 @@ export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChart
     : arabicLetters.filter(l => letterIds?.includes(l.id));
 
   const handleLetterClick = (arabic: string) => {
-    playLetter(arabic, 'sound');
+    playLetter(arabic, 'name');
   };
 
   return (
