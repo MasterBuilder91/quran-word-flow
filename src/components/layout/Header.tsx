@@ -38,6 +38,9 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
+            <Link to="/learn-to-read" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              Learn to Read
+            </Link>
             <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Modules
             </Link>
