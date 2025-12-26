@@ -31,8 +31,8 @@ export const Header = () => {
               <span className="text-primary-foreground font-arabic text-xl">ق</span>
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-english font-semibold text-lg text-foreground">Nūr al-Bayān</h1>
-              <p className="text-xs text-muted-foreground">نور البيان</p>
+              <h1 className="font-english font-semibold text-lg text-foreground">Quranic Arabic Lab</h1>
+              <p className="text-xs text-muted-foreground">Learn. Practice. Understand.</p>
             </div>
           </Link>
 

@@ -15,8 +15,8 @@ export const Footer = () => {
                 <span className="text-primary-foreground font-arabic text-xl">ق</span>
               </div>
               <div>
-                <h3 className="font-english font-semibold text-lg text-foreground">Nūr al-Bayān</h3>
-                <p className="text-xs text-muted-foreground font-arabic">نور البيان</p>
+                <h3 className="font-english font-semibold text-lg text-foreground">Quranic Arabic Lab</h3>
+                <p className="text-xs text-muted-foreground">Learn. Practice. Understand.</p>
               </div>
             </div>
             <p className="text-muted-foreground font-ui text-sm max-w-md">
@@ -78,7 +78,7 @@ export const Footer = () => {
             "And We have certainly made the Qur'an easy for remembrance, so is there any who will remember?"
           </p>
           <p className="text-xs text-muted-foreground mt-4">
-            © {new Date().getFullYear()} Nūr al-Bayān. All rights reserved.
+            © {new Date().getFullYear()} Quranic Arabic Lab. All rights reserved.
           </p>
         </div>
       </div>
