@@ -65,6 +65,31 @@ export default function LearnToReadPage() {
             ))}
           </div>
         );
+      case 'drill':
+        return (
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-english text-lg font-semibold text-foreground">{content.data.title}</h3>
+              <span className="font-arabic text-gold">{content.data.titleArabic}</span>
+            </div>
+            <div className="p-6 rounded-xl bg-card border border-border">
+              <div className="space-y-4">
+                {content.data.rows.map((row: string[], rowIndex: number) => (
+                  <div key={rowIndex} className="flex flex-wrap justify-center gap-3 md:gap-4">
+                    {row.map((syllable: string, colIndex: number) => (
+                      <div
+                        key={colIndex}
+                        className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-lg bg-background border border-border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer"
+                      >
+                        <span className="font-arabic text-2xl md:text-3xl text-foreground">{syllable}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
