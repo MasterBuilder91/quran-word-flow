@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Volume2 } from "lucide-react";
+import { useArabicAudio } from "@/hooks/useArabicAudio";
 
 // Import articulation chart images
 import throatLettersImg from "@/assets/articulation/throat-letters.png";
@@ -87,10 +89,15 @@ interface ArticulationChartProps {
 
 export const ArticulationChart = ({ selectedGroup, onGroupSelect }: ArticulationChartProps) => {
   const [activeGroup, setActiveGroup] = useState<string | null>(selectedGroup || null);
+  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
 
   const handleGroupClick = (groupId: string) => {
     setActiveGroup(activeGroup === groupId ? null : groupId);
     onGroupSelect?.(groupId);
+  };
+
+  const handleLetterClick = (letter: string) => {
+    playLetter(letter, 'sound');
   };
 
   return (
@@ -167,22 +174,30 @@ export const ArticulationChart = ({ selectedGroup, onGroupSelect }: Articulation
                     {/* Letter breakdown */}
                     <div className="grid gap-3">
                       {group.letters.map((letter, i) => (
-                        <div 
+                        <button 
                           key={i}
-                          className={`flex items-center gap-4 p-3 rounded-lg ${
+                          onClick={() => handleLetterClick(letter.arabic)}
+                          className={`flex items-center gap-4 p-3 rounded-lg w-full text-left transition-all hover:scale-[1.02] ${
                             letter.english.includes('✓') 
-                              ? 'bg-green-500/10 border border-green-500/20' 
-                              : 'bg-card border border-border/50'
-                          }`}
+                              ? 'bg-green-500/10 border border-green-500/20 hover:bg-green-500/20' 
+                              : 'bg-card border border-border/50 hover:bg-card/80'
+                          } ${currentLetter === letter.arabic ? 'ring-2 ring-primary' : ''}`}
                         >
-                          <span className="font-arabic text-3xl text-gold w-12 text-center">
+                          <span className={`font-arabic text-3xl text-gold w-12 text-center transition-transform ${
+                            currentLetter === letter.arabic && isPlaying ? 'scale-110' : ''
+                          }`}>
                             {letter.arabic}
                           </span>
                           <div className="flex-1">
                             <span className="font-semibold text-foreground">{letter.name}</span>
                             <p className="text-sm text-muted-foreground">{letter.english}</p>
                           </div>
-                        </div>
+                          <Volume2 className={`w-5 h-5 transition-colors ${
+                            currentLetter === letter.arabic && isPlaying 
+                              ? 'text-primary animate-pulse' 
+                              : 'text-muted-foreground'
+                          }`} />
+                        </button>
                       ))}
                     </div>
                   </div>
