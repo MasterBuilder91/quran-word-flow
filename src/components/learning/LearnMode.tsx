@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eye, EyeOff, ChevronLeft, ChevronRight } from "lucide-react";
+import { Eye, EyeOff, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuranicWord } from "@/data/quranicWords";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
+import { useArabicPronunciation } from "@/hooks/useArabicPronunciation";
 
 interface LearnModeProps {
   words: QuranicWord[];
@@ -14,9 +15,14 @@ export const LearnMode = ({ words, onComplete }: LearnModeProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showEnglish, setShowEnglish] = useState(false);
   const [direction, setDirection] = useState(0);
+  const { speak, isSpeaking, currentLetter } = useArabicPronunciation();
 
   const currentWord = words[currentIndex];
   const progress = ((currentIndex + 1) / words.length) * 100;
+
+  const playWord = () => {
+    speak(currentWord.arabic, currentWord.arabic);
+  };
 
   const goNext = () => {
     if (currentIndex < words.length - 1) {
@@ -100,15 +106,17 @@ export const LearnMode = ({ words, onComplete }: LearnModeProps) => {
           >
             {/* Word Card */}
             <div className="bg-card rounded-3xl border border-border p-8 md:p-12 text-center shadow-medium">
-              {/* Arabic Word */}
-              <motion.h1
+              {/* Arabic Word - Clickable for sound */}
+              <motion.button
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="font-arabic text-6xl md:text-8xl text-foreground mb-4 leading-normal"
+                onClick={playWord}
+                className="font-arabic text-6xl md:text-8xl text-foreground mb-4 leading-normal cursor-pointer hover:text-gold transition-colors group relative"
               >
                 {currentWord.arabic}
-              </motion.h1>
+                <Volume2 className={`absolute -right-8 top-1/2 -translate-y-1/2 w-6 h-6 text-muted-foreground group-hover:text-gold transition-colors ${isSpeaking && currentLetter === currentWord.arabic ? 'text-primary animate-pulse' : ''}`} />
+              </motion.button>
 
               {/* Transliteration */}
               <motion.p
