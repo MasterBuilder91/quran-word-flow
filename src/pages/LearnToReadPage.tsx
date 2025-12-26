@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { readingLessons, arabicLetters } from "@/data/arabicReadingCourse";
-import { MakhaarijDiagram } from "@/components/reading/MakhaarijDiagram";
+import { ArticulationChart } from "@/components/reading/ArticulationChart";
 import { LetterFormsChart, LetterCard } from "@/components/reading/LetterCharts";
 import { HarakatChart } from "@/components/reading/HarakatChart";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Lock } from "lucide-react";
@@ -28,7 +28,7 @@ export default function LearnToReadPage() {
           </div>
         );
       case 'diagram':
-        return <MakhaarijDiagram />;
+        return <ArticulationChart />;
       case 'chart':
         if (content.data.chartType === 'alphabet-full' || content.data.chartType === 'letter-forms') {
           return <LetterFormsChart />;
