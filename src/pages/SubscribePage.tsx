@@ -1,6 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { StripeBuyButton } from "@/components/StripeBuyButton";
+import { Button } from "@/components/ui/button";
 import { RedeemCodeModal } from "@/components/RedeemCodeModal";
 import { useAccess } from "@/hooks/useAccess";
 import { Check } from "lucide-react";
@@ -22,6 +22,7 @@ const plans = [
       "Progress tracking",
     ],
     popular: false,
+    stripeLink: "https://buy.stripe.com/6oU28rahqd0C5fXgChdIA01",
   },
   {
     id: "complete",
@@ -36,6 +37,7 @@ const plans = [
       "Best value",
     ],
     popular: true,
+    stripeLink: "https://buy.stripe.com/6oUfZhblu1hU7o5adTdIA02",
   },
   {
     id: "grammar",
@@ -49,6 +51,7 @@ const plans = [
       "Progress tracking",
     ],
     popular: false,
+    stripeLink: "https://buy.stripe.com/cNi8wP0GQbWyfUB71HdIA03",
   },
 ];
 
@@ -160,10 +163,15 @@ const SubscribePage = () => {
             {user ? (
               <div className="space-y-4">
                 <div className="flex justify-center">
-                  <StripeBuyButton
-                    buyButtonId="buy_btn_1SiEWIGAtYKo4nymTylZrMgN"
-                    publishableKey="pk_live_51R1aMZGAtYKo4nymurCYvAbK33ZFFHUHdHYV9mYihSf4ngtkxd6fthHvWwT0xk3WndJ1yMaKysicZ0HxboCeIUoB00faWxdgGL"
-                  />
+                  <Button asChild className="w-full">
+                    <a
+                      href={plans.find(p => p.id === selectedPlan)?.stripeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Subscribe Now
+                    </a>
+                  </Button>
                 </div>
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-sm text-muted-foreground">or</span>
