@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Volume2 } from "lucide-react";
+import { useArabicPronunciation } from "@/hooks/useArabicPronunciation";
 
 // Import articulation chart images
 import throatLettersImg from "@/assets/articulation/throat-letters.png";
@@ -87,10 +89,16 @@ interface ArticulationChartProps {
 
 export const ArticulationChart = ({ selectedGroup, onGroupSelect }: ArticulationChartProps) => {
   const [activeGroup, setActiveGroup] = useState<string | null>(selectedGroup || null);
+  const { speak, isSpeaking, currentLetter } = useArabicPronunciation();
 
   const handleGroupClick = (groupId: string) => {
     setActiveGroup(activeGroup === groupId ? null : groupId);
     onGroupSelect?.(groupId);
+  };
+
+  const handleLetterClick = (letter: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    speak(letter, letter);
   };
 
   return (
@@ -103,9 +111,18 @@ export const ArticulationChart = ({ selectedGroup, onGroupSelect }: Articulation
         </p>
         <div className="flex flex-wrap gap-2">
           {['ب', 'ت', 'ث', 'ج', 'د', 'ذ', 'ز', 'س', 'ش', 'ف', 'ك', 'ل', 'م', 'ن', 'و', 'ي'].map(letter => (
-            <span key={letter} className="font-arabic text-lg px-2 py-1 rounded bg-green-500/20 text-green-300">
+            <button 
+              key={letter} 
+              onClick={() => speak(letter, letter)}
+              className={`font-arabic text-lg px-2 py-1 rounded bg-green-500/20 text-green-300 hover:bg-green-500/30 transition-all cursor-pointer ${
+                currentLetter === letter ? 'ring-2 ring-green-400 scale-110' : ''
+              }`}
+            >
               {letter}
-            </span>
+              {currentLetter === letter && (
+                <Volume2 className="inline-block w-3 h-3 ml-1 animate-pulse" />
+              )}
+            </button>
           ))}
         </div>
       </div>
@@ -164,22 +181,27 @@ export const ArticulationChart = ({ selectedGroup, onGroupSelect }: Articulation
                     {/* Letter breakdown */}
                     <div className="grid gap-3">
                       {group.letters.map((letter, i) => (
-                        <div 
+                        <button 
                           key={i}
-                          className={`flex items-center gap-4 p-3 rounded-lg ${
+                          onClick={(e) => handleLetterClick(letter.arabic, e)}
+                          className={`flex items-center gap-4 p-3 rounded-lg text-left transition-all hover:scale-[1.02] cursor-pointer ${
                             letter.english.includes('✓') 
-                              ? 'bg-green-500/10 border border-green-500/20' 
-                              : 'bg-card border border-border/50'
-                          }`}
+                              ? 'bg-green-500/10 border border-green-500/20 hover:bg-green-500/20' 
+                              : 'bg-card border border-border/50 hover:bg-card/80'
+                          } ${currentLetter === letter.arabic ? 'ring-2 ring-primary scale-[1.02]' : ''}`}
                         >
-                          <span className="font-arabic text-3xl text-gold w-12 text-center">
+                          <span className="font-arabic text-3xl text-gold w-12 text-center relative">
                             {letter.arabic}
+                            {currentLetter === letter.arabic && (
+                              <Volume2 className="absolute -top-1 -right-1 w-4 h-4 text-primary animate-pulse" />
+                            )}
                           </span>
                           <div className="flex-1">
                             <span className="font-semibold text-foreground">{letter.name}</span>
                             <p className="text-sm text-muted-foreground">{letter.english}</p>
                           </div>
-                        </div>
+                          <Volume2 className="w-5 h-5 text-muted-foreground/50" />
+                        </button>
                       ))}
                     </div>
                   </div>
