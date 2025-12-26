@@ -687,38 +687,41 @@ export const readingLessons: ReadingLesson[] = [
     id: 3,
     title: 'Where Sounds Come From',
     titleArabic: 'المَخارِج',
-    description: 'Master the science of makhaarij - the articulation points.',
+    description: 'Learn where each Arabic letter originates - from the throat, tongue, or lips.',
     type: 'makhaarij',
     content: [
       {
-        type: 'diagram',
-        data: { diagramType: 'makhaarij-full' },
-      },
-      {
         type: 'text',
         data: {
-          title: 'The Five Main Regions',
+          title: 'Articulation Points (Makhaarij)',
           paragraphs: [
-            '1. AL-JAWF (الجَوف) - The Empty Space: Long vowels originate here',
-            '2. AL-HALQ (الحَلق) - The Throat: Letters like ع، ح، خ، غ، ه، ء',
-            '3. AL-LISAN (اللِّسان) - The Tongue: Most letters use the tongue',
-            '4. ASH-SHAFATAAN (الشَّفَتان) - The Lips: ب، م، و، ف',
-            '5. AL-KHAYSHUM (الخَيشوم) - Nasal Passage: For ghunnah sounds',
+            'Every Arabic letter has a specific place in the mouth or throat where it is produced. Mastering these points is essential for proper Quranic recitation.',
+            'The letters are grouped by their articulation point. Click each group to see the letters with their three vowel forms (fatha, kasra, damma) and a diagram showing where to place your tongue.',
           ],
         },
+      },
+      {
+        type: 'diagram',
+        data: { diagramType: 'articulation-chart' },
       },
     ],
   },
   {
     id: 4,
-    title: 'Letters from the Throat',
+    title: 'Throat Letters',
     titleArabic: 'حُروف الحَلق',
     description: 'Master the six throat letters that challenge English speakers.',
     type: 'makhaarij',
     content: [
       {
-        type: 'diagram',
-        data: { diagramType: 'throat-focus' },
+        type: 'text',
+        data: {
+          title: 'The Throat Letters',
+          paragraphs: [
+            'These letters come from the throat and are challenging for English speakers because most don\'t exist in English.',
+            'Practice tip: Place your hand on your throat and feel it vibrate differently for each letter.',
+          ],
+        },
       },
       {
         type: 'letters',
@@ -790,22 +793,22 @@ export const readingLessons: ReadingLesson[] = [
     type: 'makhaarij',
     content: [
       {
-        type: 'letters',
-        data: {
-          letterIds: ['saad', 'daad', 'taa-emphatic', 'dhaa'],
-          focus: 'emphatic',
-        },
-      },
-      {
         type: 'text',
         data: {
           title: 'The Art of Tafkheem (Heaviness)',
           paragraphs: [
-            'These four letters are "emphatic" or "heavy". They require raising the back of your tongue.',
+            'These four letters are "emphatic" or "heavy". They require raising the back of your tongue while pronouncing.',
             'When you pronounce them, the surrounding vowels become deeper and fuller.',
             'ض (Daad) is SO unique that Arabic is called "لُغة الضّاد" - the Language of Daad!',
             'Practice tip: Say "s" and feel your tongue flat. Now try to say "s" while keeping the back of your tongue raised toward your soft palate. That\'s the emphatic quality.',
           ],
+        },
+      },
+      {
+        type: 'letters',
+        data: {
+          letterIds: ['saad', 'daad', 'taa-emphatic', 'dhaa'],
+          focus: 'emphatic',
         },
       },
     ],
