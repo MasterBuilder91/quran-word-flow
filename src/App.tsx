@@ -10,6 +10,10 @@ import ModulesPage from "./pages/ModulesPage";
 import GrammarModulePage from "./pages/GrammarModulePage";
 import SubscribePage from "./pages/SubscribePage";
 import AuthPage from "./pages/AuthPage";
+import ForumPage from "./pages/ForumPage";
+import ForumCategoryPage from "./pages/ForumCategoryPage";
+import ForumThreadPage from "./pages/ForumThreadPage";
+import NewThreadPage from "./pages/NewThreadPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +32,10 @@ const App = () => (
           <Route path="/grammar/:id" element={<GrammarModulePage />} />
           <Route path="/subscribe" element={<SubscribePage />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/forum" element={<ForumPage />} />
+          <Route path="/forum/:categorySlug" element={<ForumCategoryPage />} />
+          <Route path="/forum/:categorySlug/new" element={<NewThreadPage />} />
+          <Route path="/forum/:categorySlug/:threadSlug" element={<ForumThreadPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
