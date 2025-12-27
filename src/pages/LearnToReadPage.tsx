@@ -8,11 +8,26 @@ import { readingLessons, arabicLetters } from "@/data/arabicReadingCourse";
 import { ArticulationChart } from "@/components/reading/ArticulationChart";
 import { LetterFormsChart, LetterCard } from "@/components/reading/LetterCharts";
 import { HarakatChart } from "@/components/reading/HarakatChart";
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Volume2 } from "lucide-react";
+import { useArabicAudio } from "@/hooks/useArabicAudio";
 
 export default function LearnToReadPage() {
   const [currentLesson, setCurrentLesson] = useState(0);
   const lesson = readingLessons[currentLesson];
+  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
+
+  // Extract the base letter from a syllable/word for audio playback
+  const extractBaseLetter = (text: string): string | null => {
+    const letters = text.replace(/[\u064B-\u0652]/g, ''); // Remove diacritics
+    return letters.length > 0 ? letters[0] : null;
+  };
+
+  const handlePlaySyllable = (syllable: string) => {
+    const baseLetter = extractBaseLetter(syllable);
+    if (baseLetter) {
+      playLetter(baseLetter, 'sound');
+    }
+  };
 
   const renderContent = (content: any) => {
     switch (content.type) {
@@ -49,13 +64,23 @@ export default function LearnToReadPage() {
       case 'practice':
         return (
           <div className="space-y-4">
-            {content.data.words?.map((word: any, i: number) => (
-              <div key={i} className="p-6 rounded-xl bg-card border border-border text-center">
-                <p className="font-arabic text-4xl text-gold mb-2">{word.arabic}</p>
-                <p className="font-mono text-primary mb-1">{word.transliteration}</p>
-                <p className="text-sm text-muted-foreground">{word.meaning}</p>
-              </div>
-            ))}
+            {content.data.words?.map((word: any, i: number) => {
+              const baseLetter = extractBaseLetter(word.arabic);
+              return (
+                <div 
+                  key={i} 
+                  className="p-6 rounded-xl bg-card border border-border text-center hover:border-primary/50 transition-colors cursor-pointer group"
+                  onClick={() => baseLetter && playLetter(baseLetter, 'sound')}
+                >
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <p className="font-arabic text-4xl text-gold">{word.arabic}</p>
+                    <Volume2 className={`w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors ${isPlaying && currentLetter === baseLetter ? 'text-primary animate-pulse' : ''}`} />
+                  </div>
+                  <p className="font-mono text-primary mb-1">{word.transliteration}</p>
+                  <p className="text-sm text-muted-foreground">{word.meaning}</p>
+                </div>
+              );
+            })}
             {content.data.verses?.map((verse: any, i: number) => (
               <div key={i} className="p-6 rounded-xl bg-card border border-primary/30 text-center">
                 <p className="font-arabic text-3xl text-gold mb-3 leading-loose">{verse.arabic}</p>
@@ -69,21 +94,36 @@ export default function LearnToReadPage() {
         return (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-english text-lg font-semibold text-foreground">{content.data.title}</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-english text-lg font-semibold text-foreground">{content.data.title}</h3>
+                <Volume2 className="w-4 h-4 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground">Click to hear</span>
+              </div>
               <span className="font-arabic text-gold">{content.data.titleArabic}</span>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border">
               <div className="space-y-4">
                 {content.data.rows.map((row: string[], rowIndex: number) => (
                   <div key={rowIndex} className="flex flex-wrap justify-center gap-3 md:gap-4">
-                    {row.map((syllable: string, colIndex: number) => (
-                      <div
-                        key={colIndex}
-                        className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-lg bg-background border border-border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer"
-                      >
-                        <span className="font-arabic text-2xl md:text-3xl text-foreground">{syllable}</span>
-                      </div>
-                    ))}
+                    {row.map((syllable: string, colIndex: number) => {
+                      const baseLetter = extractBaseLetter(syllable);
+                      const isCurrentlyPlaying = isPlaying && currentLetter === baseLetter;
+                      return (
+                        <div
+                          key={colIndex}
+                          onClick={() => handlePlaySyllable(syllable)}
+                          className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-lg bg-background border transition-all cursor-pointer active:scale-95 ${
+                            isCurrentlyPlaying 
+                              ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20' 
+                              : 'border-border hover:border-primary/50 hover:bg-primary/5'
+                          }`}
+                        >
+                          <span className={`font-arabic text-2xl md:text-3xl ${isCurrentlyPlaying ? 'text-primary' : 'text-foreground'}`}>
+                            {syllable}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 ))}
               </div>
