@@ -128,7 +128,8 @@ export const useArabicAudio = () => {
     playAudio(url, baseLetter);
   }, [playAudio]);
 
-  // Play a syllable with vowel (e.g., بَ = "ba", بِ = "bi", بُ = "bu")
+  // Play a syllable - the external site only has base letter sounds, not syllable-specific audio
+  // So we play the base letter sound for all syllables
   const playSyllable = useCallback((syllable: string) => {
     const baseLetter = getBaseLetter(syllable);
     const audioName = letterToAudioName[baseLetter];
@@ -138,22 +139,9 @@ export const useArabicAudio = () => {
       return;
     }
 
-    const vowelSuffix = getVowelSuffix(syllable);
-    
-    // Try syllable audio first (e.g., ba.mp3, bi.mp3, bu.mp3)
-    // The site uses format like: ba.mp3 for بَ
-    let url: string;
-    
-    if (vowelSuffix) {
-      // For syllables with vowels, use the consonant + vowel format
-      // e.g., "ba" for بَ, "bi" for بِ, "bu" for بُ
-      const consonantBase = audioName.replace(/a$|i$|u$/, ''); // Remove trailing vowel if any
-      url = `${AUDIO_BASE_URL}/${consonantBase}${vowelSuffix}.mp3`;
-    } else {
-      // No vowel, just play the base letter sound
-      url = `${AUDIO_BASE_URL}/${audioName}.mp3`;
-    }
-
+    // The arabicreadingcourse.com site only has base letter sounds (e.g., ba.mp3)
+    // It doesn't have syllable-specific audio like bu.mp3 or bi.mp3
+    const url = `${AUDIO_BASE_URL}/${audioName}.mp3`;
     playAudio(url, syllable);
   }, [playAudio]);
 
