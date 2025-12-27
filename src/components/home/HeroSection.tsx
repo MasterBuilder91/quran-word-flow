@@ -90,6 +90,26 @@ export const HeroSection = () => {
             No assumed knowledge. Just clear, structured learning that actually works.
           </motion.p>
 
+          {/* Video Ad Section */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mb-10"
+          >
+            <div className="relative max-w-3xl mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl">
+              <div className="aspect-video">
+                <iframe
+                  src="https://drive.google.com/file/d/182uTzmkEqKOU9BvNajxCHkLgH1T2btz9/preview"
+                  className="w-full h-full"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title="Learn Quranic Arabic - Introduction"
+                />
+              </div>
+            </div>
+          </motion.div>
+
           {/* The Viral Hook - 125 Words = 50% */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -124,6 +144,34 @@ export const HeroSection = () => {
             </div>
           </motion.div>
 
+          {/* FREE Content Highlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="mb-10"
+          >
+            <div className="inline-flex flex-col items-center p-6 rounded-2xl bg-gradient-to-r from-gold/10 via-gold/20 to-gold/10 border border-gold/40 backdrop-blur-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-3xl">🎁</span>
+                <span className="text-gold text-xl md:text-2xl font-bold uppercase tracking-wide">
+                  Start Learning FREE — Right Now!
+                </span>
+                <span className="text-3xl">🎁</span>
+              </div>
+              <p className="text-foreground text-lg md:text-xl font-medium mb-2">
+                Your journey to understanding the Qur'an begins TODAY.
+              </p>
+              <p className="text-muted-foreground text-base max-w-xl">
+                Access <span className="text-gold font-bold">Module 1 completely FREE</span> — no credit card, no signup hassle. 
+                Learn your first Quranic words and see the method that's helping English speakers finally connect with the Qur'an.
+              </p>
+              <p className="text-primary font-semibold mt-3 text-lg">
+                Stop waiting. Start understanding. ✨
+              </p>
+            </div>
+          </motion.div>
+
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -131,16 +179,17 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link to="/subscribe">
-              <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 glow-emerald">
-                Start Your 50% Journey
-                <ArrowRight className="ml-2 h-5 w-5" />
+            <Link to="/modules">
+              <Button size="lg" className="text-lg px-8 py-6 bg-gold hover:bg-gold/90 text-background font-bold glow-emerald">
+                <Sparkles className="mr-2 h-5 w-5" />
+                Start FREE Module Now
               </Button>
             </Link>
-            <Link to="/modules">
+            <Link to="/subscribe">
               <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-primary/30 hover:bg-primary/5">
                 <BookOpen className="mr-2 h-5 w-5" />
-                Explore Free Modules
+                Unlock Full Course
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </motion.div>
