@@ -76,15 +76,22 @@ interface LetterCardProps {
 }
 
 export const LetterCard = ({ letter, showDetails = true }: LetterCardProps) => {
+  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
+  const isCurrentlyPlaying = isPlaying && currentLetter === letter.arabic;
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all discovery-card"
+      className="p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all discovery-card cursor-pointer"
+      onClick={() => playLetter(letter.arabic, 'name')}
     >
       {/* Main letter */}
-      <div className="text-center mb-4">
-        <span className="font-arabic text-6xl text-gold text-glow-gold">{letter.arabic}</span>
+      <div className="text-center mb-4 relative">
+        <span className={`font-arabic text-6xl text-gold text-glow-gold ${isCurrentlyPlaying ? 'animate-pulse' : ''}`}>
+          {letter.arabic}
+        </span>
+        <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary' : 'text-muted-foreground'}`} />
       </div>
 
       {/* Name and transliteration */}
