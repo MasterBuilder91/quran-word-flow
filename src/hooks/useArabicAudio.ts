@@ -128,26 +128,8 @@ export const useArabicAudio = () => {
     playAudio(url, baseLetter);
   }, [playAudio]);
 
-  // Play a syllable - the external site only has base letter sounds, not syllable-specific audio
-  // So we play the base letter sound for all syllables
-  const playSyllable = useCallback((syllable: string) => {
-    const baseLetter = getBaseLetter(syllable);
-    const audioName = letterToAudioName[baseLetter];
-    
-    if (!audioName) {
-      console.warn(`No audio mapping for syllable: ${syllable}`);
-      return;
-    }
-
-    // The arabicreadingcourse.com site only has base letter sounds (e.g., ba.mp3)
-    // It doesn't have syllable-specific audio like bu.mp3 or bi.mp3
-    const url = `${AUDIO_BASE_URL}/${audioName}.mp3`;
-    playAudio(url, syllable);
-  }, [playAudio]);
-
   return {
     playLetter,
-    playSyllable,
     stop,
     isPlaying,
     currentLetter,
