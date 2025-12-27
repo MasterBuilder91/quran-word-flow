@@ -100,7 +100,7 @@ export const HeroSection = () => {
             <div className="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl bg-black">
               <div className="relative w-full" style={{ paddingBottom: '177.78%' }}>
                 <iframe
-                  src="https://www.youtube.com/embed/Sm0OZ0eB3qk?rel=0&modestbranding=1"
+                  src="https://www.youtube-nocookie.com/embed/Sm0OZ0eB3qk?rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
                   className="absolute inset-0 w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
