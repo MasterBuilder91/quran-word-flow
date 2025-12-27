@@ -97,8 +97,8 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mb-10"
           >
-            <div className="relative w-full max-w-4xl mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl bg-black">
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <div className="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl bg-black">
+              <div className="relative w-full" style={{ paddingBottom: '177.78%' }}>
                 <iframe
                   src="https://drive.google.com/file/d/182uTzmkEqKOU9BvNajxCHkLgH1T2btz9/preview"
                   className="absolute inset-0 w-full h-full"
