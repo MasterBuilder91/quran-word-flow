@@ -9,6 +9,7 @@ import { ModulePreview } from "@/components/home/ModulePreview";
 import { CommunitySection } from "@/components/home/CommunitySection";
 import { PricingSection } from "@/components/home/PricingSection";
 import { ReferralSection } from "@/components/home/ReferralSection";
+import { AskAboutIslamCTA } from "@/components/home/AskAboutIslamCTA";
 import { CheatSheetModal } from "@/components/modals/CheatSheetModal";
 
 const Index = () => {
@@ -38,6 +39,7 @@ const Index = () => {
         <ReferralSection />
         <CommunitySection />
         <PricingSection />
+        <AskAboutIslamCTA />
       </main>
       <Footer />
       
