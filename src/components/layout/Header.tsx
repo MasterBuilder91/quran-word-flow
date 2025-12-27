@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo.png";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,14 +27,8 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-arabic text-xl">ق</span>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="font-english font-semibold text-lg text-foreground">Quranic Arabic Lab</h1>
-              <p className="text-xs text-muted-foreground">Learn. Practice. Understand.</p>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Quranic Arabic Lab" className="h-10 md:h-12 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
