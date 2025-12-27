@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
+import logo from "@/assets/logo.png";
 
 export const Footer = () => {
   return (
@@ -10,14 +11,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-arabic text-xl">ق</span>
-              </div>
-              <div>
-                <h3 className="font-english font-semibold text-lg text-foreground">Quranic Arabic Lab</h3>
-                <p className="text-xs text-muted-foreground">Learn. Practice. Understand.</p>
-              </div>
+            <div className="mb-4">
+              <img src={logo} alt="Quranic Arabic Lab" className="h-12 w-auto" />
             </div>
             <p className="text-muted-foreground font-ui text-sm max-w-md">
               A respectful platform for learning Qur'anic Arabic through repetition, context, and structure. 
