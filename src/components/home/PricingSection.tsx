@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
 import { Button } from "@/components/ui/button";
 
@@ -20,16 +20,18 @@ const plans = [
   {
     name: "Complete",
     price: "$7",
-    description: "Vocabulary + Grammar combined",
+    description: "Best for English speakers",
     features: [
       "All vocabulary modules",
-      "All grammar modules",
+      "All grammar modules", 
       "12+ comprehensive lessons",
+      "English-first explanations",
       "Progress tracking",
-      "Best value",
+      "Community access",
     ],
     popular: true,
     stripeLink: "https://buy.stripe.com/6oUfZhblu1hU7o5adTdIA02",
+    badge: "Best Value for English Speakers",
   },
   {
     name: "Grammar",
@@ -95,9 +97,10 @@ export const PricingSection = () => {
               className={`relative ${plan.popular ? 'md:-mt-4 md:mb-4' : ''}`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <span className="bg-gold text-background text-xs font-semibold px-3 py-1 rounded-full">
-                    Best Value
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <span className="bg-gold text-background text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg whitespace-nowrap">
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    Best for English Speakers
                   </span>
                 </div>
               )}
