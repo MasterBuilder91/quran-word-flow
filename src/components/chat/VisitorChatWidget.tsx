@@ -18,9 +18,11 @@ export const VisitorChatWidget = () => {
   const [newMessage, setNewMessage] = useState('');
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [visitorName, setVisitorName] = useState('');
   const [hasStarted, setHasStarted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -30,33 +32,36 @@ export const VisitorChatWidget = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Poll for new messages when conversation is active
   useEffect(() => {
-    if (!conversationId) return;
+    if (!conversationId || !hasStarted) return;
 
-    const channel = supabase
-      .channel(`chat-${conversationId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'chat_messages',
-          filter: `conversation_id=eq.${conversationId}`,
-        },
-        (payload) => {
-          const newMsg = payload.new as Message;
-          setMessages((prev) => {
-            if (prev.some((m) => m.id === newMsg.id)) return prev;
-            return [...prev, newMsg];
-          });
+    const pollMessages = async () => {
+      try {
+        const { data } = await supabase.functions.invoke('chat-api', {
+          body: { action: 'get_messages', conversation_id: conversationId },
+        });
+
+        if (data?.success && data.messages) {
+          setMessages(data.messages);
         }
-      )
-      .subscribe();
+      } catch (err) {
+        console.error('Error polling messages:', err);
+      }
+    };
+
+    // Initial fetch
+    pollMessages();
+
+    // Poll every 3 seconds
+    pollingRef.current = setInterval(pollMessages, 3000);
 
     return () => {
-      supabase.removeChannel(channel);
+      if (pollingRef.current) {
+        clearInterval(pollingRef.current);
+      }
     };
-  }, [conversationId]);
+  }, [conversationId, hasStarted]);
 
   const getLocation = async (): Promise<{ lat: number; lng: number } | null> => {
     return new Promise((resolve) => {
@@ -84,20 +89,20 @@ export const VisitorChatWidget = () => {
     try {
       const location = await getLocation();
       
-      const { data, error } = await supabase
-        .from('chat_conversations')
-        .insert({
+      const { data, error } = await supabase.functions.invoke('chat-api', {
+        body: {
+          action: 'create_conversation',
           visitor_name: visitorName.trim(),
           visitor_location: location,
-          status: 'waiting',
-        })
-        .select()
-        .single();
+        },
+      });
 
       if (error) throw error;
       
-      setConversationId(data.id);
-      setHasStarted(true);
+      if (data?.success && data.conversation) {
+        setConversationId(data.conversation.id);
+        setHasStarted(true);
+      }
     } catch (err) {
       console.error('Error starting conversation:', err);
     } finally {
@@ -106,22 +111,46 @@ export const VisitorChatWidget = () => {
   };
 
   const sendMessage = async () => {
-    if (!newMessage.trim() || !conversationId) return;
+    if (!newMessage.trim() || !conversationId || isSending) return;
 
     const content = newMessage.trim();
     setNewMessage('');
+    setIsSending(true);
+
+    // Optimistically add message to UI
+    const tempMessage: Message = {
+      id: `temp-${Date.now()}`,
+      content,
+      sender_type: 'visitor',
+      created_at: new Date().toISOString(),
+    };
+    setMessages((prev) => [...prev, tempMessage]);
 
     try {
-      const { error } = await supabase.from('chat_messages').insert({
-        conversation_id: conversationId,
-        content,
-        sender_type: 'visitor',
+      const { data, error } = await supabase.functions.invoke('chat-api', {
+        body: {
+          action: 'send_message',
+          conversation_id: conversationId,
+          content,
+          sender_type: 'visitor',
+        },
       });
 
       if (error) throw error;
+
+      // Replace temp message with real one
+      if (data?.success && data.message) {
+        setMessages((prev) => 
+          prev.map((m) => (m.id === tempMessage.id ? data.message : m))
+        );
+      }
     } catch (err) {
       console.error('Error sending message:', err);
+      // Remove temp message on error
+      setMessages((prev) => prev.filter((m) => m.id !== tempMessage.id));
       setNewMessage(content);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -213,8 +242,12 @@ export const VisitorChatWidget = () => {
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                     />
-                    <Button size="icon" onClick={sendMessage} disabled={!newMessage.trim()}>
-                      <Send className="h-4 w-4" />
+                    <Button size="icon" onClick={sendMessage} disabled={!newMessage.trim() || isSending}>
+                      {isSending ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Send className="h-4 w-4" />
+                      )}
                     </Button>
                   </div>
                 </>
