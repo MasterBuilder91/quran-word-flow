@@ -15,7 +15,7 @@ const plans = [
       "Progress tracking",
     ],
     popular: false,
-    stripeLink: "https://buy.stripe.com/6oU28rahqd0C5fXgChdIA01",
+    stripeLink: "https://buy.stripe.com/cNi8wP0GQbWyfUB71HdIA03",
   },
   {
     name: "Complete",
@@ -30,7 +30,7 @@ const plans = [
       "Community access",
     ],
     popular: true,
-    stripeLink: "https://buy.stripe.com/6oUfZhblu1hU7o5adTdIA02",
+    stripeLink: "https://buy.stripe.com/6oU28rahqd0C5fXgChdIA01",
     badge: "Best Value for English Speakers",
   },
   {
@@ -44,7 +44,7 @@ const plans = [
       "Progress tracking",
     ],
     popular: false,
-    stripeLink: "https://buy.stripe.com/cNi8wP0GQbWyfUB71HdIA03",
+    stripeLink: "https://buy.stripe.com/6oUfZhblu1hU7o5adTdIA02",
   },
 ];
 
