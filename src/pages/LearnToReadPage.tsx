@@ -14,7 +14,7 @@ import { useArabicAudio } from "@/hooks/useArabicAudio";
 export default function LearnToReadPage() {
   const [currentLesson, setCurrentLesson] = useState(0);
   const lesson = readingLessons[currentLesson];
-  const { playLetter, playSyllable, isPlaying, currentLetter } = useArabicAudio();
+  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
 
   const renderContent = (content: any) => {
     switch (content.type) {
@@ -55,13 +55,9 @@ export default function LearnToReadPage() {
               return (
                 <div 
                   key={i} 
-                  className="p-6 rounded-xl bg-card border border-border text-center hover:border-primary/50 transition-colors cursor-pointer group"
-                  onClick={() => playSyllable(word.arabic)}
+                  className="p-6 rounded-xl bg-card border border-border text-center"
                 >
-                  <div className="flex items-center justify-center gap-3 mb-2">
-                    <p className="font-arabic text-4xl text-gold">{word.arabic}</p>
-                    <Volume2 className={`w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors ${isPlaying && currentLetter === word.arabic ? 'text-primary animate-pulse' : ''}`} />
-                  </div>
+                  <p className="font-arabic text-4xl text-gold mb-2">{word.arabic}</p>
                   <p className="font-mono text-primary mb-1">{word.transliteration}</p>
                   <p className="text-sm text-muted-foreground">{word.meaning}</p>
                 </div>
@@ -80,35 +76,23 @@ export default function LearnToReadPage() {
         return (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <h3 className="font-english text-lg font-semibold text-foreground">{content.data.title}</h3>
-                <Volume2 className="w-4 h-4 text-muted-foreground" />
-                <span className="text-xs text-muted-foreground">Click to hear</span>
-              </div>
+              <h3 className="font-english text-lg font-semibold text-foreground">{content.data.title}</h3>
               <span className="font-arabic text-gold">{content.data.titleArabic}</span>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border">
               <div className="space-y-4">
                 {content.data.rows.map((row: string[], rowIndex: number) => (
                   <div key={rowIndex} className="flex flex-wrap justify-center gap-3 md:gap-4">
-                    {row.map((syllable: string, colIndex: number) => {
-                      const isCurrentlyPlaying = isPlaying && currentLetter === syllable;
-                      return (
-                        <div
-                          key={colIndex}
-                          onClick={() => playSyllable(syllable)}
-                          className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-lg bg-background border transition-all cursor-pointer active:scale-95 ${
-                            isCurrentlyPlaying 
-                              ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20' 
-                              : 'border-border hover:border-primary/50 hover:bg-primary/5'
-                          }`}
-                        >
-                          <span className={`font-arabic text-2xl md:text-3xl ${isCurrentlyPlaying ? 'text-primary' : 'text-foreground'}`}>
-                            {syllable}
-                          </span>
-                        </div>
-                      );
-                    })}
+                    {row.map((syllable: string, colIndex: number) => (
+                      <div
+                        key={colIndex}
+                        className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-lg bg-background border border-border"
+                      >
+                        <span className="font-arabic text-2xl md:text-3xl text-foreground">
+                          {syllable}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 ))}
               </div>
