@@ -100,9 +100,9 @@ export const HeroSection = () => {
             <div className="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl bg-black">
               <div className="relative w-full" style={{ paddingBottom: '177.78%' }}>
                 <iframe
-                  src="https://drive.google.com/file/d/182uTzmkEqKOU9BvNajxCHkLgH1T2btz9/preview"
+                  src="https://www.youtube.com/embed/Sm0OZ0eB3qk?rel=0&modestbranding=1"
                   className="absolute inset-0 w-full h-full"
-                  allow="autoplay; encrypted-media"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   title="Learn Quranic Arabic - Introduction"
                   style={{ border: 'none' }}
