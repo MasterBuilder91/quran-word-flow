@@ -7,12 +7,10 @@ export const useAccess = () => {
   const [hasAccess, setHasAccess] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const checkAccess = async (userId: string) => {
+  const checkAccess = async () => {
     try {
-      // Use the database function to check access
-      const { data, error } = await supabase.rpc('user_has_access', {
-        p_user_id: userId
-      });
+      // Use the database function to check access (now uses auth.uid() internally)
+      const { data, error } = await supabase.rpc('user_has_access');
       
       if (error) {
         console.error('Error checking access:', error);
@@ -41,7 +39,7 @@ export const useAccess = () => {
       if (result.success) {
         // Refresh access status
         if (user) {
-          const access = await checkAccess(user.id);
+          const access = await checkAccess();
           setHasAccess(access);
         }
         return { success: true, message: result.message || 'Code redeemed successfully!' };
@@ -59,7 +57,7 @@ export const useAccess = () => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          const access = await checkAccess(session.user.id);
+          const access = await checkAccess();
           setHasAccess(access);
         } else {
           setHasAccess(false);
@@ -73,7 +71,7 @@ export const useAccess = () => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        const access = await checkAccess(session.user.id);
+        const access = await checkAccess();
         setHasAccess(access);
       }
       setLoading(false);
