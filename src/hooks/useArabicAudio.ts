@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from 'react';
 // Mapping from Arabic letters to the audio file names used by arabicreadingcourse.com
 const letterToAudioName: Record<string, string> = {
   // Throat letters
-  'ء': 'alif', // hamza is on alif
+  'ء': 'alif',
   'ه': 'ha',
   'ع': 'ayn',
   'ح': 'hha',
@@ -39,7 +39,33 @@ const letterToAudioName: Record<string, string> = {
   'ا': 'alif',
 };
 
+// Diacritic Unicode values
+const FATHA = '\u064E';     // َ (a sound)
+const KASRA = '\u0650';     // ِ (i sound)
+const DAMMA = '\u064F';     // ُ (u sound)
+const SUKUN = '\u0652';     // ْ (no vowel)
+const SHADDA = '\u0651';    // ّ (doubling)
+const FATHATAN = '\u064B';  // ً (an sound)
+const KASRATAN = '\u064D';  // ٍ (in sound)
+const DAMMATAN = '\u064C';  // ٌ (un sound)
+
 const AUDIO_BASE_URL = 'https://www.arabicreadingcourse.com/audio';
+
+// Get the vowel suffix based on diacritic
+const getVowelSuffix = (text: string): string => {
+  if (text.includes(FATHA)) return 'a';
+  if (text.includes(KASRA)) return 'i';
+  if (text.includes(DAMMA)) return 'u';
+  if (text.includes(FATHATAN)) return 'an';
+  if (text.includes(KASRATAN)) return 'in';
+  if (text.includes(DAMMATAN)) return 'un';
+  return '';
+};
+
+// Extract the base letter (without diacritics)
+const getBaseLetter = (text: string): string => {
+  return text.replace(/[\u064B-\u0652\u0670]/g, '').charAt(0);
+};
 
 export const useArabicAudio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -56,25 +82,12 @@ export const useArabicAudio = () => {
     setCurrentLetter(null);
   }, []);
 
-  const playLetter = useCallback((letter: string, type: 'name' | 'sound' = 'sound') => {
-    const audioName = letterToAudioName[letter];
-    
-    if (!audioName) {
-      console.warn(`No audio mapping for letter: ${letter}`);
-      return;
-    }
-
-    // Stop any currently playing audio
+  const playAudio = useCallback((url: string, identifier: string) => {
     stop();
-
-    // Build URL - 'name' plays the letter name, 'sound' plays the sound it makes
-    const url = type === 'name' 
-      ? `${AUDIO_BASE_URL}/isolated-letters/${audioName}.mp3`
-      : `${AUDIO_BASE_URL}/${audioName}.mp3`;
 
     const audio = new Audio(url);
     audioRef.current = audio;
-    setCurrentLetter(letter);
+    setCurrentLetter(identifier);
     setIsPlaying(true);
 
     audio.onended = () => {
@@ -84,22 +97,69 @@ export const useArabicAudio = () => {
     };
 
     audio.onerror = () => {
-      console.warn(`Failed to load audio for letter: ${letter}`);
+      console.warn(`Failed to load audio: ${url}`);
       setIsPlaying(false);
       setCurrentLetter(null);
       audioRef.current = null;
     };
 
     audio.play().catch((error) => {
-      console.warn(`Failed to play audio for letter: ${letter}`, error);
+      console.warn(`Failed to play audio: ${url}`, error);
       setIsPlaying(false);
       setCurrentLetter(null);
       audioRef.current = null;
     });
   }, [stop]);
 
+  // Play a single letter (name or sound)
+  const playLetter = useCallback((letter: string, type: 'name' | 'sound' = 'sound') => {
+    const baseLetter = getBaseLetter(letter);
+    const audioName = letterToAudioName[baseLetter];
+    
+    if (!audioName) {
+      console.warn(`No audio mapping for letter: ${baseLetter}`);
+      return;
+    }
+
+    const url = type === 'name' 
+      ? `${AUDIO_BASE_URL}/isolated-letters/${audioName}.mp3`
+      : `${AUDIO_BASE_URL}/${audioName}.mp3`;
+
+    playAudio(url, baseLetter);
+  }, [playAudio]);
+
+  // Play a syllable with vowel (e.g., بَ = "ba", بِ = "bi", بُ = "bu")
+  const playSyllable = useCallback((syllable: string) => {
+    const baseLetter = getBaseLetter(syllable);
+    const audioName = letterToAudioName[baseLetter];
+    
+    if (!audioName) {
+      console.warn(`No audio mapping for syllable: ${syllable}`);
+      return;
+    }
+
+    const vowelSuffix = getVowelSuffix(syllable);
+    
+    // Try syllable audio first (e.g., ba.mp3, bi.mp3, bu.mp3)
+    // The site uses format like: ba.mp3 for بَ
+    let url: string;
+    
+    if (vowelSuffix) {
+      // For syllables with vowels, use the consonant + vowel format
+      // e.g., "ba" for بَ, "bi" for بِ, "bu" for بُ
+      const consonantBase = audioName.replace(/a$|i$|u$/, ''); // Remove trailing vowel if any
+      url = `${AUDIO_BASE_URL}/${consonantBase}${vowelSuffix}.mp3`;
+    } else {
+      // No vowel, just play the base letter sound
+      url = `${AUDIO_BASE_URL}/${audioName}.mp3`;
+    }
+
+    playAudio(url, syllable);
+  }, [playAudio]);
+
   return {
     playLetter,
+    playSyllable,
     stop,
     isPlaying,
     currentLetter,

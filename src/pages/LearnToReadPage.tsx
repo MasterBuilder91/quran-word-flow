@@ -14,20 +14,7 @@ import { useArabicAudio } from "@/hooks/useArabicAudio";
 export default function LearnToReadPage() {
   const [currentLesson, setCurrentLesson] = useState(0);
   const lesson = readingLessons[currentLesson];
-  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
-
-  // Extract the base letter from a syllable/word for audio playback
-  const extractBaseLetter = (text: string): string | null => {
-    const letters = text.replace(/[\u064B-\u0652]/g, ''); // Remove diacritics
-    return letters.length > 0 ? letters[0] : null;
-  };
-
-  const handlePlaySyllable = (syllable: string) => {
-    const baseLetter = extractBaseLetter(syllable);
-    if (baseLetter) {
-      playLetter(baseLetter, 'sound');
-    }
-  };
+  const { playLetter, playSyllable, isPlaying, currentLetter } = useArabicAudio();
 
   const renderContent = (content: any) => {
     switch (content.type) {
@@ -65,16 +52,15 @@ export default function LearnToReadPage() {
         return (
           <div className="space-y-4">
             {content.data.words?.map((word: any, i: number) => {
-              const baseLetter = extractBaseLetter(word.arabic);
               return (
                 <div 
                   key={i} 
                   className="p-6 rounded-xl bg-card border border-border text-center hover:border-primary/50 transition-colors cursor-pointer group"
-                  onClick={() => baseLetter && playLetter(baseLetter, 'sound')}
+                  onClick={() => playSyllable(word.arabic)}
                 >
                   <div className="flex items-center justify-center gap-3 mb-2">
                     <p className="font-arabic text-4xl text-gold">{word.arabic}</p>
-                    <Volume2 className={`w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors ${isPlaying && currentLetter === baseLetter ? 'text-primary animate-pulse' : ''}`} />
+                    <Volume2 className={`w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors ${isPlaying && currentLetter === word.arabic ? 'text-primary animate-pulse' : ''}`} />
                   </div>
                   <p className="font-mono text-primary mb-1">{word.transliteration}</p>
                   <p className="text-sm text-muted-foreground">{word.meaning}</p>
@@ -106,12 +92,11 @@ export default function LearnToReadPage() {
                 {content.data.rows.map((row: string[], rowIndex: number) => (
                   <div key={rowIndex} className="flex flex-wrap justify-center gap-3 md:gap-4">
                     {row.map((syllable: string, colIndex: number) => {
-                      const baseLetter = extractBaseLetter(syllable);
-                      const isCurrentlyPlaying = isPlaying && currentLetter === baseLetter;
+                      const isCurrentlyPlaying = isPlaying && currentLetter === syllable;
                       return (
                         <div
                           key={colIndex}
-                          onClick={() => handlePlaySyllable(syllable)}
+                          onClick={() => playSyllable(syllable)}
                           className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-lg bg-background border transition-all cursor-pointer active:scale-95 ${
                             isCurrentlyPlaying 
                               ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20' 
