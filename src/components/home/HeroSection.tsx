@@ -97,14 +97,15 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mb-10"
           >
-            <div className="relative max-w-3xl mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl">
-              <div className="aspect-video">
+            <div className="relative w-full max-w-4xl mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl bg-black">
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   src="https://drive.google.com/file/d/182uTzmkEqKOU9BvNajxCHkLgH1T2btz9/preview"
-                  className="w-full h-full"
+                  className="absolute inset-0 w-full h-full"
                   allow="autoplay; encrypted-media"
                   allowFullScreen
                   title="Learn Quranic Arabic - Introduction"
+                  style={{ border: 'none' }}
                 />
               </div>
             </div>
