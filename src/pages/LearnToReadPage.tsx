@@ -8,7 +8,7 @@ import { readingLessons, arabicLetters } from "@/data/arabicReadingCourse";
 import { ArticulationChart } from "@/components/reading/ArticulationChart";
 import { LetterFormsChart, LetterCard } from "@/components/reading/LetterCharts";
 import { HarakatChart } from "@/components/reading/HarakatChart";
-import { ArrowLeft, ArrowRight, BookOpen, Volume2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Volume2, Home } from "lucide-react";
 import { useArabicAudio } from "@/hooks/useArabicAudio";
 
 export default function LearnToReadPage() {
@@ -139,6 +139,15 @@ export default function LearnToReadPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-16">
+        {/* Home Button */}
+        <div className="mb-8">
+          <Link to="/">
+            <Button variant="outline" size="sm">
+              <Home className="w-4 h-4 mr-2" /> Back to Home
+            </Button>
+          </Link>
+        </div>
+
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 mb-6">
