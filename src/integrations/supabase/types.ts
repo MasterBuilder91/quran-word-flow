@@ -389,7 +389,7 @@ export type Database = {
     }
     Functions: {
       redeem_access_code: { Args: { p_code: string }; Returns: Json }
-      user_has_access: { Args: { p_user_id: string }; Returns: boolean }
+      user_has_access: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
