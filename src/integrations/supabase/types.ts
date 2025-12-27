@@ -50,6 +50,39 @@ export type Database = {
         }
         Relationships: []
       }
+      badges: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          name: string
+          requirement_type: string
+          requirement_value: number
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          icon: string
+          id?: string
+          name: string
+          requirement_type: string
+          requirement_value: number
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+          requirement_type?: string
+          requirement_value?: number
+          slug?: string
+        }
+        Relationships: []
+      }
       chat_conversations: {
         Row: {
           created_at: string
@@ -111,6 +144,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      email_subscribers: {
+        Row: {
+          email: string
+          id: string
+          source: string | null
+          subscribed_at: string
+        }
+        Insert: {
+          email: string
+          id?: string
+          source?: string | null
+          subscribed_at?: string
+        }
+        Update: {
+          email?: string
+          id?: string
+          source?: string | null
+          subscribed_at?: string
+        }
+        Relationships: []
       }
       forum_bookmarks: {
         Row: {
@@ -347,6 +401,27 @@ export type Database = {
           },
         ]
       }
+      referrals: {
+        Row: {
+          created_at: string
+          id: string
+          referred_user_id: string
+          referrer_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          referred_user_id: string
+          referrer_user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          referred_user_id?: string
+          referrer_user_id?: string
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           created_at: string
@@ -408,6 +483,77 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_badges: {
+        Row: {
+          badge_id: string
+          earned_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          badge_id: string
+          earned_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          badge_id?: string
+          earned_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_gamification: {
+        Row: {
+          created_at: string
+          current_streak: number
+          id: string
+          last_activity_date: string | null
+          longest_streak: number
+          referral_code: string | null
+          referrals_count: number
+          total_modules_completed: number
+          total_words_learned: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_streak?: number
+          id?: string
+          last_activity_date?: string | null
+          longest_streak?: number
+          referral_code?: string | null
+          referrals_count?: number
+          total_modules_completed?: number
+          total_words_learned?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_streak?: number
+          id?: string
+          last_activity_date?: string | null
+          longest_streak?: number
+          referral_code?: string | null
+          referrals_count?: number
+          total_modules_completed?: number
+          total_words_learned?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_progress: {
         Row: {
