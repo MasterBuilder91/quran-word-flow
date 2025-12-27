@@ -1,1 +1,7 @@
 project_id = "nexzfjqsdxptpxpsrbkz"
+
+[functions.chat-api]
+verify_jwt = false
+
+[functions.get-mapbox-token]
+verify_jwt = false
