@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { VisitorChatWidget } from "@/components/chat/VisitorChatWidget";
 import Index from "./pages/Index";
 import ModulePage from "./pages/ModulePage";
 import ModulesPage from "./pages/ModulesPage";
@@ -16,6 +17,7 @@ import ForumThreadPage from "./pages/ForumThreadPage";
 import NewThreadPage from "./pages/NewThreadPage";
 import LearnToReadPage from "./pages/LearnToReadPage";
 import PracticePlaygroundPage from "./pages/PracticePlaygroundPage";
+import AdminChatPage from "./pages/AdminChatPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,8 +42,10 @@ const App = () => (
           <Route path="/forum/:categorySlug" element={<ForumCategoryPage />} />
           <Route path="/forum/:categorySlug/new" element={<NewThreadPage />} />
           <Route path="/forum/:categorySlug/:threadSlug" element={<ForumThreadPage />} />
+          <Route path="/admin/chat" element={<AdminChatPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <VisitorChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
