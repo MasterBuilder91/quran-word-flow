@@ -95,14 +95,14 @@ export default function ForumThreadPage() {
         .update({ view_count: threadData.view_count + 1 })
         .eq('id', threadData.id);
 
-      // Get author
+      // Get author (only select display_name, not email for privacy)
       const { data: profile } = await supabase
         .from('profiles')
-        .select('display_name, email')
+        .select('display_name')
         .eq('user_id', threadData.user_id)
-        .single();
+        .maybeSingle();
 
-      setAuthorName(profile?.display_name || profile?.email?.split('@')[0] || 'Anonymous');
+      setAuthorName(profile?.display_name || 'Anonymous');
 
       // Get thread likes
       const { count } = await supabase
@@ -161,9 +161,9 @@ export default function ForumThreadPage() {
         postsData.map(async (post) => {
           const { data: profile } = await supabase
             .from('profiles')
-            .select('display_name, email')
+            .select('display_name')
             .eq('user_id', post.user_id)
-            .single();
+            .maybeSingle();
 
           const { count } = await supabase
             .from('post_likes')
@@ -172,7 +172,7 @@ export default function ForumThreadPage() {
 
           return {
             ...post,
-            author_name: profile?.display_name || profile?.email?.split('@')[0] || 'Anonymous',
+            author_name: profile?.display_name || 'Anonymous',
             like_count: count || 0,
           };
         })
