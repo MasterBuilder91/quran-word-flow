@@ -1320,30 +1320,56 @@ export const readingLessons: ReadingLesson[] = [
   },
   {
     id: 20,
-    title: 'Advanced Reading Drill',
-    titleArabic: 'تَدريب مُتَقَدِّم',
-    description: 'Challenge yourself with complex syllable patterns.',
+    title: 'Words with All Diacritics',
+    titleArabic: 'كَلِماتٌ بِجَميعِ الحَرَكات',
+    description: 'Practice reading single words with every type of diacritic mark.',
     type: 'practice',
     content: [
       {
         type: 'text',
         data: {
-          title: 'Complex Patterns',
+          title: 'Read Each Word Carefully',
           paragraphs: [
-            'These drills combine everything: sukun, madd, shadda, and tanween.',
-            'Read slowly and carefully. Accuracy over speed.',
+            'Each word below demonstrates different diacritics. Take your time pronouncing each one.',
           ],
         },
       },
       {
-        type: 'drill',
+        type: 'practice',
         data: {
-          title: 'Mixed Complexity Drill',
-          titleArabic: 'تَدريب شامِل',
-          rows: [
-            ['مُسْتَقِيمٌ', 'مُتَشَابِهَاتٌ', 'يَسْتَغْفِرُونَ', 'الْمُؤْمِنُونَ'],
-            ['وَالصَّافَّاتِ', 'الْحَمْدُ لِلَّهِ', 'بِسْمِ اللَّهِ', 'رَبِّ الْعَالَمِينَ'],
-            ['الرَّحْمَٰنِ الرَّحِيمِ', 'مَالِكِ يَوْمِ الدِّينِ', 'إِيَّاكَ نَعْبُدُ', 'وَإِيَّاكَ نَسْتَعِينُ'],
+          words: [
+            // Fatha examples
+            { arabic: 'كَتَبَ', transliteration: 'kataba', meaning: 'he wrote' },
+            { arabic: 'ذَهَبَ', transliteration: 'dhahaba', meaning: 'he went' },
+            { arabic: 'نَصَرَ', transliteration: 'nasara', meaning: 'he helped' },
+            // Kasra examples
+            { arabic: 'عِلْمٌ', transliteration: 'ʿilm', meaning: 'knowledge' },
+            { arabic: 'كِتَابٌ', transliteration: 'kitaab', meaning: 'a book' },
+            { arabic: 'فِيهِ', transliteration: 'feehi', meaning: 'in it' },
+            // Damma examples
+            { arabic: 'كُتُبٌ', transliteration: 'kutub', meaning: 'books' },
+            { arabic: 'رُسُلٌ', transliteration: 'rusul', meaning: 'messengers' },
+            { arabic: 'نُورٌ', transliteration: 'noor', meaning: 'light' },
+            // Sukun examples
+            { arabic: 'مِنْ', transliteration: 'min', meaning: 'from' },
+            { arabic: 'عَنْ', transliteration: 'ʿan', meaning: 'about' },
+            { arabic: 'قَبْلَ', transliteration: 'qabla', meaning: 'before' },
+            // Shadda examples
+            { arabic: 'رَبَّ', transliteration: 'rabba', meaning: 'Lord (acc.)' },
+            { arabic: 'إِنَّ', transliteration: 'inna', meaning: 'indeed' },
+            { arabic: 'ثُمَّ', transliteration: 'thumma', meaning: 'then' },
+            // Tanween examples
+            { arabic: 'كِتَابًا', transliteration: 'kitaaban', meaning: 'a book (acc.)' },
+            { arabic: 'عَلِيمٌ', transliteration: 'ʿaleem', meaning: 'All-Knowing' },
+            { arabic: 'رَحِيمٍ', transliteration: 'raheem', meaning: 'merciful (gen.)' },
+            // Madd (long vowel) examples
+            { arabic: 'قَالَ', transliteration: 'qaala', meaning: 'he said' },
+            { arabic: 'يَقُولُ', transliteration: 'yaqoolu', meaning: 'he says' },
+            { arabic: 'فِي', transliteration: 'fee', meaning: 'in' },
+            // Mixed examples
+            { arabic: 'الْحَمْدُ', transliteration: 'al-hamd', meaning: 'the praise' },
+            { arabic: 'اللَّهِ', transliteration: 'Allaahi', meaning: 'of Allah' },
+            { arabic: 'الْعَالَمِينَ', transliteration: 'al-ʿaalameen', meaning: 'the worlds' },
           ],
         },
       },
