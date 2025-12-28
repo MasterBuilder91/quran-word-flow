@@ -2,13 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, Users, BookOpen, TrendingUp } from "lucide-react";
+import { ApplicationForm } from "@/components/ApplicationForm";
 
 const CareersPage = () => {
-  const handleApply = () => {
-    window.open("mailto:careers@example.com?subject=Coach%20Application", "_blank");
-  };
 
   return (
     <>
@@ -218,7 +215,7 @@ const CareersPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Application Section */}
         <section className="py-16 md:py-24 px-4">
           <div className="container max-w-4xl mx-auto">
             <motion.div
@@ -226,26 +223,27 @@ const CareersPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="text-center mb-12"
             >
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Interested?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-xl mx-auto">
                 If this resonates with your experience and you believe you can help English speakers finally understand Arabic, we'd like to hear from you.
               </p>
-              
-              <Button
-                onClick={handleApply}
-                size="lg"
-                className="bg-gold hover:bg-gold/90 text-background font-semibold text-lg px-8 py-6"
-              >
-                Apply to Become a Coach
-              </Button>
-              
-              <p className="text-muted-foreground text-sm mt-6">
-                Applications are reviewed manually. We'll respond if there's a potential fit.
-              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <ApplicationForm
+                applicationType="careers"
+                title="Apply to Become a Coach"
+                description="Complete this form to apply. We review applications manually and respond if there's a potential fit."
+              />
             </motion.div>
           </div>
         </section>

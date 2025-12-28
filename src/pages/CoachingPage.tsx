@@ -2,14 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle, ArrowRight } from "lucide-react";
+import { ApplicationForm } from "@/components/ApplicationForm";
 import founderPortrait from "@/assets/founder-portrait.jpg";
 
 const CoachingPage = () => {
-  const handleApply = () => {
-    window.open("mailto:coaching@example.com?subject=1-on-1%20Coaching%20Application", "_blank");
-  };
 
   return (
     <>
@@ -276,7 +273,7 @@ const CoachingPage = () => {
           </div>
         </section>
 
-        {/* Pricing Section */}
+        {/* Pricing & Application Section */}
         <section className="py-16 md:py-24 px-4">
           <div className="container max-w-4xl mx-auto">
             <motion.div
@@ -284,37 +281,35 @@ const CoachingPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="text-center mb-12"
             >
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Investment
               </h2>
               
-              <div className="bg-card border border-border rounded-2xl p-8 md:p-12 max-w-lg mx-auto mb-8">
-                <div className="mb-6">
-                  <span className="text-5xl md:text-6xl font-bold text-foreground">$800</span>
-                  <span className="text-xl text-muted-foreground ml-2">/ month</span>
+              <div className="bg-card/50 border border-border rounded-xl p-6 max-w-md mx-auto mb-8">
+                <div className="mb-4">
+                  <span className="text-4xl md:text-5xl font-bold text-foreground">$800</span>
+                  <span className="text-lg text-muted-foreground ml-2">/ month</span>
                 </div>
                 
-                <div className="space-y-3 text-muted-foreground mb-8">
-                  <p>No discounts.</p>
-                  <p>No negotiation.</p>
-                  <p>Limited spots available.</p>
-                  <p className="font-semibold text-foreground">Application required.</p>
+                <div className="space-y-2 text-muted-foreground text-sm">
+                  <p>No discounts. No negotiation. Limited spots.</p>
                 </div>
-                
-                <Button
-                  onClick={handleApply}
-                  size="lg"
-                  className="w-full bg-gold hover:bg-gold/90 text-background font-semibold text-lg py-6"
-                >
-                  Apply for 1-on-1 Coaching
-                </Button>
               </div>
-              
-              <p className="text-muted-foreground text-sm max-w-md mx-auto">
-                Applying does not guarantee acceptance. This coaching is selective by design.
-              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <ApplicationForm
+                applicationType="coaching"
+                title="Apply for 1-on-1 Coaching"
+                description="Complete this form to apply. We review applications manually and respond if there's a potential fit."
+              />
             </motion.div>
           </div>
         </section>

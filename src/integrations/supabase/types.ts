@@ -50,6 +50,48 @@ export type Database = {
         }
         Relationships: []
       }
+      applications: {
+        Row: {
+          admin_notes: string | null
+          application_type: string
+          arabic_background: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          status: string
+          updated_at: string
+          why_apply: string
+          years_experience: number | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          application_type: string
+          arabic_background: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          status?: string
+          updated_at?: string
+          why_apply: string
+          years_experience?: number | null
+        }
+        Update: {
+          admin_notes?: string | null
+          application_type?: string
+          arabic_background?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          why_apply?: string
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
       badges: {
         Row: {
           created_at: string
