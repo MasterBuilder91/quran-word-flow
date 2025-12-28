@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Volume2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FlashcardWord } from '@/data/flashcardVocabulary';
@@ -11,7 +9,6 @@ interface FlashCardProps {
 }
 
 export const FlashCard = ({ word, showImage = true }: FlashCardProps) => {
-  const [isFlipped, setIsFlipped] = useState(false);
   const { speak, isPlaying, isLoading } = useElevenLabsTTS();
 
   const handleSpeak = async (e: React.MouseEvent) => {
@@ -21,10 +18,6 @@ export const FlashCard = ({ word, showImage = true }: FlashCardProps) => {
     } catch (error) {
       console.error('Failed to play pronunciation:', error);
     }
-  };
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
   };
 
   // Generate a placeholder gradient based on word category
@@ -47,105 +40,59 @@ export const FlashCard = ({ word, showImage = true }: FlashCardProps) => {
   };
 
   return (
-    <div 
-      className="perspective-1000 w-full h-[340px] cursor-pointer"
-      onClick={handleFlip}
-    >
-      <motion.div
-        className="relative w-full h-full"
-        initial={false}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        {/* Front of card */}
-        <div 
-          className="absolute w-full h-full rounded-2xl bg-card border border-border shadow-lg overflow-hidden"
-          style={{ backfaceVisibility: 'hidden' }}
-        >
-          {/* Image area */}
-          {showImage && (
-            <div className={`h-[160px] bg-gradient-to-br ${getCategoryGradient(word.category)} flex items-center justify-center`}>
-              {word.image ? (
-                <img 
-                  src={word.image} 
-                  alt={word.english}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <span className="text-6xl">{getEmojiForWord(word.id)}</span>
-              )}
-            </div>
-          )}
-          
-          {/* Content area */}
-          <div className="p-5 flex flex-col items-center justify-center h-[180px]">
-            <p className="text-4xl font-arabic text-foreground mb-2 leading-relaxed">
-              {word.arabic}
-            </p>
-            <p className="text-sm text-muted-foreground italic mb-4">
-              {word.transliteration}
-            </p>
-            
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleSpeak}
-              disabled={isPlaying || isLoading}
-              className="gap-2"
-            >
-              {isLoading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <Volume2 className={`w-4 h-4 ${isPlaying ? 'text-primary animate-pulse' : ''}`} />
-              )}
-              Listen
-            </Button>
+    <div className="w-full">
+      <div className="rounded-2xl bg-card border border-border shadow-lg overflow-hidden">
+        {/* Image area */}
+        {showImage && (
+          <div className={`h-[160px] bg-gradient-to-br ${getCategoryGradient(word.category)} flex items-center justify-center`}>
+            {word.image ? (
+              <img 
+                src={word.image} 
+                alt={word.english}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-6xl">{getEmojiForWord(word.id)}</span>
+            )}
           </div>
-          
-          <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
-            Tap to flip
-          </div>
-        </div>
-
-        {/* Back of card */}
-        <div 
-          className="absolute w-full h-full rounded-2xl bg-card border border-border shadow-lg overflow-hidden flex flex-col items-center justify-center p-6"
-          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-        >
-          <p className="text-3xl font-bold text-foreground mb-4 text-center">
+        )}
+        
+        {/* Content area */}
+        <div className="p-6 flex flex-col items-center text-center">
+          {/* English - always visible */}
+          <p className="text-2xl font-bold text-foreground mb-3">
             {word.english}
           </p>
           
-          <div className="w-16 h-1 bg-primary/30 rounded-full mb-4" />
+          <div className="w-12 h-0.5 bg-primary/30 rounded-full mb-3" />
           
-          <p className="text-5xl font-arabic text-primary mb-2">
+          {/* Arabic */}
+          <p className="text-4xl font-arabic text-primary mb-2 leading-relaxed">
             {word.arabic}
           </p>
-          <p className="text-lg text-muted-foreground italic">
+          
+          {/* Transliteration */}
+          <p className="text-sm text-muted-foreground italic mb-4">
             {word.transliteration}
           </p>
           
+          {/* Audio button */}
           <Button
-            variant="default"
+            variant="outline"
             size="sm"
             onClick={handleSpeak}
             disabled={isPlaying || isLoading}
-            className="gap-2 mt-6"
+            className="gap-2"
           >
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
             ) : (
-              <Volume2 className={`w-4 h-4 ${isPlaying ? 'animate-pulse' : ''}`} />
+              <Volume2 className={`w-4 h-4 ${isPlaying ? 'text-primary animate-pulse' : ''}`} />
             )}
-            Hear Pronunciation
+            Listen
           </Button>
-          
-          <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
-            Tap to flip back
-          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
