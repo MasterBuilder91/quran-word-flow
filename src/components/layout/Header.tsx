@@ -1,14 +1,42 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
+import { toast } from "sonner";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Error signing out");
+    } else {
+      toast.success("Signed out successfully");
+      navigate("/");
+    }
+  };
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== "/") {
@@ -67,11 +95,17 @@ export const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/auth">
-              <Button variant="ghost" className="font-ui">
-                Sign In
+            {user ? (
+              <Button variant="ghost" className="font-ui" onClick={handleSignOut}>
+                Sign Out
               </Button>
-            </Link>
+            ) : (
+              <Link to="/auth">
+                <Button variant="ghost" className="font-ui">
+                  Sign In
+                </Button>
+              </Link>
+            )}
             <Link to="/subscribe">
               <Button className="font-ui bg-primary hover:bg-primary/90">
                 Start Learning
@@ -166,11 +200,20 @@ export const Header = () => {
                 Pricing
               </button>
               <div className="flex flex-col gap-3 pt-4">
-                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="outline" className="w-full">
-                    Sign In
+                {user ? (
+                  <Button variant="outline" className="w-full" onClick={() => {
+                    handleSignOut();
+                    setIsMenuOpen(false);
+                  }}>
+                    Sign Out
                   </Button>
-                </Link>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" className="w-full">
+                      Sign In
+                    </Button>
+                  </Link>
+                )}
                 <Link to="/subscribe" onClick={() => setIsMenuOpen(false)}>
                   <Button className="w-full">
                     Start Learning
