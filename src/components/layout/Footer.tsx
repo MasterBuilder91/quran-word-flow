@@ -61,6 +61,16 @@ export const Footer = () => {
                   Pricing
                 </Link>
               </li>
+              <li>
+                <Link to="/coaching" className="text-muted-foreground hover:text-foreground transition-colors">
+                  1-on-1 Coaching
+                </Link>
+              </li>
+              <li>
+                <Link to="/careers" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Careers
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
