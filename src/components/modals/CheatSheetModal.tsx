@@ -26,24 +26,37 @@ export const CheatSheetModal = ({ open, onOpenChange }: CheatSheetModalProps) =>
 
     setLoading(true);
     
-    const { error } = await supabase
+    // Save to database
+    const { error: dbError } = await supabase
       .from('email_subscribers')
       .insert({ email, source: 'cheat_sheet' });
 
-    setLoading(false);
-
-    if (error) {
-      if (error.code === '23505') {
-        toast.info("You're already subscribed! Check your email for the cheat sheet.");
-        setSuccess(true);
-      } else {
-        toast.error('Something went wrong. Please try again.');
-      }
+    if (dbError && dbError.code !== '23505') {
+      setLoading(false);
+      toast.error('Something went wrong. Please try again.');
       return;
     }
 
+    // Send email with PDF
+    try {
+      const { error: emailError } = await supabase.functions.invoke('send-cheatsheet', {
+        body: { email }
+      });
+
+      if (emailError) {
+        console.error('Email error:', emailError);
+        // Still show success since they're subscribed, just note the email issue
+        toast.success('Subscribed! If you don\'t receive the email, check your spam folder.');
+      } else {
+        toast.success('Success! Check your email for the cheat sheet.');
+      }
+    } catch (err) {
+      console.error('Function invoke error:', err);
+      toast.success('Subscribed! The cheat sheet will arrive shortly.');
+    }
+
+    setLoading(false);
     setSuccess(true);
-    toast.success('Success! Check your email for the cheat sheet.');
   };
 
   useEffect(() => {
