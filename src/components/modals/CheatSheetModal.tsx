@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Check, Loader2 } from "lucide-react";
+import { Mail, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -26,10 +26,9 @@ export const CheatSheetModal = ({ open, onOpenChange }: CheatSheetModalProps) =>
 
     setLoading(true);
     
-    // Save to database
     const { error: dbError } = await supabase
       .from('email_subscribers')
-      .insert({ email, source: 'cheat_sheet' });
+      .insert({ email, source: 'newsletter' });
 
     if (dbError && dbError.code !== '23505') {
       setLoading(false);
@@ -37,22 +36,10 @@ export const CheatSheetModal = ({ open, onOpenChange }: CheatSheetModalProps) =>
       return;
     }
 
-    // Send email with PDF
-    try {
-      const { error: emailError } = await supabase.functions.invoke('send-cheatsheet', {
-        body: { email }
-      });
-
-      if (emailError) {
-        console.error('Email error:', emailError);
-        // Still show success since they're subscribed, just note the email issue
-        toast.success('Subscribed! If you don\'t receive the email, check your spam folder.');
-      } else {
-        toast.success('Success! Check your email for the cheat sheet.');
-      }
-    } catch (err) {
-      console.error('Function invoke error:', err);
-      toast.success('Subscribed! The cheat sheet will arrive shortly.');
+    if (dbError?.code === '23505') {
+      toast.success("You're already subscribed!");
+    } else {
+      toast.success('Successfully subscribed!');
     }
 
     setLoading(false);
@@ -73,13 +60,13 @@ export const CheatSheetModal = ({ open, onOpenChange }: CheatSheetModalProps) =>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-            <BookOpen className="w-6 h-6 text-primary" />
+            <Mail className="w-6 h-6 text-primary" />
           </div>
           <DialogTitle className="text-center text-xl">
-            Free 125-Word Quranic Vocabulary Cheat Sheet
+            Stay Updated
           </DialogTitle>
           <DialogDescription className="text-center">
-            Get instant access to all 125 high-frequency words that cover 50% of the Qur'an — beautifully formatted PDF, perfect for printing!
+            Get learning tips, new lesson announcements, and exclusive resources delivered to your inbox.
           </DialogDescription>
         </DialogHeader>
 
@@ -90,10 +77,10 @@ export const CheatSheetModal = ({ open, onOpenChange }: CheatSheetModalProps) =>
             </div>
             <p className="text-foreground font-medium">You're all set!</p>
             <p className="text-sm text-muted-foreground">
-              Check your inbox for the cheat sheet. Happy learning! 🌙
+              We'll keep you updated on your Arabic learning journey. 🌙
             </p>
             <Button onClick={() => onOpenChange(false)} className="mt-4">
-              Start Learning
+              Continue Learning
             </Button>
           </div>
         ) : (
@@ -110,10 +97,10 @@ export const CheatSheetModal = ({ open, onOpenChange }: CheatSheetModalProps) =>
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Sending...
+                  Subscribing...
                 </>
               ) : (
-                'Get Free Cheat Sheet'
+                'Subscribe'
               )}
             </Button>
             <p className="text-xs text-center text-muted-foreground">
