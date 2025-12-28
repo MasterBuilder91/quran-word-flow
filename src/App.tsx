@@ -21,6 +21,7 @@ import AdminChatPage from "./pages/AdminChatPage";
 import AskAboutIslamPage from "./pages/AskAboutIslamPage";
 import FlashcardsPage from "./pages/FlashcardsPage";
 import CoachingPage from "./pages/CoachingPage";
+import CareersPage from "./pages/CareersPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/forum/:categorySlug/:threadSlug" element={<ForumThreadPage />} />
           <Route path="/admin/chat" element={<AdminChatPage />} />
           <Route path="/coaching" element={<CoachingPage />} />
+          <Route path="/careers" element={<CareersPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
