@@ -7,6 +7,7 @@ import { WhySectionApart } from "@/components/home/WhySectionApart";
 import { BuiltForOurBrainsSection } from "@/components/home/BuiltForOurBrainsSection";
 import { ModulePreview } from "@/components/home/ModulePreview";
 import { CommunitySection } from "@/components/home/CommunitySection";
+import { OurCommunitySection } from "@/components/home/OurCommunitySection";
 import { PricingSection } from "@/components/home/PricingSection";
 import { ReferralSection } from "@/components/home/ReferralSection";
 import { AskAboutIslamCTA } from "@/components/home/AskAboutIslamCTA";
@@ -32,6 +33,7 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
+        <OurCommunitySection />
         <BuiltForOurBrainsSection />
         <MethodSection />
         <WhySectionApart />
