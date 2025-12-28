@@ -99,9 +99,9 @@ export default function FlashcardsPage() {
         <div className="mb-8">
           {viewMode === 'flashcards' ? (
             <Button
-              variant="ghost"
+              variant="outline"
               onClick={handleBack}
-              className="gap-2 mb-4"
+              className="gap-2 mb-4 border-primary/30 hover:bg-primary/10"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Categories
