@@ -13,6 +13,37 @@ interface CheatSheetRequest {
   email: string;
 }
 
+// Simple in-memory rate limiting
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(identifier: string, maxRequests: number, windowMs: number): boolean {
+  const now = Date.now();
+  
+  // Clean up old entries
+  for (const [key, value] of rateLimitMap.entries()) {
+    if (value.resetAt < now) {
+      rateLimitMap.delete(key);
+    }
+  }
+  
+  const record = rateLimitMap.get(identifier);
+  
+  if (!record || record.resetAt < now) {
+    rateLimitMap.set(identifier, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+  
+  if (record.count >= maxRequests) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+}
+
+// Email validation regex
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -22,7 +53,8 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { email }: CheatSheetRequest = await req.json();
 
-    if (!email || !email.includes('@')) {
+    // Validate email format properly
+    if (!email || typeof email !== "string" || !emailRegex.test(email.trim())) {
       console.error("Invalid email provided:", email);
       return new Response(
         JSON.stringify({ error: "Invalid email address" }),
@@ -33,14 +65,53 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log("Sending cheat sheet to:", email);
+    // Sanitize email
+    const sanitizedEmail = email.trim().toLowerCase();
+
+    // Check email length (max 255 chars is standard)
+    if (sanitizedEmail.length > 255) {
+      return new Response(
+        JSON.stringify({ error: "Email address too long" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Rate limit: 3 requests per hour per email
+    if (!checkRateLimit(sanitizedEmail, 3, 60 * 60 * 1000)) {
+      console.log(`Rate limit exceeded for email: ${sanitizedEmail}`);
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please try again later." }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Also rate limit by IP to prevent mass spamming
+    const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(`ip:${clientIP}`, 10, 60 * 60 * 1000)) {
+      console.log(`IP rate limit exceeded: ${clientIP}`);
+      return new Response(
+        JSON.stringify({ error: "Too many requests from this IP. Please try again later." }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    console.log("Sending cheat sheet to:", sanitizedEmail);
 
     // Get the PDF URL from your deployed site
     const pdfUrl = "https://quranicarabiclab.com/downloads/125-words-cheatsheet.pdf";
 
     const emailResponse = await resend.emails.send({
       from: "Quranic Arabic Lab <onboarding@resend.dev>",
-      to: [email],
+      to: [sanitizedEmail],
       subject: "Your Free 125-Word Quranic Vocabulary Cheat Sheet 📖",
       html: `
         <!DOCTYPE html>
@@ -103,7 +174,7 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error: any) {
     console.error("Error in send-cheatsheet function:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "Failed to send email. Please try again." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
