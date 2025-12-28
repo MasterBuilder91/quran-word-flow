@@ -51,6 +51,9 @@ export const Header = () => {
             <Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Forum
             </Link>
+            <Link to="/coaching" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              1-on-1 Coaching
+            </Link>
             <button
               onClick={() => scrollToSection("pricing")}
               className="text-muted-foreground hover:text-foreground transition-colors font-ui"
@@ -135,6 +138,13 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Forum
+              </Link>
+              <Link
+                to="/coaching"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                1-on-1 Coaching
               </Link>
               <button
                 onClick={() => {
