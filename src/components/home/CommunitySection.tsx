@@ -111,7 +111,7 @@ export const CommunitySection = () => {
                       </motion.div>
                     ))}
                     <div className="w-14 h-14 rounded-full bg-primary/20 border-3 border-card flex items-center justify-center">
-                      <span className="text-xs text-primary font-medium">+247</span>
+                      <span className="text-xs text-primary font-medium">& more</span>
                     </div>
                   </div>
                   
