@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Shuffle, Layers } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Shuffle, Layers, LayoutGrid } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Header } from '@/components/layout/Header';
@@ -18,10 +18,19 @@ import {
 type ViewMode = 'categories' | 'flashcards';
 
 export default function FlashcardsPage() {
+  const location = useLocation();
   const [viewMode, setViewMode] = useState<ViewMode>('categories');
   const [selectedCategory, setSelectedCategory] = useState<FlashcardCategory | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [shuffledWords, setShuffledWords] = useState<FlashcardWord[]>([]);
+
+  // Reset to categories view when navigating to this page (e.g., from header link)
+  useEffect(() => {
+    setViewMode('categories');
+    setSelectedCategory(null);
+    setCurrentIndex(0);
+    setShuffledWords([]);
+  }, [location.key]);
 
   const categoryWords = useMemo(() => {
     if (!selectedCategory) return [];
@@ -218,6 +227,15 @@ export default function FlashcardsPage() {
 
               {/* Controls */}
               <div className="flex justify-center gap-2 mb-6">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleBack}
+                  className="gap-2"
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                  All Categories
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"
