@@ -99,11 +99,27 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-6"
+            className="mb-4"
           >
             <span className="font-arabic text-gold text-2xl md:text-3xl">
               بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
             </span>
+          </motion.div>
+
+          {/* Featured Verse - Right after Bismillah */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-8 p-4 md:p-6 rounded-xl bg-card/50 border border-primary/20 backdrop-blur-sm max-w-2xl mx-auto"
+          >
+            <p className="font-arabic text-2xl md:text-3xl text-foreground mb-2 leading-relaxed">
+              وَلَقَدْ يَسَّرْنَا ٱلْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+            </p>
+            <p className="font-english text-sm md:text-base text-muted-foreground italic">
+              "And We have certainly made the Qur'an easy for remembrance, so is there any who will remember?"
+            </p>
+            <p className="text-xs text-gold mt-1">— Surah Al-Qamar (54:17)</p>
           </motion.div>
 
           {/* New Tagline */}
@@ -244,21 +260,6 @@ export const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Featured Verse */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.4 }}
-            className="mt-16 p-6 md:p-8 rounded-2xl bg-card/50 border border-border backdrop-blur-sm max-w-2xl mx-auto"
-          >
-            <p className="font-arabic arabic-large text-foreground mb-4 leading-loose">
-              وَلَقَدْ يَسَّرْنَا ٱلْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-            </p>
-            <p className="font-english text-muted-foreground italic">
-              "And We have certainly made the Qur'an easy for remembrance, so is there any who will remember?"
-            </p>
-            <p className="text-sm text-gold mt-2">— Surah Al-Qamar (54:17)</p>
-          </motion.div>
         </div>
       </div>
     </section>
