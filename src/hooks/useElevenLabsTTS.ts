@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 const TTS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-tts`;
 
@@ -64,19 +65,28 @@ export const useElevenLabsTTS = () => {
     setUsingFallback(false);
 
     try {
+      // Get the current session for authentication
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.access_token) {
+        console.warn("No authenticated session, falling back to Web Speech API");
+        throw new Error("Authentication required for premium TTS");
+      }
+
       const response = await fetch(TTS_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ text, voiceId }),
       });
 
       if (!response.ok) {
-        console.warn("ElevenLabs TTS failed, falling back to Web Speech API");
-        throw new Error(`TTS request failed: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        console.warn("ElevenLabs TTS failed:", errorData.error || response.status);
+        throw new Error(errorData.error || `TTS request failed: ${response.status}`);
       }
 
       const audioBlob = await response.blob();
