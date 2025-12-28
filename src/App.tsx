@@ -22,6 +22,7 @@ import AskAboutIslamPage from "./pages/AskAboutIslamPage";
 import FlashcardsPage from "./pages/FlashcardsPage";
 import CoachingPage from "./pages/CoachingPage";
 import CareersPage from "./pages/CareersPage";
+import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/forum/:categorySlug/new" element={<NewThreadPage />} />
           <Route path="/forum/:categorySlug/:threadSlug" element={<ForumThreadPage />} />
           <Route path="/admin/chat" element={<AdminChatPage />} />
+          <Route path="/admin/applications" element={<AdminApplicationsPage />} />
           <Route path="/coaching" element={<CoachingPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="*" element={<NotFound />} />
