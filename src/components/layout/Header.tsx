@@ -42,6 +42,9 @@ export const Header = () => {
             <Link to="/practice" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Practice
             </Link>
+            <Link to="/flashcards" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+              Flashcards
+            </Link>
             <Link to="/ask-about-islam" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
               Ask About Islam
             </Link>
@@ -111,6 +114,13 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Practice
+              </Link>
+              <Link
+                to="/flashcards"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Flashcards
               </Link>
               <Link
                 to="/ask-about-islam"
