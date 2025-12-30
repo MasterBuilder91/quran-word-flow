@@ -125,15 +125,20 @@ export default function FlashcardsPage() {
           )}
           
           <div className="text-center">
+            {viewMode === 'categories' && (
+              <span className="inline-block px-4 py-1 rounded-full bg-green-500/20 text-green-600 dark:text-green-400 text-sm font-semibold mb-4">
+                100% FREE
+              </span>
+            )}
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
-              {viewMode === 'categories' ? 'Arabic Flashcards' : selectedCategory?.name}
+              {viewMode === 'categories' ? 'Free Arabic Flashcards' : selectedCategory?.name}
             </h1>
             <p className="text-xl font-arabic text-primary mb-4">
-              {viewMode === 'categories' ? 'بِطَاقَات تَعْلِيمِيَّة' : selectedCategory?.nameArabic}
+              {viewMode === 'categories' ? 'بِطَاقَات تَعْلِيمِيَّة مَجَّانِيَّة' : selectedCategory?.nameArabic}
             </p>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               {viewMode === 'categories' 
-                ? 'Master Arabic vocabulary with beautiful flashcards. Each card includes pronunciation audio, transliteration, and visual aids.'
+                ? `Master Arabic vocabulary with over ${flashcardWords.length.toLocaleString()} words across ${flashcardCategories.length} categories — completely free. Each card includes pronunciation audio, transliteration, and visual aids.`
                 : selectedCategory?.description
               }
             </p>
