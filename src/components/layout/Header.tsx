@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,9 +10,11 @@ import { toast } from "sonner";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const moreMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -26,6 +28,18 @@ export const Header = () => {
     });
 
     return () => subscription.unsubscribe();
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleSignOut = async () => {
@@ -60,40 +74,83 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link to="/learn-to-read" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+          <nav className="hidden md:flex items-center gap-6">
+            <Link to="/learn-to-read" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Learn to Read
             </Link>
-            <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+            <Link to="/modules" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Modules
             </Link>
-            <Link to="/practice" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+            <Link to="/practice" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Practice
             </Link>
-            <Link to="/flashcards" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+            <Link to="/flashcards" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Flashcards
             </Link>
-            <Link to="/ask-about-islam" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
-              Ask About Islam
-            </Link>
-            <Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
+            <Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Forum
             </Link>
-            <Link to="/coaching" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
-              1-on-1 Coaching
-            </Link>
-            <Link to="/careers" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
-              Careers
-            </Link>
-            <Link to="/quran-insight" className="text-muted-foreground hover:text-foreground transition-colors font-ui">
-              Quran Insight
-            </Link>
-            <button
-              onClick={() => scrollToSection("pricing")}
-              className="text-muted-foreground hover:text-foreground transition-colors font-ui"
-            >
-              Pricing
-            </button>
+            
+            {/* More Dropdown */}
+            <div className="relative" ref={moreMenuRef}>
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors font-ui text-sm"
+              >
+                More
+                <ChevronDown className={`h-4 w-4 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              <AnimatePresence>
+                {isMoreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 w-64 bg-background border border-border rounded-lg shadow-lg py-2 z-50"
+                  >
+                    <Link
+                      to="/quran-insight"
+                      onClick={() => setIsMoreOpen(false)}
+                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      How Much Quran Do I Understand?
+                    </Link>
+                    <Link
+                      to="/ask-about-islam"
+                      onClick={() => setIsMoreOpen(false)}
+                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      Ask About Islam
+                    </Link>
+                    <Link
+                      to="/coaching"
+                      onClick={() => setIsMoreOpen(false)}
+                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      1-on-1 Coaching
+                    </Link>
+                    <Link
+                      to="/careers"
+                      onClick={() => setIsMoreOpen(false)}
+                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      Careers
+                    </Link>
+                    <button
+                      onClick={() => {
+                        scrollToSection("pricing");
+                        setIsMoreOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      Pricing
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </nav>
 
           {/* Desktop CTA */}
@@ -198,7 +255,7 @@ export const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
-                Quran Insight
+                How Much Quran Do I Understand?
               </Link>
               <button
                 onClick={() => {
