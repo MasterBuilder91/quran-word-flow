@@ -11,6 +11,7 @@ import { OurCommunitySection } from "@/components/home/OurCommunitySection";
 import { PricingSection } from "@/components/home/PricingSection";
 import { ReferralSection } from "@/components/home/ReferralSection";
 import { AskAboutIslamCTA } from "@/components/home/AskAboutIslamCTA";
+import { FreeFlashcardsSection } from "@/components/home/FreeFlashcardsSection";
 import { CheatSheetModal } from "@/components/modals/CheatSheetModal";
 
 const Index = () => {
@@ -37,6 +38,7 @@ const Index = () => {
         <BuiltForOurBrainsSection />
         <MethodSection />
         <WhySectionApart />
+        <FreeFlashcardsSection />
         <ModulePreview />
         <ReferralSection />
         <CommunitySection />
