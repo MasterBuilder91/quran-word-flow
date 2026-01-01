@@ -17,6 +17,28 @@ import {
 import { analyzeWordMorphology, formatMorphologyDetails, MorphologyDetails } from "@/lib/quranMorphology";
 import { supabase } from "@/integrations/supabase/client";
 
+interface AIAnalysisResult {
+  word: string;
+  translation: string;
+  transliteration: string;
+  partOfSpeech: 'verb' | 'noun' | 'particle';
+  root?: string;
+  details: {
+    particleType?: string;
+    tense?: string;
+    form?: string;
+    voice?: string;
+    person?: string;
+    gender?: string;
+    number?: string;
+    definiteness?: string;
+    case?: string;
+    nounType?: string;
+    morphability?: string;
+  };
+  notes?: string;
+}
+
 interface AnalyzedWord {
   original: string;
   entry: ArabicWordEntry | null;
@@ -26,6 +48,7 @@ interface AnalyzedWord {
   translation?: string;
   transliteration?: string;
   morphology?: MorphologyDetails;
+  aiAnalysis?: AIAnalysisResult;
 }
 
 interface QuranApiWord {
@@ -49,7 +72,7 @@ const LabPage = () => {
   const [analyzedWords, setAnalyzedWords] = useState<AnalyzedWord[]>([]);
   const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [apiSource, setApiSource] = useState<'local' | 'api' | null>(null);
+  const [apiSource, setApiSource] = useState<'local' | 'ai' | 'api' | null>(null);
 
   // Normalize Arabic text (remove some diacritics for lookup, keep original for display)
   const normalizeForLookup = (word: string): string => {
@@ -216,7 +239,30 @@ const LabPage = () => {
     }
   };
 
-  // Handle analysis with API integration
+  // Use AI to analyze words
+  const fetchAIAnalysis = async (words: string[]): Promise<AIAnalysisResult[] | null> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('arabic-word-analysis', {
+        body: { words }
+      });
+      
+      if (error) {
+        console.error('AI analysis error:', error);
+        return null;
+      }
+      
+      if (data?.success && data?.analysis) {
+        return data.analysis;
+      }
+      
+      return null;
+    } catch (err) {
+      console.error('Failed to fetch AI analysis:', err);
+      return null;
+    }
+  };
+
+  // Handle analysis with AI integration
   const handleAnalyze = useCallback(async () => {
     if (!inputText.trim()) {
       toast.error("Please enter some Arabic text to analyze");
@@ -227,25 +273,64 @@ const LabPage = () => {
     setSelectedWord(null);
 
     try {
-      // Try API first
-      const apiWords = await fetchFromQuranApi(inputText);
+      // Tokenize the input
+      const tokens = tokenize(inputText);
       
-      if (apiWords && apiWords.length > 0) {
-        // Use API data with local morphology enhancement
-        const analyzed = apiWords.map(apiWord => {
-          const wordText = apiWord.text_uthmani || apiWord.text || '';
-          return analyzeWord(
-            wordText,
-            apiWord.translation?.text,
-            apiWord.transliteration?.text
-          );
+      // Use AI analysis for accurate meanings and grammar
+      const aiResults = await fetchAIAnalysis(tokens);
+      
+      if (aiResults && aiResults.length > 0) {
+        // Map AI results to AnalyzedWord format
+        const analyzed: AnalyzedWord[] = aiResults.map((aiWord) => {
+          // Also get local dictionary entry if available
+          const entry = fullDictionary[aiWord.word] || null;
+          
+          // Convert AI analysis to morphology format
+          const morphology: MorphologyDetails = {
+            partOfSpeech: aiWord.partOfSpeech,
+            root: aiWord.root,
+            translation: aiWord.translation,
+            transliteration: aiWord.transliteration,
+          };
+          
+          // Add verb details
+          if (aiWord.partOfSpeech === 'verb' && aiWord.details) {
+            if (aiWord.details.tense) morphology.tense = aiWord.details.tense as MorphologyDetails['tense'];
+            if (aiWord.details.form) morphology.verbForm = aiWord.details.form as MorphologyDetails['verbForm'];
+            if (aiWord.details.voice) morphology.voice = aiWord.details.voice as MorphologyDetails['voice'];
+            if (aiWord.details.person) morphology.person = aiWord.details.person as MorphologyDetails['person'];
+            if (aiWord.details.gender) morphology.gender = aiWord.details.gender as MorphologyDetails['gender'];
+            if (aiWord.details.number) morphology.number = aiWord.details.number as MorphologyDetails['number'];
+          }
+          
+          // Add noun details
+          if (aiWord.partOfSpeech === 'noun' && aiWord.details) {
+            if (aiWord.details.gender) morphology.gender = aiWord.details.gender as MorphologyDetails['gender'];
+            if (aiWord.details.number) morphology.number = aiWord.details.number as MorphologyDetails['number'];
+            if (aiWord.details.definiteness) morphology.definiteness = aiWord.details.definiteness as MorphologyDetails['definiteness'];
+            if (aiWord.details.case) morphology.case = aiWord.details.case as MorphologyDetails['case'];
+            if (aiWord.details.morphability) morphology.morphability = aiWord.details.morphability as MorphologyDetails['morphability'];
+            if (aiWord.details.nounType) morphology.nounType = aiWord.details.nounType as MorphologyDetails['nounType'];
+          }
+          
+          return {
+            original: aiWord.word,
+            entry,
+            detectedPrefixes: [],
+            detectedSuffixes: [],
+            heuristicNotes: aiWord.notes ? [aiWord.notes] : [],
+            translation: aiWord.translation,
+            transliteration: aiWord.transliteration,
+            morphology,
+            aiAnalysis: aiWord,
+          };
         });
+        
         setAnalyzedWords(analyzed);
-        setApiSource('api');
-        toast.success(`Analyzed ${analyzed.length} words (with Quran.com data)`);
+        setApiSource('ai');
+        toast.success(`Analyzed ${analyzed.length} words with AI`);
       } else {
         // Fallback to local analysis
-        const tokens = tokenize(inputText);
         const analyzed = tokens.map(word => analyzeWord(word));
         setAnalyzedWords(analyzed);
         setApiSource('local');
@@ -474,7 +559,7 @@ const LabPage = () => {
                 <h2 className="text-lg font-semibold text-foreground">2) Click any word</h2>
                 {apiSource && (
                   <Badge variant="outline" className="text-xs">
-                    {apiSource === 'api' ? '🌐 API + Local' : '📚 Local Analysis'}
+                    {apiSource === 'ai' ? '🤖 AI Analysis' : apiSource === 'api' ? '🌐 API + Local' : '📚 Local Analysis'}
                   </Badge>
                 )}
               </div>
@@ -535,9 +620,9 @@ const LabPage = () => {
 
             {/* Disclaimer */}
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">Accuracy & Scope:</strong> This tool uses pattern-based morphology analysis 
-              combined with the Quran.com API. Arabic morphology has edge cases - if a word is unknown, it will still provide 
-              grammatical hints based on its structure.
+              <strong className="text-foreground">Powered by AI:</strong> This tool uses AI-powered analysis for accurate 
+              translations, part-of-speech identification, and detailed morphology. مِنْ is correctly identified as a 
+              particle (preposition), not a noun!
             </p>
           </div>
 
@@ -682,6 +767,22 @@ const LabPage = () => {
                             )}
                           </div>
                         )}
+
+                        {/* Particle-specific details */}
+                        {selectedWord.morphology.partOfSpeech === 'particle' && (
+                          <div className="grid grid-cols-1 gap-2 text-sm">
+                            <div className="p-2 rounded bg-blue-500/10 border border-blue-500/20">
+                              <span className="text-xs text-blue-400">Particle Type</span>
+                              <p className="text-foreground capitalize">
+                                {selectedWord.aiAnalysis?.details?.particleType || 'particle'}
+                              </p>
+                            </div>
+                            <div className="p-2 rounded bg-blue-500/10 border border-blue-500/20">
+                              <span className="text-xs text-blue-400">Morphability</span>
+                              <p className="text-foreground">Indeclinable (مبني)</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}
@@ -715,8 +816,19 @@ const LabPage = () => {
                     </>
                   )}
 
+                  {/* AI Analysis Notes */}
+                  {selectedWord.aiAnalysis?.notes && (
+                    <>
+                      <div className="h-px bg-border my-4" />
+                      <div className="text-sm p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+                        <span className="text-xs text-purple-400 font-medium">AI Notes</span>
+                        <p className="mt-1 text-foreground/90">{selectedWord.aiAnalysis.notes}</p>
+                      </div>
+                    </>
+                  )}
+
                   {/* Dictionary Notes */}
-                  {selectedWord.entry?.notes && (
+                  {selectedWord.entry?.notes && !selectedWord.aiAnalysis?.notes && (
                     <>
                       <div className="h-px bg-border my-4" />
                       <div className="text-sm">
@@ -727,7 +839,7 @@ const LabPage = () => {
                   )}
 
                   {/* Heuristic Notes for Unknown Words */}
-                  {!selectedWord.entry && selectedWord.heuristicNotes.length > 0 && (
+                  {!selectedWord.entry && !selectedWord.aiAnalysis && selectedWord.heuristicNotes.length > 0 && (
                     <>
                       <div className="h-px bg-border my-4" />
                       <div className="text-sm">
