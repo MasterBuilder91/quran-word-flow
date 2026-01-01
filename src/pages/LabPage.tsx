@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Copy, Trash2, BookOpen, Sparkles, ArrowRight, Loader2 } from "lucide-react";
+import { Copy, Trash2, BookOpen, Sparkles, ArrowRight, Loader2, Globe } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { 
@@ -28,17 +28,31 @@ interface AnalyzedWord {
   morphology?: MorphologyDetails;
 }
 
+interface QuranApiWord {
+  id: number;
+  position: number;
+  text_uthmani?: string;
+  text?: string;
+  translation?: {
+    text: string;
+    language_name: string;
+  };
+  transliteration?: {
+    text: string;
+    language_name: string;
+  };
+  char_type_name: string;
+}
+
 const LabPage = () => {
   const [inputText, setInputText] = useState("");
   const [analyzedWords, setAnalyzedWords] = useState<AnalyzedWord[]>([]);
   const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
+  const [apiSource, setApiSource] = useState<'local' | 'api' | null>(null);
 
   // Normalize Arabic text (remove some diacritics for lookup, keep original for display)
   const normalizeForLookup = (word: string): string => {
-    // Keep the word mostly as-is for dictionary lookup
-    // Just trim whitespace
     return word.trim();
   };
 
@@ -51,7 +65,7 @@ const LabPage = () => {
       if (remaining.startsWith(prefix) && remaining.length > prefix.length) {
         detected.push(`${prefix} (${meaning} - ${type})`);
         remaining = remaining.slice(prefix.length);
-        break; // Only detect one prefix layer for simplicity
+        break;
       }
     }
     
@@ -67,84 +81,15 @@ const LabPage = () => {
       if (remaining.endsWith(suffix) && remaining.length > suffix.length) {
         detected.push(`${suffix} (${meaning} - ${type})`);
         remaining = remaining.slice(0, -suffix.length);
-        break; // Only detect one suffix layer for simplicity
+        break;
       }
     }
     
     return { remaining, detected };
   };
 
-  // Generate heuristic notes for unknown words
-  const generateHeuristicNotes = (word: string): string[] => {
-    const notes: string[] = [];
-    
-    // Check for definite article
-    if (word.startsWith('ٱلْ') || word.startsWith('ال')) {
-      notes.push('Definite article (ال) detected - likely a noun');
-    }
-    
-    // Check for common verb prefixes (imperfect tense markers)
-    if (word.startsWith('يَ') || word.startsWith('ي')) {
-      notes.push('Prefix يـ suggests 3rd person masculine present tense verb');
-    } else if (word.startsWith('تَ') || word.startsWith('ت')) {
-      notes.push('Prefix تـ suggests 2nd person or 3rd feminine present tense verb');
-    } else if (word.startsWith('أَ') || word.startsWith('أ')) {
-      notes.push('Prefix أ suggests 1st person singular present tense verb or Form IV');
-    } else if (word.startsWith('نَ') || word.startsWith('ن')) {
-      notes.push('Prefix نـ suggests 1st person plural present tense verb');
-    }
-    
-    // Check for feminine markers
-    if (word.includes('ة') || word.endsWith('ة')) {
-      notes.push('Feminine marker (ة) detected');
-    }
-    
-    // Check for plural patterns
-    if (word.endsWith('ونَ') || word.endsWith('ون')) {
-      notes.push('Masculine plural verb/noun ending (-ون)');
-    } else if (word.endsWith('ينَ') || word.endsWith('ين')) {
-      notes.push('Masculine plural noun ending (-ين) - genitive/accusative');
-    } else if (word.endsWith('ات')) {
-      notes.push('Feminine plural ending (-ات)');
-    }
-    
-    // Check for dual
-    if (word.endsWith('انِ') || word.endsWith('ان')) {
-      notes.push('Dual ending (-ان) nominative');
-    } else if (word.endsWith('يْنِ') || word.endsWith('ين')) {
-      notes.push('Possible dual ending (-ين) genitive/accusative');
-    }
-    
-    // Check for attached pronouns
-    if (word.endsWith('هُمْ') || word.endsWith('هم')) {
-      notes.push('Attached pronoun: هم (them/their)');
-    } else if (word.endsWith('هُ') || (word.endsWith('ه') && word.length > 2)) {
-      notes.push('Attached pronoun: ه (him/his/it)');
-    } else if (word.endsWith('هَا') || word.endsWith('ها')) {
-      notes.push('Attached pronoun: ها (her/hers/it)');
-    } else if (word.endsWith('نَا') || word.endsWith('نا')) {
-      notes.push('Attached pronoun: نا (us/our)');
-    } else if (word.endsWith('كَ') || (word.endsWith('ك') && word.length > 2)) {
-      notes.push('Attached pronoun: ك (you/your - masculine singular)');
-    } else if (word.endsWith('كُمْ') || word.endsWith('كم')) {
-      notes.push('Attached pronoun: كم (you all/your - plural)');
-    }
-    
-    // Check for shadda (gemination)
-    if (word.includes('ّ')) {
-      notes.push('Shadda (ّ) indicates doubled letter - may suggest Form II verb or intensive form');
-    }
-    
-    // Check for tanween (nunation)
-    if (word.includes('ً') || word.includes('ٍ') || word.includes('ٌ')) {
-      notes.push('Tanween detected - indicates indefinite noun');
-    }
-    
-    return notes;
-  };
-
-  // Analyze a single word
-  const analyzeWord = (word: string): AnalyzedWord => {
+  // Analyze a single word with enhanced morphology
+  const analyzeWord = (word: string, apiTranslation?: string, apiTransliteration?: string): AnalyzedWord => {
     const trimmed = word.trim();
     if (!trimmed) {
       return {
@@ -156,6 +101,9 @@ const LabPage = () => {
       };
     }
 
+    // Get morphology analysis
+    const morphology = analyzeWordMorphology(trimmed);
+
     // First, try direct dictionary lookup
     const directMatch = fullDictionary[trimmed];
     if (directMatch) {
@@ -165,6 +113,9 @@ const LabPage = () => {
         detectedPrefixes: [],
         detectedSuffixes: [],
         heuristicNotes: [],
+        translation: apiTranslation,
+        transliteration: apiTransliteration,
+        morphology,
       };
     }
 
@@ -179,6 +130,9 @@ const LabPage = () => {
           detectedPrefixes,
           detectedSuffixes: [],
           heuristicNotes: [],
+          translation: apiTranslation,
+          transliteration: apiTransliteration,
+          morphology,
         };
       }
     }
@@ -194,6 +148,9 @@ const LabPage = () => {
           detectedPrefixes: [],
           detectedSuffixes,
           heuristicNotes: [],
+          translation: apiTranslation,
+          transliteration: apiTransliteration,
+          morphology,
         };
       }
     }
@@ -209,38 +166,102 @@ const LabPage = () => {
           detectedPrefixes,
           detectedSuffixes: suffixesAfterPrefix,
           heuristicNotes: [],
+          translation: apiTranslation,
+          transliteration: apiTransliteration,
+          morphology,
         };
       }
     }
 
-    // No dictionary match - provide heuristic analysis
+    // No dictionary match - use morphology-based hints
+    const morphHints = formatMorphologyDetails(morphology);
+    
     return {
       original: trimmed,
       entry: null,
       detectedPrefixes,
       detectedSuffixes,
-      heuristicNotes: generateHeuristicNotes(trimmed),
+      heuristicNotes: morphHints,
+      translation: apiTranslation,
+      transliteration: apiTransliteration,
+      morphology,
     };
   };
 
   // Tokenize Arabic text
   const tokenize = (text: string): string[] => {
-    // Split on whitespace and filter empty strings
     return text.split(/\s+/).filter(word => word.trim().length > 0);
   };
 
-  // Handle analysis
-  const handleAnalyze = useCallback(() => {
+  // Try to fetch word-by-word data from Quran.com API
+  const fetchFromQuranApi = async (text: string): Promise<QuranApiWord[] | null> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('quran-word-lookup', {
+        body: { text }
+      });
+      
+      if (error) {
+        console.error('API error:', error);
+        return null;
+      }
+      
+      if (data?.success && data?.words?.length > 0) {
+        return data.words;
+      }
+      
+      return null;
+    } catch (err) {
+      console.error('Failed to fetch from API:', err);
+      return null;
+    }
+  };
+
+  // Handle analysis with API integration
+  const handleAnalyze = useCallback(async () => {
     if (!inputText.trim()) {
       toast.error("Please enter some Arabic text to analyze");
       return;
     }
 
-    const tokens = tokenize(inputText);
-    const analyzed = tokens.map(analyzeWord);
-    setAnalyzedWords(analyzed);
+    setIsLoading(true);
     setSelectedWord(null);
-    toast.success(`Analyzed ${analyzed.length} words`);
+
+    try {
+      // Try API first
+      const apiWords = await fetchFromQuranApi(inputText);
+      
+      if (apiWords && apiWords.length > 0) {
+        // Use API data with local morphology enhancement
+        const analyzed = apiWords.map(apiWord => {
+          const wordText = apiWord.text_uthmani || apiWord.text || '';
+          return analyzeWord(
+            wordText,
+            apiWord.translation?.text,
+            apiWord.transliteration?.text
+          );
+        });
+        setAnalyzedWords(analyzed);
+        setApiSource('api');
+        toast.success(`Analyzed ${analyzed.length} words (with Quran.com data)`);
+      } else {
+        // Fallback to local analysis
+        const tokens = tokenize(inputText);
+        const analyzed = tokens.map(word => analyzeWord(word));
+        setAnalyzedWords(analyzed);
+        setApiSource('local');
+        toast.success(`Analyzed ${analyzed.length} words (local analysis)`);
+      }
+    } catch (error) {
+      console.error('Analysis error:', error);
+      // Fallback to local
+      const tokens = tokenize(inputText);
+      const analyzed = tokens.map(word => analyzeWord(word));
+      setAnalyzedWords(analyzed);
+      setApiSource('local');
+      toast.success(`Analyzed ${analyzed.length} words`);
+    } finally {
+      setIsLoading(false);
+    }
   }, [inputText]);
 
   // Handle clear
@@ -248,6 +269,7 @@ const LabPage = () => {
     setInputText("");
     setAnalyzedWords([]);
     setSelectedWord(null);
+    setApiSource(null);
   };
 
   // Load demo text
@@ -255,7 +277,7 @@ const LabPage = () => {
     setInputText("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَالَمِينَ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ مَالِكِ يَوْمِ ٱلدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسْتَقِيمَ صِرَاطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّالِّينَ");
   };
 
-  // Generate shareable summary
+  // Generate shareable summary with morphology
   const generateSummary = (): string => {
     if (analyzedWords.length === 0) return "";
 
@@ -264,17 +286,38 @@ const LabPage = () => {
 
     analyzedWords.forEach((word, index) => {
       summary += `${index + 1}. ${word.original}\n`;
-      if (word.entry) {
-        summary += `   Type: ${word.entry.type}\n`;
-        if (word.entry.root) summary += `   Root: ${word.entry.root}\n`;
+      
+      // Use morphology or entry type
+      const pos = word.morphology?.partOfSpeech || word.entry?.type || 'unknown';
+      summary += `   Type: ${pos}\n`;
+      
+      if (word.translation) {
+        summary += `   Translation: ${word.translation}\n`;
+      }
+      
+      if (word.entry?.root || word.morphology?.root) {
+        summary += `   Root: ${word.entry?.root || word.morphology?.root}\n`;
+      }
+      
+      if (word.entry?.gloss) {
         summary += `   Meaning: ${word.entry.gloss}\n`;
-        if (word.entry.notes) summary += `   Notes: ${word.entry.notes}\n`;
-      } else {
-        summary += `   Type: unknown\n`;
-        if (word.heuristicNotes.length > 0) {
-          summary += `   Hints: ${word.heuristicNotes.join("; ")}\n`;
+      }
+      
+      // Add morphology details
+      if (word.morphology) {
+        if (word.morphology.partOfSpeech === 'verb') {
+          if (word.morphology.tense) summary += `   Tense: ${word.morphology.tense}\n`;
+          if (word.morphology.verbForm) summary += `   Form: ${word.morphology.verbForm}\n`;
+          if (word.morphology.voice) summary += `   Voice: ${word.morphology.voice}\n`;
+        }
+        if (word.morphology.partOfSpeech === 'noun') {
+          if (word.morphology.gender) summary += `   Gender: ${word.morphology.gender}\n`;
+          if (word.morphology.number) summary += `   Number: ${word.morphology.number}\n`;
+          if (word.morphology.definiteness) summary += `   Definiteness: ${word.morphology.definiteness}\n`;
+          if (word.morphology.morphability) summary += `   Morphability: ${word.morphology.morphability}\n`;
         }
       }
+      
       if (word.detectedPrefixes.length > 0) {
         summary += `   Prefixes: ${word.detectedPrefixes.join(", ")}\n`;
       }
@@ -300,8 +343,9 @@ const LabPage = () => {
     }
   };
 
-  // Get word type color
-  const getWordTypeColor = (type: string | undefined): string => {
+  // Get word type color - use morphology if available
+  const getWordTypeColor = (word: AnalyzedWord): string => {
+    const type = word.morphology?.partOfSpeech || word.entry?.type;
     switch (type) {
       case 'particle':
         return 'border-blue-500/70 shadow-[inset_0_0_0_1px_rgba(59,130,246,0.15)]';
@@ -315,7 +359,8 @@ const LabPage = () => {
   };
 
   // Get badge variant for word type
-  const getBadgeVariant = (type: string | undefined) => {
+  const getBadgeVariant = (word: AnalyzedWord) => {
+    const type = word.morphology?.partOfSpeech || word.entry?.type;
     switch (type) {
       case 'particle':
         return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
@@ -340,12 +385,16 @@ const LabPage = () => {
               <Sparkles className="w-3 h-3 mr-1" />
               100% FREE
             </Badge>
+            <Badge variant="secondary" className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+              <Globe className="w-3 h-3 mr-1" />
+              Quran.com API
+            </Badge>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3 font-english">
             Qur'anic Arabic Lab (Free)
           </h1>
           <p className="text-muted-foreground max-w-2xl">
-            Paste a Qur'anic phrase and get a word-by-word breakdown (particles, roots, verb clues, and grammar notes).
+            Paste any Qur'anic phrase and get a word-by-word breakdown with grammatical analysis: verb tenses, noun gender, number, definiteness, and morphability.
             <span className="block mt-1 text-amber-500/80 text-sm">
               ⚠️ Educational analysis only — not tafsīr or religious rulings.
             </span>
@@ -354,15 +403,15 @@ const LabPage = () => {
           <div className="flex flex-wrap gap-3 mt-4">
             <Badge variant="outline" className="text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-400 mr-2" />
-              Zero backend
-            </Badge>
-            <Badge variant="outline" className="text-xs">
-              <span className="w-2 h-2 rounded-full bg-blue-400 mr-2" />
-              Zero API cost
+              Verb Tense Detection
             </Badge>
             <Badge variant="outline" className="text-xs">
               <span className="w-2 h-2 rounded-full bg-amber-400 mr-2" />
-              Runs in browser
+              Noun Gender & Number
+            </Badge>
+            <Badge variant="outline" className="text-xs">
+              <span className="w-2 h-2 rounded-full bg-blue-400 mr-2" />
+              Morphability Analysis
             </Badge>
           </div>
         </div>
@@ -376,7 +425,7 @@ const LabPage = () => {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-foreground">1) Paste Arabic</h2>
                 <span className="text-xs text-muted-foreground">
-                  Tip: try "ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسْتَقِيمَ"
+                  Works with any Qur'anic verse
                 </span>
               </div>
               
@@ -392,16 +441,29 @@ const LabPage = () => {
               />
               
               <div className="flex flex-wrap gap-3 mt-4">
-                <Button onClick={handleAnalyze} className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  Analyze
+                <Button 
+                  onClick={handleAnalyze} 
+                  disabled={isLoading}
+                  className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      Analyze
+                    </>
+                  )}
                 </Button>
                 <Button variant="outline" onClick={handleClear}>
                   <Trash2 className="w-4 h-4 mr-2" />
                   Clear
                 </Button>
                 <Button variant="ghost" onClick={handleLoadDemo} className="border border-dashed border-muted-foreground/30">
-                  Load Demo
+                  Load Al-Fatiha
                 </Button>
               </div>
             </Card>
@@ -410,9 +472,11 @@ const LabPage = () => {
             <Card className="p-6 bg-card border-border">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-foreground">2) Click any word</h2>
-                <span className="text-xs text-muted-foreground">
-                  Particles/verbs/nouns are color-outlined
-                </span>
+                {apiSource && (
+                  <Badge variant="outline" className="text-xs">
+                    {apiSource === 'api' ? '🌐 API + Local' : '📚 Local Analysis'}
+                  </Badge>
+                )}
               </div>
               
               {analyzedWords.length > 0 ? (
@@ -424,7 +488,7 @@ const LabPage = () => {
                     <button
                       key={index}
                       onClick={() => setSelectedWord(word)}
-                      className={`inline-block mx-1 my-1 px-3 py-1 rounded-xl border-2 text-xl font-arabic transition-all hover:-translate-y-0.5 cursor-pointer bg-background/50 ${getWordTypeColor(word.entry?.type)} ${selectedWord?.original === word.original ? 'ring-2 ring-primary' : ''}`}
+                      className={`inline-block mx-1 my-1 px-3 py-1 rounded-xl border-2 text-xl font-arabic transition-all hover:-translate-y-0.5 cursor-pointer bg-background/50 ${getWordTypeColor(word)} ${selectedWord?.original === word.original ? 'ring-2 ring-primary' : ''}`}
                     >
                       {word.original}
                     </button>
@@ -459,8 +523,9 @@ const LabPage = () => {
 
             {/* Disclaimer */}
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">Accuracy & Scope:</strong> This tool uses deterministic rules + a growing word list.
-              Arabic morphology has edge cases. If a word is unknown, it will show "unknown" and still give helpful prefix/suffix hints.
+              <strong className="text-foreground">Accuracy & Scope:</strong> This tool uses pattern-based morphology analysis 
+              combined with the Quran.com API. Arabic morphology has edge cases - if a word is unknown, it will still provide 
+              grammatical hints based on its structure.
             </p>
           </div>
 
@@ -485,31 +550,136 @@ const LabPage = () => {
                     <span className="text-4xl font-arabic" dir="rtl">
                       {selectedWord.original}
                     </span>
+                    {selectedWord.transliteration && (
+                      <p className="text-sm text-muted-foreground mt-2">{selectedWord.transliteration}</p>
+                    )}
                   </div>
+
+                  {/* Translation from API */}
+                  {selectedWord.translation && (
+                    <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                      <span className="text-xs text-emerald-400 font-medium">Translation</span>
+                      <p className="text-foreground mt-1">{selectedWord.translation}</p>
+                    </div>
+                  )}
 
                   {/* Details Grid */}
                   <div className="grid grid-cols-[100px_1fr] gap-3 text-sm">
-                    <span className="text-muted-foreground">Selected</span>
-                    <span className="font-arabic text-lg" dir="rtl">{selectedWord.original}</span>
-                    
                     <span className="text-muted-foreground">Type</span>
-                    <Badge className={getBadgeVariant(selectedWord.entry?.type)}>
-                      {selectedWord.entry?.type || 'unknown'}
+                    <Badge className={getBadgeVariant(selectedWord)}>
+                      {selectedWord.morphology?.partOfSpeech || selectedWord.entry?.type || 'unknown'}
                     </Badge>
                     
                     <span className="text-muted-foreground">Root (جذر)</span>
                     <span className="font-arabic" dir="rtl">
-                      {selectedWord.entry?.root || '—'}
+                      {selectedWord.entry?.root || selectedWord.morphology?.root || '—'}
                     </span>
                     
-                    <span className="text-muted-foreground">Gloss</span>
-                    <span>{selectedWord.entry?.gloss || '—'}</span>
-                    
-                    <span className="text-muted-foreground">Notes</span>
-                    <span className="text-sm leading-relaxed">
-                      {selectedWord.entry?.notes || '—'}
-                    </span>
+                    {selectedWord.entry?.gloss && (
+                      <>
+                        <span className="text-muted-foreground">Gloss</span>
+                        <span>{selectedWord.entry.gloss}</span>
+                      </>
+                    )}
                   </div>
+
+                  {/* Morphology Details */}
+                  {selectedWord.morphology && (
+                    <>
+                      <div className="h-px bg-border my-4" />
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-semibold text-foreground">Grammar Details</h4>
+                        
+                        {/* Verb-specific details */}
+                        {selectedWord.morphology.partOfSpeech === 'verb' && (
+                          <div className="grid grid-cols-2 gap-2 text-sm">
+                            {selectedWord.morphology.tense && (
+                              <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-xs text-emerald-400">Tense</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.tense}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.verbForm && (
+                              <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-xs text-emerald-400">Form</span>
+                                <p className="text-foreground">{selectedWord.morphology.verbForm}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.voice && (
+                              <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-xs text-emerald-400">Voice</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.voice}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.person && (
+                              <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-xs text-emerald-400">Person</span>
+                                <p className="text-foreground">{selectedWord.morphology.person}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.gender && (
+                              <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-xs text-emerald-400">Gender</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.gender}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.number && (
+                              <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-xs text-emerald-400">Number</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.number}</p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Noun-specific details */}
+                        {selectedWord.morphology.partOfSpeech === 'noun' && (
+                          <div className="grid grid-cols-2 gap-2 text-sm">
+                            {selectedWord.morphology.gender && (
+                              <div className="p-2 rounded bg-amber-500/10 border border-amber-500/20">
+                                <span className="text-xs text-amber-400">Gender</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.gender}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.number && (
+                              <div className="p-2 rounded bg-amber-500/10 border border-amber-500/20">
+                                <span className="text-xs text-amber-400">Number</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.number}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.definiteness && (
+                              <div className="p-2 rounded bg-amber-500/10 border border-amber-500/20">
+                                <span className="text-xs text-amber-400">Definiteness</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.definiteness}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.case && (
+                              <div className="p-2 rounded bg-amber-500/10 border border-amber-500/20">
+                                <span className="text-xs text-amber-400">Case</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.case}</p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.morphability && (
+                              <div className="p-2 rounded bg-amber-500/10 border border-amber-500/20 col-span-2">
+                                <span className="text-xs text-amber-400">Morphability</span>
+                                <p className="text-foreground capitalize">
+                                  {selectedWord.morphology.morphability === 'triptote' && 'Triptote (fully declinable)'}
+                                  {selectedWord.morphology.morphability === 'diptote' && 'Diptote (partially declinable)'}
+                                  {selectedWord.morphology.morphability === 'indeclinable' && 'Indeclinable'}
+                                </p>
+                              </div>
+                            )}
+                            {selectedWord.morphology.nounType && (
+                              <div className="p-2 rounded bg-amber-500/10 border border-amber-500/20 col-span-2">
+                                <span className="text-xs text-amber-400">Noun Type</span>
+                                <p className="text-foreground capitalize">{selectedWord.morphology.nounType.replace(/-/g, ' ')}</p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
 
                   {/* Prefixes & Suffixes */}
                   {(selectedWord.detectedPrefixes.length > 0 || selectedWord.detectedSuffixes.length > 0) && (
@@ -540,12 +710,23 @@ const LabPage = () => {
                     </>
                   )}
 
+                  {/* Dictionary Notes */}
+                  {selectedWord.entry?.notes && (
+                    <>
+                      <div className="h-px bg-border my-4" />
+                      <div className="text-sm">
+                        <span className="text-muted-foreground">Notes:</span>
+                        <p className="mt-1 text-foreground/80">{selectedWord.entry.notes}</p>
+                      </div>
+                    </>
+                  )}
+
                   {/* Heuristic Notes for Unknown Words */}
                   {!selectedWord.entry && selectedWord.heuristicNotes.length > 0 && (
                     <>
                       <div className="h-px bg-border my-4" />
                       <div className="text-sm">
-                        <span className="text-muted-foreground">Structural Hints:</span>
+                        <span className="text-muted-foreground">Analysis:</span>
                         <ul className="mt-2 space-y-1">
                           {selectedWord.heuristicNotes.map((note, i) => (
                             <li key={i} className="text-emerald-400 text-xs">• {note}</li>
@@ -557,21 +738,9 @@ const LabPage = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <div className="grid grid-cols-[100px_1fr] gap-3 text-sm">
-                    <span className="text-muted-foreground">Selected</span>
-                    <span className="text-muted-foreground">—</span>
-                    
-                    <span className="text-muted-foreground">Type</span>
-                    <span className="text-muted-foreground">—</span>
-                    
-                    <span className="text-muted-foreground">Root (جذر)</span>
-                    <span className="text-muted-foreground">—</span>
-                    
-                    <span className="text-muted-foreground">Gloss</span>
-                    <span className="text-muted-foreground">—</span>
-                    
-                    <span className="text-muted-foreground">Notes</span>
-                    <span className="text-muted-foreground">—</span>
+                  <div className="p-8 text-center text-muted-foreground">
+                    <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                    <p>Select a word to see its grammatical analysis</p>
                   </div>
                 </div>
               )}
