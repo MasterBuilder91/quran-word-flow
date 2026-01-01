@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Copy, Trash2, BookOpen, Sparkles, ArrowRight } from "lucide-react";
+import { Copy, Trash2, BookOpen, Sparkles, ArrowRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { 
@@ -14,6 +14,8 @@ import {
   suffixes, 
   ArabicWordEntry 
 } from "@/data/arabicDictionary";
+import { analyzeWordMorphology, formatMorphologyDetails, MorphologyDetails } from "@/lib/quranMorphology";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AnalyzedWord {
   original: string;
@@ -21,11 +23,16 @@ interface AnalyzedWord {
   detectedPrefixes: string[];
   detectedSuffixes: string[];
   heuristicNotes: string[];
+  translation?: string;
+  transliteration?: string;
+  morphology?: MorphologyDetails;
 }
 
 const LabPage = () => {
   const [inputText, setInputText] = useState("");
   const [analyzedWords, setAnalyzedWords] = useState<AnalyzedWord[]>([]);
+  const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
 
   // Normalize Arabic text (remove some diacritics for lookup, keep original for display)
