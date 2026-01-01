@@ -484,15 +484,27 @@ const LabPage = () => {
                   className="p-4 rounded-xl border border-border bg-muted/30 text-right leading-[2.5]"
                   dir="rtl"
                 >
-                  {analyzedWords.map((word, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedWord(word)}
-                      className={`inline-block mx-1 my-1 px-3 py-1 rounded-xl border-2 text-xl font-arabic transition-all hover:-translate-y-0.5 cursor-pointer bg-background/50 ${getWordTypeColor(word)} ${selectedWord?.original === word.original ? 'ring-2 ring-primary' : ''}`}
-                    >
-                      {word.original}
-                    </button>
-                  ))}
+                  <div className="flex flex-wrap gap-3 justify-end">
+                    {analyzedWords.map((word, index) => {
+                      const meaning = word.translation || word.entry?.gloss;
+                      return (
+                        <div key={index} className="flex flex-col items-center">
+                          <button
+                            onClick={() => setSelectedWord(word)}
+                            className={`px-3 py-1 rounded-xl border-2 text-xl font-arabic transition-all hover:-translate-y-0.5 cursor-pointer bg-background/50 ${getWordTypeColor(word)} ${selectedWord?.original === word.original ? 'ring-2 ring-primary' : ''}`}
+                            title={meaning || 'Click to analyze'}
+                          >
+                            {word.original}
+                          </button>
+                          {meaning && (
+                            <span className="text-[10px] text-muted-foreground mt-1 max-w-[80px] text-center leading-tight" dir="ltr">
+                              {meaning}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               ) : (
                 <div className="p-8 rounded-xl border border-dashed border-muted-foreground/30 text-center text-muted-foreground">
@@ -555,13 +567,13 @@ const LabPage = () => {
                     )}
                   </div>
 
-                  {/* Translation from API */}
-                  {selectedWord.translation && (
-                    <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-                      <span className="text-xs text-emerald-400 font-medium">Translation</span>
-                      <p className="text-foreground mt-1">{selectedWord.translation}</p>
-                    </div>
-                  )}
+                  {/* MEANING - Most Important! */}
+                  <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
+                    <span className="text-xs text-primary font-medium uppercase tracking-wide">Meaning</span>
+                    <p className="text-lg font-medium text-foreground mt-1">
+                      {selectedWord.translation || selectedWord.entry?.gloss || 'Meaning not found in dictionary'}
+                    </p>
+                  </div>
 
                   {/* Details Grid */}
                   <div className="grid grid-cols-[100px_1fr] gap-3 text-sm">
@@ -571,16 +583,9 @@ const LabPage = () => {
                     </Badge>
                     
                     <span className="text-muted-foreground">Root (جذر)</span>
-                    <span className="font-arabic" dir="rtl">
+                    <span className="font-arabic text-lg" dir="rtl">
                       {selectedWord.entry?.root || selectedWord.morphology?.root || '—'}
                     </span>
-                    
-                    {selectedWord.entry?.gloss && (
-                      <>
-                        <span className="text-muted-foreground">Gloss</span>
-                        <span>{selectedWord.entry.gloss}</span>
-                      </>
-                    )}
                   </div>
 
                   {/* Morphology Details */}
