@@ -135,6 +135,13 @@ export const Header = () => {
                       1-on-1 Coaching
                     </Link>
                     <Link
+                      to="/mushaf"
+                      onClick={() => setIsMoreOpen(false)}
+                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      Free Mushaf
+                    </Link>
+                    <Link
                       to="/careers"
                       onClick={() => setIsMoreOpen(false)}
                       className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -266,6 +273,13 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Free Arabic Lab
+              </Link>
+              <Link
+                to="/mushaf"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Free Mushaf
               </Link>
               <button
                 onClick={() => {

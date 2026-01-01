@@ -25,6 +25,7 @@ import CareersPage from "./pages/CareersPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import QuranInsightPage from "./pages/QuranInsightPage";
 import LabPage from "./pages/LabPage";
+import MushafPage from "./pages/MushafPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/quran-insight" element={<QuranInsightPage />} />
           <Route path="/lab" element={<LabPage />} />
+          <Route path="/mushaf" element={<MushafPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
