@@ -1,0 +1,1698 @@
+// Qur'anic Arabic Heritage - Functional Core Vocabulary
+// Based on AAC research: high-frequency words that can be combined to communicate in any situation
+// All phrases are in Classical Qur'anic Arabic (Fuṣḥā)
+
+export interface HeritagePhrase {
+  id: number;
+  arabic: string;
+  transliteration: string;
+  english: string;
+  category: HeritageCategory;
+  subcategory?: string;
+  frequency: 'core' | 'essential' | 'common';
+  quranicExample?: {
+    arabic: string;
+    english: string;
+    reference: string;
+  };
+  usage: string; // When/how to use this phrase
+  audioTip?: string;
+}
+
+export type HeritageCategory = 
+  | 'core-requests'
+  | 'core-actions'
+  | 'core-responses'
+  | 'core-descriptions'
+  | 'core-questions'
+  | 'dua-starters'
+  | 'emotions'
+  | 'time-place'
+  | 'people-relations'
+  | 'daily-actions'
+  | 'learning-knowledge'
+  | 'gratitude-praise'
+  | 'seeking-asking'
+  | 'giving-sharing'
+  | 'movement-direction'
+  | 'affirmation-negation';
+
+export interface HeritageModule {
+  id: string;
+  title: string;
+  titleArabic: string;
+  description: string;
+  icon: string;
+  category: 'core' | 'functional';
+  phraseIds: number[];
+  isCore?: boolean; // Core vocabulary = foundational building blocks
+}
+
+// =============================================
+// CORE VOCABULARY - The 50 Most Essential Words
+// These are the building blocks of communication
+// =============================================
+
+export const heritageCorePhrases: HeritagePhrase[] = [
+  // CORE REQUESTS (like "I want", "give me", "help me")
+  {
+    id: 1,
+    arabic: "أُرِيدُ",
+    transliteration: "urīdu",
+    english: "I want",
+    category: 'core-requests',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "إِنِّي أُرِيدُ أَنْ أُنكِحَكَ",
+      english: "Indeed, I wish to wed you",
+      reference: "Qur'an 28:27"
+    },
+    usage: "Express any desire or want. Combine with nouns: 'I want water' = أُرِيدُ مَاءً"
+  },
+  {
+    id: 2,
+    arabic: "أَعْطِنِي",
+    transliteration: "aʿṭinī",
+    english: "Give me",
+    category: 'core-requests',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "رَبِّ هَبْ لِي حُكْمًا",
+      english: "My Lord, grant me authority",
+      reference: "Qur'an 26:83"
+    },
+    usage: "Request anything. 'Give me the book' = أَعْطِنِي الكِتَابَ"
+  },
+  {
+    id: 3,
+    arabic: "سَاعِدْنِي",
+    transliteration: "sāʿidnī",
+    english: "Help me",
+    category: 'core-requests',
+    frequency: 'core',
+    usage: "Ask for assistance in any situation"
+  },
+  {
+    id: 4,
+    arabic: "زِدْنِي",
+    transliteration: "zidnī",
+    english: "Give me more / Increase me",
+    category: 'core-requests',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "وَقُل رَّبِّ زِدْنِي عِلْمًا",
+      english: "And say: My Lord, increase me in knowledge",
+      reference: "Qur'an 20:114"
+    },
+    usage: "Ask for more of anything. One of the most powerful du'a phrases."
+  },
+  {
+    id: 5,
+    arabic: "أَحْتَاجُ",
+    transliteration: "aḥtāju",
+    english: "I need",
+    category: 'core-requests',
+    frequency: 'core',
+    usage: "Express necessity. 'I need help' = أَحْتَاجُ مُسَاعَدَةً"
+  },
+  {
+    id: 6,
+    arabic: "مِنْ فَضْلِكَ",
+    transliteration: "min faḍlika",
+    english: "Please (lit: from your grace)",
+    category: 'core-requests',
+    frequency: 'core',
+    usage: "Polite request. Add to any request for courtesy."
+  },
+
+  // CORE ACTIONS (verbs that combine with anything)
+  {
+    id: 7,
+    arabic: "اِذْهَبْ",
+    transliteration: "idhhab",
+    english: "Go",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "اذْهَبْ إِلَىٰ فِرْعَوْنَ",
+      english: "Go to Pharaoh",
+      reference: "Qur'an 20:24"
+    },
+    usage: "Command to go. Add destination: 'Go home' = اِذْهَبْ إِلَى البَيْتِ"
+  },
+  {
+    id: 8,
+    arabic: "تَعَالَ",
+    transliteration: "taʿāla",
+    english: "Come",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "قُلْ تَعَالَوْا أَتْلُ",
+      english: "Say: Come, I will recite",
+      reference: "Qur'an 6:151"
+    },
+    usage: "Call someone to come. 'Come here' = تَعَالَ هُنَا"
+  },
+  {
+    id: 9,
+    arabic: "اُنْظُرْ",
+    transliteration: "unẓur",
+    english: "Look / See",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "انظُرْ كَيْفَ ضَرَبُوا لَكَ الْأَمْثَالَ",
+      english: "Look how they strike examples for you",
+      reference: "Qur'an 17:48"
+    },
+    usage: "Direct attention. 'Look at this' = اُنْظُرْ إِلَى هٰذَا"
+  },
+  {
+    id: 10,
+    arabic: "اِسْمَعْ",
+    transliteration: "ismaʿ",
+    english: "Listen / Hear",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "وَإِذَا قُرِئَ الْقُرْآنُ فَاسْتَمِعُوا لَهُ",
+      english: "When the Qur'an is recited, listen to it",
+      reference: "Qur'an 7:204"
+    },
+    usage: "Get someone's attention for listening"
+  },
+  {
+    id: 11,
+    arabic: "قُلْ",
+    transliteration: "qul",
+    english: "Say",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      english: "Say: He is Allah, the One",
+      reference: "Qur'an 112:1"
+    },
+    usage: "Most common Qur'anic command. 'Say...' introduces statements."
+  },
+  {
+    id: 12,
+    arabic: "اِفْعَلْ",
+    transliteration: "ifʿal",
+    english: "Do (it)",
+    category: 'core-actions',
+    frequency: 'core',
+    usage: "General command to do something"
+  },
+  {
+    id: 13,
+    arabic: "خُذْ",
+    transliteration: "khudh",
+    english: "Take",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً",
+      english: "Take from their wealth a charity",
+      reference: "Qur'an 9:103"
+    },
+    usage: "Offer something or command taking"
+  },
+  {
+    id: 14,
+    arabic: "اِقْرَأْ",
+    transliteration: "iqra'",
+    english: "Read / Recite",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
+      english: "Read in the name of your Lord who created",
+      reference: "Qur'an 96:1"
+    },
+    usage: "The first revelation. Command to read/recite."
+  },
+  {
+    id: 15,
+    arabic: "اُكْتُبْ",
+    transliteration: "uktub",
+    english: "Write",
+    category: 'core-actions',
+    frequency: 'core',
+    usage: "Command to write something"
+  },
+  {
+    id: 16,
+    arabic: "كُلْ",
+    transliteration: "kul",
+    english: "Eat",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "كُلُوا مِن طَيِّبَاتِ مَا رَزَقْنَاكُمْ",
+      english: "Eat from the good things We have provided you",
+      reference: "Qur'an 2:57"
+    },
+    usage: "Command or invitation to eat"
+  },
+  {
+    id: 17,
+    arabic: "اِشْرَبْ",
+    transliteration: "ishrab",
+    english: "Drink",
+    category: 'core-actions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "كُلُوا وَاشْرَبُوا",
+      english: "Eat and drink",
+      reference: "Qur'an 2:60"
+    },
+    usage: "Command or invitation to drink"
+  },
+
+  // CORE RESPONSES
+  {
+    id: 18,
+    arabic: "نَعَمْ",
+    transliteration: "naʿam",
+    english: "Yes",
+    category: 'core-responses',
+    frequency: 'core',
+    usage: "Affirmative response"
+  },
+  {
+    id: 19,
+    arabic: "لَا",
+    transliteration: "lā",
+    english: "No",
+    category: 'core-responses',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "لَا إِكْرَاهَ فِي الدِّينِ",
+      english: "There is no compulsion in religion",
+      reference: "Qur'an 2:256"
+    },
+    usage: "Negation. Most common negative particle."
+  },
+  {
+    id: 20,
+    arabic: "حَسَنٌ",
+    transliteration: "ḥasan",
+    english: "Good / Okay",
+    category: 'core-responses',
+    frequency: 'core',
+    usage: "Agreement or approval"
+  },
+  {
+    id: 21,
+    arabic: "إِنْ شَاءَ اللَّهُ",
+    transliteration: "in shā'a Allāh",
+    english: "If Allah wills",
+    category: 'core-responses',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "وَلَا تَقُولَنَّ لِشَيْءٍ إِنِّي فَاعِلٌ ذَٰلِكَ غَدًا إِلَّا أَن يَشَاءَ اللَّهُ",
+      english: "And never say of anything, 'I shall do that tomorrow' except [with] 'If Allah wills'",
+      reference: "Qur'an 18:23-24"
+    },
+    usage: "Used when speaking about future intentions"
+  },
+  {
+    id: 22,
+    arabic: "مَا شَاءَ اللَّهُ",
+    transliteration: "mā shā'a Allāh",
+    english: "What Allah has willed (expressing wonder/appreciation)",
+    category: 'core-responses',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "مَا شَاءَ اللَّهُ لَا قُوَّةَ إِلَّا بِاللَّهِ",
+      english: "What Allah has willed; there is no power except in Allah",
+      reference: "Qur'an 18:39"
+    },
+    usage: "Express appreciation without envy. Protects from evil eye."
+  },
+  {
+    id: 23,
+    arabic: "سُبْحَانَ اللَّهِ",
+    transliteration: "subḥāna Allāh",
+    english: "Glory be to Allah",
+    category: 'core-responses',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ",
+      english: "Exalted is He who took His servant by night",
+      reference: "Qur'an 17:1"
+    },
+    usage: "Express amazement, glorify Allah, or respond to something wonderful"
+  },
+  {
+    id: 24,
+    arabic: "الْحَمْدُ لِلَّهِ",
+    transliteration: "al-ḥamdu lillāh",
+    english: "All praise is for Allah",
+    category: 'core-responses',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      english: "All praise is for Allah, Lord of all worlds",
+      reference: "Qur'an 1:2"
+    },
+    usage: "Express gratitude. Response to 'How are you?' = الحمد لله"
+  },
+  {
+    id: 25,
+    arabic: "اللَّهُ أَكْبَرُ",
+    transliteration: "Allāhu akbar",
+    english: "Allah is the Greatest",
+    category: 'core-responses',
+    frequency: 'core',
+    usage: "Express that Allah is greater than all. Used in prayer and exclamation."
+  },
+
+  // CORE DESCRIPTIONS
+  {
+    id: 26,
+    arabic: "هٰذَا",
+    transliteration: "hādhā",
+    english: "This (masculine)",
+    category: 'core-descriptions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "هَٰذَا صِرَاطٌ مُّسْتَقِيمٌ",
+      english: "This is a straight path",
+      reference: "Qur'an 36:61"
+    },
+    usage: "Point to something near. 'This is a book' = هٰذَا كِتَابٌ"
+  },
+  {
+    id: 27,
+    arabic: "هٰذِهِ",
+    transliteration: "hādhihi",
+    english: "This (feminine)",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Point to feminine noun. 'This is a house' = هٰذِهِ دَارٌ"
+  },
+  {
+    id: 28,
+    arabic: "ذٰلِكَ",
+    transliteration: "dhālika",
+    english: "That (masculine)",
+    category: 'core-descriptions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
+      english: "That is the Book about which there is no doubt",
+      reference: "Qur'an 2:2"
+    },
+    usage: "Point to something far or abstract"
+  },
+  {
+    id: 29,
+    arabic: "كَبِيرٌ",
+    transliteration: "kabīr",
+    english: "Big / Great",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Describe size or importance"
+  },
+  {
+    id: 30,
+    arabic: "صَغِيرٌ",
+    transliteration: "ṣaghīr",
+    english: "Small / Little",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Describe small size"
+  },
+  {
+    id: 31,
+    arabic: "كَثِيرٌ",
+    transliteration: "kathīr",
+    english: "Many / Much",
+    category: 'core-descriptions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "وَذَكَرَ اللَّهَ كَثِيرًا",
+      english: "And remembers Allah much",
+      reference: "Qur'an 33:21"
+    },
+    usage: "Describe quantity"
+  },
+  {
+    id: 32,
+    arabic: "قَلِيلٌ",
+    transliteration: "qalīl",
+    english: "Few / Little",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Describe small quantity"
+  },
+  {
+    id: 33,
+    arabic: "جَيِّدٌ",
+    transliteration: "jayyid",
+    english: "Good / Excellent",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Positive quality description"
+  },
+  {
+    id: 34,
+    arabic: "جَمِيلٌ",
+    transliteration: "jamīl",
+    english: "Beautiful",
+    category: 'core-descriptions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "فَصَبْرٌ جَمِيلٌ",
+      english: "So patience is most fitting (beautiful)",
+      reference: "Qur'an 12:18"
+    },
+    usage: "Describe beauty - physical or abstract"
+  },
+  {
+    id: 35,
+    arabic: "سَهْلٌ",
+    transliteration: "sahl",
+    english: "Easy",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Describe ease or simplicity"
+  },
+  {
+    id: 36,
+    arabic: "صَعْبٌ",
+    transliteration: "ṣaʿb",
+    english: "Difficult / Hard",
+    category: 'core-descriptions',
+    frequency: 'core',
+    usage: "Describe difficulty"
+  },
+
+  // CORE QUESTIONS
+  {
+    id: 37,
+    arabic: "مَا",
+    transliteration: "mā",
+    english: "What?",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "مَا هَٰذَا",
+      english: "What is this?",
+      reference: "Qur'an 21:36"
+    },
+    usage: "Ask about things. 'What is this?' = مَا هٰذَا؟"
+  },
+  {
+    id: 38,
+    arabic: "مَنْ",
+    transliteration: "man",
+    english: "Who?",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "مَن ذَا الَّذِي يَشْفَعُ عِندَهُ",
+      english: "Who is it that can intercede with Him?",
+      reference: "Qur'an 2:255"
+    },
+    usage: "Ask about people. 'Who is he?' = مَنْ هُوَ؟"
+  },
+  {
+    id: 39,
+    arabic: "أَيْنَ",
+    transliteration: "ayna",
+    english: "Where?",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "أَيْنَ مَا تَكُونُوا يَأْتِ بِكُمُ اللَّهُ",
+      english: "Wherever you may be, Allah will bring you forth",
+      reference: "Qur'an 2:148"
+    },
+    usage: "Ask about location. 'Where is the masjid?' = أَيْنَ المَسْجِدُ؟"
+  },
+  {
+    id: 40,
+    arabic: "مَتَىٰ",
+    transliteration: "matā",
+    english: "When?",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "مَتَىٰ نَصْرُ اللَّهِ",
+      english: "When is the help of Allah?",
+      reference: "Qur'an 2:214"
+    },
+    usage: "Ask about time"
+  },
+  {
+    id: 41,
+    arabic: "كَيْفَ",
+    transliteration: "kayfa",
+    english: "How?",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "كَيْفَ تَكْفُرُونَ بِاللَّهِ",
+      english: "How can you disbelieve in Allah?",
+      reference: "Qur'an 2:28"
+    },
+    usage: "Ask about manner. 'How are you?' = كَيْفَ حَالُكَ؟"
+  },
+  {
+    id: 42,
+    arabic: "لِمَاذَا",
+    transliteration: "limādhā",
+    english: "Why?",
+    category: 'core-questions',
+    frequency: 'core',
+    usage: "Ask for reason. 'Why did you do this?' = لِمَاذَا فَعَلْتَ هٰذَا؟"
+  },
+  {
+    id: 43,
+    arabic: "كَمْ",
+    transliteration: "kam",
+    english: "How many? / How much?",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "كَمْ لَبِثْتُمْ فِي الْأَرْضِ",
+      english: "How long did you remain on earth?",
+      reference: "Qur'an 23:112"
+    },
+    usage: "Ask about quantity or duration"
+  },
+  {
+    id: 44,
+    arabic: "هَلْ",
+    transliteration: "hal",
+    english: "Is? / Does? (yes/no question)",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "هَلْ أَتَىٰ عَلَى الْإِنسَانِ حِينٌ",
+      english: "Has there come upon man a period of time?",
+      reference: "Qur'an 76:1"
+    },
+    usage: "Form yes/no questions. 'Is this correct?' = هَلْ هٰذَا صَحِيحٌ؟"
+  },
+
+  // DU'A STARTERS
+  {
+    id: 45,
+    arabic: "رَبِّ",
+    transliteration: "rabbi",
+    english: "My Lord",
+    category: 'dua-starters',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "رَبِّ اغْفِرْ لِي",
+      english: "My Lord, forgive me",
+      reference: "Qur'an 38:35"
+    },
+    usage: "Address Allah in supplication. Most intimate form."
+  },
+  {
+    id: 46,
+    arabic: "اللَّهُمَّ",
+    transliteration: "Allāhumma",
+    english: "O Allah",
+    category: 'dua-starters',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "اللَّهُمَّ مَالِكَ الْمُلْكِ",
+      english: "O Allah, Owner of Sovereignty",
+      reference: "Qur'an 3:26"
+    },
+    usage: "Formal way to address Allah in du'a"
+  },
+  {
+    id: 47,
+    arabic: "اِغْفِرْ لِي",
+    transliteration: "ighfir lī",
+    english: "Forgive me",
+    category: 'dua-starters',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ",
+      english: "My Lord, forgive me and my parents",
+      reference: "Qur'an 71:28"
+    },
+    usage: "Seek forgiveness from Allah"
+  },
+  {
+    id: 48,
+    arabic: "اِهْدِنِي",
+    transliteration: "ihdinī",
+    english: "Guide me",
+    category: 'dua-starters',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+      english: "Guide us to the straight path",
+      reference: "Qur'an 1:6"
+    },
+    usage: "Ask for guidance"
+  },
+  {
+    id: 49,
+    arabic: "اِرْحَمْنِي",
+    transliteration: "irḥamnī",
+    english: "Have mercy on me",
+    category: 'dua-starters',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+      english: "My Lord, have mercy upon them as they brought me up when I was small",
+      reference: "Qur'an 17:24"
+    },
+    usage: "Ask for Allah's mercy"
+  },
+  {
+    id: 50,
+    arabic: "أَعُوذُ بِاللَّهِ",
+    transliteration: "aʿūdhu billāh",
+    english: "I seek refuge in Allah",
+    category: 'dua-starters',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
+      english: "Say: I seek refuge in the Lord of daybreak",
+      reference: "Qur'an 113:1"
+    },
+    usage: "Seek protection from harm or evil"
+  }
+];
+
+// =============================================
+// FUNCTIONAL PHRASES LIBRARY
+// Organized by situation and use case
+// =============================================
+
+export const heritageFunctionalPhrases: HeritagePhrase[] = [
+  // EMOTIONS
+  {
+    id: 101,
+    arabic: "أَنَا سَعِيدٌ",
+    transliteration: "anā saʿīd",
+    english: "I am happy",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express happiness"
+  },
+  {
+    id: 102,
+    arabic: "أَنَا حَزِينٌ",
+    transliteration: "anā ḥazīn",
+    english: "I am sad",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express sadness"
+  },
+  {
+    id: 103,
+    arabic: "أَنَا مُتْعَبٌ",
+    transliteration: "anā mutʿab",
+    english: "I am tired",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express fatigue"
+  },
+  {
+    id: 104,
+    arabic: "أَنَا جَائِعٌ",
+    transliteration: "anā jāʾiʿ",
+    english: "I am hungry",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express hunger"
+  },
+  {
+    id: 105,
+    arabic: "أَنَا عَطْشَانٌ",
+    transliteration: "anā ʿaṭshān",
+    english: "I am thirsty",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express thirst"
+  },
+  {
+    id: 106,
+    arabic: "أَنَا خَائِفٌ",
+    transliteration: "anā khāʾif",
+    english: "I am afraid",
+    category: 'emotions',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "لَا تَخَفْ",
+      english: "Do not be afraid",
+      reference: "Qur'an 20:68"
+    },
+    usage: "Express fear"
+  },
+  {
+    id: 107,
+    arabic: "أَنَا فَرِحٌ",
+    transliteration: "anā fariḥ",
+    english: "I am joyful",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express joy"
+  },
+  {
+    id: 108,
+    arabic: "أُحِبُّ",
+    transliteration: "uḥibbu",
+    english: "I love",
+    category: 'emotions',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ",
+      english: "And Allah loves the doers of good",
+      reference: "Qur'an 3:134"
+    },
+    usage: "Express love for something or someone"
+  },
+  {
+    id: 109,
+    arabic: "لَا أُحِبُّ",
+    transliteration: "lā uḥibbu",
+    english: "I don't like",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express dislike"
+  },
+  {
+    id: 110,
+    arabic: "أَنَا مَرِيضٌ",
+    transliteration: "anā marīḍ",
+    english: "I am sick",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express illness"
+  },
+
+  // TIME & PLACE
+  {
+    id: 111,
+    arabic: "الآنَ",
+    transliteration: "al-āna",
+    english: "Now",
+    category: 'time-place',
+    frequency: 'essential',
+    usage: "Indicate present time"
+  },
+  {
+    id: 112,
+    arabic: "غَدًا",
+    transliteration: "ghadan",
+    english: "Tomorrow",
+    category: 'time-place',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "إِنِّي فَاعِلٌ ذَٰلِكَ غَدًا",
+      english: "Indeed, I will do that tomorrow",
+      reference: "Qur'an 18:23"
+    },
+    usage: "Indicate tomorrow"
+  },
+  {
+    id: 113,
+    arabic: "أَمْسِ",
+    transliteration: "amsi",
+    english: "Yesterday",
+    category: 'time-place',
+    frequency: 'essential',
+    usage: "Indicate yesterday"
+  },
+  {
+    id: 114,
+    arabic: "اليَوْمَ",
+    transliteration: "al-yawma",
+    english: "Today",
+    category: 'time-place',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "الْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ",
+      english: "Today I have perfected for you your religion",
+      reference: "Qur'an 5:3"
+    },
+    usage: "Indicate today"
+  },
+  {
+    id: 115,
+    arabic: "هُنَا",
+    transliteration: "hunā",
+    english: "Here",
+    category: 'time-place',
+    frequency: 'essential',
+    usage: "Indicate this location"
+  },
+  {
+    id: 116,
+    arabic: "هُنَاكَ",
+    transliteration: "hunāka",
+    english: "There",
+    category: 'time-place',
+    frequency: 'essential',
+    usage: "Indicate that location"
+  },
+  {
+    id: 117,
+    arabic: "قَبْلَ",
+    transliteration: "qabla",
+    english: "Before",
+    category: 'time-place',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "مِن قَبْلُ",
+      english: "From before",
+      reference: "Qur'an 2:25"
+    },
+    usage: "Indicate preceding time or position"
+  },
+  {
+    id: 118,
+    arabic: "بَعْدَ",
+    transliteration: "baʿda",
+    english: "After",
+    category: 'time-place',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "مِن بَعْدِ",
+      english: "From after",
+      reference: "Qur'an 2:27"
+    },
+    usage: "Indicate following time or position"
+  },
+  {
+    id: 119,
+    arabic: "فَوْقَ",
+    transliteration: "fawqa",
+    english: "Above / Over",
+    category: 'time-place',
+    frequency: 'essential',
+    usage: "Indicate position above"
+  },
+  {
+    id: 120,
+    arabic: "تَحْتَ",
+    transliteration: "taḥta",
+    english: "Under / Below",
+    category: 'time-place',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ",
+      english: "Rivers flow beneath it",
+      reference: "Qur'an 2:25"
+    },
+    usage: "Indicate position below"
+  },
+
+  // PEOPLE & RELATIONS
+  {
+    id: 121,
+    arabic: "أَبِي",
+    transliteration: "abī",
+    english: "My father",
+    category: 'people-relations',
+    frequency: 'essential',
+    usage: "Refer to one's father"
+  },
+  {
+    id: 122,
+    arabic: "أُمِّي",
+    transliteration: "ummī",
+    english: "My mother",
+    category: 'people-relations',
+    frequency: 'essential',
+    usage: "Refer to one's mother"
+  },
+  {
+    id: 123,
+    arabic: "أَخِي",
+    transliteration: "akhī",
+    english: "My brother",
+    category: 'people-relations',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَأَخِي هَارُونُ",
+      english: "And my brother Harun",
+      reference: "Qur'an 20:30"
+    },
+    usage: "Refer to one's brother"
+  },
+  {
+    id: 124,
+    arabic: "أُخْتِي",
+    transliteration: "ukhtī",
+    english: "My sister",
+    category: 'people-relations',
+    frequency: 'essential',
+    usage: "Refer to one's sister"
+  },
+  {
+    id: 125,
+    arabic: "اِبْنِي",
+    transliteration: "ibnī",
+    english: "My son",
+    category: 'people-relations',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "يَا بُنَيَّ",
+      english: "O my son",
+      reference: "Qur'an 31:13"
+    },
+    usage: "Refer to one's son"
+  },
+  {
+    id: 126,
+    arabic: "بِنْتِي",
+    transliteration: "bintī",
+    english: "My daughter",
+    category: 'people-relations',
+    frequency: 'essential',
+    usage: "Refer to one's daughter"
+  },
+  {
+    id: 127,
+    arabic: "صَدِيقِي",
+    transliteration: "ṣadīqī",
+    english: "My friend",
+    category: 'people-relations',
+    frequency: 'essential',
+    usage: "Refer to one's friend"
+  },
+  {
+    id: 128,
+    arabic: "أُسْتَاذِي",
+    transliteration: "ustādhī",
+    english: "My teacher",
+    category: 'people-relations',
+    frequency: 'essential',
+    usage: "Refer to one's teacher"
+  },
+
+  // DAILY ACTIONS
+  {
+    id: 129,
+    arabic: "أَسْتَيْقِظُ",
+    transliteration: "astayqiẓu",
+    english: "I wake up",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe waking up"
+  },
+  {
+    id: 130,
+    arabic: "أَنَامُ",
+    transliteration: "anāmu",
+    english: "I sleep",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe sleeping"
+  },
+  {
+    id: 131,
+    arabic: "آكُلُ",
+    transliteration: "ākulu",
+    english: "I eat",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe eating (first person)"
+  },
+  {
+    id: 132,
+    arabic: "أَشْرَبُ",
+    transliteration: "ashrabu",
+    english: "I drink",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe drinking (first person)"
+  },
+  {
+    id: 133,
+    arabic: "أُصَلِّي",
+    transliteration: "uṣallī",
+    english: "I pray",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe praying"
+  },
+  {
+    id: 134,
+    arabic: "أَقْرَأُ",
+    transliteration: "aqra'u",
+    english: "I read",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe reading"
+  },
+  {
+    id: 135,
+    arabic: "أَكْتُبُ",
+    transliteration: "aktubu",
+    english: "I write",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe writing"
+  },
+  {
+    id: 136,
+    arabic: "أَتَكَلَّمُ",
+    transliteration: "atakallamu",
+    english: "I speak",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe speaking"
+  },
+  {
+    id: 137,
+    arabic: "أَسْتَمِعُ",
+    transliteration: "astamiʿu",
+    english: "I listen",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Describe listening"
+  },
+  {
+    id: 138,
+    arabic: "أَفْهَمُ",
+    transliteration: "afhamu",
+    english: "I understand",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Express understanding"
+  },
+  {
+    id: 139,
+    arabic: "لَا أَفْهَمُ",
+    transliteration: "lā afhamu",
+    english: "I don't understand",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Express lack of understanding"
+  },
+  {
+    id: 140,
+    arabic: "أَعْرِفُ",
+    transliteration: "aʿrifu",
+    english: "I know",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Express knowledge"
+  },
+  {
+    id: 141,
+    arabic: "لَا أَعْرِفُ",
+    transliteration: "lā aʿrifu",
+    english: "I don't know",
+    category: 'daily-actions',
+    frequency: 'common',
+    usage: "Express lack of knowledge"
+  },
+
+  // LEARNING & KNOWLEDGE
+  {
+    id: 142,
+    arabic: "عَلِّمْنِي",
+    transliteration: "ʿallimnī",
+    english: "Teach me",
+    category: 'learning-knowledge',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا",
+      english: "And He taught Adam the names - all of them",
+      reference: "Qur'an 2:31"
+    },
+    usage: "Request to be taught something"
+  },
+  {
+    id: 143,
+    arabic: "أُرِيدُ أَنْ أَتَعَلَّمَ",
+    transliteration: "urīdu an ataʿallama",
+    english: "I want to learn",
+    category: 'learning-knowledge',
+    frequency: 'essential',
+    usage: "Express desire to learn"
+  },
+  {
+    id: 144,
+    arabic: "أَفْهَمْتَ",
+    transliteration: "afahimta",
+    english: "Did you understand?",
+    category: 'learning-knowledge',
+    frequency: 'common',
+    usage: "Check understanding"
+  },
+  {
+    id: 145,
+    arabic: "أَعِدْ مِنْ فَضْلِكَ",
+    transliteration: "aʿid min faḍlik",
+    english: "Please repeat",
+    category: 'learning-knowledge',
+    frequency: 'common',
+    usage: "Request repetition"
+  },
+  {
+    id: 146,
+    arabic: "مَا مَعْنَى هٰذَا",
+    transliteration: "mā maʿnā hādhā",
+    english: "What does this mean?",
+    category: 'learning-knowledge',
+    frequency: 'common',
+    usage: "Ask for meaning"
+  },
+  {
+    id: 147,
+    arabic: "تَكَلَّمْ بِبُطْءٍ",
+    transliteration: "takallam bibuṭ'in",
+    english: "Speak slowly",
+    category: 'learning-knowledge',
+    frequency: 'common',
+    usage: "Request slower speech"
+  },
+
+  // GRATITUDE & PRAISE
+  {
+    id: 148,
+    arabic: "شُكْرًا",
+    transliteration: "shukran",
+    english: "Thank you",
+    category: 'gratitude-praise',
+    frequency: 'essential',
+    usage: "Express thanks"
+  },
+  {
+    id: 149,
+    arabic: "جَزَاكَ اللَّهُ خَيْرًا",
+    transliteration: "jazāka Allāhu khayran",
+    english: "May Allah reward you with good",
+    category: 'gratitude-praise',
+    frequency: 'essential',
+    usage: "Islamic expression of deep thanks"
+  },
+  {
+    id: 150,
+    arabic: "بَارَكَ اللَّهُ فِيكَ",
+    transliteration: "bāraka Allāhu fīka",
+    english: "May Allah bless you",
+    category: 'gratitude-praise',
+    frequency: 'essential',
+    usage: "Blessing for someone"
+  },
+  {
+    id: 151,
+    arabic: "أَحْسَنْتَ",
+    transliteration: "aḥsanta",
+    english: "Well done! / Excellent!",
+    category: 'gratitude-praise',
+    frequency: 'common',
+    usage: "Praise someone's action"
+  },
+  {
+    id: 152,
+    arabic: "مَاشَاءَ اللَّهُ تَبَارَكَ اللَّهُ",
+    transliteration: "mā shā'a Allāh tabāraka Allāh",
+    english: "What Allah willed, blessed is Allah",
+    category: 'gratitude-praise',
+    frequency: 'essential',
+    usage: "Express admiration while protecting from evil eye"
+  },
+
+  // SEEKING & ASKING
+  {
+    id: 153,
+    arabic: "أَسْأَلُكَ",
+    transliteration: "as'aluka",
+    english: "I ask you",
+    category: 'seeking-asking',
+    frequency: 'essential',
+    usage: "Begin a request"
+  },
+  {
+    id: 154,
+    arabic: "اِنْتَظِرْ",
+    transliteration: "intaẓir",
+    english: "Wait",
+    category: 'seeking-asking',
+    frequency: 'essential',
+    usage: "Ask someone to wait"
+  },
+  {
+    id: 155,
+    arabic: "لَحْظَةً",
+    transliteration: "laḥẓatan",
+    english: "One moment",
+    category: 'seeking-asking',
+    frequency: 'common',
+    usage: "Request a brief wait"
+  },
+  {
+    id: 156,
+    arabic: "أَيْنَ الحَمَّامُ",
+    transliteration: "ayna al-ḥammām",
+    english: "Where is the bathroom?",
+    category: 'seeking-asking',
+    frequency: 'common',
+    usage: "Ask for bathroom location"
+  },
+
+  // GIVING & SHARING
+  {
+    id: 157,
+    arabic: "تَفَضَّلْ",
+    transliteration: "tafaḍḍal",
+    english: "Please (offering) / Go ahead",
+    category: 'giving-sharing',
+    frequency: 'essential',
+    usage: "Offer something or invite someone"
+  },
+  {
+    id: 158,
+    arabic: "هٰذَا لَكَ",
+    transliteration: "hādhā laka",
+    english: "This is for you",
+    category: 'giving-sharing',
+    frequency: 'common',
+    usage: "Give something to someone"
+  },
+  {
+    id: 159,
+    arabic: "نَحْنُ مَعًا",
+    transliteration: "naḥnu maʿan",
+    english: "We are together",
+    category: 'giving-sharing',
+    frequency: 'common',
+    usage: "Express togetherness"
+  },
+
+  // MOVEMENT & DIRECTION
+  {
+    id: 160,
+    arabic: "قِفْ",
+    transliteration: "qif",
+    english: "Stop",
+    category: 'movement-direction',
+    frequency: 'essential',
+    usage: "Command to stop"
+  },
+  {
+    id: 161,
+    arabic: "اِمْشِ",
+    transliteration: "imshi",
+    english: "Walk",
+    category: 'movement-direction',
+    frequency: 'common',
+    usage: "Command to walk"
+  },
+  {
+    id: 162,
+    arabic: "اُجْلِسْ",
+    transliteration: "ujlis",
+    english: "Sit down",
+    category: 'movement-direction',
+    frequency: 'essential',
+    usage: "Command to sit"
+  },
+  {
+    id: 163,
+    arabic: "قُمْ",
+    transliteration: "qum",
+    english: "Stand up / Get up",
+    category: 'movement-direction',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "قُمِ اللَّيْلَ",
+      english: "Stand (in prayer) at night",
+      reference: "Qur'an 73:2"
+    },
+    usage: "Command to stand or get up"
+  },
+  {
+    id: 164,
+    arabic: "اِفْتَحْ",
+    transliteration: "iftaḥ",
+    english: "Open",
+    category: 'movement-direction',
+    frequency: 'common',
+    quranicExample: {
+      arabic: "رَبَّنَا افْتَحْ بَيْنَنَا",
+      english: "Our Lord, decide between us",
+      reference: "Qur'an 7:89"
+    },
+    usage: "Command to open"
+  },
+  {
+    id: 165,
+    arabic: "أَغْلِقْ",
+    transliteration: "aghliq",
+    english: "Close",
+    category: 'movement-direction',
+    frequency: 'common',
+    usage: "Command to close"
+  },
+  {
+    id: 166,
+    arabic: "يَمِينًا",
+    transliteration: "yamīnan",
+    english: "To the right",
+    category: 'movement-direction',
+    frequency: 'common',
+    usage: "Indicate right direction"
+  },
+  {
+    id: 167,
+    arabic: "شِمَالًا",
+    transliteration: "shimālan",
+    english: "To the left",
+    category: 'movement-direction',
+    frequency: 'common',
+    usage: "Indicate left direction"
+  },
+  {
+    id: 168,
+    arabic: "أَمَامَكَ",
+    transliteration: "amāmaka",
+    english: "In front of you",
+    category: 'movement-direction',
+    frequency: 'common',
+    usage: "Indicate forward direction"
+  },
+  {
+    id: 169,
+    arabic: "وَرَاءَكَ",
+    transliteration: "warā'aka",
+    english: "Behind you",
+    category: 'movement-direction',
+    frequency: 'common',
+    usage: "Indicate backward direction"
+  },
+
+  // AFFIRMATION & NEGATION
+  {
+    id: 170,
+    arabic: "صَحِيحٌ",
+    transliteration: "ṣaḥīḥ",
+    english: "Correct / Right",
+    category: 'affirmation-negation',
+    frequency: 'essential',
+    usage: "Affirm correctness"
+  },
+  {
+    id: 171,
+    arabic: "خَطَأٌ",
+    transliteration: "khaṭa'",
+    english: "Wrong / Mistake",
+    category: 'affirmation-negation',
+    frequency: 'essential',
+    usage: "Indicate error"
+  },
+  {
+    id: 172,
+    arabic: "أُوَافِقُ",
+    transliteration: "uwāfiqu",
+    english: "I agree",
+    category: 'affirmation-negation',
+    frequency: 'common',
+    usage: "Express agreement"
+  },
+  {
+    id: 173,
+    arabic: "لَا أُوَافِقُ",
+    transliteration: "lā uwāfiqu",
+    english: "I disagree",
+    category: 'affirmation-negation',
+    frequency: 'common',
+    usage: "Express disagreement"
+  },
+  {
+    id: 174,
+    arabic: "رُبَّمَا",
+    transliteration: "rubbamā",
+    english: "Maybe / Perhaps",
+    category: 'affirmation-negation',
+    frequency: 'common',
+    usage: "Express uncertainty"
+  },
+  {
+    id: 175,
+    arabic: "بِالتَّأْكِيدِ",
+    transliteration: "bit-ta'kīd",
+    english: "Certainly / Definitely",
+    category: 'affirmation-negation',
+    frequency: 'common',
+    usage: "Express certainty"
+  },
+  {
+    id: 176,
+    arabic: "لَيْسَ كَذٰلِكَ",
+    transliteration: "laysa kadhālik",
+    english: "It's not like that",
+    category: 'affirmation-negation',
+    frequency: 'common',
+    usage: "Correct a misunderstanding"
+  },
+  {
+    id: 177,
+    arabic: "عَفْوًا",
+    transliteration: "ʿafwan",
+    english: "Excuse me / Sorry",
+    category: 'affirmation-negation',
+    frequency: 'essential',
+    usage: "Apologize or get attention"
+  },
+  {
+    id: 178,
+    arabic: "لَا بَأْسَ",
+    transliteration: "lā ba's",
+    english: "No problem / It's okay",
+    category: 'affirmation-negation',
+    frequency: 'essential',
+    usage: "Dismiss a minor issue"
+  },
+  {
+    id: 179,
+    arabic: "كَفَىٰ",
+    transliteration: "kafā",
+    english: "Enough",
+    category: 'affirmation-negation',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَكَفَىٰ بِاللَّهِ شَهِيدًا",
+      english: "And sufficient is Allah as Witness",
+      reference: "Qur'an 4:79"
+    },
+    usage: "Indicate sufficiency or to stop"
+  },
+  {
+    id: 180,
+    arabic: "أُرِيدُ المَزِيدَ",
+    transliteration: "urīdu al-mazīd",
+    english: "I want more",
+    category: 'affirmation-negation',
+    frequency: 'essential',
+    usage: "Request more of something"
+  }
+];
+
+// Combine all phrases
+export const allHeritgePhrases: HeritagePhrase[] = [
+  ...heritageCorePhrases,
+  ...heritageFunctionalPhrases
+];
+
+// =============================================
+// MODULES ORGANIZATION
+// =============================================
+
+export const heritageModules: HeritageModule[] = [
+  // CORE MODULES (Foundation - learn first)
+  {
+    id: 'core-requests',
+    title: 'Core Requests',
+    titleArabic: 'الطَّلَبَات الأَسَاسِيَّة',
+    description: 'I want, give me, help me - the foundation of expressing needs',
+    icon: '🙋',
+    category: 'core',
+    phraseIds: [1, 2, 3, 4, 5, 6],
+    isCore: true
+  },
+  {
+    id: 'core-actions',
+    title: 'Core Actions',
+    titleArabic: 'الأَفْعَال الأَسَاسِيَّة',
+    description: 'Go, come, look, listen, read - verbs that combine with anything',
+    icon: '🏃',
+    category: 'core',
+    phraseIds: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+    isCore: true
+  },
+  {
+    id: 'core-responses',
+    title: 'Core Responses',
+    titleArabic: 'الرُّدُود الأَسَاسِيَّة',
+    description: 'Yes, no, and essential Islamic phrases for daily use',
+    icon: '💬',
+    category: 'core',
+    phraseIds: [18, 19, 20, 21, 22, 23, 24, 25],
+    isCore: true
+  },
+  {
+    id: 'core-descriptions',
+    title: 'Core Descriptions',
+    titleArabic: 'الأَوْصَاف الأَسَاسِيَّة',
+    description: 'This, that, big, small - describe anything',
+    icon: '📝',
+    category: 'core',
+    phraseIds: [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
+    isCore: true
+  },
+  {
+    id: 'core-questions',
+    title: 'Core Questions',
+    titleArabic: 'الأَسْئِلَة الأَسَاسِيَّة',
+    description: 'What, who, where, when, how, why - ask about anything',
+    icon: '❓',
+    category: 'core',
+    phraseIds: [37, 38, 39, 40, 41, 42, 43, 44],
+    isCore: true
+  },
+  {
+    id: 'dua-starters',
+    title: 'Du\'a Starters',
+    titleArabic: 'بِدَايَات الدُّعَاء',
+    description: 'Begin your supplications with Qur\'anic phrases',
+    icon: '🤲',
+    category: 'core',
+    phraseIds: [45, 46, 47, 48, 49, 50],
+    isCore: true
+  },
+
+  // FUNCTIONAL MODULES (Build fluency)
+  {
+    id: 'emotions',
+    title: 'Express Emotions',
+    titleArabic: 'التَّعْبِير عَن المَشَاعِر',
+    description: 'Happy, sad, tired, hungry - express how you feel',
+    icon: '😊',
+    category: 'functional',
+    phraseIds: [101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
+  },
+  {
+    id: 'time-place',
+    title: 'Time & Place',
+    titleArabic: 'الزَّمَان وَالمَكَان',
+    description: 'Now, tomorrow, here, there - orient in time and space',
+    icon: '🗓️',
+    category: 'functional',
+    phraseIds: [111, 112, 113, 114, 115, 116, 117, 118, 119, 120]
+  },
+  {
+    id: 'people-relations',
+    title: 'People & Family',
+    titleArabic: 'النَّاس وَالعَائِلَة',
+    description: 'Father, mother, brother, sister, friend, teacher',
+    icon: '👨‍👩‍👧‍👦',
+    category: 'functional',
+    phraseIds: [121, 122, 123, 124, 125, 126, 127, 128]
+  },
+  {
+    id: 'daily-actions',
+    title: 'Daily Actions',
+    titleArabic: 'الأَفْعَال اليَوْمِيَّة',
+    description: 'I eat, I sleep, I read, I understand - describe your day',
+    icon: '☀️',
+    category: 'functional',
+    phraseIds: [129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141]
+  },
+  {
+    id: 'learning-knowledge',
+    title: 'Learning & Knowledge',
+    titleArabic: 'التَّعَلُّم وَالمَعْرِفَة',
+    description: 'Teach me, I want to learn, what does this mean?',
+    icon: '📚',
+    category: 'functional',
+    phraseIds: [142, 143, 144, 145, 146, 147]
+  },
+  {
+    id: 'gratitude-praise',
+    title: 'Gratitude & Praise',
+    titleArabic: 'الشُّكْر وَالثَّنَاء',
+    description: 'Thank you, may Allah reward you, well done!',
+    icon: '🌟',
+    category: 'functional',
+    phraseIds: [148, 149, 150, 151, 152]
+  },
+  {
+    id: 'movement-direction',
+    title: 'Movement & Direction',
+    titleArabic: 'الحَرَكَة وَالاِتِّجَاه',
+    description: 'Stop, sit, stand, left, right, open, close',
+    icon: '🧭',
+    category: 'functional',
+    phraseIds: [160, 161, 162, 163, 164, 165, 166, 167, 168, 169]
+  },
+  {
+    id: 'affirmation-negation',
+    title: 'Agree & Disagree',
+    titleArabic: 'المُوَافَقَة وَالرَّفْض',
+    description: 'Correct, wrong, I agree, maybe, enough',
+    icon: '✅',
+    category: 'functional',
+    phraseIds: [170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180]
+  },
+  {
+    id: 'seeking-giving',
+    title: 'Asking & Giving',
+    titleArabic: 'السُّؤَال وَالعَطَاء',
+    description: 'Wait, please, this is for you',
+    icon: '🎁',
+    category: 'functional',
+    phraseIds: [153, 154, 155, 156, 157, 158, 159]
+  }
+];
+
+// Helper functions
+export const getHeritagePhraseById = (id: number): HeritagePhrase | undefined => {
+  return allHeritgePhrases.find(p => p.id === id);
+};
+
+export const getHeritageModulePhrases = (moduleId: string): HeritagePhrase[] => {
+  const module = heritageModules.find(m => m.id === moduleId);
+  if (!module) return [];
+  return module.phraseIds.map(id => getHeritagePhraseById(id)).filter(Boolean) as HeritagePhrase[];
+};
+
+export const getCoreModules = (): HeritageModule[] => {
+  return heritageModules.filter(m => m.category === 'core');
+};
+
+export const getFunctionalModules = (): HeritageModule[] => {
+  return heritageModules.filter(m => m.category === 'functional');
+};
+
+export const getCategoryLabel = (category: HeritageCategory): string => {
+  const labels: Record<HeritageCategory, string> = {
+    'core-requests': 'Core Requests',
+    'core-actions': 'Core Actions',
+    'core-responses': 'Core Responses',
+    'core-descriptions': 'Core Descriptions',
+    'core-questions': 'Core Questions',
+    'dua-starters': 'Du\'a Starters',
+    'emotions': 'Emotions',
+    'time-place': 'Time & Place',
+    'people-relations': 'People & Relations',
+    'daily-actions': 'Daily Actions',
+    'learning-knowledge': 'Learning & Knowledge',
+    'gratitude-praise': 'Gratitude & Praise',
+    'seeking-asking': 'Seeking & Asking',
+    'giving-sharing': 'Giving & Sharing',
+    'movement-direction': 'Movement & Direction',
+    'affirmation-negation': 'Affirmation & Negation'
+  };
+  return labels[category] || category;
+};
