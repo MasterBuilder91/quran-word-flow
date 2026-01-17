@@ -26,6 +26,7 @@ import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import QuranInsightPage from "./pages/QuranInsightPage";
 import LabPage from "./pages/LabPage";
 import MushafPage from "./pages/MushafPage";
+import HeritagePage from "./pages/HeritagePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ const App = () => (
           <Route path="/quran-insight" element={<QuranInsightPage />} />
           <Route path="/lab" element={<LabPage />} />
           <Route path="/mushaf" element={<MushafPage />} />
+          <Route path="/heritage" element={<HeritagePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
