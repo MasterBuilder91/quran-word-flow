@@ -25,6 +25,7 @@ import {
 import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 type ViewMode = 'modules' | 'phrases';
+type GenderMode = 'masculine' | 'feminine';
 
 const HeritagePage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('modules');
@@ -32,6 +33,7 @@ const HeritagePage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
   const [direction, setDirection] = useState(0);
+  const [genderMode, setGenderMode] = useState<GenderMode>('masculine');
   
   const { speak, isPlaying, stop } = useElevenLabsTTS();
   
@@ -76,8 +78,28 @@ const HeritagePage = () => {
     if (isPlaying) {
       stop();
     } else {
-      speak(phrase.arabic);
+      // Use gender-specific form if available
+      const arabicText = phrase.genderForms 
+        ? phrase.genderForms[genderMode].arabic 
+        : phrase.arabic;
+      speak(arabicText);
     }
+  };
+
+  // Get the appropriate Arabic text based on gender mode
+  const getArabicText = (phrase: HeritagePhrase) => {
+    if (phrase.genderForms) {
+      return phrase.genderForms[genderMode].arabic;
+    }
+    return phrase.arabic;
+  };
+
+  // Get the appropriate transliteration based on gender mode
+  const getTransliteration = (phrase: HeritagePhrase) => {
+    if (phrase.genderForms) {
+      return phrase.genderForms[genderMode].transliteration;
+    }
+    return phrase.transliteration;
   };
 
   const variants = {
@@ -270,31 +292,75 @@ const HeritagePage = () => {
                       transition={{ duration: 0.3 }}
                       className="bg-card border border-border rounded-2xl p-8"
                     >
-                      {/* Phrase Number */}
+                      {/* Phrase Number & Gender Toggle */}
                       <div className="flex justify-between items-start mb-6">
                         <span className="text-xs text-muted-foreground">
                           {currentIndex + 1} of {currentPhrases.length}
                         </span>
-                        <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
-                          currentPhrase.frequency === 'core' 
-                            ? 'bg-primary/20 text-primary' 
-                            : currentPhrase.frequency === 'essential'
-                            ? 'bg-accent/20 text-accent'
-                            : 'bg-muted text-muted-foreground'
-                        }`}>
-                          {currentPhrase.frequency.toUpperCase()}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          {currentPhrase.genderForms && (
+                            <div className="flex items-center bg-muted rounded-full p-0.5">
+                              <button
+                                onClick={() => setGenderMode('masculine')}
+                                className={`px-2 py-0.5 text-xs font-medium rounded-full transition-all ${
+                                  genderMode === 'masculine'
+                                    ? 'bg-blue-500/20 text-blue-400'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                              >
+                                ♂ Masc
+                              </button>
+                              <button
+                                onClick={() => setGenderMode('feminine')}
+                                className={`px-2 py-0.5 text-xs font-medium rounded-full transition-all ${
+                                  genderMode === 'feminine'
+                                    ? 'bg-pink-500/20 text-pink-400'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                              >
+                                ♀ Fem
+                              </button>
+                            </div>
+                          )}
+                          <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
+                            currentPhrase.frequency === 'core' 
+                              ? 'bg-primary/20 text-primary' 
+                              : currentPhrase.frequency === 'essential'
+                              ? 'bg-accent/20 text-accent'
+                              : 'bg-muted text-muted-foreground'
+                          }`}>
+                            {currentPhrase.frequency.toUpperCase()}
+                          </span>
+                        </div>
                       </div>
 
                       {/* Arabic */}
                       <div className="text-center mb-6">
                         <p className="text-5xl font-arabic text-foreground mb-3 leading-relaxed">
-                          {currentPhrase.arabic}
+                          {getArabicText(currentPhrase)}
                         </p>
                         <p className="text-lg text-primary/80 font-mono">
-                          {currentPhrase.transliteration}
+                          {getTransliteration(currentPhrase)}
                         </p>
+                        
+                        {/* Show both forms hint */}
+                        {currentPhrase.genderForms && (
+                          <div className="mt-3 pt-3 border-t border-border/50">
+                            <p className="text-xs text-muted-foreground mb-2">Both forms:</p>
+                            <div className="flex justify-center gap-6 text-sm">
+                              <div className={`${genderMode === 'masculine' ? 'text-blue-400' : 'text-muted-foreground/70'}`}>
+                                <span className="block font-arabic text-lg">{currentPhrase.genderForms.masculine.arabic}</span>
+                                <span className="text-xs">(♂ {currentPhrase.genderForms.masculine.transliteration})</span>
+                              </div>
+                              <div className={`${genderMode === 'feminine' ? 'text-pink-400' : 'text-muted-foreground/70'}`}>
+                                <span className="block font-arabic text-lg">{currentPhrase.genderForms.feminine.arabic}</span>
+                                <span className="text-xs">(♀ {currentPhrase.genderForms.feminine.transliteration})</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
+
 
                       {/* Audio Button */}
                       <div className="flex justify-center mb-6">
