@@ -90,6 +90,9 @@ export const Header = () => {
             <Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Forum
             </Link>
+            <Link to="/heritage" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
+              Heritage
+            </Link>
             <Link to="/lab" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Free Lab
             </Link>
@@ -231,6 +234,13 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Flashcards
+              </Link>
+              <Link
+                to="/heritage"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Qur'anic Arabic Heritage
               </Link>
               <Link
                 to="/ask-about-islam"
