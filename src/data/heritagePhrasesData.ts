@@ -1141,8 +1141,8 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
   },
   {
     id: 144,
-    arabic: "أَفْهَمْتَ",
-    transliteration: "afahimta",
+    arabic: "أَفَهِمْتَ؟",
+    transliteration: "afahimta?",
     english: "Did you understand?",
     category: 'learning-knowledge',
     frequency: 'common',
