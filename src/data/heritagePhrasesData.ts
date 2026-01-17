@@ -54,7 +54,15 @@ export type HeritageCategory =
   | 'social-greetings'
   | 'choices-preferences'
   | 'places-objects'
-  | 'safety-emergency';
+  | 'safety-emergency'
+  | 'countries'
+  | 'body-parts'
+  | 'colors'
+  | 'numbers'
+  | 'days-months'
+  | 'weather-nature'
+  | 'food-drink'
+  | 'clothing';
 
 export interface HeritageModule {
   id: string;
@@ -2580,6 +2588,2493 @@ export const heritageAACPhrases: HeritagePhrase[] = [
       masculine: { arabic: "أَفْتَقِدُكَ", transliteration: "aftaqiduka" },
       feminine: { arabic: "أَفْتَقِدُكِ", transliteration: "aftaqiduki" }
     }
+  },
+
+  // =============================================
+  // COUNTRIES - Extended list
+  // =============================================
+  
+  // Arab Countries
+  {
+    id: 301,
+    arabic: "أَنَا مِنْ مِصْرَ",
+    transliteration: "anā min miṣr",
+    english: "I am from Egypt",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "State your origin"
+  },
+  {
+    id: 302,
+    arabic: "مِصْرُ",
+    transliteration: "miṣr",
+    english: "Egypt",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Egypt"
+  },
+  {
+    id: 303,
+    arabic: "السَّعُودِيَّةُ",
+    transliteration: "as-saʿūdiyyah",
+    english: "Saudi Arabia",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Saudi Arabia"
+  },
+  {
+    id: 304,
+    arabic: "الأُرْدُنُّ",
+    transliteration: "al-urdunn",
+    english: "Jordan",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Jordan"
+  },
+  {
+    id: 305,
+    arabic: "سُورِيَا",
+    transliteration: "sūriyā",
+    english: "Syria",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Syria"
+  },
+  {
+    id: 306,
+    arabic: "العِرَاقُ",
+    transliteration: "al-ʿirāq",
+    english: "Iraq",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Iraq"
+  },
+  {
+    id: 307,
+    arabic: "فِلَسْطِينُ",
+    transliteration: "filasṭīn",
+    english: "Palestine",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Palestine"
+  },
+  {
+    id: 308,
+    arabic: "لُبْنَانُ",
+    transliteration: "lubnān",
+    english: "Lebanon",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Lebanon"
+  },
+  {
+    id: 309,
+    arabic: "المَغْرِبُ",
+    transliteration: "al-maghrib",
+    english: "Morocco",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Morocco"
+  },
+  {
+    id: 310,
+    arabic: "الجَزَائِرُ",
+    transliteration: "al-jazāʾir",
+    english: "Algeria",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Algeria"
+  },
+  {
+    id: 311,
+    arabic: "تُونِسُ",
+    transliteration: "tūnis",
+    english: "Tunisia",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Tunisia"
+  },
+  {
+    id: 312,
+    arabic: "لِيبْيَا",
+    transliteration: "lībiyā",
+    english: "Libya",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Libya"
+  },
+  {
+    id: 313,
+    arabic: "السُّودَانُ",
+    transliteration: "as-sūdān",
+    english: "Sudan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Sudan"
+  },
+  {
+    id: 314,
+    arabic: "اليَمَنُ",
+    transliteration: "al-yaman",
+    english: "Yemen",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Yemen"
+  },
+  {
+    id: 315,
+    arabic: "عُمَانُ",
+    transliteration: "ʿumān",
+    english: "Oman",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Oman"
+  },
+  {
+    id: 316,
+    arabic: "الإِمَارَاتُ",
+    transliteration: "al-imārāt",
+    english: "UAE (Emirates)",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to UAE"
+  },
+  {
+    id: 317,
+    arabic: "قَطَرُ",
+    transliteration: "qaṭar",
+    english: "Qatar",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Qatar"
+  },
+  {
+    id: 318,
+    arabic: "البَحْرَيْنُ",
+    transliteration: "al-baḥrayn",
+    english: "Bahrain",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Bahrain"
+  },
+  {
+    id: 319,
+    arabic: "الكُوَيْتُ",
+    transliteration: "al-kuwayt",
+    english: "Kuwait",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Kuwait"
+  },
+  {
+    id: 320,
+    arabic: "مُورِيتَانِيَا",
+    transliteration: "mūrītāniyā",
+    english: "Mauritania",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Mauritania"
+  },
+  {
+    id: 321,
+    arabic: "جِيبُوتِي",
+    transliteration: "jībūtī",
+    english: "Djibouti",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Djibouti"
+  },
+  {
+    id: 322,
+    arabic: "الصُّومَالُ",
+    transliteration: "aṣ-ṣūmāl",
+    english: "Somalia",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Somalia"
+  },
+  {
+    id: 323,
+    arabic: "جُزُرُ القَمَرِ",
+    transliteration: "juzur al-qamar",
+    english: "Comoros",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Comoros"
+  },
+  
+  // Muslim-majority non-Arab countries
+  {
+    id: 324,
+    arabic: "تُرْكِيَا",
+    transliteration: "turkiyā",
+    english: "Turkey",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Turkey"
+  },
+  {
+    id: 325,
+    arabic: "إِيرَانُ",
+    transliteration: "īrān",
+    english: "Iran",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Iran"
+  },
+  {
+    id: 326,
+    arabic: "بَاكِسْتَانُ",
+    transliteration: "bākistān",
+    english: "Pakistan",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Pakistan"
+  },
+  {
+    id: 327,
+    arabic: "أَفْغَانِسْتَانُ",
+    transliteration: "afghānistān",
+    english: "Afghanistan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Afghanistan"
+  },
+  {
+    id: 328,
+    arabic: "بَنْغْلَادِيشُ",
+    transliteration: "banghladīsh",
+    english: "Bangladesh",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Bangladesh"
+  },
+  {
+    id: 329,
+    arabic: "إِنْدُونِيسِيَا",
+    transliteration: "indūnīsiyā",
+    english: "Indonesia",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Indonesia"
+  },
+  {
+    id: 330,
+    arabic: "مَالِيزِيَا",
+    transliteration: "mālīziyā",
+    english: "Malaysia",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Malaysia"
+  },
+  {
+    id: 331,
+    arabic: "بُرُونَايُ",
+    transliteration: "brūnāy",
+    english: "Brunei",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Brunei"
+  },
+  {
+    id: 332,
+    arabic: "أُوزْبَكِسْتَانُ",
+    transliteration: "ūzbakistān",
+    english: "Uzbekistan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Uzbekistan"
+  },
+  {
+    id: 333,
+    arabic: "كَازَاخِسْتَانُ",
+    transliteration: "kāzākhstān",
+    english: "Kazakhstan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Kazakhstan"
+  },
+  {
+    id: 334,
+    arabic: "طَاجِيكِسْتَانُ",
+    transliteration: "ṭājīkistān",
+    english: "Tajikistan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Tajikistan"
+  },
+  {
+    id: 335,
+    arabic: "تُرْكِمَانِسْتَانُ",
+    transliteration: "turkmānistān",
+    english: "Turkmenistan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Turkmenistan"
+  },
+  {
+    id: 336,
+    arabic: "قِيرْغِيزِسْتَانُ",
+    transliteration: "qīrghīzistān",
+    english: "Kyrgyzstan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Kyrgyzstan"
+  },
+  {
+    id: 337,
+    arabic: "أَذَرْبَيْجَانُ",
+    transliteration: "adharbījān",
+    english: "Azerbaijan",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Azerbaijan"
+  },
+  {
+    id: 338,
+    arabic: "مَالِي",
+    transliteration: "mālī",
+    english: "Mali",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Mali"
+  },
+  {
+    id: 339,
+    arabic: "السِّنِغَالُ",
+    transliteration: "as-sinighāl",
+    english: "Senegal",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Senegal"
+  },
+  {
+    id: 340,
+    arabic: "نَيْجِيرِيَا",
+    transliteration: "nayjīriyā",
+    english: "Nigeria",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Nigeria"
+  },
+  {
+    id: 341,
+    arabic: "غَامْبِيَا",
+    transliteration: "ghāmbiyā",
+    english: "Gambia",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Gambia"
+  },
+  {
+    id: 342,
+    arabic: "غِينِيَا",
+    transliteration: "ghīniyā",
+    english: "Guinea",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Guinea"
+  },
+  {
+    id: 343,
+    arabic: "النَّيْجَرُ",
+    transliteration: "an-nayjar",
+    english: "Niger",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Niger"
+  },
+  {
+    id: 344,
+    arabic: "تْشَادُ",
+    transliteration: "tshād",
+    english: "Chad",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Chad"
+  },
+  {
+    id: 345,
+    arabic: "سِيرَالِيُونُ",
+    transliteration: "sīrāliyūn",
+    english: "Sierra Leone",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Sierra Leone"
+  },
+  {
+    id: 346,
+    arabic: "بُورْكِينَا فَاسُو",
+    transliteration: "būrkīnā fāsū",
+    english: "Burkina Faso",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Burkina Faso"
+  },
+  
+  // Western countries
+  {
+    id: 347,
+    arabic: "أَمْرِيكَا",
+    transliteration: "amrīkā",
+    english: "America (USA)",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to USA"
+  },
+  {
+    id: 348,
+    arabic: "الوِلَايَاتُ المُتَّحِدَةُ",
+    transliteration: "al-wilāyāt al-muttaḥida",
+    english: "United States",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Formal name for USA"
+  },
+  {
+    id: 349,
+    arabic: "كَنَدَا",
+    transliteration: "kanadā",
+    english: "Canada",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Canada"
+  },
+  {
+    id: 350,
+    arabic: "بْرِيطَانِيَا",
+    transliteration: "brīṭāniyā",
+    english: "Britain",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Britain/UK"
+  },
+  {
+    id: 351,
+    arabic: "إِنْجِلْتِرَا",
+    transliteration: "injiltirā",
+    english: "England",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to England"
+  },
+  {
+    id: 352,
+    arabic: "فَرَنْسَا",
+    transliteration: "faransā",
+    english: "France",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to France"
+  },
+  {
+    id: 353,
+    arabic: "أَلْمَانِيَا",
+    transliteration: "almāniyā",
+    english: "Germany",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Germany"
+  },
+  {
+    id: 354,
+    arabic: "إِسْبَانِيَا",
+    transliteration: "isbāniyā",
+    english: "Spain",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Spain"
+  },
+  {
+    id: 355,
+    arabic: "إِيطَالِيَا",
+    transliteration: "īṭāliyā",
+    english: "Italy",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Italy"
+  },
+  {
+    id: 356,
+    arabic: "هُولَنْدَا",
+    transliteration: "hūlandā",
+    english: "Netherlands",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Netherlands"
+  },
+  {
+    id: 357,
+    arabic: "بَلْجِيكَا",
+    transliteration: "baljīkā",
+    english: "Belgium",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Belgium"
+  },
+  {
+    id: 358,
+    arabic: "السُّوِيدُ",
+    transliteration: "as-suwīd",
+    english: "Sweden",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Sweden"
+  },
+  {
+    id: 359,
+    arabic: "النُّرْوِيجُ",
+    transliteration: "an-nurwīj",
+    english: "Norway",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Norway"
+  },
+  {
+    id: 360,
+    arabic: "الدَّانِمَارْكُ",
+    transliteration: "ad-dānimārk",
+    english: "Denmark",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Denmark"
+  },
+  {
+    id: 361,
+    arabic: "أُسْتُرَالِيَا",
+    transliteration: "usturāliyā",
+    english: "Australia",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Australia"
+  },
+  {
+    id: 362,
+    arabic: "نْيُوزِيلَانْدَا",
+    transliteration: "nyūzīlandā",
+    english: "New Zealand",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to New Zealand"
+  },
+  {
+    id: 363,
+    arabic: "سُوِيسْرَا",
+    transliteration: "suwīsrā",
+    english: "Switzerland",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Switzerland"
+  },
+  {
+    id: 364,
+    arabic: "النَّمْسَا",
+    transliteration: "an-namsā",
+    english: "Austria",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Austria"
+  },
+  {
+    id: 365,
+    arabic: "بُولَنْدَا",
+    transliteration: "būlandā",
+    english: "Poland",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Poland"
+  },
+  {
+    id: 366,
+    arabic: "رُوسِيَا",
+    transliteration: "rūsiyā",
+    english: "Russia",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Russia"
+  },
+  {
+    id: 367,
+    arabic: "أُوكْرَانِيَا",
+    transliteration: "ūkrāniyā",
+    english: "Ukraine",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Ukraine"
+  },
+  {
+    id: 368,
+    arabic: "اليُونَانُ",
+    transliteration: "al-yūnān",
+    english: "Greece",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Greece"
+  },
+  {
+    id: 369,
+    arabic: "البُرْتُغَالُ",
+    transliteration: "al-burtuġhāl",
+    english: "Portugal",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Portugal"
+  },
+  {
+    id: 370,
+    arabic: "إِيرْلَنْدَا",
+    transliteration: "īrlandā",
+    english: "Ireland",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Ireland"
+  },
+  {
+    id: 371,
+    arabic: "اِسْكُتْلَنْدَا",
+    transliteration: "iskutlandā",
+    english: "Scotland",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Scotland"
+  },
+  
+  // Asian countries
+  {
+    id: 372,
+    arabic: "الهِنْدُ",
+    transliteration: "al-hind",
+    english: "India",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to India"
+  },
+  {
+    id: 373,
+    arabic: "الصِّينُ",
+    transliteration: "aṣ-ṣīn",
+    english: "China",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to China"
+  },
+  {
+    id: 374,
+    arabic: "اليَابَانُ",
+    transliteration: "al-yābān",
+    english: "Japan",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Japan"
+  },
+  {
+    id: 375,
+    arabic: "كُورِيَا",
+    transliteration: "kūriyā",
+    english: "Korea",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Korea"
+  },
+  {
+    id: 376,
+    arabic: "تَايْلَانْدُ",
+    transliteration: "tāylandū",
+    english: "Thailand",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Thailand"
+  },
+  {
+    id: 377,
+    arabic: "الفِلِبِّينُ",
+    transliteration: "al-filibīn",
+    english: "Philippines",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Philippines"
+  },
+  {
+    id: 378,
+    arabic: "سِنْغَافُورَةُ",
+    transliteration: "singhāfūra",
+    english: "Singapore",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Singapore"
+  },
+  {
+    id: 379,
+    arabic: "فِيتْنَامُ",
+    transliteration: "fītnām",
+    english: "Vietnam",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Vietnam"
+  },
+  {
+    id: 380,
+    arabic: "سِرِيلَانْكَا",
+    transliteration: "sirīlānkā",
+    english: "Sri Lanka",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Sri Lanka"
+  },
+  {
+    id: 381,
+    arabic: "نِيبَالُ",
+    transliteration: "nībāl",
+    english: "Nepal",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Nepal"
+  },
+  
+  // African countries
+  {
+    id: 382,
+    arabic: "إِثْيُوبِيَا",
+    transliteration: "ithyūbiyā",
+    english: "Ethiopia",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Ethiopia"
+  },
+  {
+    id: 383,
+    arabic: "كِينْيَا",
+    transliteration: "kīnyā",
+    english: "Kenya",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Kenya"
+  },
+  {
+    id: 384,
+    arabic: "تَنْزَانِيَا",
+    transliteration: "tanzāniyā",
+    english: "Tanzania",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Tanzania"
+  },
+  {
+    id: 385,
+    arabic: "أُوغَنْدَا",
+    transliteration: "ūghandā",
+    english: "Uganda",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Uganda"
+  },
+  {
+    id: 386,
+    arabic: "جَنُوبُ أَفْرِيقِيَا",
+    transliteration: "janūb afrīqiyā",
+    english: "South Africa",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to South Africa"
+  },
+  {
+    id: 387,
+    arabic: "غَانَا",
+    transliteration: "ghānā",
+    english: "Ghana",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Ghana"
+  },
+  {
+    id: 388,
+    arabic: "إِرِيتْرِيَا",
+    transliteration: "irītriyā",
+    english: "Eritrea",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Eritrea"
+  },
+  
+  // Latin American countries
+  {
+    id: 389,
+    arabic: "المَكْسِيكُ",
+    transliteration: "al-maksīk",
+    english: "Mexico",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Mexico"
+  },
+  {
+    id: 390,
+    arabic: "البْرَازِيلُ",
+    transliteration: "al-brāzīl",
+    english: "Brazil",
+    category: 'countries',
+    frequency: 'essential',
+    usage: "Refer to Brazil"
+  },
+  {
+    id: 391,
+    arabic: "الأَرْجَنْتِينُ",
+    transliteration: "al-arjantīn",
+    english: "Argentina",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Argentina"
+  },
+  {
+    id: 392,
+    arabic: "كُولُومْبِيَا",
+    transliteration: "kūlūmbiyā",
+    english: "Colombia",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Colombia"
+  },
+  {
+    id: 393,
+    arabic: "تْشِيلِي",
+    transliteration: "tshīlī",
+    english: "Chile",
+    category: 'countries',
+    frequency: 'common',
+    usage: "Refer to Chile"
+  },
+  
+  // =============================================
+  // BODY PARTS - Extended for medical/AAC
+  // =============================================
+  {
+    id: 401,
+    arabic: "رَأْسٌ",
+    transliteration: "ra's",
+    english: "Head",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to head"
+  },
+  {
+    id: 402,
+    arabic: "وَجْهٌ",
+    transliteration: "wajh",
+    english: "Face",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to face"
+  },
+  {
+    id: 403,
+    arabic: "عَيْنٌ",
+    transliteration: "ʿayn",
+    english: "Eye",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to eye"
+  },
+  {
+    id: 404,
+    arabic: "عَيْنَانِ",
+    transliteration: "ʿaynān",
+    english: "Eyes (dual)",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to both eyes"
+  },
+  {
+    id: 405,
+    arabic: "أُذُنٌ",
+    transliteration: "udhun",
+    english: "Ear",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to ear"
+  },
+  {
+    id: 406,
+    arabic: "أُذُنَانِ",
+    transliteration: "udhunān",
+    english: "Ears (dual)",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to both ears"
+  },
+  {
+    id: 407,
+    arabic: "أَنْفٌ",
+    transliteration: "anf",
+    english: "Nose",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to nose"
+  },
+  {
+    id: 408,
+    arabic: "فَمٌ",
+    transliteration: "fam",
+    english: "Mouth",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to mouth"
+  },
+  {
+    id: 409,
+    arabic: "شَفَةٌ",
+    transliteration: "shafa",
+    english: "Lip",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to lip"
+  },
+  {
+    id: 410,
+    arabic: "لِسَانٌ",
+    transliteration: "lisān",
+    english: "Tongue",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to tongue"
+  },
+  {
+    id: 411,
+    arabic: "أَسْنَانٌ",
+    transliteration: "asnān",
+    english: "Teeth",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to teeth"
+  },
+  {
+    id: 412,
+    arabic: "سِنٌّ",
+    transliteration: "sinn",
+    english: "Tooth",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to a tooth"
+  },
+  {
+    id: 413,
+    arabic: "حَلْقٌ",
+    transliteration: "ḥalq",
+    english: "Throat",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to throat"
+  },
+  {
+    id: 414,
+    arabic: "رَقَبَةٌ",
+    transliteration: "raqaba",
+    english: "Neck",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to neck"
+  },
+  {
+    id: 415,
+    arabic: "كَتِفٌ",
+    transliteration: "katif",
+    english: "Shoulder",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to shoulder"
+  },
+  {
+    id: 416,
+    arabic: "ذِرَاعٌ",
+    transliteration: "dhirāʿ",
+    english: "Arm",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to arm"
+  },
+  {
+    id: 417,
+    arabic: "مِرْفَقٌ",
+    transliteration: "mirfaq",
+    english: "Elbow",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to elbow"
+  },
+  {
+    id: 418,
+    arabic: "يَدٌ",
+    transliteration: "yad",
+    english: "Hand",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to hand"
+  },
+  {
+    id: 419,
+    arabic: "يَدَانِ",
+    transliteration: "yadān",
+    english: "Hands (dual)",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to both hands"
+  },
+  {
+    id: 420,
+    arabic: "مِعْصَمٌ",
+    transliteration: "miʿṣam",
+    english: "Wrist",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to wrist"
+  },
+  {
+    id: 421,
+    arabic: "أَصَابِعُ",
+    transliteration: "aṣābiʿ",
+    english: "Fingers",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to fingers"
+  },
+  {
+    id: 422,
+    arabic: "إِصْبَعٌ",
+    transliteration: "iṣbaʿ",
+    english: "Finger",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to a finger"
+  },
+  {
+    id: 423,
+    arabic: "إِبْهَامٌ",
+    transliteration: "ibhām",
+    english: "Thumb",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to thumb"
+  },
+  {
+    id: 424,
+    arabic: "صَدْرٌ",
+    transliteration: "ṣadr",
+    english: "Chest",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to chest"
+  },
+  {
+    id: 425,
+    arabic: "قَلْبٌ",
+    transliteration: "qalb",
+    english: "Heart",
+    category: 'body-parts',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ أَمْ عَلَىٰ قُلُوبٍ أَقْفَالُهَا",
+      english: "Do they not reflect upon the Qur'an, or are there locks upon their hearts?",
+      reference: "Qur'an 47:24"
+    },
+    usage: "Refer to heart"
+  },
+  {
+    id: 426,
+    arabic: "بَطْنٌ",
+    transliteration: "baṭn",
+    english: "Stomach/Belly",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to stomach"
+  },
+  {
+    id: 427,
+    arabic: "ظَهْرٌ",
+    transliteration: "ẓahr",
+    english: "Back",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to back"
+  },
+  {
+    id: 428,
+    arabic: "رِجْلٌ",
+    transliteration: "rijl",
+    english: "Leg/Foot",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to leg or foot"
+  },
+  {
+    id: 429,
+    arabic: "رِجْلَانِ",
+    transliteration: "rijlān",
+    english: "Legs (dual)",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to both legs"
+  },
+  {
+    id: 430,
+    arabic: "رُكْبَةٌ",
+    transliteration: "rukba",
+    english: "Knee",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to knee"
+  },
+  {
+    id: 431,
+    arabic: "كَاحِلٌ",
+    transliteration: "kāḥil",
+    english: "Ankle",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to ankle"
+  },
+  {
+    id: 432,
+    arabic: "قَدَمٌ",
+    transliteration: "qadam",
+    english: "Foot",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to foot"
+  },
+  {
+    id: 433,
+    arabic: "أَصَابِعُ القَدَمِ",
+    transliteration: "aṣābiʿ al-qadam",
+    english: "Toes",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to toes"
+  },
+  {
+    id: 434,
+    arabic: "جِلْدٌ",
+    transliteration: "jild",
+    english: "Skin",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to skin"
+  },
+  {
+    id: 435,
+    arabic: "شَعْرٌ",
+    transliteration: "shaʿr",
+    english: "Hair",
+    category: 'body-parts',
+    frequency: 'essential',
+    usage: "Refer to hair"
+  },
+  {
+    id: 436,
+    arabic: "جَبْهَةٌ",
+    transliteration: "jabha",
+    english: "Forehead",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to forehead"
+  },
+  {
+    id: 437,
+    arabic: "حَاجِبٌ",
+    transliteration: "ḥājib",
+    english: "Eyebrow",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to eyebrow"
+  },
+  {
+    id: 438,
+    arabic: "خَدٌّ",
+    transliteration: "khadd",
+    english: "Cheek",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to cheek"
+  },
+  {
+    id: 439,
+    arabic: "ذَقْنٌ",
+    transliteration: "dhaqn",
+    english: "Chin",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to chin"
+  },
+  {
+    id: 440,
+    arabic: "لِحْيَةٌ",
+    transliteration: "liḥya",
+    english: "Beard",
+    category: 'body-parts',
+    frequency: 'common',
+    usage: "Refer to beard"
+  },
+  
+  // =============================================
+  // COLORS
+  // =============================================
+  {
+    id: 451,
+    arabic: "أَبْيَضُ",
+    transliteration: "abyaḍ",
+    english: "White",
+    category: 'colors',
+    frequency: 'essential',
+    usage: "Describe white color",
+    genderForms: {
+      masculine: { arabic: "أَبْيَضُ", transliteration: "abyaḍ" },
+      feminine: { arabic: "بَيْضَاءُ", transliteration: "bayḍā'" }
+    }
+  },
+  {
+    id: 452,
+    arabic: "أَسْوَدُ",
+    transliteration: "aswad",
+    english: "Black",
+    category: 'colors',
+    frequency: 'essential',
+    usage: "Describe black color",
+    genderForms: {
+      masculine: { arabic: "أَسْوَدُ", transliteration: "aswad" },
+      feminine: { arabic: "سَوْدَاءُ", transliteration: "sawdā'" }
+    }
+  },
+  {
+    id: 453,
+    arabic: "أَحْمَرُ",
+    transliteration: "aḥmar",
+    english: "Red",
+    category: 'colors',
+    frequency: 'essential',
+    usage: "Describe red color",
+    genderForms: {
+      masculine: { arabic: "أَحْمَرُ", transliteration: "aḥmar" },
+      feminine: { arabic: "حَمْرَاءُ", transliteration: "ḥamrā'" }
+    }
+  },
+  {
+    id: 454,
+    arabic: "أَخْضَرُ",
+    transliteration: "akhḍar",
+    english: "Green",
+    category: 'colors',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "مُتَّكِئِينَ عَلَىٰ رَفْرَفٍ خُضْرٍ",
+      english: "Reclining on green cushions",
+      reference: "Qur'an 55:76"
+    },
+    usage: "Describe green color",
+    genderForms: {
+      masculine: { arabic: "أَخْضَرُ", transliteration: "akhḍar" },
+      feminine: { arabic: "خَضْرَاءُ", transliteration: "khaḍrā'" }
+    }
+  },
+  {
+    id: 455,
+    arabic: "أَزْرَقُ",
+    transliteration: "azraq",
+    english: "Blue",
+    category: 'colors',
+    frequency: 'essential',
+    usage: "Describe blue color",
+    genderForms: {
+      masculine: { arabic: "أَزْرَقُ", transliteration: "azraq" },
+      feminine: { arabic: "زَرْقَاءُ", transliteration: "zarqā'" }
+    }
+  },
+  {
+    id: 456,
+    arabic: "أَصْفَرُ",
+    transliteration: "aṣfar",
+    english: "Yellow",
+    category: 'colors',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "بَقَرَةٌ صَفْرَاءُ فَاقِعٌ لَّوْنُهَا",
+      english: "A yellow cow, bright in color",
+      reference: "Qur'an 2:69"
+    },
+    usage: "Describe yellow color",
+    genderForms: {
+      masculine: { arabic: "أَصْفَرُ", transliteration: "aṣfar" },
+      feminine: { arabic: "صَفْرَاءُ", transliteration: "ṣafrā'" }
+    }
+  },
+  {
+    id: 457,
+    arabic: "بُرْتُقَالِيٌّ",
+    transliteration: "burtuqāliyy",
+    english: "Orange",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe orange color",
+    genderForms: {
+      masculine: { arabic: "بُرْتُقَالِيٌّ", transliteration: "burtuqāliyy" },
+      feminine: { arabic: "بُرْتُقَالِيَّةٌ", transliteration: "burtuqāliyya" }
+    }
+  },
+  {
+    id: 458,
+    arabic: "بَنَفْسَجِيٌّ",
+    transliteration: "banafsajiyy",
+    english: "Purple",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe purple color",
+    genderForms: {
+      masculine: { arabic: "بَنَفْسَجِيٌّ", transliteration: "banafsajiyy" },
+      feminine: { arabic: "بَنَفْسَجِيَّةٌ", transliteration: "banafsajiyya" }
+    }
+  },
+  {
+    id: 459,
+    arabic: "وَرْدِيٌّ",
+    transliteration: "wardiyy",
+    english: "Pink",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe pink color",
+    genderForms: {
+      masculine: { arabic: "وَرْدِيٌّ", transliteration: "wardiyy" },
+      feminine: { arabic: "وَرْدِيَّةٌ", transliteration: "wardiyya" }
+    }
+  },
+  {
+    id: 460,
+    arabic: "بُنِّيٌّ",
+    transliteration: "bunniyy",
+    english: "Brown",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe brown color",
+    genderForms: {
+      masculine: { arabic: "بُنِّيٌّ", transliteration: "bunniyy" },
+      feminine: { arabic: "بُنِّيَّةٌ", transliteration: "bunniyya" }
+    }
+  },
+  {
+    id: 461,
+    arabic: "رَمَادِيٌّ",
+    transliteration: "ramādiyy",
+    english: "Gray",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe gray color",
+    genderForms: {
+      masculine: { arabic: "رَمَادِيٌّ", transliteration: "ramādiyy" },
+      feminine: { arabic: "رَمَادِيَّةٌ", transliteration: "ramādiyya" }
+    }
+  },
+  {
+    id: 462,
+    arabic: "ذَهَبِيٌّ",
+    transliteration: "dhahabiyy",
+    english: "Gold/Golden",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe gold color",
+    genderForms: {
+      masculine: { arabic: "ذَهَبِيٌّ", transliteration: "dhahabiyy" },
+      feminine: { arabic: "ذَهَبِيَّةٌ", transliteration: "dhahabiyya" }
+    }
+  },
+  {
+    id: 463,
+    arabic: "فِضِّيٌّ",
+    transliteration: "fiḍḍiyy",
+    english: "Silver",
+    category: 'colors',
+    frequency: 'common',
+    usage: "Describe silver color",
+    genderForms: {
+      masculine: { arabic: "فِضِّيٌّ", transliteration: "fiḍḍiyy" },
+      feminine: { arabic: "فِضِّيَّةٌ", transliteration: "fiḍḍiyya" }
+    }
+  },
+  
+  // =============================================
+  // NUMBERS
+  // =============================================
+  {
+    id: 471,
+    arabic: "صِفْرٌ",
+    transliteration: "ṣifr",
+    english: "Zero",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 0"
+  },
+  {
+    id: 472,
+    arabic: "وَاحِدٌ",
+    transliteration: "wāḥid",
+    english: "One",
+    category: 'numbers',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      english: "Say: He is Allah, the One",
+      reference: "Qur'an 112:1"
+    },
+    usage: "The number 1"
+  },
+  {
+    id: 473,
+    arabic: "اِثْنَانِ",
+    transliteration: "ithnān",
+    english: "Two",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 2"
+  },
+  {
+    id: 474,
+    arabic: "ثَلَاثَةٌ",
+    transliteration: "thalātha",
+    english: "Three",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 3"
+  },
+  {
+    id: 475,
+    arabic: "أَرْبَعَةٌ",
+    transliteration: "arbaʿa",
+    english: "Four",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 4"
+  },
+  {
+    id: 476,
+    arabic: "خَمْسَةٌ",
+    transliteration: "khamsa",
+    english: "Five",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 5"
+  },
+  {
+    id: 477,
+    arabic: "سِتَّةٌ",
+    transliteration: "sitta",
+    english: "Six",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 6"
+  },
+  {
+    id: 478,
+    arabic: "سَبْعَةٌ",
+    transliteration: "sabʿa",
+    english: "Seven",
+    category: 'numbers',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "سَبْعَ سَمَاوَاتٍ",
+      english: "Seven heavens",
+      reference: "Qur'an 2:29"
+    },
+    usage: "The number 7"
+  },
+  {
+    id: 479,
+    arabic: "ثَمَانِيَةٌ",
+    transliteration: "thamāniya",
+    english: "Eight",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 8"
+  },
+  {
+    id: 480,
+    arabic: "تِسْعَةٌ",
+    transliteration: "tisʿa",
+    english: "Nine",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 9"
+  },
+  {
+    id: 481,
+    arabic: "عَشَرَةٌ",
+    transliteration: "ʿashara",
+    english: "Ten",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 10"
+  },
+  {
+    id: 482,
+    arabic: "أَحَدَ عَشَرَ",
+    transliteration: "aḥada ʿashar",
+    english: "Eleven",
+    category: 'numbers',
+    frequency: 'common',
+    usage: "The number 11"
+  },
+  {
+    id: 483,
+    arabic: "اِثْنَا عَشَرَ",
+    transliteration: "ithnā ʿashar",
+    english: "Twelve",
+    category: 'numbers',
+    frequency: 'common',
+    usage: "The number 12"
+  },
+  {
+    id: 484,
+    arabic: "عِشْرُونَ",
+    transliteration: "ʿishrūn",
+    english: "Twenty",
+    category: 'numbers',
+    frequency: 'common',
+    usage: "The number 20"
+  },
+  {
+    id: 485,
+    arabic: "ثَلَاثُونَ",
+    transliteration: "thalāthūn",
+    english: "Thirty",
+    category: 'numbers',
+    frequency: 'common',
+    usage: "The number 30"
+  },
+  {
+    id: 486,
+    arabic: "أَرْبَعُونَ",
+    transliteration: "arbaʿūn",
+    english: "Forty",
+    category: 'numbers',
+    frequency: 'common',
+    usage: "The number 40"
+  },
+  {
+    id: 487,
+    arabic: "خَمْسُونَ",
+    transliteration: "khamsūn",
+    english: "Fifty",
+    category: 'numbers',
+    frequency: 'common',
+    usage: "The number 50"
+  },
+  {
+    id: 488,
+    arabic: "مِائَةٌ",
+    transliteration: "mi'a",
+    english: "One hundred",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "The number 100"
+  },
+  {
+    id: 489,
+    arabic: "أَلْفٌ",
+    transliteration: "alf",
+    english: "One thousand",
+    category: 'numbers',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ",
+      english: "The Night of Decree is better than a thousand months",
+      reference: "Qur'an 97:3"
+    },
+    usage: "The number 1000"
+  },
+  {
+    id: 490,
+    arabic: "الأَوَّلُ",
+    transliteration: "al-awwal",
+    english: "First",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "Ordinal: first",
+    genderForms: {
+      masculine: { arabic: "الأَوَّلُ", transliteration: "al-awwal" },
+      feminine: { arabic: "الأُولَى", transliteration: "al-ūlā" }
+    }
+  },
+  {
+    id: 491,
+    arabic: "الثَّانِي",
+    transliteration: "ath-thānī",
+    english: "Second",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "Ordinal: second",
+    genderForms: {
+      masculine: { arabic: "الثَّانِي", transliteration: "ath-thānī" },
+      feminine: { arabic: "الثَّانِيَةُ", transliteration: "ath-thāniya" }
+    }
+  },
+  {
+    id: 492,
+    arabic: "الثَّالِثُ",
+    transliteration: "ath-thālith",
+    english: "Third",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "Ordinal: third",
+    genderForms: {
+      masculine: { arabic: "الثَّالِثُ", transliteration: "ath-thālith" },
+      feminine: { arabic: "الثَّالِثَةُ", transliteration: "ath-thālitha" }
+    }
+  },
+  {
+    id: 493,
+    arabic: "الأَخِيرُ",
+    transliteration: "al-akhīr",
+    english: "Last",
+    category: 'numbers',
+    frequency: 'essential',
+    usage: "Ordinal: last",
+    genderForms: {
+      masculine: { arabic: "الأَخِيرُ", transliteration: "al-akhīr" },
+      feminine: { arabic: "الأَخِيرَةُ", transliteration: "al-akhīra" }
+    }
+  },
+  
+  // =============================================
+  // DAYS & MONTHS
+  // =============================================
+  {
+    id: 501,
+    arabic: "يَوْمُ الأَحَدِ",
+    transliteration: "yawm al-aḥad",
+    english: "Sunday",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Day of the week"
+  },
+  {
+    id: 502,
+    arabic: "يَوْمُ الاِثْنَيْنِ",
+    transliteration: "yawm al-ithnayn",
+    english: "Monday",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Day of the week"
+  },
+  {
+    id: 503,
+    arabic: "يَوْمُ الثُّلَاثَاءِ",
+    transliteration: "yawm ath-thulāthā'",
+    english: "Tuesday",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Day of the week"
+  },
+  {
+    id: 504,
+    arabic: "يَوْمُ الأَرْبِعَاءِ",
+    transliteration: "yawm al-arbiʿā'",
+    english: "Wednesday",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Day of the week"
+  },
+  {
+    id: 505,
+    arabic: "يَوْمُ الخَمِيسِ",
+    transliteration: "yawm al-khamīs",
+    english: "Thursday",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Day of the week"
+  },
+  {
+    id: 506,
+    arabic: "يَوْمُ الجُمُعَةِ",
+    transliteration: "yawm al-jumuʿa",
+    english: "Friday",
+    category: 'days-months',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ",
+      english: "O you who believe, when the call is made for prayer on Friday",
+      reference: "Qur'an 62:9"
+    },
+    usage: "Day of the week - special in Islam"
+  },
+  {
+    id: 507,
+    arabic: "يَوْمُ السَّبْتِ",
+    transliteration: "yawm as-sabt",
+    english: "Saturday",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Day of the week"
+  },
+  
+  // Islamic months
+  {
+    id: 511,
+    arabic: "مُحَرَّمٌ",
+    transliteration: "muḥarram",
+    english: "Muharram (1st month)",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "First Islamic month - sacred"
+  },
+  {
+    id: 512,
+    arabic: "صَفَرٌ",
+    transliteration: "ṣafar",
+    english: "Safar (2nd month)",
+    category: 'days-months',
+    frequency: 'common',
+    usage: "Second Islamic month"
+  },
+  {
+    id: 513,
+    arabic: "رَبِيعُ الأَوَّلِ",
+    transliteration: "rabīʿ al-awwal",
+    english: "Rabi al-Awwal (3rd month)",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Third Islamic month - Prophet's birthday"
+  },
+  {
+    id: 514,
+    arabic: "رَبِيعُ الآخِرِ",
+    transliteration: "rabīʿ al-ākhir",
+    english: "Rabi al-Akhir (4th month)",
+    category: 'days-months',
+    frequency: 'common',
+    usage: "Fourth Islamic month"
+  },
+  {
+    id: 515,
+    arabic: "جُمَادَى الأُولَى",
+    transliteration: "jumādā al-ūlā",
+    english: "Jumada al-Ula (5th month)",
+    category: 'days-months',
+    frequency: 'common',
+    usage: "Fifth Islamic month"
+  },
+  {
+    id: 516,
+    arabic: "جُمَادَى الآخِرَةِ",
+    transliteration: "jumādā al-ākhira",
+    english: "Jumada al-Akhira (6th month)",
+    category: 'days-months',
+    frequency: 'common',
+    usage: "Sixth Islamic month"
+  },
+  {
+    id: 517,
+    arabic: "رَجَبٌ",
+    transliteration: "rajab",
+    english: "Rajab (7th month)",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Seventh Islamic month - sacred"
+  },
+  {
+    id: 518,
+    arabic: "شَعْبَانُ",
+    transliteration: "shaʿbān",
+    english: "Sha'ban (8th month)",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Eighth Islamic month - before Ramadan"
+  },
+  {
+    id: 519,
+    arabic: "رَمَضَانُ",
+    transliteration: "ramaḍān",
+    english: "Ramadan (9th month)",
+    category: 'days-months',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ",
+      english: "The month of Ramadan in which the Qur'an was revealed",
+      reference: "Qur'an 2:185"
+    },
+    usage: "Ninth Islamic month - fasting"
+  },
+  {
+    id: 520,
+    arabic: "شَوَّالٌ",
+    transliteration: "shawwāl",
+    english: "Shawwal (10th month)",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Tenth Islamic month - Eid al-Fitr"
+  },
+  {
+    id: 521,
+    arabic: "ذُو القَعْدَةِ",
+    transliteration: "dhū al-qaʿda",
+    english: "Dhu al-Qa'dah (11th month)",
+    category: 'days-months',
+    frequency: 'common',
+    usage: "Eleventh Islamic month - sacred"
+  },
+  {
+    id: 522,
+    arabic: "ذُو الحِجَّةِ",
+    transliteration: "dhū al-ḥijja",
+    english: "Dhu al-Hijjah (12th month)",
+    category: 'days-months',
+    frequency: 'essential',
+    usage: "Twelfth Islamic month - Hajj, Eid al-Adha"
+  },
+  
+  // =============================================
+  // WEATHER & NATURE
+  // =============================================
+  {
+    id: 531,
+    arabic: "الشَّمْسُ",
+    transliteration: "ash-shams",
+    english: "The sun",
+    category: 'weather-nature',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَالشَّمْسِ وَضُحَاهَا",
+      english: "By the sun and its brightness",
+      reference: "Qur'an 91:1"
+    },
+    usage: "Refer to sun"
+  },
+  {
+    id: 532,
+    arabic: "القَمَرُ",
+    transliteration: "al-qamar",
+    english: "The moon",
+    category: 'weather-nature',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَالْقَمَرِ إِذَا تَلَاهَا",
+      english: "And the moon when it follows it",
+      reference: "Qur'an 91:2"
+    },
+    usage: "Refer to moon"
+  },
+  {
+    id: 533,
+    arabic: "النُّجُومُ",
+    transliteration: "an-nujūm",
+    english: "The stars",
+    category: 'weather-nature',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَالنَّجْمِ إِذَا هَوَىٰ",
+      english: "By the star when it descends",
+      reference: "Qur'an 53:1"
+    },
+    usage: "Refer to stars"
+  },
+  {
+    id: 534,
+    arabic: "السَّمَاءُ",
+    transliteration: "as-samā'",
+    english: "The sky",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to sky"
+  },
+  {
+    id: 535,
+    arabic: "الأَرْضُ",
+    transliteration: "al-arḍ",
+    english: "The earth",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to earth"
+  },
+  {
+    id: 536,
+    arabic: "السَّحَابُ",
+    transliteration: "as-saḥāb",
+    english: "The clouds",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to clouds"
+  },
+  {
+    id: 537,
+    arabic: "المَطَرُ",
+    transliteration: "al-maṭar",
+    english: "The rain",
+    category: 'weather-nature',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَهُوَ الَّذِي يُنَزِّلُ الْغَيْثَ",
+      english: "And it is He who sends down the rain",
+      reference: "Qur'an 42:28"
+    },
+    usage: "Refer to rain"
+  },
+  {
+    id: 538,
+    arabic: "الثَّلْجُ",
+    transliteration: "ath-thalj",
+    english: "The snow",
+    category: 'weather-nature',
+    frequency: 'common',
+    usage: "Refer to snow"
+  },
+  {
+    id: 539,
+    arabic: "الرِّيحُ",
+    transliteration: "ar-rīḥ",
+    english: "The wind",
+    category: 'weather-nature',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَأَرْسَلْنَا الرِّيَاحَ لَوَاقِحَ",
+      english: "And We have sent the winds as pollinators",
+      reference: "Qur'an 15:22"
+    },
+    usage: "Refer to wind"
+  },
+  {
+    id: 540,
+    arabic: "حَارٌّ",
+    transliteration: "ḥārr",
+    english: "Hot (weather)",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Describe hot weather"
+  },
+  {
+    id: 541,
+    arabic: "بَارِدٌ",
+    transliteration: "bārid",
+    english: "Cold (weather)",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Describe cold weather"
+  },
+  {
+    id: 542,
+    arabic: "مُشْمِسٌ",
+    transliteration: "mushmis",
+    english: "Sunny",
+    category: 'weather-nature',
+    frequency: 'common',
+    usage: "Describe sunny weather"
+  },
+  {
+    id: 543,
+    arabic: "غَائِمٌ",
+    transliteration: "ghā'im",
+    english: "Cloudy",
+    category: 'weather-nature',
+    frequency: 'common',
+    usage: "Describe cloudy weather"
+  },
+  {
+    id: 544,
+    arabic: "مُمْطِرٌ",
+    transliteration: "mumṭir",
+    english: "Rainy",
+    category: 'weather-nature',
+    frequency: 'common',
+    usage: "Describe rainy weather"
+  },
+  {
+    id: 545,
+    arabic: "البَحْرُ",
+    transliteration: "al-baḥr",
+    english: "The sea",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to sea"
+  },
+  {
+    id: 546,
+    arabic: "النَّهْرُ",
+    transliteration: "an-nahr",
+    english: "The river",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to river"
+  },
+  {
+    id: 547,
+    arabic: "الجَبَلُ",
+    transliteration: "al-jabal",
+    english: "The mountain",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to mountain"
+  },
+  {
+    id: 548,
+    arabic: "الشَّجَرَةُ",
+    transliteration: "ash-shajara",
+    english: "The tree",
+    category: 'weather-nature',
+    frequency: 'essential',
+    usage: "Refer to tree"
+  },
+  {
+    id: 549,
+    arabic: "الوَرْدَةُ",
+    transliteration: "al-warda",
+    english: "The flower/rose",
+    category: 'weather-nature',
+    frequency: 'common',
+    usage: "Refer to flower"
+  },
+  {
+    id: 550,
+    arabic: "الحَدِيقَةُ",
+    transliteration: "al-ḥadīqa",
+    english: "The garden",
+    category: 'weather-nature',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَلِمَنْ خَافَ مَقَامَ رَبِّهِ جَنَّتَانِ",
+      english: "But for he who fears the position of his Lord are two gardens",
+      reference: "Qur'an 55:46"
+    },
+    usage: "Refer to garden"
+  },
+  
+  // =============================================
+  // FOOD & DRINK
+  // =============================================
+  {
+    id: 561,
+    arabic: "خُبْزٌ",
+    transliteration: "khubz",
+    english: "Bread",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to bread"
+  },
+  {
+    id: 562,
+    arabic: "أَرُزٌّ",
+    transliteration: "aruzz",
+    english: "Rice",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to rice"
+  },
+  {
+    id: 563,
+    arabic: "لَحْمٌ",
+    transliteration: "laḥm",
+    english: "Meat",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to meat"
+  },
+  {
+    id: 564,
+    arabic: "دَجَاجٌ",
+    transliteration: "dajāj",
+    english: "Chicken",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to chicken"
+  },
+  {
+    id: 565,
+    arabic: "سَمَكٌ",
+    transliteration: "samak",
+    english: "Fish",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to fish"
+  },
+  {
+    id: 566,
+    arabic: "بَيْضٌ",
+    transliteration: "bayḍ",
+    english: "Eggs",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to eggs"
+  },
+  {
+    id: 567,
+    arabic: "حَلِيبٌ",
+    transliteration: "ḥalīb",
+    english: "Milk",
+    category: 'food-drink',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "لَبَنًا خَالِصًا سَائِغًا لِّلشَّارِبِينَ",
+      english: "Pure milk, palatable to those who drink",
+      reference: "Qur'an 16:66"
+    },
+    usage: "Refer to milk"
+  },
+  {
+    id: 568,
+    arabic: "جُبْنٌ",
+    transliteration: "jubn",
+    english: "Cheese",
+    category: 'food-drink',
+    frequency: 'common',
+    usage: "Refer to cheese"
+  },
+  {
+    id: 569,
+    arabic: "زُبْدَةٌ",
+    transliteration: "zubda",
+    english: "Butter",
+    category: 'food-drink',
+    frequency: 'common',
+    usage: "Refer to butter"
+  },
+  {
+    id: 570,
+    arabic: "عَسَلٌ",
+    transliteration: "ʿasal",
+    english: "Honey",
+    category: 'food-drink',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "فِيهِ شِفَاءٌ لِّلنَّاسِ",
+      english: "In it is healing for people",
+      reference: "Qur'an 16:69"
+    },
+    usage: "Refer to honey"
+  },
+  {
+    id: 571,
+    arabic: "تُفَّاحٌ",
+    transliteration: "tuffāḥ",
+    english: "Apple",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to apple"
+  },
+  {
+    id: 572,
+    arabic: "مَوْزٌ",
+    transliteration: "mawz",
+    english: "Banana",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to banana"
+  },
+  {
+    id: 573,
+    arabic: "بُرْتُقَالٌ",
+    transliteration: "burtuqāl",
+    english: "Orange",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to orange"
+  },
+  {
+    id: 574,
+    arabic: "عِنَبٌ",
+    transliteration: "ʿinab",
+    english: "Grapes",
+    category: 'food-drink',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَأَعْنَابًا وَقَضْبًا",
+      english: "And grapes and fresh vegetation",
+      reference: "Qur'an 80:28"
+    },
+    usage: "Refer to grapes"
+  },
+  {
+    id: 575,
+    arabic: "تَمْرٌ",
+    transliteration: "tamr",
+    english: "Dates",
+    category: 'food-drink',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَهُزِّي إِلَيْكِ بِجِذْعِ النَّخْلَةِ تُسَاقِطْ عَلَيْكِ رُطَبًا جَنِيًّا",
+      english: "Shake toward you the trunk of the palm tree; it will drop upon you ripe, fresh dates",
+      reference: "Qur'an 19:25"
+    },
+    usage: "Refer to dates"
+  },
+  {
+    id: 576,
+    arabic: "زَيْتُونٌ",
+    transliteration: "zaytūn",
+    english: "Olives",
+    category: 'food-drink',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَالتِّينِ وَالزَّيْتُونِ",
+      english: "By the fig and the olive",
+      reference: "Qur'an 95:1"
+    },
+    usage: "Refer to olives"
+  },
+  {
+    id: 577,
+    arabic: "تِينٌ",
+    transliteration: "tīn",
+    english: "Figs",
+    category: 'food-drink',
+    frequency: 'common',
+    usage: "Refer to figs"
+  },
+  {
+    id: 578,
+    arabic: "رُمَّانٌ",
+    transliteration: "rummān",
+    english: "Pomegranate",
+    category: 'food-drink',
+    frequency: 'common',
+    quranicExample: {
+      arabic: "فِيهِمَا فَاكِهَةٌ وَنَخْلٌ وَرُمَّانٌ",
+      english: "In both are fruit and palm trees and pomegranates",
+      reference: "Qur'an 55:68"
+    },
+    usage: "Refer to pomegranate"
+  },
+  {
+    id: 579,
+    arabic: "شَايٌ",
+    transliteration: "shāy",
+    english: "Tea",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to tea"
+  },
+  {
+    id: 580,
+    arabic: "قَهْوَةٌ",
+    transliteration: "qahwa",
+    english: "Coffee",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to coffee"
+  },
+  {
+    id: 581,
+    arabic: "عَصِيرٌ",
+    transliteration: "ʿaṣīr",
+    english: "Juice",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to juice"
+  },
+  {
+    id: 582,
+    arabic: "سُكَّرٌ",
+    transliteration: "sukkar",
+    english: "Sugar",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to sugar"
+  },
+  {
+    id: 583,
+    arabic: "مِلْحٌ",
+    transliteration: "milḥ",
+    english: "Salt",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to salt"
+  },
+  {
+    id: 584,
+    arabic: "زَيْتٌ",
+    transliteration: "zayt",
+    english: "Oil",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to oil"
+  },
+  {
+    id: 585,
+    arabic: "خُضَارٌ",
+    transliteration: "khuḍār",
+    english: "Vegetables",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to vegetables"
+  },
+  {
+    id: 586,
+    arabic: "فَوَاكِهُ",
+    transliteration: "fawākih",
+    english: "Fruits",
+    category: 'food-drink',
+    frequency: 'essential',
+    usage: "Refer to fruits"
+  },
+  
+  // =============================================
+  // CLOTHING
+  // =============================================
+  {
+    id: 601,
+    arabic: "ثَوْبٌ",
+    transliteration: "thawb",
+    english: "Garment/Thobe",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to garment"
+  },
+  {
+    id: 602,
+    arabic: "قَمِيصٌ",
+    transliteration: "qamīṣ",
+    english: "Shirt",
+    category: 'clothing',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "وَجَاءُوا عَلَىٰ قَمِيصِهِ بِدَمٍ كَذِبٍ",
+      english: "And they brought upon his shirt false blood",
+      reference: "Qur'an 12:18"
+    },
+    usage: "Refer to shirt"
+  },
+  {
+    id: 603,
+    arabic: "بَنْطَلُونٌ",
+    transliteration: "banṭalūn",
+    english: "Pants/Trousers",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to pants"
+  },
+  {
+    id: 604,
+    arabic: "فُسْتَانٌ",
+    transliteration: "fustān",
+    english: "Dress",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to dress"
+  },
+  {
+    id: 605,
+    arabic: "تَنُّورَةٌ",
+    transliteration: "tannūra",
+    english: "Skirt",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to skirt"
+  },
+  {
+    id: 606,
+    arabic: "جَاكِيتٌ",
+    transliteration: "jākīt",
+    english: "Jacket",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to jacket"
+  },
+  {
+    id: 607,
+    arabic: "مِعْطَفٌ",
+    transliteration: "miʿṭaf",
+    english: "Coat",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to coat"
+  },
+  {
+    id: 608,
+    arabic: "حِذَاءٌ",
+    transliteration: "ḥidhā'",
+    english: "Shoes",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to shoes"
+  },
+  {
+    id: 609,
+    arabic: "جَوْرَبٌ",
+    transliteration: "jawrab",
+    english: "Socks",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to socks"
+  },
+  {
+    id: 610,
+    arabic: "حِجَابٌ",
+    transliteration: "ḥijāb",
+    english: "Hijab",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to hijab"
+  },
+  {
+    id: 611,
+    arabic: "عَبَايَةٌ",
+    transliteration: "ʿabāya",
+    english: "Abaya",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to abaya"
+  },
+  {
+    id: 612,
+    arabic: "نِقَابٌ",
+    transliteration: "niqāb",
+    english: "Niqab",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to niqab"
+  },
+  {
+    id: 613,
+    arabic: "قُبَّعَةٌ",
+    transliteration: "qubbaʿa",
+    english: "Hat/Cap",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to hat"
+  },
+  {
+    id: 614,
+    arabic: "كُوفِيَّةٌ",
+    transliteration: "kūfiyya",
+    english: "Kufi (cap)",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to kufi cap"
+  },
+  {
+    id: 615,
+    arabic: "نَظَّارَاتٌ",
+    transliteration: "naẓẓārāt",
+    english: "Glasses",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to glasses"
+  },
+  {
+    id: 616,
+    arabic: "سَاعَةٌ",
+    transliteration: "sāʿa",
+    english: "Watch",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to watch"
+  },
+  {
+    id: 617,
+    arabic: "حَقِيبَةٌ",
+    transliteration: "ḥaqība",
+    english: "Bag",
+    category: 'clothing',
+    frequency: 'essential',
+    usage: "Refer to bag"
+  },
+  {
+    id: 618,
+    arabic: "خَاتَمٌ",
+    transliteration: "khātam",
+    english: "Ring",
+    category: 'clothing',
+    frequency: 'common',
+    usage: "Refer to ring"
   }
 ];
 
@@ -2868,7 +5363,15 @@ export const getCategoryLabel = (category: HeritageCategory): string => {
     'social-greetings': 'Social Greetings',
     'choices-preferences': 'Choices & Preferences',
     'places-objects': 'Places & Objects',
-    'safety-emergency': 'Safety & Emergency'
+    'safety-emergency': 'Safety & Emergency',
+    'countries': 'Countries',
+    'body-parts': 'Body Parts',
+    'colors': 'Colors',
+    'numbers': 'Numbers',
+    'days-months': 'Days & Months',
+    'weather-nature': 'Weather & Nature',
+    'food-drink': 'Food & Drink',
+    'clothing': 'Clothing'
   };
   return labels[category] || category;
 };
