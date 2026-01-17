@@ -35,7 +35,15 @@ export type HeritageCategory =
   | 'seeking-asking'
   | 'giving-sharing'
   | 'movement-direction'
-  | 'affirmation-negation';
+  | 'affirmation-negation'
+  | 'urgent-needs'
+  | 'physical-states'
+  | 'pain-medical'
+  | 'comfort-reassurance'
+  | 'social-greetings'
+  | 'choices-preferences'
+  | 'places-objects'
+  | 'safety-emergency';
 
 export interface HeritageModule {
   id: string;
@@ -1499,10 +1507,956 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
   }
 ];
 
+// =============================================
+// AAC-STYLE ESSENTIAL PHRASES
+// For non-verbal communication needs
+// =============================================
+
+export const heritageAACPhrases: HeritagePhrase[] = [
+  // URGENT NEEDS - Critical for immediate communication
+  {
+    id: 201,
+    arabic: "أُرِيدُ الحَمَّامَ",
+    transliteration: "urīdu al-ḥammām",
+    english: "I need the bathroom",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Express urgent bathroom need"
+  },
+  {
+    id: 202,
+    arabic: "أَنَا بَارِدٌ",
+    transliteration: "anā bārid",
+    english: "I am cold",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Express feeling cold"
+  },
+  {
+    id: 203,
+    arabic: "أَنَا حَارٌّ",
+    transliteration: "anā ḥārr",
+    english: "I am hot",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Express feeling hot"
+  },
+  {
+    id: 204,
+    arabic: "أُرِيدُ مَاءً",
+    transliteration: "urīdu mā'an",
+    english: "I want water",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Request water"
+  },
+  {
+    id: 205,
+    arabic: "أُرِيدُ طَعَامًا",
+    transliteration: "urīdu ṭaʿāman",
+    english: "I want food",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Request food"
+  },
+  {
+    id: 206,
+    arabic: "أُرِيدُ أَنْ أَنَامَ",
+    transliteration: "urīdu an anāma",
+    english: "I want to sleep",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Express need for sleep"
+  },
+  {
+    id: 207,
+    arabic: "أُرِيدُ أَنْ أَخْرُجَ",
+    transliteration: "urīdu an akhruja",
+    english: "I want to go out",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Express need to leave/exit"
+  },
+  {
+    id: 208,
+    arabic: "دَعْنِي وَحْدِي",
+    transliteration: "daʿnī waḥdī",
+    english: "Leave me alone",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Request personal space"
+  },
+  {
+    id: 209,
+    arabic: "لَا تَذْهَبْ",
+    transliteration: "lā tadhhab",
+    english: "Don't go",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Ask someone to stay"
+  },
+  {
+    id: 210,
+    arabic: "اِبْقَ مَعِي",
+    transliteration: "ibqa maʿī",
+    english: "Stay with me",
+    category: 'urgent-needs',
+    frequency: 'essential',
+    usage: "Request companionship"
+  },
+
+  // PHYSICAL STATES - Body awareness
+  {
+    id: 211,
+    arabic: "أَنَا نَعْسَانٌ",
+    transliteration: "anā naʿsān",
+    english: "I am sleepy",
+    category: 'physical-states',
+    frequency: 'essential',
+    usage: "Express drowsiness"
+  },
+  {
+    id: 212,
+    arabic: "أَنَا قَوِيٌّ",
+    transliteration: "anā qawiyy",
+    english: "I am strong",
+    category: 'physical-states',
+    frequency: 'common',
+    usage: "Express feeling strong"
+  },
+  {
+    id: 213,
+    arabic: "أَنَا ضَعِيفٌ",
+    transliteration: "anā ḍaʿīf",
+    english: "I am weak",
+    category: 'physical-states',
+    frequency: 'essential',
+    usage: "Express feeling weak"
+  },
+  {
+    id: 214,
+    arabic: "لَسْتُ جَائِعًا",
+    transliteration: "lastu jāʿian",
+    english: "I am not hungry",
+    category: 'physical-states',
+    frequency: 'common',
+    usage: "Decline food"
+  },
+  {
+    id: 215,
+    arabic: "لَسْتُ عَطْشَانًا",
+    transliteration: "lastu ʿaṭshānan",
+    english: "I am not thirsty",
+    category: 'physical-states',
+    frequency: 'common',
+    usage: "Decline drink"
+  },
+  {
+    id: 216,
+    arabic: "أَنَا شَبْعَانٌ",
+    transliteration: "anā shabʿān",
+    english: "I am full (not hungry)",
+    category: 'physical-states',
+    frequency: 'common',
+    usage: "Express satiation"
+  },
+  {
+    id: 217,
+    arabic: "أَنَا مُرْتَاحٌ",
+    transliteration: "anā murtāḥ",
+    english: "I am comfortable",
+    category: 'physical-states',
+    frequency: 'common',
+    usage: "Express comfort"
+  },
+  {
+    id: 218,
+    arabic: "لَسْتُ مُرْتَاحًا",
+    transliteration: "lastu murtāḥan",
+    english: "I am not comfortable",
+    category: 'physical-states',
+    frequency: 'essential',
+    usage: "Express discomfort"
+  },
+  {
+    id: 219,
+    arabic: "أَشْعُرُ بِالدَّوَارِ",
+    transliteration: "ashʿuru bid-dawār",
+    english: "I feel dizzy",
+    category: 'physical-states',
+    frequency: 'essential',
+    usage: "Express dizziness"
+  },
+  {
+    id: 220,
+    arabic: "أَنَا بِخَيْرٍ",
+    transliteration: "anā bikhayr",
+    english: "I am fine/okay",
+    category: 'physical-states',
+    frequency: 'essential',
+    usage: "Express being okay"
+  },
+
+  // PAIN & MEDICAL - Critical for health communication
+  {
+    id: 221,
+    arabic: "يُؤْلِمُنِي",
+    transliteration: "yu'limunī",
+    english: "It hurts me",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Express pain"
+  },
+  {
+    id: 222,
+    arabic: "رَأْسِي يُؤْلِمُنِي",
+    transliteration: "ra'sī yu'limunī",
+    english: "My head hurts",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Express headache"
+  },
+  {
+    id: 223,
+    arabic: "بَطْنِي يُؤْلِمُنِي",
+    transliteration: "baṭnī yu'limunī",
+    english: "My stomach hurts",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Express stomach pain"
+  },
+  {
+    id: 224,
+    arabic: "ظَهْرِي يُؤْلِمُنِي",
+    transliteration: "ẓahrī yu'limunī",
+    english: "My back hurts",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Express back pain"
+  },
+  {
+    id: 225,
+    arabic: "أَحْتَاجُ دَوَاءً",
+    transliteration: "aḥtāju dawā'an",
+    english: "I need medicine",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Request medication"
+  },
+  {
+    id: 226,
+    arabic: "أَحْتَاجُ طَبِيبًا",
+    transliteration: "aḥtāju ṭabīban",
+    english: "I need a doctor",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Request medical help"
+  },
+  {
+    id: 227,
+    arabic: "لَا أَسْتَطِيعُ التَّنَفُّسَ",
+    transliteration: "lā astaṭīʿu at-tanaffus",
+    english: "I can't breathe",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Express breathing difficulty - URGENT"
+  },
+  {
+    id: 228,
+    arabic: "أَشْعُرُ بِالْغَثَيَانِ",
+    transliteration: "ashʿuru bil-ghathayān",
+    english: "I feel nauseous",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Express nausea"
+  },
+  {
+    id: 229,
+    arabic: "يَدِي",
+    transliteration: "yadī",
+    english: "My hand",
+    category: 'pain-medical',
+    frequency: 'common',
+    usage: "Point to hand - combine with pain phrases"
+  },
+  {
+    id: 230,
+    arabic: "رِجْلِي",
+    transliteration: "rijlī",
+    english: "My leg/foot",
+    category: 'pain-medical',
+    frequency: 'common',
+    usage: "Point to leg/foot - combine with pain phrases"
+  },
+  {
+    id: 231,
+    arabic: "عَيْنِي",
+    transliteration: "ʿaynī",
+    english: "My eye",
+    category: 'pain-medical',
+    frequency: 'common',
+    usage: "Point to eye - combine with pain phrases"
+  },
+  {
+    id: 232,
+    arabic: "أُذُنِي",
+    transliteration: "udhunī",
+    english: "My ear",
+    category: 'pain-medical',
+    frequency: 'common',
+    usage: "Point to ear - combine with pain phrases"
+  },
+  {
+    id: 233,
+    arabic: "صَدْرِي",
+    transliteration: "ṣadrī",
+    english: "My chest",
+    category: 'pain-medical',
+    frequency: 'essential',
+    usage: "Point to chest - combine with pain phrases"
+  },
+  {
+    id: 234,
+    arabic: "حَلْقِي",
+    transliteration: "ḥalqī",
+    english: "My throat",
+    category: 'pain-medical',
+    frequency: 'common',
+    usage: "Point to throat - combine with pain phrases"
+  },
+
+  // COMFORT & REASSURANCE
+  {
+    id: 235,
+    arabic: "لَا تَخَفْ",
+    transliteration: "lā takhaf",
+    english: "Don't be afraid",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "لَا تَخَفْ إِنَّكَ أَنتَ الْأَعْلَىٰ",
+      english: "Fear not. Indeed, it is you who are superior",
+      reference: "Qur'an 20:68"
+    },
+    usage: "Comfort someone who is scared"
+  },
+  {
+    id: 236,
+    arabic: "لَا تَحْزَنْ",
+    transliteration: "lā taḥzan",
+    english: "Don't be sad",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+      english: "Do not grieve, indeed Allah is with us",
+      reference: "Qur'an 9:40"
+    },
+    usage: "Comfort someone who is sad"
+  },
+  {
+    id: 237,
+    arabic: "كُلُّ شَيْءٍ بِخَيْرٍ",
+    transliteration: "kullu shay'in bikhayr",
+    english: "Everything is okay",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    usage: "Reassure that things are fine"
+  },
+  {
+    id: 238,
+    arabic: "أَنَا هُنَا",
+    transliteration: "anā hunā",
+    english: "I am here",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    usage: "Reassure presence"
+  },
+  {
+    id: 239,
+    arabic: "اللَّهُ مَعَنَا",
+    transliteration: "Allāhu maʿanā",
+    english: "Allah is with us",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    usage: "Express faith and comfort"
+  },
+  {
+    id: 240,
+    arabic: "سَيَكُونُ خَيْرًا",
+    transliteration: "sayakūnu khayran",
+    english: "It will be good",
+    category: 'comfort-reassurance',
+    frequency: 'common',
+    usage: "Express hope for the future"
+  },
+  {
+    id: 241,
+    arabic: "أُحِبُّكَ",
+    transliteration: "uḥibbuka",
+    english: "I love you (to male)",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    usage: "Express love"
+  },
+  {
+    id: 242,
+    arabic: "أُحِبُّكِ",
+    transliteration: "uḥibbuki",
+    english: "I love you (to female)",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    usage: "Express love"
+  },
+  {
+    id: 243,
+    arabic: "أَنْتَ لَسْتَ وَحْدَكَ",
+    transliteration: "anta lasta waḥdaka",
+    english: "You are not alone",
+    category: 'comfort-reassurance',
+    frequency: 'essential',
+    usage: "Reassure someone"
+  },
+  {
+    id: 244,
+    arabic: "سَامَحْتُكَ",
+    transliteration: "sāmaḥtuka",
+    english: "I forgive you",
+    category: 'comfort-reassurance',
+    frequency: 'common',
+    usage: "Express forgiveness"
+  },
+
+  // SOCIAL GREETINGS - Essential for connection
+  {
+    id: 245,
+    arabic: "السَّلَامُ عَلَيْكُمْ",
+    transliteration: "as-salāmu ʿalaykum",
+    english: "Peace be upon you",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Islamic greeting"
+  },
+  {
+    id: 246,
+    arabic: "وَعَلَيْكُمُ السَّلَامُ",
+    transliteration: "wa ʿalaykum as-salām",
+    english: "And upon you be peace",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Response to greeting"
+  },
+  {
+    id: 247,
+    arabic: "أَهْلًا وَسَهْلًا",
+    transliteration: "ahlan wa sahlan",
+    english: "Welcome",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Welcome someone"
+  },
+  {
+    id: 248,
+    arabic: "صَبَاحُ الخَيْرِ",
+    transliteration: "ṣabāḥ al-khayr",
+    english: "Good morning",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Morning greeting"
+  },
+  {
+    id: 249,
+    arabic: "مَسَاءُ الخَيْرِ",
+    transliteration: "masā' al-khayr",
+    english: "Good evening",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Evening greeting"
+  },
+  {
+    id: 250,
+    arabic: "مَعَ السَّلَامَةِ",
+    transliteration: "maʿa as-salāma",
+    english: "Goodbye (go with safety)",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Say goodbye"
+  },
+  {
+    id: 251,
+    arabic: "تُشَرِّفْنَا",
+    transliteration: "tusharrifnā",
+    english: "You honor us",
+    category: 'social-greetings',
+    frequency: 'common',
+    usage: "Welcome an honored guest"
+  },
+  {
+    id: 252,
+    arabic: "كَيْفَ حَالُكَ",
+    transliteration: "kayfa ḥāluka",
+    english: "How are you? (to male)",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Ask about wellbeing"
+  },
+  {
+    id: 253,
+    arabic: "كَيْفَ حَالُكِ",
+    transliteration: "kayfa ḥāluki",
+    english: "How are you? (to female)",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Ask about wellbeing"
+  },
+  {
+    id: 254,
+    arabic: "أَنَا اِسْمِي",
+    transliteration: "anā ismī...",
+    english: "My name is...",
+    category: 'social-greetings',
+    frequency: 'essential',
+    usage: "Introduce yourself"
+  },
+
+  // CHOICES & PREFERENCES
+  {
+    id: 255,
+    arabic: "أُفَضِّلُ هٰذَا",
+    transliteration: "ufaḍḍilu hādhā",
+    english: "I prefer this",
+    category: 'choices-preferences',
+    frequency: 'essential',
+    usage: "Express preference"
+  },
+  {
+    id: 256,
+    arabic: "لَا أُرِيدُ هٰذَا",
+    transliteration: "lā urīdu hādhā",
+    english: "I don't want this",
+    category: 'choices-preferences',
+    frequency: 'essential',
+    usage: "Decline something"
+  },
+  {
+    id: 257,
+    arabic: "أُرِيدُ هٰذَا",
+    transliteration: "urīdu hādhā",
+    english: "I want this",
+    category: 'choices-preferences',
+    frequency: 'essential',
+    usage: "Choose something"
+  },
+  {
+    id: 258,
+    arabic: "الأَوَّلُ",
+    transliteration: "al-awwal",
+    english: "The first one",
+    category: 'choices-preferences',
+    frequency: 'common',
+    usage: "Select first option"
+  },
+  {
+    id: 259,
+    arabic: "الثَّانِي",
+    transliteration: "ath-thānī",
+    english: "The second one",
+    category: 'choices-preferences',
+    frequency: 'common',
+    usage: "Select second option"
+  },
+  {
+    id: 260,
+    arabic: "الآخَرُ",
+    transliteration: "al-ākhar",
+    english: "The other one",
+    category: 'choices-preferences',
+    frequency: 'essential',
+    usage: "Select alternative"
+  },
+  {
+    id: 261,
+    arabic: "كِلَاهُمَا",
+    transliteration: "kilāhumā",
+    english: "Both of them",
+    category: 'choices-preferences',
+    frequency: 'common',
+    usage: "Choose both options"
+  },
+  {
+    id: 262,
+    arabic: "لَا شَيْءَ",
+    transliteration: "lā shay'a",
+    english: "Nothing",
+    category: 'choices-preferences',
+    frequency: 'essential',
+    usage: "Decline all options"
+  },
+  {
+    id: 263,
+    arabic: "أَيُّ شَيْءٍ",
+    transliteration: "ayyu shay'in",
+    english: "Anything",
+    category: 'choices-preferences',
+    frequency: 'common',
+    usage: "Accept any option"
+  },
+  {
+    id: 264,
+    arabic: "غَيِّرْهُ",
+    transliteration: "ghayyirhu",
+    english: "Change it",
+    category: 'choices-preferences',
+    frequency: 'common',
+    usage: "Request a change"
+  },
+
+  // PLACES & OBJECTS - Navigate environment
+  {
+    id: 265,
+    arabic: "البَيْتُ",
+    transliteration: "al-bayt",
+    english: "The house/home",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to home"
+  },
+  {
+    id: 266,
+    arabic: "الغُرْفَةُ",
+    transliteration: "al-ghurfa",
+    english: "The room",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to a room"
+  },
+  {
+    id: 267,
+    arabic: "السَّرِيرُ",
+    transliteration: "as-sarīr",
+    english: "The bed",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to bed"
+  },
+  {
+    id: 268,
+    arabic: "الكُرْسِيُّ",
+    transliteration: "al-kursiyy",
+    english: "The chair",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to chair"
+  },
+  {
+    id: 269,
+    arabic: "الطَّاوِلَةُ",
+    transliteration: "aṭ-ṭāwila",
+    english: "The table",
+    category: 'places-objects',
+    frequency: 'common',
+    usage: "Refer to table"
+  },
+  {
+    id: 270,
+    arabic: "البَابُ",
+    transliteration: "al-bāb",
+    english: "The door",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to door"
+  },
+  {
+    id: 271,
+    arabic: "النَّافِذَةُ",
+    transliteration: "an-nāfidha",
+    english: "The window",
+    category: 'places-objects',
+    frequency: 'common',
+    usage: "Refer to window"
+  },
+  {
+    id: 272,
+    arabic: "المَاءُ",
+    transliteration: "al-mā'",
+    english: "The water",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to water"
+  },
+  {
+    id: 273,
+    arabic: "الطَّعَامُ",
+    transliteration: "aṭ-ṭaʿām",
+    english: "The food",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to food"
+  },
+  {
+    id: 274,
+    arabic: "الهَاتِفُ",
+    transliteration: "al-hātif",
+    english: "The phone",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to phone"
+  },
+  {
+    id: 275,
+    arabic: "الكِتَابُ",
+    transliteration: "al-kitāb",
+    english: "The book",
+    category: 'places-objects',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
+      english: "That is the Book about which there is no doubt",
+      reference: "Qur'an 2:2"
+    },
+    usage: "Refer to book"
+  },
+  {
+    id: 276,
+    arabic: "المَسْجِدُ",
+    transliteration: "al-masjid",
+    english: "The mosque",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to mosque"
+  },
+  {
+    id: 277,
+    arabic: "السَّيَّارَةُ",
+    transliteration: "as-sayyāra",
+    english: "The car",
+    category: 'places-objects',
+    frequency: 'common',
+    usage: "Refer to car"
+  },
+  {
+    id: 278,
+    arabic: "المِفْتَاحُ",
+    transliteration: "al-miftāḥ",
+    english: "The key",
+    category: 'places-objects',
+    frequency: 'common',
+    usage: "Refer to key"
+  },
+  {
+    id: 279,
+    arabic: "النُّورُ",
+    transliteration: "an-nūr",
+    english: "The light",
+    category: 'places-objects',
+    frequency: 'essential',
+    quranicExample: {
+      arabic: "اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ",
+      english: "Allah is the Light of the heavens and the earth",
+      reference: "Qur'an 24:35"
+    },
+    usage: "Refer to light"
+  },
+  {
+    id: 280,
+    arabic: "المُصْحَفُ",
+    transliteration: "al-muṣḥaf",
+    english: "The Qur'an (physical copy)",
+    category: 'places-objects',
+    frequency: 'essential',
+    usage: "Refer to Qur'an"
+  },
+
+  // SAFETY & EMERGENCY
+  {
+    id: 281,
+    arabic: "خَطَرٌ",
+    transliteration: "khaṭar",
+    english: "Danger!",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Warn of danger"
+  },
+  {
+    id: 282,
+    arabic: "اِتَّصِلْ بِالشُّرْطَةِ",
+    transliteration: "ittaṣil bish-shurṭa",
+    english: "Call the police",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Request police help"
+  },
+  {
+    id: 283,
+    arabic: "اِتَّصِلْ بِالإِسْعَافِ",
+    transliteration: "ittaṣil bil-isʿāf",
+    english: "Call an ambulance",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Request ambulance"
+  },
+  {
+    id: 284,
+    arabic: "حَرِيقٌ",
+    transliteration: "ḥarīq",
+    english: "Fire!",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Warn of fire"
+  },
+  {
+    id: 285,
+    arabic: "أَنَا ضَائِعٌ",
+    transliteration: "anā ḍā'iʿ",
+    english: "I am lost",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Express being lost"
+  },
+  {
+    id: 286,
+    arabic: "أَحْتَاجُ مُسَاعَدَةً فَوْرًا",
+    transliteration: "aḥtāju musāʿadatan fawran",
+    english: "I need help immediately",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Urgent help request"
+  },
+  {
+    id: 287,
+    arabic: "لَا تَلْمِسْنِي",
+    transliteration: "lā talmisnī",
+    english: "Don't touch me",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Set physical boundary"
+  },
+  {
+    id: 288,
+    arabic: "اِبْتَعِدْ عَنِّي",
+    transliteration: "ibtaʿid ʿannī",
+    english: "Get away from me",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Request distance - safety"
+  },
+  {
+    id: 289,
+    arabic: "هٰذَا خَطَأٌ",
+    transliteration: "hādhā khaṭa'",
+    english: "This is wrong",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Express something is wrong/bad"
+  },
+  {
+    id: 290,
+    arabic: "أَيْنَ أُمِّي",
+    transliteration: "ayna ummī",
+    english: "Where is my mother?",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Find mother - safety/comfort"
+  },
+  {
+    id: 291,
+    arabic: "أَيْنَ أَبِي",
+    transliteration: "ayna abī",
+    english: "Where is my father?",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Find father - safety/comfort"
+  },
+  {
+    id: 292,
+    arabic: "أُرِيدُ الذَّهَابَ إِلَى البَيْتِ",
+    transliteration: "urīdu adh-dhahāba ilā al-bayt",
+    english: "I want to go home",
+    category: 'safety-emergency',
+    frequency: 'essential',
+    usage: "Express need to go home"
+  },
+
+  // ADDITIONAL EMOTIONS - Expanded set
+  {
+    id: 293,
+    arabic: "أَنَا غَاضِبٌ",
+    transliteration: "anā ghāḍib",
+    english: "I am angry",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express anger"
+  },
+  {
+    id: 294,
+    arabic: "أَنَا مُتَحَمِّسٌ",
+    transliteration: "anā mutaḥammis",
+    english: "I am excited",
+    category: 'emotions',
+    frequency: 'common',
+    usage: "Express excitement"
+  },
+  {
+    id: 295,
+    arabic: "أَنَا مَلْآنُ",
+    transliteration: "anā mal'ān",
+    english: "I am bored",
+    category: 'emotions',
+    frequency: 'common',
+    usage: "Express boredom"
+  },
+  {
+    id: 296,
+    arabic: "أَنَا قَلِقٌ",
+    transliteration: "anā qaliq",
+    english: "I am worried",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express worry/anxiety"
+  },
+  {
+    id: 297,
+    arabic: "أَنَا مُحْرَجٌ",
+    transliteration: "anā muḥraj",
+    english: "I am embarrassed",
+    category: 'emotions',
+    frequency: 'common',
+    usage: "Express embarrassment"
+  },
+  {
+    id: 298,
+    arabic: "أَنَا مُحْتَارٌ",
+    transliteration: "anā muḥtār",
+    english: "I am confused",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express confusion"
+  },
+  {
+    id: 299,
+    arabic: "أَنَا وَحِيدٌ",
+    transliteration: "anā waḥīd",
+    english: "I am lonely",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express loneliness"
+  },
+  {
+    id: 300,
+    arabic: "أَفْتَقِدُكَ",
+    transliteration: "aftaqiduka",
+    english: "I miss you",
+    category: 'emotions',
+    frequency: 'essential',
+    usage: "Express missing someone"
+  }
+];
+
 // Combine all phrases
 export const allHeritgePhrases: HeritagePhrase[] = [
   ...heritageCorePhrases,
-  ...heritageFunctionalPhrases
+  ...heritageFunctionalPhrases,
+  ...heritageAACPhrases
 ];
 
 // =============================================
@@ -1653,6 +2607,89 @@ export const heritageModules: HeritageModule[] = [
     icon: '🎁',
     category: 'functional',
     phraseIds: [153, 154, 155, 156, 157, 158, 159]
+  },
+
+  // AAC MODULES (Essential for non-verbal communication)
+  {
+    id: 'urgent-needs',
+    title: 'Urgent Needs',
+    titleArabic: 'الحَاجَات العَاجِلَة',
+    description: 'Bathroom, water, food, sleep - express immediate needs',
+    icon: '🚨',
+    category: 'functional',
+    phraseIds: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210]
+  },
+  {
+    id: 'physical-states',
+    title: 'Physical States',
+    titleArabic: 'الحَالَات الجِسْمِيَّة',
+    description: 'Sleepy, strong, weak, comfortable - describe your body',
+    icon: '💪',
+    category: 'functional',
+    phraseIds: [211, 212, 213, 214, 215, 216, 217, 218, 219, 220]
+  },
+  {
+    id: 'pain-medical',
+    title: 'Pain & Medical',
+    titleArabic: 'الأَلَم وَالصِّحَّة',
+    description: 'It hurts, I need medicine, body parts - communicate health needs',
+    icon: '🏥',
+    category: 'functional',
+    phraseIds: [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234]
+  },
+  {
+    id: 'comfort-reassurance',
+    title: 'Comfort & Reassurance',
+    titleArabic: 'الرَّاحَة وَالطُّمَأْنِينَة',
+    description: "Don't be afraid, I love you, everything is okay",
+    icon: '🤗',
+    category: 'functional',
+    phraseIds: [235, 236, 237, 238, 239, 240, 241, 242, 243, 244]
+  },
+  {
+    id: 'social-greetings',
+    title: 'Social Greetings',
+    titleArabic: 'التَّحِيَّات الاِجْتِمَاعِيَّة',
+    description: 'Salam, welcome, goodbye, how are you',
+    icon: '👋',
+    category: 'functional',
+    phraseIds: [245, 246, 247, 248, 249, 250, 251, 252, 253, 254]
+  },
+  {
+    id: 'choices-preferences',
+    title: 'Choices & Preferences',
+    titleArabic: 'الخَيَارَات وَالتَّفْضِيلَات',
+    description: 'I want this, I prefer that, nothing, anything',
+    icon: '🤔',
+    category: 'functional',
+    phraseIds: [255, 256, 257, 258, 259, 260, 261, 262, 263, 264]
+  },
+  {
+    id: 'places-objects',
+    title: 'Places & Objects',
+    titleArabic: 'الأَمَاكِن وَالأَشْيَاء',
+    description: 'Home, room, bed, door, water, phone, book',
+    icon: '🏠',
+    category: 'functional',
+    phraseIds: [265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280]
+  },
+  {
+    id: 'safety-emergency',
+    title: 'Safety & Emergency',
+    titleArabic: 'السَّلَامَة وَالطَّوَارِئ',
+    description: 'Danger, help, call police, where is my mother',
+    icon: '⚠️',
+    category: 'functional',
+    phraseIds: [281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292]
+  },
+  {
+    id: 'emotions-expanded',
+    title: 'More Emotions',
+    titleArabic: 'مَشَاعِر إِضَافِيَّة',
+    description: 'Angry, excited, bored, worried, confused, lonely',
+    icon: '😤',
+    category: 'functional',
+    phraseIds: [293, 294, 295, 296, 297, 298, 299, 300]
   }
 ];
 
@@ -1692,7 +2729,15 @@ export const getCategoryLabel = (category: HeritageCategory): string => {
     'seeking-asking': 'Seeking & Asking',
     'giving-sharing': 'Giving & Sharing',
     'movement-direction': 'Movement & Direction',
-    'affirmation-negation': 'Affirmation & Negation'
+    'affirmation-negation': 'Affirmation & Negation',
+    'urgent-needs': 'Urgent Needs',
+    'physical-states': 'Physical States',
+    'pain-medical': 'Pain & Medical',
+    'comfort-reassurance': 'Comfort & Reassurance',
+    'social-greetings': 'Social Greetings',
+    'choices-preferences': 'Choices & Preferences',
+    'places-objects': 'Places & Objects',
+    'safety-emergency': 'Safety & Emergency'
   };
   return labels[category] || category;
 };
