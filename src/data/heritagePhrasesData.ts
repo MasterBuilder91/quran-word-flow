@@ -1777,7 +1777,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am fine/okay",
     category: 'physical-states',
     frequency: 'essential',
-    usage: "Express being okay"
+    usage: "Express being okay",
+    genderForms: {
+      masculine: { arabic: "أَنَا بِخَيْرٍ", transliteration: "anā bikhayr" },
+      feminine: { arabic: "أَنَا بِخَيْرٍ", transliteration: "anā bikhayr" }
+    }
   },
 
   // PAIN & MEDICAL - Critical for health communication
@@ -1953,7 +1957,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am here",
     category: 'comfort-reassurance',
     frequency: 'essential',
-    usage: "Reassure presence"
+    usage: "Reassure presence",
+    genderForms: {
+      masculine: { arabic: "أَنَا هُنَا", transliteration: "anā hunā" },
+      feminine: { arabic: "أَنَا هُنَا", transliteration: "anā hunā" }
+    }
   },
   {
     id: 239,
@@ -2099,7 +2107,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "My name is...",
     category: 'social-greetings',
     frequency: 'essential',
-    usage: "Introduce yourself"
+    usage: "Introduce yourself",
+    genderForms: {
+      masculine: { arabic: "أَنَا اِسْمِي", transliteration: "anā ismī..." },
+      feminine: { arabic: "أَنَا اِسْمِي", transliteration: "anā ismī..." }
+    }
   },
 
   // CHOICES & PREFERENCES
