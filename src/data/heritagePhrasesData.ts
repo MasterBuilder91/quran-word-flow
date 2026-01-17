@@ -17,6 +17,17 @@ export interface HeritagePhrase {
   };
   usage: string; // When/how to use this phrase
   audioTip?: string;
+  // Gender-specific forms for phrases about oneself
+  genderForms?: {
+    masculine: {
+      arabic: string;
+      transliteration: string;
+    };
+    feminine: {
+      arabic: string;
+      transliteration: string;
+    };
+  };
 }
 
 export type HeritageCategory = 
@@ -709,7 +720,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am happy",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express happiness"
+    usage: "Express happiness",
+    genderForms: {
+      masculine: { arabic: "أَنَا سَعِيدٌ", transliteration: "anā saʿīd" },
+      feminine: { arabic: "أَنَا سَعِيدَةٌ", transliteration: "anā saʿīda" }
+    }
   },
   {
     id: 102,
@@ -718,7 +733,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am sad",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express sadness"
+    usage: "Express sadness",
+    genderForms: {
+      masculine: { arabic: "أَنَا حَزِينٌ", transliteration: "anā ḥazīn" },
+      feminine: { arabic: "أَنَا حَزِينَةٌ", transliteration: "anā ḥazīna" }
+    }
   },
   {
     id: 103,
@@ -727,7 +746,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am tired",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express fatigue"
+    usage: "Express fatigue",
+    genderForms: {
+      masculine: { arabic: "أَنَا مُتْعَبٌ", transliteration: "anā mutʿab" },
+      feminine: { arabic: "أَنَا مُتْعَبَةٌ", transliteration: "anā mutʿaba" }
+    }
   },
   {
     id: 104,
@@ -736,7 +759,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am hungry",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express hunger"
+    usage: "Express hunger",
+    genderForms: {
+      masculine: { arabic: "أَنَا جَائِعٌ", transliteration: "anā jāʾiʿ" },
+      feminine: { arabic: "أَنَا جَائِعَةٌ", transliteration: "anā jāʾiʿa" }
+    }
   },
   {
     id: 105,
@@ -745,7 +772,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am thirsty",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express thirst"
+    usage: "Express thirst",
+    genderForms: {
+      masculine: { arabic: "أَنَا عَطْشَانٌ", transliteration: "anā ʿaṭshān" },
+      feminine: { arabic: "أَنَا عَطْشَانَةٌ", transliteration: "anā ʿaṭshāna" }
+    }
   },
   {
     id: 106,
@@ -759,7 +790,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
       english: "Do not be afraid",
       reference: "Qur'an 20:68"
     },
-    usage: "Express fear"
+    usage: "Express fear",
+    genderForms: {
+      masculine: { arabic: "أَنَا خَائِفٌ", transliteration: "anā khāʾif" },
+      feminine: { arabic: "أَنَا خَائِفَةٌ", transliteration: "anā khāʾifa" }
+    }
   },
   {
     id: 107,
@@ -768,7 +803,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am joyful",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express joy"
+    usage: "Express joy",
+    genderForms: {
+      masculine: { arabic: "أَنَا فَرِحٌ", transliteration: "anā fariḥ" },
+      feminine: { arabic: "أَنَا فَرِحَةٌ", transliteration: "anā fariḥa" }
+    }
   },
   {
     id: 108,
@@ -800,7 +839,11 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "I am sick",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express illness"
+    usage: "Express illness",
+    genderForms: {
+      masculine: { arabic: "أَنَا مَرِيضٌ", transliteration: "anā marīḍ" },
+      feminine: { arabic: "أَنَا مَرِيضَةٌ", transliteration: "anā marīḍa" }
+    }
   },
 
   // TIME & PLACE
@@ -1530,7 +1573,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am cold",
     category: 'urgent-needs',
     frequency: 'essential',
-    usage: "Express feeling cold"
+    usage: "Express feeling cold",
+    genderForms: {
+      masculine: { arabic: "أَنَا بَارِدٌ", transliteration: "anā bārid" },
+      feminine: { arabic: "أَنَا بَارِدَةٌ", transliteration: "anā bārida" }
+    }
   },
   {
     id: 203,
@@ -1539,7 +1586,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am hot",
     category: 'urgent-needs',
     frequency: 'essential',
-    usage: "Express feeling hot"
+    usage: "Express feeling hot",
+    genderForms: {
+      masculine: { arabic: "أَنَا حَارٌّ", transliteration: "anā ḥārr" },
+      feminine: { arabic: "أَنَا حَارَّةٌ", transliteration: "anā ḥārra" }
+    }
   },
   {
     id: 204,
@@ -1613,7 +1664,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am sleepy",
     category: 'physical-states',
     frequency: 'essential',
-    usage: "Express drowsiness"
+    usage: "Express drowsiness",
+    genderForms: {
+      masculine: { arabic: "أَنَا نَعْسَانٌ", transliteration: "anā naʿsān" },
+      feminine: { arabic: "أَنَا نَعْسَانَةٌ", transliteration: "anā naʿsāna" }
+    }
   },
   {
     id: 212,
@@ -1622,7 +1677,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am strong",
     category: 'physical-states',
     frequency: 'common',
-    usage: "Express feeling strong"
+    usage: "Express feeling strong",
+    genderForms: {
+      masculine: { arabic: "أَنَا قَوِيٌّ", transliteration: "anā qawiyy" },
+      feminine: { arabic: "أَنَا قَوِيَّةٌ", transliteration: "anā qawiyya" }
+    }
   },
   {
     id: 213,
@@ -1631,7 +1690,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am weak",
     category: 'physical-states',
     frequency: 'essential',
-    usage: "Express feeling weak"
+    usage: "Express feeling weak",
+    genderForms: {
+      masculine: { arabic: "أَنَا ضَعِيفٌ", transliteration: "anā ḍaʿīf" },
+      feminine: { arabic: "أَنَا ضَعِيفَةٌ", transliteration: "anā ḍaʿīfa" }
+    }
   },
   {
     id: 214,
@@ -1640,7 +1703,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am not hungry",
     category: 'physical-states',
     frequency: 'common',
-    usage: "Decline food"
+    usage: "Decline food",
+    genderForms: {
+      masculine: { arabic: "لَسْتُ جَائِعًا", transliteration: "lastu jāʿian" },
+      feminine: { arabic: "لَسْتُ جَائِعَةً", transliteration: "lastu jāʿiatan" }
+    }
   },
   {
     id: 215,
@@ -1649,7 +1716,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am not thirsty",
     category: 'physical-states',
     frequency: 'common',
-    usage: "Decline drink"
+    usage: "Decline drink",
+    genderForms: {
+      masculine: { arabic: "لَسْتُ عَطْشَانًا", transliteration: "lastu ʿaṭshānan" },
+      feminine: { arabic: "لَسْتُ عَطْشَانَةً", transliteration: "lastu ʿaṭshānatan" }
+    }
   },
   {
     id: 216,
@@ -1658,7 +1729,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am full (not hungry)",
     category: 'physical-states',
     frequency: 'common',
-    usage: "Express satiation"
+    usage: "Express satiation",
+    genderForms: {
+      masculine: { arabic: "أَنَا شَبْعَانٌ", transliteration: "anā shabʿān" },
+      feminine: { arabic: "أَنَا شَبْعَانَةٌ", transliteration: "anā shabʿāna" }
+    }
   },
   {
     id: 217,
@@ -1667,7 +1742,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am comfortable",
     category: 'physical-states',
     frequency: 'common',
-    usage: "Express comfort"
+    usage: "Express comfort",
+    genderForms: {
+      masculine: { arabic: "أَنَا مُرْتَاحٌ", transliteration: "anā murtāḥ" },
+      feminine: { arabic: "أَنَا مُرْتَاحَةٌ", transliteration: "anā murtāḥa" }
+    }
   },
   {
     id: 218,
@@ -1676,7 +1755,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am not comfortable",
     category: 'physical-states',
     frequency: 'essential',
-    usage: "Express discomfort"
+    usage: "Express discomfort",
+    genderForms: {
+      masculine: { arabic: "لَسْتُ مُرْتَاحًا", transliteration: "lastu murtāḥan" },
+      feminine: { arabic: "لَسْتُ مُرْتَاحَةً", transliteration: "lastu murtāḥatan" }
+    }
   },
   {
     id: 219,
@@ -2311,7 +2394,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am lost",
     category: 'safety-emergency',
     frequency: 'essential',
-    usage: "Express being lost"
+    usage: "Express being lost",
+    genderForms: {
+      masculine: { arabic: "أَنَا ضَائِعٌ", transliteration: "anā ḍā'iʿ" },
+      feminine: { arabic: "أَنَا ضَائِعَةٌ", transliteration: "anā ḍā'iʿa" }
+    }
   },
   {
     id: 286,
@@ -2385,7 +2472,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am angry",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express anger"
+    usage: "Express anger",
+    genderForms: {
+      masculine: { arabic: "أَنَا غَاضِبٌ", transliteration: "anā ghāḍib" },
+      feminine: { arabic: "أَنَا غَاضِبَةٌ", transliteration: "anā ghāḍiba" }
+    }
   },
   {
     id: 294,
@@ -2394,7 +2485,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am excited",
     category: 'emotions',
     frequency: 'common',
-    usage: "Express excitement"
+    usage: "Express excitement",
+    genderForms: {
+      masculine: { arabic: "أَنَا مُتَحَمِّسٌ", transliteration: "anā mutaḥammis" },
+      feminine: { arabic: "أَنَا مُتَحَمِّسَةٌ", transliteration: "anā mutaḥammisa" }
+    }
   },
   {
     id: 295,
@@ -2403,7 +2498,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am bored",
     category: 'emotions',
     frequency: 'common',
-    usage: "Express boredom"
+    usage: "Express boredom",
+    genderForms: {
+      masculine: { arabic: "أَنَا مَلْآنُ", transliteration: "anā mal'ān" },
+      feminine: { arabic: "أَنَا مَلْآنَةٌ", transliteration: "anā mal'āna" }
+    }
   },
   {
     id: 296,
@@ -2412,7 +2511,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am worried",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express worry/anxiety"
+    usage: "Express worry/anxiety",
+    genderForms: {
+      masculine: { arabic: "أَنَا قَلِقٌ", transliteration: "anā qaliq" },
+      feminine: { arabic: "أَنَا قَلِقَةٌ", transliteration: "anā qaliqa" }
+    }
   },
   {
     id: 297,
@@ -2421,7 +2524,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am embarrassed",
     category: 'emotions',
     frequency: 'common',
-    usage: "Express embarrassment"
+    usage: "Express embarrassment",
+    genderForms: {
+      masculine: { arabic: "أَنَا مُحْرَجٌ", transliteration: "anā muḥraj" },
+      feminine: { arabic: "أَنَا مُحْرَجَةٌ", transliteration: "anā muḥraja" }
+    }
   },
   {
     id: 298,
@@ -2430,7 +2537,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am confused",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express confusion"
+    usage: "Express confusion",
+    genderForms: {
+      masculine: { arabic: "أَنَا مُحْتَارٌ", transliteration: "anā muḥtār" },
+      feminine: { arabic: "أَنَا مُحْتَارَةٌ", transliteration: "anā muḥtāra" }
+    }
   },
   {
     id: 299,
@@ -2439,7 +2550,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I am lonely",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express loneliness"
+    usage: "Express loneliness",
+    genderForms: {
+      masculine: { arabic: "أَنَا وَحِيدٌ", transliteration: "anā waḥīd" },
+      feminine: { arabic: "أَنَا وَحِيدَةٌ", transliteration: "anā waḥīda" }
+    }
   },
   {
     id: 300,
@@ -2448,7 +2563,11 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "I miss you",
     category: 'emotions',
     frequency: 'essential',
-    usage: "Express missing someone"
+    usage: "Express missing someone",
+    genderForms: {
+      masculine: { arabic: "أَفْتَقِدُكَ", transliteration: "aftaqiduka" },
+      feminine: { arabic: "أَفْتَقِدُكِ", transliteration: "aftaqiduki" }
+    }
   }
 ];
 
