@@ -9,7 +9,7 @@ interface LetterFormsChartProps {
 }
 
 export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChartProps) => {
-  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
+  const { playLetter, isLetterPlaying } = useArabicAudio();
   
   const letters = showAll 
     ? arabicLetters.filter(l => !['taa-marbuta', 'hamza'].includes(l.id))
@@ -33,37 +33,40 @@ export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChart
           </tr>
         </thead>
         <tbody>
-          {letters.map((letter, index) => (
-            <motion.tr
-              key={letter.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.03 }}
-              className="border-b border-border/50 hover:bg-card/50 transition-colors"
-            >
-              <td className="p-3">
-                <button
-                  onClick={() => handleLetterClick(letter.arabic)}
-                  className="flex items-center gap-2 group cursor-pointer hover:opacity-80 transition-opacity"
-                >
-                  <span className={`font-arabic text-2xl text-gold ${isPlaying && currentLetter === letter.arabic ? 'animate-pulse' : ''}`}>
-                    {letter.arabic}
-                  </span>
-                  <span className="text-sm text-foreground">{letter.name}</span>
-                  <Volume2 className={`w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors ${isPlaying && currentLetter === letter.arabic ? 'text-primary' : ''}`} />
-                </button>
-              </td>
-              <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.isolated}</td>
-              <td className="p-3 text-center font-arabic text-3xl text-foreground">
-                {letter.connectorType === 'right-only' ? (
-                  <span className="text-muted-foreground text-lg">—</span>
-                ) : letter.forms.initial}
-              </td>
-              <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.medial}</td>
-              <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.final}</td>
-              <td className="p-3 text-sm text-muted-foreground">{letter.transliteration}</td>
-            </motion.tr>
-          ))}
+          {letters.map((letter, index) => {
+            const isCurrentlyPlaying = isLetterPlaying(letter.arabic);
+            return (
+              <motion.tr
+                key={letter.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.03 }}
+                className="border-b border-border/50 hover:bg-card/50 transition-colors"
+              >
+                <td className="p-3">
+                  <button
+                    onClick={() => handleLetterClick(letter.arabic)}
+                    className="flex items-center gap-2 group cursor-pointer hover:opacity-80 transition-opacity"
+                  >
+                    <span className={`font-arabic text-2xl text-gold ${isCurrentlyPlaying ? 'animate-pulse' : ''}`}>
+                      {letter.arabic}
+                    </span>
+                    <span className="text-sm text-foreground">{letter.name}</span>
+                    <Volume2 className={`w-4 h-4 transition-colors ${isCurrentlyPlaying ? 'text-primary animate-pulse' : 'text-muted-foreground group-hover:text-primary'}`} />
+                  </button>
+                </td>
+                <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.isolated}</td>
+                <td className="p-3 text-center font-arabic text-3xl text-foreground">
+                  {letter.connectorType === 'right-only' ? (
+                    <span className="text-muted-foreground text-lg">—</span>
+                  ) : letter.forms.initial}
+                </td>
+                <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.medial}</td>
+                <td className="p-3 text-center font-arabic text-3xl text-foreground">{letter.forms.final}</td>
+                <td className="p-3 text-sm text-muted-foreground">{letter.transliteration}</td>
+              </motion.tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
@@ -76,8 +79,8 @@ interface LetterCardProps {
 }
 
 export const LetterCard = ({ letter, showDetails = true }: LetterCardProps) => {
-  const { playLetter, isPlaying, currentLetter } = useArabicAudio();
-  const isCurrentlyPlaying = isPlaying && currentLetter === letter.arabic;
+  const { playLetter, isLetterPlaying } = useArabicAudio();
+  const isCurrentlyPlaying = isLetterPlaying(letter.arabic);
 
   return (
     <motion.div
@@ -91,7 +94,7 @@ export const LetterCard = ({ letter, showDetails = true }: LetterCardProps) => {
         <span className={`font-arabic text-6xl text-gold text-glow-gold ${isCurrentlyPlaying ? 'animate-pulse' : ''}`}>
           {letter.arabic}
         </span>
-        <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary' : 'text-muted-foreground'}`} />
+        <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
       </div>
 
       {/* Name and transliteration */}

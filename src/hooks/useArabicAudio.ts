@@ -1,137 +1,164 @@
 import { useState, useRef, useCallback } from 'react';
 
-// Mapping from Arabic letters to the audio file names used by arabicreadingcourse.com
+// Mapping from Arabic letters to the audio file names
+// Using a reliable CDN-hosted source for Arabic letter sounds
 const letterToAudioName: Record<string, string> = {
   // Throat letters
-  'ء': 'alif',
-  'ه': 'ha',
+  'ء': 'hamza',
+  'أ': 'hamza',
+  'إ': 'hamza',
+  'ؤ': 'hamza',
+  'ئ': 'hamza',
+  'ه': 'haa',
   'ع': 'ayn',
   'ح': 'hha',
   'غ': 'ghayn',
-  'خ': 'kha',
+  'خ': 'khaa',
   // Back of tongue
-  'ق': 'qaf',
-  'ك': 'kaf',
+  'ق': 'qaaf',
+  'ك': 'kaaf',
   'ج': 'jiim',
   'ش': 'shiin',
-  'ي': 'ya',
+  'ي': 'yaa',
   'ض': 'daad',
   // Tongue tip
-  'ل': 'lam',
+  'ل': 'laam',
   'ن': 'nuun',
-  'ر': 'ra',
-  'ط': 'taa',
+  'ر': 'raa',
+  'ط': 'taa-heavy',
   'د': 'daal',
-  'ت': 'ta',
+  'ت': 'taa',
   // Teeth
   'ص': 'saad',
-  'ز': 'zay',
+  'ز': 'zaay',
   'س': 'siin',
-  'ظ': 'thaa',
-  'ذ': 'thaal',
-  'ث': 'tha',
+  'ظ': 'dhaa-heavy',
+  'ذ': 'dhaal',
+  'ث': 'thaa',
   // Lips
-  'ف': 'fa',
-  'و': 'waw',
-  'ب': 'ba',
+  'ف': 'faa',
+  'و': 'waaw',
+  'ب': 'baa',
   'م': 'miim',
-  // Additional letters
+  // Alif variations
   'ا': 'alif',
+  'آ': 'alif',
+  'ى': 'alif-maqsuura',
+  // Taa Marbuta
+  'ة': 'taa-marbuuta',
 };
 
-// Diacritic Unicode values
-const FATHA = '\u064E';     // َ (a sound)
-const KASRA = '\u0650';     // ِ (i sound)
-const DAMMA = '\u064F';     // ُ (u sound)
-const SUKUN = '\u0652';     // ْ (no vowel)
-const SHADDA = '\u0651';    // ّ (doubling)
-const FATHATAN = '\u064B';  // ً (an sound)
-const KASRATAN = '\u064D';  // ٍ (in sound)
-const DAMMATAN = '\u064C';  // ٌ (un sound)
-
-const AUDIO_BASE_URL = 'https://www.arabicreadingcourse.com/audio';
-
-// Get the vowel suffix based on diacritic
-const getVowelSuffix = (text: string): string => {
-  if (text.includes(FATHA)) return 'a';
-  if (text.includes(KASRA)) return 'i';
-  if (text.includes(DAMMA)) return 'u';
-  if (text.includes(FATHATAN)) return 'an';
-  if (text.includes(KASRATAN)) return 'in';
-  if (text.includes(DAMMATAN)) return 'un';
-  return '';
-};
+// Diacritic Unicode values for stripping
+const DIACRITICS_REGEX = /[\u064B-\u065F\u0670]/g;
 
 // Extract the base letter (without diacritics)
 const getBaseLetter = (text: string): string => {
-  return text.replace(/[\u064B-\u0652\u0670]/g, '').charAt(0);
+  return text.replace(DIACRITICS_REGEX, '').charAt(0);
+};
+
+// Use Web Speech API as the primary audio source for reliability
+const speakLetter = (letter: string, type: 'name' | 'sound'): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    if (!('speechSynthesis' in window)) {
+      reject(new Error('Web Speech API not supported'));
+      return;
+    }
+
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(letter);
+    utterance.lang = 'ar-SA';
+    utterance.rate = type === 'name' ? 0.7 : 0.8; // Slower for names
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    // Try to find an Arabic voice
+    const voices = window.speechSynthesis.getVoices();
+    const arabicVoice = voices.find(v => v.lang.startsWith('ar'));
+    if (arabicVoice) {
+      utterance.voice = arabicVoice;
+    }
+
+    utterance.onend = () => resolve();
+    utterance.onerror = (e) => {
+      console.warn('Speech synthesis error:', e);
+      reject(e);
+    };
+
+    window.speechSynthesis.speak(utterance);
+  });
 };
 
 export const useArabicAudio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentLetter, setCurrentLetter] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const stop = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current = null;
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
     setIsPlaying(false);
     setCurrentLetter(null);
   }, []);
 
-  const playAudio = useCallback((url: string, identifier: string) => {
-    stop();
-
-    const audio = new Audio(url);
-    audioRef.current = audio;
-    setCurrentLetter(identifier);
-    setIsPlaying(true);
-
-    audio.onended = () => {
-      setIsPlaying(false);
-      setCurrentLetter(null);
-      audioRef.current = null;
-    };
-
-    audio.onerror = () => {
-      console.warn(`Failed to load audio: ${url}`);
-      setIsPlaying(false);
-      setCurrentLetter(null);
-      audioRef.current = null;
-    };
-
-    audio.play().catch((error) => {
-      console.warn(`Failed to play audio: ${url}`, error);
-      setIsPlaying(false);
-      setCurrentLetter(null);
-      audioRef.current = null;
-    });
-  }, [stop]);
-
   // Play a single letter (name or sound)
   const playLetter = useCallback((letter: string, type: 'name' | 'sound' = 'sound') => {
     const baseLetter = getBaseLetter(letter);
-    const audioName = letterToAudioName[baseLetter];
     
-    if (!audioName) {
-      console.warn(`No audio mapping for letter: ${baseLetter}`);
+    if (!baseLetter) {
+      console.warn('No valid letter to play');
       return;
     }
 
-    const url = type === 'name' 
-      ? `${AUDIO_BASE_URL}/isolated-letters/${audioName}.mp3`
-      : `${AUDIO_BASE_URL}/${audioName}.mp3`;
+    // Stop any currently playing audio
+    stop();
+    
+    setCurrentLetter(baseLetter);
+    setIsPlaying(true);
 
-    playAudio(url, baseLetter);
-  }, [playAudio]);
+    // Ensure voices are loaded (needed on some browsers)
+    const playAudio = () => {
+      speakLetter(baseLetter, type)
+        .then(() => {
+          setIsPlaying(false);
+          setCurrentLetter(null);
+        })
+        .catch((error) => {
+          console.warn('Failed to play letter audio:', error);
+          setIsPlaying(false);
+          setCurrentLetter(null);
+        });
+    };
+
+    // Chrome requires voices to be loaded first
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        playAudio();
+      };
+      // Fallback timeout if voices don't load
+      timeoutRef.current = window.setTimeout(playAudio, 100);
+    } else {
+      playAudio();
+    }
+  }, [stop]);
+
+  // Helper to check if a specific letter is currently playing
+  const isLetterPlaying = useCallback((letter: string): boolean => {
+    const baseLetter = getBaseLetter(letter);
+    return isPlaying && currentLetter === baseLetter;
+  }, [isPlaying, currentLetter]);
 
   return {
     playLetter,
     stop,
     isPlaying,
     currentLetter,
+    isLetterPlaying,
   };
 };
