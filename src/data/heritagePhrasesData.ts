@@ -621,7 +621,7 @@ export const heritageCorePhrases: HeritagePhrase[] = [
     id: 37,
     arabic: "مَا",
     transliteration: "mā",
-    english: "What?",
+    english: "What? (with nouns)",
     category: 'core-questions',
     frequency: 'core',
     quranicExample: {
@@ -629,7 +629,21 @@ export const heritageCorePhrases: HeritagePhrase[] = [
       english: "What is this?",
       reference: "Qur'an 21:36"
     },
-    usage: "Ask about things. 'What is this?' = مَا هٰذَا؟"
+    usage: "Ask about things using nouns. 'What is this?' = مَا هٰذَا؟ Used before nouns and pronouns."
+  },
+  {
+    id: 3701,
+    arabic: "مَاذَا",
+    transliteration: "mādhā",
+    english: "What? (with verbs)",
+    category: 'core-questions',
+    frequency: 'core',
+    quranicExample: {
+      arabic: "مَاذَا أَنزَلَ رَبُّكُمْ",
+      english: "What has your Lord revealed?",
+      reference: "Qur'an 16:24"
+    },
+    usage: "Ask about actions using verbs. 'What are you doing?' = مَاذَا تَفْعَلُ؟ 'What did you say?' = مَاذَا قُلْتَ؟"
   },
   {
     id: 38,
@@ -5264,7 +5278,7 @@ export const heritageModules: HeritageModule[] = [
     description: 'What, who, where, when, how, why - ask about anything',
     icon: '❓',
     category: 'core',
-    phraseIds: [37, 38, 39, 40, 41, 42, 43, 44],
+    phraseIds: [37, 3701, 38, 39, 40, 41, 42, 43, 44],
     isCore: true
   },
   {
