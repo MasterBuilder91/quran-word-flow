@@ -20,7 +20,8 @@ import {
   getCoreModules,
   getFunctionalModules,
   HeritagePhrase,
-  HeritageModule
+  HeritageModule,
+  AddresseeType
 } from "@/data/heritagePhrasesData";
 import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
@@ -34,6 +35,7 @@ const HeritagePage = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [direction, setDirection] = useState(0);
   const [genderMode, setGenderMode] = useState<GenderMode>('masculine');
+  const [addresseeMode, setAddresseeMode] = useState<AddresseeType>('masculine_singular');
   
   const { speak, isPlaying, stop } = useElevenLabsTTS();
   
@@ -78,28 +80,49 @@ const HeritagePage = () => {
     if (isPlaying) {
       stop();
     } else {
-      // Use gender-specific form if available
-      const arabicText = phrase.genderForms 
-        ? phrase.genderForms[genderMode].arabic 
-        : phrase.arabic;
+      // Use imperative form if available, then gender form, then default
+      let arabicText = phrase.arabic;
+      if (phrase.imperativeForms) {
+        arabicText = phrase.imperativeForms[addresseeMode].arabic;
+      } else if (phrase.genderForms) {
+        arabicText = phrase.genderForms[genderMode].arabic;
+      }
       speak(arabicText);
     }
   };
 
-  // Get the appropriate Arabic text based on gender mode
+  // Get the appropriate Arabic text based on addressee mode or gender mode
   const getArabicText = (phrase: HeritagePhrase) => {
+    if (phrase.imperativeForms) {
+      return phrase.imperativeForms[addresseeMode].arabic;
+    }
     if (phrase.genderForms) {
       return phrase.genderForms[genderMode].arabic;
     }
     return phrase.arabic;
   };
 
-  // Get the appropriate transliteration based on gender mode
+  // Get the appropriate transliteration based on addressee mode or gender mode
   const getTransliteration = (phrase: HeritagePhrase) => {
+    if (phrase.imperativeForms) {
+      return phrase.imperativeForms[addresseeMode].transliteration;
+    }
     if (phrase.genderForms) {
       return phrase.genderForms[genderMode].transliteration;
     }
     return phrase.transliteration;
+  };
+
+  // Get addressee label for display
+  const getAddresseeLabel = (type: AddresseeType): { short: string; arabic: string; desc: string } => {
+    const labels: Record<AddresseeType, { short: string; arabic: string; desc: string }> = {
+      masculine_singular: { short: "♂ Him", arabic: "أنتَ", desc: "one male" },
+      feminine_singular: { short: "♀ Her", arabic: "أنتِ", desc: "one female" },
+      dual: { short: "👥 Two", arabic: "أنتما", desc: "two people" },
+      masculine_plural: { short: "👥♂ Group", arabic: "أنتم", desc: "males/mixed" },
+      feminine_plural: { short: "👥♀ Women", arabic: "أنتن", desc: "females only" }
+    };
+    return labels[type];
   };
 
   const variants = {
@@ -292,13 +315,37 @@ const HeritagePage = () => {
                       transition={{ duration: 0.3 }}
                       className="bg-card border border-border rounded-2xl p-8"
                     >
-                      {/* Phrase Number & Gender Toggle */}
+                      {/* Phrase Number & Form Toggle */}
                       <div className="flex justify-between items-start mb-6">
                         <span className="text-xs text-muted-foreground">
                           {currentIndex + 1} of {currentPhrases.length}
                         </span>
                         <div className="flex items-center gap-2">
-                          {currentPhrase.genderForms && (
+                          {/* Imperative Forms Toggle (for commands) */}
+                          {currentPhrase.imperativeForms && (
+                            <div className="flex flex-wrap items-center gap-1 bg-muted rounded-lg p-1">
+                              {(Object.keys(currentPhrase.imperativeForms) as AddresseeType[]).map((type) => {
+                                const label = getAddresseeLabel(type);
+                                return (
+                                  <button
+                                    key={type}
+                                    onClick={() => setAddresseeMode(type)}
+                                    className={`px-2 py-1 text-xs font-medium rounded-md transition-all ${
+                                      addresseeMode === type
+                                        ? 'bg-primary/20 text-primary'
+                                        : 'text-muted-foreground hover:text-foreground hover:bg-muted-foreground/10'
+                                    }`}
+                                    title={`${label.arabic} - ${label.desc}`}
+                                  >
+                                    {label.short}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          )}
+                          
+                          {/* Gender Forms Toggle (for self-descriptions) */}
+                          {currentPhrase.genderForms && !currentPhrase.imperativeForms && (
                             <div className="flex items-center bg-muted rounded-full p-0.5">
                               <button
                                 onClick={() => setGenderMode('masculine')}
@@ -343,8 +390,35 @@ const HeritagePage = () => {
                           {getTransliteration(currentPhrase)}
                         </p>
                         
-                        {/* Show both forms hint */}
-                        {currentPhrase.genderForms && (
+                        {/* Show all imperative forms */}
+                        {currentPhrase.imperativeForms && (
+                          <div className="mt-4 pt-4 border-t border-border/50">
+                            <p className="text-xs text-muted-foreground mb-3">All forms (who you're speaking to):</p>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                              {(Object.entries(currentPhrase.imperativeForms) as [AddresseeType, {arabic: string; transliteration: string}][]).map(([type, form]) => {
+                                const label = getAddresseeLabel(type);
+                                return (
+                                  <button
+                                    key={type}
+                                    onClick={() => setAddresseeMode(type)}
+                                    className={`p-2 rounded-lg border transition-all ${
+                                      addresseeMode === type
+                                        ? 'border-primary bg-primary/10'
+                                        : 'border-border/50 hover:border-primary/50'
+                                    }`}
+                                  >
+                                    <span className="block font-arabic text-lg">{form.arabic}</span>
+                                    <span className="block text-xs text-muted-foreground">{form.transliteration}</span>
+                                    <span className="block text-[10px] text-primary/70 mt-1">{label.arabic} ({label.desc})</span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                        
+                        {/* Show both gender forms (for non-imperatives) */}
+                        {currentPhrase.genderForms && !currentPhrase.imperativeForms && (
                           <div className="mt-3 pt-3 border-t border-border/50">
                             <p className="text-xs text-muted-foreground mb-2">Both forms:</p>
                             <div className="flex justify-center gap-6 text-sm">
