@@ -129,7 +129,14 @@ export const heritageCorePhrases: HeritagePhrase[] = [
       english: "My Lord, grant me authority",
       reference: "Qur'an 26:83"
     },
-    usage: "Request anything. 'Give me the book' = أَعْطِنِي الكِتَابَ"
+    usage: "Request anything. 'Give me the book' = أَعْطِنِي الكِتَابَ",
+    imperativeForms: {
+      masculine_singular: { arabic: "أَعْطِنِي", transliteration: "aʿṭinī" },
+      feminine_singular: { arabic: "أَعْطِينِي", transliteration: "aʿṭīnī" },
+      dual: { arabic: "أَعْطِيَانِي", transliteration: "aʿṭiyānī" },
+      masculine_plural: { arabic: "أَعْطُونِي", transliteration: "aʿṭūnī" },
+      feminine_plural: { arabic: "أَعْطِينَنِي", transliteration: "aʿṭīnanī" }
+    }
   },
   {
     id: 3,
@@ -138,7 +145,14 @@ export const heritageCorePhrases: HeritagePhrase[] = [
     english: "Help me",
     category: 'core-requests',
     frequency: 'core',
-    usage: "Ask for assistance in any situation"
+    usage: "Ask for assistance in any situation",
+    imperativeForms: {
+      masculine_singular: { arabic: "سَاعِدْنِي", transliteration: "sāʿidnī" },
+      feminine_singular: { arabic: "سَاعِدِينِي", transliteration: "sāʿidīnī" },
+      dual: { arabic: "سَاعِدَانِي", transliteration: "sāʿidānī" },
+      masculine_plural: { arabic: "سَاعِدُونِي", transliteration: "sāʿidūnī" },
+      feminine_plural: { arabic: "سَاعِدْنَنِي", transliteration: "sāʿidnanī" }
+    }
   },
   {
     id: 4,
@@ -152,7 +166,14 @@ export const heritageCorePhrases: HeritagePhrase[] = [
       english: "And say: My Lord, increase me in knowledge",
       reference: "Qur'an 20:114"
     },
-    usage: "Ask for more of anything. One of the most powerful du'a phrases."
+    usage: "Ask for more of anything. One of the most powerful du'a phrases.",
+    imperativeForms: {
+      masculine_singular: { arabic: "زِدْنِي", transliteration: "zidnī" },
+      feminine_singular: { arabic: "زِيدِينِي", transliteration: "zīdīnī" },
+      dual: { arabic: "زِيدَانِي", transliteration: "zīdānī" },
+      masculine_plural: { arabic: "زِيدُونِي", transliteration: "zīdūnī" },
+      feminine_plural: { arabic: "زِدْنَنِي", transliteration: "zidnanī" }
+    }
   },
   {
     id: 5,
@@ -1299,7 +1320,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
       english: "And He taught Adam the names - all of them",
       reference: "Qur'an 2:31"
     },
-    usage: "Request to be taught something"
+    usage: "Request to be taught something",
+    imperativeForms: {
+      masculine_singular: { arabic: "عَلِّمْنِي", transliteration: "ʿallimnī" },
+      feminine_singular: { arabic: "عَلِّمِينِي", transliteration: "ʿallimīnī" },
+      dual: { arabic: "عَلِّمَانِي", transliteration: "ʿallimānī" },
+      masculine_plural: { arabic: "عَلِّمُونِي", transliteration: "ʿallimūnī" },
+      feminine_plural: { arabic: "عَلِّمْنَنِي", transliteration: "ʿallimnanī" }
+    }
   },
   {
     id: 143,
@@ -1326,7 +1354,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Please repeat",
     category: 'learning-knowledge',
     frequency: 'common',
-    usage: "Request repetition"
+    usage: "Request repetition",
+    imperativeForms: {
+      masculine_singular: { arabic: "أَعِدْ مِنْ فَضْلِكَ", transliteration: "aʿid min faḍlik" },
+      feminine_singular: { arabic: "أَعِيدِي مِنْ فَضْلِكِ", transliteration: "aʿīdī min faḍliki" },
+      dual: { arabic: "أَعِيدَا مِنْ فَضْلِكُمَا", transliteration: "aʿīdā min faḍlikumā" },
+      masculine_plural: { arabic: "أَعِيدُوا مِنْ فَضْلِكُمْ", transliteration: "aʿīdū min faḍlikum" },
+      feminine_plural: { arabic: "أَعِدْنَ مِنْ فَضْلِكُنَّ", transliteration: "aʿidna min faḍlikunna" }
+    }
   },
   {
     id: 146,
@@ -1344,7 +1379,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Speak slowly",
     category: 'learning-knowledge',
     frequency: 'common',
-    usage: "Request slower speech"
+    usage: "Request slower speech",
+    imperativeForms: {
+      masculine_singular: { arabic: "تَكَلَّمْ بِبُطْءٍ", transliteration: "takallam bibuṭ'in" },
+      feminine_singular: { arabic: "تَكَلَّمِي بِبُطْءٍ", transliteration: "takallamī bibuṭ'in" },
+      dual: { arabic: "تَكَلَّمَا بِبُطْءٍ", transliteration: "takallamā bibuṭ'in" },
+      masculine_plural: { arabic: "تَكَلَّمُوا بِبُطْءٍ", transliteration: "takallamū bibuṭ'in" },
+      feminine_plural: { arabic: "تَكَلَّمْنَ بِبُطْءٍ", transliteration: "takallamna bibuṭ'in" }
+    }
   },
 
   // GRATITUDE & PRAISE
@@ -1411,7 +1453,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Wait",
     category: 'seeking-asking',
     frequency: 'essential',
-    usage: "Ask someone to wait"
+    usage: "Ask someone to wait",
+    imperativeForms: {
+      masculine_singular: { arabic: "اِنْتَظِرْ", transliteration: "intaẓir" },
+      feminine_singular: { arabic: "اِنْتَظِرِي", transliteration: "intaẓirī" },
+      dual: { arabic: "اِنْتَظِرَا", transliteration: "intaẓirā" },
+      masculine_plural: { arabic: "اِنْتَظِرُوا", transliteration: "intaẓirū" },
+      feminine_plural: { arabic: "اِنْتَظِرْنَ", transliteration: "intaẓirna" }
+    }
   },
   {
     id: 155,
@@ -1440,7 +1489,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Please (offering) / Go ahead",
     category: 'giving-sharing',
     frequency: 'essential',
-    usage: "Offer something or invite someone"
+    usage: "Offer something or invite someone",
+    imperativeForms: {
+      masculine_singular: { arabic: "تَفَضَّلْ", transliteration: "tafaḍḍal" },
+      feminine_singular: { arabic: "تَفَضَّلِي", transliteration: "tafaḍḍalī" },
+      dual: { arabic: "تَفَضَّلَا", transliteration: "tafaḍḍalā" },
+      masculine_plural: { arabic: "تَفَضَّلُوا", transliteration: "tafaḍḍalū" },
+      feminine_plural: { arabic: "تَفَضَّلْنَ", transliteration: "tafaḍḍalna" }
+    }
   },
   {
     id: 158,
@@ -1469,7 +1525,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Stop",
     category: 'movement-direction',
     frequency: 'essential',
-    usage: "Command to stop"
+    usage: "Command to stop",
+    imperativeForms: {
+      masculine_singular: { arabic: "قِفْ", transliteration: "qif" },
+      feminine_singular: { arabic: "قِفِي", transliteration: "qifī" },
+      dual: { arabic: "قِفَا", transliteration: "qifā" },
+      masculine_plural: { arabic: "قِفُوا", transliteration: "qifū" },
+      feminine_plural: { arabic: "قِفْنَ", transliteration: "qifna" }
+    }
   },
   {
     id: 161,
@@ -1478,7 +1541,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Walk",
     category: 'movement-direction',
     frequency: 'common',
-    usage: "Command to walk"
+    usage: "Command to walk",
+    imperativeForms: {
+      masculine_singular: { arabic: "اِمْشِ", transliteration: "imshi" },
+      feminine_singular: { arabic: "اِمْشِي", transliteration: "imshī" },
+      dual: { arabic: "اِمْشِيَا", transliteration: "imshiyā" },
+      masculine_plural: { arabic: "اِمْشُوا", transliteration: "imshū" },
+      feminine_plural: { arabic: "اِمْشِينَ", transliteration: "imshīna" }
+    }
   },
   {
     id: 162,
@@ -1487,7 +1557,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Sit down",
     category: 'movement-direction',
     frequency: 'essential',
-    usage: "Command to sit"
+    usage: "Command to sit",
+    imperativeForms: {
+      masculine_singular: { arabic: "اُجْلِسْ", transliteration: "ujlis" },
+      feminine_singular: { arabic: "اُجْلِسِي", transliteration: "ujlisī" },
+      dual: { arabic: "اُجْلِسَا", transliteration: "ujlisā" },
+      masculine_plural: { arabic: "اُجْلِسُوا", transliteration: "ujlisū" },
+      feminine_plural: { arabic: "اُجْلِسْنَ", transliteration: "ujlisna" }
+    }
   },
   {
     id: 163,
@@ -1501,7 +1578,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
       english: "Stand (in prayer) at night",
       reference: "Qur'an 73:2"
     },
-    usage: "Command to stand or get up"
+    usage: "Command to stand or get up",
+    imperativeForms: {
+      masculine_singular: { arabic: "قُمْ", transliteration: "qum" },
+      feminine_singular: { arabic: "قُومِي", transliteration: "qūmī" },
+      dual: { arabic: "قُومَا", transliteration: "qūmā" },
+      masculine_plural: { arabic: "قُومُوا", transliteration: "qūmū" },
+      feminine_plural: { arabic: "قُمْنَ", transliteration: "qumna" }
+    }
   },
   {
     id: 164,
@@ -1515,7 +1599,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
       english: "Our Lord, decide between us",
       reference: "Qur'an 7:89"
     },
-    usage: "Command to open"
+    usage: "Command to open",
+    imperativeForms: {
+      masculine_singular: { arabic: "اِفْتَحْ", transliteration: "iftaḥ" },
+      feminine_singular: { arabic: "اِفْتَحِي", transliteration: "iftaḥī" },
+      dual: { arabic: "اِفْتَحَا", transliteration: "iftaḥā" },
+      masculine_plural: { arabic: "اِفْتَحُوا", transliteration: "iftaḥū" },
+      feminine_plural: { arabic: "اِفْتَحْنَ", transliteration: "iftaḥna" }
+    }
   },
   {
     id: 165,
@@ -1524,7 +1615,14 @@ export const heritageFunctionalPhrases: HeritagePhrase[] = [
     english: "Close",
     category: 'movement-direction',
     frequency: 'common',
-    usage: "Command to close"
+    usage: "Command to close",
+    imperativeForms: {
+      masculine_singular: { arabic: "أَغْلِقْ", transliteration: "aghliq" },
+      feminine_singular: { arabic: "أَغْلِقِي", transliteration: "aghliqī" },
+      dual: { arabic: "أَغْلِقَا", transliteration: "aghliqā" },
+      masculine_plural: { arabic: "أَغْلِقُوا", transliteration: "aghliqū" },
+      feminine_plural: { arabic: "أَغْلِقْنَ", transliteration: "aghliqna" }
+    }
   },
   {
     id: 166,
@@ -1755,7 +1853,14 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "Leave me alone",
     category: 'urgent-needs',
     frequency: 'essential',
-    usage: "Request personal space"
+    usage: "Request personal space",
+    imperativeForms: {
+      masculine_singular: { arabic: "دَعْنِي وَحْدِي", transliteration: "daʿnī waḥdī" },
+      feminine_singular: { arabic: "دَعِينِي وَحْدِي", transliteration: "daʿīnī waḥdī" },
+      dual: { arabic: "دَعَانِي وَحْدِي", transliteration: "daʿānī waḥdī" },
+      masculine_plural: { arabic: "دَعُونِي وَحْدِي", transliteration: "daʿūnī waḥdī" },
+      feminine_plural: { arabic: "دَعْنَنِي وَحْدِي", transliteration: "daʿnanī waḥdī" }
+    }
   },
   {
     id: 209,
@@ -2351,7 +2456,14 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "Change it",
     category: 'choices-preferences',
     frequency: 'common',
-    usage: "Request a change"
+    usage: "Request a change",
+    imperativeForms: {
+      masculine_singular: { arabic: "غَيِّرْهُ", transliteration: "ghayyirhu" },
+      feminine_singular: { arabic: "غَيِّرِيهِ", transliteration: "ghayyirīhi" },
+      dual: { arabic: "غَيِّرَاهُ", transliteration: "ghayyirāhu" },
+      masculine_plural: { arabic: "غَيِّرُوهُ", transliteration: "ghayyirūhu" },
+      feminine_plural: { arabic: "غَيِّرْنَهُ", transliteration: "ghayyirnahu" }
+    }
   },
 
   // PLACES & OBJECTS - Navigate environment
@@ -2527,7 +2639,14 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "Call the police",
     category: 'safety-emergency',
     frequency: 'essential',
-    usage: "Request police help"
+    usage: "Request police help",
+    imperativeForms: {
+      masculine_singular: { arabic: "اِتَّصِلْ بِالشُّرْطَةِ", transliteration: "ittaṣil bish-shurṭa" },
+      feminine_singular: { arabic: "اِتَّصِلِي بِالشُّرْطَةِ", transliteration: "ittaṣilī bish-shurṭa" },
+      dual: { arabic: "اِتَّصِلَا بِالشُّرْطَةِ", transliteration: "ittaṣilā bish-shurṭa" },
+      masculine_plural: { arabic: "اِتَّصِلُوا بِالشُّرْطَةِ", transliteration: "ittaṣilū bish-shurṭa" },
+      feminine_plural: { arabic: "اِتَّصِلْنَ بِالشُّرْطَةِ", transliteration: "ittaṣilna bish-shurṭa" }
+    }
   },
   {
     id: 283,
@@ -2536,7 +2655,14 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "Call an ambulance",
     category: 'safety-emergency',
     frequency: 'essential',
-    usage: "Request ambulance"
+    usage: "Request ambulance",
+    imperativeForms: {
+      masculine_singular: { arabic: "اِتَّصِلْ بِالإِسْعَافِ", transliteration: "ittaṣil bil-isʿāf" },
+      feminine_singular: { arabic: "اِتَّصِلِي بِالإِسْعَافِ", transliteration: "ittaṣilī bil-isʿāf" },
+      dual: { arabic: "اِتَّصِلَا بِالإِسْعَافِ", transliteration: "ittaṣilā bil-isʿāf" },
+      masculine_plural: { arabic: "اِتَّصِلُوا بِالإِسْعَافِ", transliteration: "ittaṣilū bil-isʿāf" },
+      feminine_plural: { arabic: "اِتَّصِلْنَ بِالإِسْعَافِ", transliteration: "ittaṣilna bil-isʿāf" }
+    }
   },
   {
     id: 284,
@@ -2576,7 +2702,14 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "Don't touch me",
     category: 'safety-emergency',
     frequency: 'essential',
-    usage: "Set physical boundary"
+    usage: "Set physical boundary",
+    imperativeForms: {
+      masculine_singular: { arabic: "لَا تَلْمِسْنِي", transliteration: "lā talmisnī" },
+      feminine_singular: { arabic: "لَا تَلْمِسِينِي", transliteration: "lā talmisīnī" },
+      dual: { arabic: "لَا تَلْمِسَانِي", transliteration: "lā talmisānī" },
+      masculine_plural: { arabic: "لَا تَلْمِسُونِي", transliteration: "lā talmisūnī" },
+      feminine_plural: { arabic: "لَا تَلْمِسْنَنِي", transliteration: "lā talmisnanī" }
+    }
   },
   {
     id: 288,
@@ -2585,7 +2718,14 @@ export const heritageAACPhrases: HeritagePhrase[] = [
     english: "Get away from me",
     category: 'safety-emergency',
     frequency: 'essential',
-    usage: "Request distance - safety"
+    usage: "Request distance - safety",
+    imperativeForms: {
+      masculine_singular: { arabic: "اِبْتَعِدْ عَنِّي", transliteration: "ibtaʿid ʿannī" },
+      feminine_singular: { arabic: "اِبْتَعِدِي عَنِّي", transliteration: "ibtaʿidī ʿannī" },
+      dual: { arabic: "اِبْتَعِدَا عَنِّي", transliteration: "ibtaʿidā ʿannī" },
+      masculine_plural: { arabic: "اِبْتَعِدُوا عَنِّي", transliteration: "ibtaʿidū ʿannī" },
+      feminine_plural: { arabic: "اِبْتَعِدْنَ عَنِّي", transliteration: "ibtaʿidna ʿannī" }
+    }
   },
   {
     id: 289,
