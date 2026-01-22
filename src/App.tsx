@@ -9,7 +9,7 @@ import Index from "./pages/Index";
 import ModulePage from "./pages/ModulePage";
 import ModulesPage from "./pages/ModulesPage";
 import GrammarModulePage from "./pages/GrammarModulePage";
-import SubscribePage from "./pages/SubscribePage";
+
 import AuthPage from "./pages/AuthPage";
 import ForumPage from "./pages/ForumPage";
 import ForumCategoryPage from "./pages/ForumCategoryPage";
@@ -43,7 +43,7 @@ const App = () => (
           <Route path="/module/:id" element={<ModulePage />} />
           <Route path="/modules" element={<ModulesPage />} />
           <Route path="/grammar/:id" element={<GrammarModulePage />} />
-          <Route path="/subscribe" element={<SubscribePage />} />
+          
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/learn-to-read" element={<LearnToReadPage />} />
           <Route path="/practice" element={<PracticePlaygroundPage />} />
