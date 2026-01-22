@@ -21,8 +21,8 @@ import AdminChatPage from "./pages/AdminChatPage";
 import AskAboutIslamPage from "./pages/AskAboutIslamPage";
 import FlashcardsPage from "./pages/FlashcardsPage";
 
-import CareersPage from "./pages/CareersPage";
-import AdminApplicationsPage from "./pages/AdminApplicationsPage";
+
+
 import QuranInsightPage from "./pages/QuranInsightPage";
 import LabPage from "./pages/LabPage";
 import MushafPage from "./pages/MushafPage";
@@ -54,9 +54,9 @@ const App = () => (
           <Route path="/forum/:categorySlug/new" element={<NewThreadPage />} />
           <Route path="/forum/:categorySlug/:threadSlug" element={<ForumThreadPage />} />
           <Route path="/admin/chat" element={<AdminChatPage />} />
-          <Route path="/admin/applications" element={<AdminApplicationsPage />} />
           
-          <Route path="/careers" element={<CareersPage />} />
+          
+          
           <Route path="/quran-insight" element={<QuranInsightPage />} />
           <Route path="/lab" element={<LabPage />} />
           <Route path="/mushaf" element={<MushafPage />} />
