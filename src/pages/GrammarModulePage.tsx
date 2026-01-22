@@ -8,13 +8,8 @@ import { GrammarQuizMode } from "@/components/learning/GrammarQuizMode";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BookOpen, Repeat, Award, Languages } from "lucide-react";
 import { motion } from "framer-motion";
-import { useAccess } from "@/hooks/useAccess";
-import { Paywall } from "@/components/Paywall";
 
 type Phase = "overview" | "learn" | "practice" | "quiz" | "complete";
-
-// First 2 grammar modules are free
-const FREE_GRAMMAR_MODULE_LIMIT = 2;
 
 const GrammarModulePage = () => {
   const { id } = useParams();
@@ -23,11 +18,9 @@ const GrammarModulePage = () => {
   const words = getGrammarModuleWords(moduleId);
   
   const [phase, setPhase] = useState<Phase>("overview");
-  const { user, hasAccess, loading, redeemCode } = useAccess();
 
-  // Find the module index for access checking
+  // Find the module index
   const moduleIndex = grammarModules.findIndex(m => m.id === moduleId);
-  const requiresPayment = moduleIndex >= FREE_GRAMMAR_MODULE_LIMIT && !hasAccess;
 
   if (!module) {
     return (
@@ -42,34 +35,6 @@ const GrammarModulePage = () => {
     { id: "practice", label: "Practice", icon: Repeat },
     { id: "quiz", label: "Quiz", icon: Award },
   ];
-
-  // Show loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 pb-12 container mx-auto px-4 flex items-center justify-center">
-          <p className="text-muted-foreground">Loading...</p>
-        </main>
-      </div>
-    );
-  }
-
-  // Show paywall for premium modules
-  if (requiresPayment) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 pb-12 container mx-auto px-4">
-          <Link to="/modules" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Modules
-          </Link>
-          <Paywall onRedeem={redeemCode} isLoggedIn={!!user} />
-        </main>
-      </div>
-    );
-  }
 
   // Find next module for completion
   const nextModule = grammarModules[moduleIndex + 1];

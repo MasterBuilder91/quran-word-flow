@@ -39,24 +39,7 @@ serve(async (req) => {
       );
     }
 
-    // Check if user has premium access (subscription or access code)
-    const { data: hasAccess, error: accessError } = await supabaseClient.rpc("user_has_access");
-    if (accessError) {
-      console.error("Error checking access:", accessError.message);
-      return new Response(
-        JSON.stringify({ error: "Failed to verify access" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    if (!hasAccess) {
-      console.log(`User ${user.id} attempted TTS without premium access`);
-      return new Response(
-        JSON.stringify({ error: "Premium feature - subscription or access code required" }),
-        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
+    // TTS is now free for all authenticated users
     const { text, voiceId } = await req.json();
     const ELEVENLABS_API_KEY = Deno.env.get("ELEVENLABS_API_KEY");
 

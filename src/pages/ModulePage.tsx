@@ -8,13 +8,8 @@ import { QuizMode } from "@/components/learning/QuizMode";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BookOpen, Repeat, Award } from "lucide-react";
 import { motion } from "framer-motion";
-import { useAccess } from "@/hooks/useAccess";
-import { Paywall } from "@/components/Paywall";
 
 type Phase = "overview" | "learn" | "practice" | "quiz" | "complete";
-
-// Modules 1-2 are free, 3+ require subscription
-const FREE_MODULE_LIMIT = 2;
 
 const ModulePage = () => {
   const { id } = useParams();
@@ -23,10 +18,6 @@ const ModulePage = () => {
   const words = getModuleWords(moduleId);
   
   const [phase, setPhase] = useState<Phase>("overview");
-  const { user, hasAccess, loading, redeemCode } = useAccess();
-
-  // Check if this module requires payment
-  const requiresPayment = moduleId > FREE_MODULE_LIMIT && !hasAccess;
 
   if (!module) {
     return (
@@ -41,34 +32,6 @@ const ModulePage = () => {
     { id: "practice", label: "Practice", icon: Repeat },
     { id: "quiz", label: "Quiz", icon: Award },
   ];
-
-  // Show loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 pb-12 container mx-auto px-4 flex items-center justify-center">
-          <p className="text-muted-foreground">Loading...</p>
-        </main>
-      </div>
-    );
-  }
-
-  // Show paywall for premium modules
-  if (requiresPayment) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 pb-12 container mx-auto px-4">
-          <Link to="/modules" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Modules
-          </Link>
-          <Paywall onRedeem={redeemCode} isLoggedIn={!!user} />
-        </main>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -105,7 +68,7 @@ const ModulePage = () => {
 
             {/* Phase Buttons */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {phases.map((p, idx) => (
+              {phases.map((p) => (
                 <Button
                   key={p.id}
                   variant="outline"
