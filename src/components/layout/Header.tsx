@@ -96,6 +96,9 @@ export const Header = () => {
             <Link to="/lab" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Free Lab
             </Link>
+            <Link to="/games/desert-runner" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
+              Free Video Game
+            </Link>
             
             {/* More Dropdown */}
             <div className="relative" ref={moreMenuRef}>
@@ -253,6 +256,13 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Free Mushaf
+              </Link>
+              <Link
+                to="/games/desert-runner"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Free Video Game
               </Link>
               <div className="flex flex-col gap-3 pt-4">
                 {user ? (
