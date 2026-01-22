@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
@@ -6,6 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Copy, Trash2, BookOpen, Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+
+interface WordAnalyzerProps {
+  initialText?: string;
+  onInitialTextConsumed?: () => void;
+}
 
 interface AIAnalysisResult {
   word: string;
@@ -40,11 +45,19 @@ const demoTexts = [
   { label: "Surah An-Nas", text: "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ" }
 ];
 
-export function WordAnalyzer() {
+export function WordAnalyzer({ initialText, onInitialTextConsumed }: WordAnalyzerProps) {
   const [inputText, setInputText] = useState("");
   const [analyzedWords, setAnalyzedWords] = useState<AnalyzedWord[]>([]);
   const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Handle initial text from Quran Browser
+  useEffect(() => {
+    if (initialText) {
+      setInputText(initialText);
+      onInitialTextConsumed?.();
+    }
+  }, [initialText, onInitialTextConsumed]);
 
   const tokenize = (text: string): string[] => {
     return text.split(/\s+/).filter(word => word.trim().length > 0);

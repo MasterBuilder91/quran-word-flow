@@ -20,3 +20,6 @@ verify_jwt = false
 
 [functions.arabic-assistant]
 verify_jwt = false
+
+[functions.quran-browser]
+verify_jwt = false
