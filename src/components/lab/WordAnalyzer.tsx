@@ -9,6 +9,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface WordAnalyzerProps {
   initialText?: string;
+  initialVerseKey?: string;
+  initialTranslation?: string;
   onInitialTextConsumed?: () => void;
 }
 
@@ -45,8 +47,10 @@ const demoTexts = [
   { label: "Surah An-Nas", text: "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ" }
 ];
 
-export function WordAnalyzer({ initialText, onInitialTextConsumed }: WordAnalyzerProps) {
+export function WordAnalyzer({ initialText, initialVerseKey, initialTranslation, onInitialTextConsumed }: WordAnalyzerProps) {
   const [inputText, setInputText] = useState("");
+  const [verseKey, setVerseKey] = useState<string | null>(null);
+  const [translation, setTranslation] = useState<string | null>(null);
   const [analyzedWords, setAnalyzedWords] = useState<AnalyzedWord[]>([]);
   const [selectedWord, setSelectedWord] = useState<AnalyzedWord | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,9 +59,11 @@ export function WordAnalyzer({ initialText, onInitialTextConsumed }: WordAnalyze
   useEffect(() => {
     if (initialText) {
       setInputText(initialText);
+      setVerseKey(initialVerseKey || null);
+      setTranslation(initialTranslation || null);
       onInitialTextConsumed?.();
     }
-  }, [initialText, onInitialTextConsumed]);
+  }, [initialText, initialVerseKey, initialTranslation, onInitialTextConsumed]);
 
   const tokenize = (text: string): string[] => {
     return text.split(/\s+/).filter(word => word.trim().length > 0);
@@ -104,6 +110,8 @@ export function WordAnalyzer({ initialText, onInitialTextConsumed }: WordAnalyze
 
   const handleClear = () => {
     setInputText("");
+    setVerseKey(null);
+    setTranslation(null);
     setAnalyzedWords([]);
     setSelectedWord(null);
   };
@@ -215,23 +223,50 @@ export function WordAnalyzer({ initialText, onInitialTextConsumed }: WordAnalyze
           </div>
           
           {analyzedWords.length > 0 ? (
-            <div className="p-4 rounded-xl border border-border bg-muted/30" dir="rtl">
-              <div className="flex flex-wrap gap-3 justify-end">
-                {analyzedWords.map((word) => (
-                  <div key={word.id} className="flex flex-col items-center">
-                    <button
-                      onClick={() => setSelectedWord(word)}
-                      className={`px-4 py-2 rounded-xl border-2 text-xl font-arabic transition-all hover:-translate-y-0.5 cursor-pointer ${getWordTypeColor(word.partOfSpeech)} ${
-                        selectedWord?.id === word.id ? 'ring-2 ring-primary shadow-lg' : ''
-                      }`}
-                    >
-                      {word.word}
-                    </button>
-                    <span className="text-[11px] text-muted-foreground mt-1 max-w-[100px] text-center leading-tight" dir="ltr">
-                      {word.translation}
-                    </span>
+            <div className="space-y-4">
+              {/* Sahih International Translation Banner */}
+              {translation && verseKey && (
+                <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <BookOpen className="w-4 h-4 text-emerald-400" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-xs">
+                          Sahih International
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          Quran {verseKey}
+                        </span>
+                      </div>
+                      <p className="text-foreground/90 text-sm leading-relaxed italic">
+                        "{translation}"
+                      </p>
+                    </div>
                   </div>
-                ))}
+                </div>
+              )}
+
+              {/* Word Analysis Grid */}
+              <div className="p-4 rounded-xl border border-border bg-muted/30" dir="rtl">
+                <div className="flex flex-wrap gap-3 justify-end">
+                  {analyzedWords.map((word) => (
+                    <div key={word.id} className="flex flex-col items-center">
+                      <button
+                        onClick={() => setSelectedWord(word)}
+                        className={`px-4 py-2 rounded-xl border-2 text-xl font-arabic transition-all hover:-translate-y-0.5 cursor-pointer ${getWordTypeColor(word.partOfSpeech)} ${
+                          selectedWord?.id === word.id ? 'ring-2 ring-primary shadow-lg' : ''
+                        }`}
+                      >
+                        {word.word}
+                      </button>
+                      <span className="text-[11px] text-muted-foreground mt-1 max-w-[100px] text-center leading-tight" dir="ltr">
+                        {word.translation}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (

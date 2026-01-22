@@ -16,11 +16,11 @@ import { QuranBrowser } from "@/components/lab/QuranBrowser";
 
 const LabPage = () => {
   const [activeTab, setActiveTab] = useState("assistant");
-  const [pendingVerse, setPendingVerse] = useState<{ text: string; key: string } | null>(null);
+  const [pendingVerse, setPendingVerse] = useState<{ text: string; key: string; translation?: string } | null>(null);
 
   // Handle verse selection from Quran Browser
-  const handleVerseSelect = useCallback((verseText: string, verseKey: string) => {
-    setPendingVerse({ text: verseText, key: verseKey });
+  const handleVerseSelect = useCallback((verseText: string, verseKey: string, translation?: string) => {
+    setPendingVerse({ text: verseText, key: verseKey, translation });
     setActiveTab("analyzer");
   }, []);
 
@@ -87,7 +87,9 @@ const LabPage = () => {
 
           <TabsContent value="analyzer" className="mt-0">
             <WordAnalyzer 
-              initialText={pendingVerse?.text} 
+              initialText={pendingVerse?.text}
+              initialVerseKey={pendingVerse?.key}
+              initialTranslation={pendingVerse?.translation}
               onInitialTextConsumed={handlePendingVerseConsumed}
             />
           </TabsContent>
