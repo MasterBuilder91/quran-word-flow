@@ -149,20 +149,22 @@ serve(async (req) => {
         );
       }
 
-      // Fetch verses from Quran.com API
-      const response = await fetch(
-        `https://api.quran.com/api/v4/verses/by_chapter/${surah}?words=true&word_fields=text_uthmani,text&translations=131&per_page=${per_page}&page=${page}`,
+      // Fetch verses with words AND translations from Quran.com API
+      // Translation 131 = Dr. Mustafa Khattab (Clear Quran), 20 = Saheeh International
+      const versesResponse = await fetch(
+        `https://api.quran.com/api/v4/verses/by_chapter/${surah}?words=true&word_fields=text_uthmani,text&translations=20&per_page=${per_page}&page=${page}`,
         { headers: { 'Accept': 'application/json' } }
       );
 
-      if (!response.ok) {
-        throw new Error(`Quran API returned ${response.status}`);
+      if (!versesResponse.ok) {
+        throw new Error(`Quran API returned ${versesResponse.status}`);
       }
 
-      const data = await response.json();
+      const versesData = await versesResponse.json();
+      console.log('Sample verse translations:', JSON.stringify(versesData.verses?.[0]?.translations));
       
-      // Format verses
-      const verses = data.verses.map((verse: any) => ({
+      // Format verses with translations
+      const verses = versesData.verses.map((verse: any) => ({
         id: verse.id,
         verse_key: verse.verse_key,
         verse_number: parseInt(verse.verse_key.split(':')[1]),
@@ -170,7 +172,7 @@ serve(async (req) => {
           .filter((w: any) => w.char_type_name === 'word')
           .map((w: any) => w.text_uthmani || w.text)
           .join(' '),
-        translation: verse.translations?.[0]?.text || '',
+        translation: verse.translations?.[0]?.text?.replace(/<[^>]*>/g, '') || '',
         words: verse.words.filter((w: any) => w.char_type_name === 'word').map((w: any) => ({
           id: w.id,
           position: w.position,
@@ -183,7 +185,7 @@ serve(async (req) => {
           success: true, 
           surah: surahInfo,
           verses,
-          pagination: data.pagination
+          pagination: versesData.pagination
         }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
