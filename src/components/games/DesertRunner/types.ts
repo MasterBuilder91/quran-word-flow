@@ -48,6 +48,7 @@ export interface GameState {
   correctWords: number;
   totalWords: number;
   speed: number;
+  initialSpeed: number;
   isPlaying: boolean;
   isPaused: boolean;
   isGameOver: boolean;
