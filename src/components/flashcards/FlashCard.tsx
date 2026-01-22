@@ -180,13 +180,16 @@ function getEmojiForWord(wordId: string): string {
     earrings: '💎', purse: '👛', wallet: '👝', backpack: '🎒', umbrella: '☂️',
 
     // ========== BODY PARTS ==========
-    head: '👤', eye: '👁️', ear: '👂', nose: '👃', mouth: '👄',
-    hand: '✋', foot: '🦶', heart: '❤️', finger: '👆', tongue: '👅',
-    hair: '💇', face: '😊', teeth: '🦷', lip: '👄', neck: '🦒',
-    shoulder: '💪', arm: '💪', leg: '🦵', knee: '🦵', back: '🔙',
-    stomach: '🫃', chest: '🫁', brain: '🧠', blood: '🩸', bone: '🦴',
+    head: '🗣️', eye: '👁️', ear: '👂', nose: '👃', mouth: '👄',
+    hand: '🤚', foot: '🦶', heart: '❤️', finger: '☝️', tongue: '👅',
+    hair: '💇', face: '😊', tooth: '🦷', lip: '👄', neck: '🦢',
+    shoulder: '🙆', arm: '💪', leg: '🦵', knee: '🦵', back: '🔙',
+    stomach: '🤰', chest: '🫁', brain: '🧠', blood: '🩸', bone: '🦴',
     skin: '🖐️', muscle: '💪', nail: '💅', eyebrow: '🤨', eyelash: '👁️',
-    beard: '🧔', mustache: '👨',
+    beard: '🧔', mustache: '👨', elbow: '💪', wrist: '⌚', palm: '🖐️',
+    thumb: '👍', ankle: '🦶', heel: '🦶', toe: '🦶', waist: '👗',
+    hip: '🧍', liver: '🫀', kidney: '🫘', lung: '🫁', cheek: '😊',
+    chin: '🗣️', forehead: '🧠',
 
     // ========== HEALTH & MEDICINE ==========
     doctor: '👨‍⚕️', nurse: '👩‍⚕️', patient: '🤒', 'hospital-health': '🏥', medicine: '💊',
