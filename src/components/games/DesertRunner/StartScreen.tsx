@@ -14,10 +14,11 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
   const [speed, setSpeed] = useState(GAME_CONFIG.initialSpeed);
 
   const getSpeedLabel = (value: number) => {
-    if (value <= 3) return 'Relaxed';
-    if (value <= 5) return 'Normal';
-    if (value <= 8) return 'Fast';
-    if (value <= 11) return 'Intense';
+    if (value <= 1) return 'Super Relaxed';
+    if (value <= 1.5) return 'Relaxed';
+    if (value <= 2) return 'Normal';
+    if (value <= 3) return 'Fast';
+    if (value <= 4) return 'Intense';
     return 'Extreme';
   };
 
@@ -92,9 +93,9 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
           <Slider
             value={[speed]}
             onValueChange={(value) => setSpeed(value[0])}
-            min={2}
-            max={12}
-            step={1}
+            min={0.5}
+            max={5}
+            step={0.5}
             className="w-full"
           />
           <div className="flex justify-between text-xs text-white/40 mt-1">

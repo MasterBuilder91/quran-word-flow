@@ -8,8 +8,10 @@ import { GameHUD } from './GameHUD';
 import { GameOverScreen } from './GameOverScreen';
 import { StartScreen } from './StartScreen';
 import { MobileControls } from './MobileControls';
+import { AudioControls } from './AudioControls';
 import { useTouchControls } from './useTouchControls';
 import { useGameWords } from './useGameWords';
+import { useGameAudio } from './useGameAudio';
 import { 
   GameState, 
   PlayerState, 
@@ -34,8 +36,10 @@ const setStoredHighScore = (score: number) => {
 
 export const DesertRunnerGame = () => {
   const { getRandomWord, getWordOptions } = useGameWords();
+  const { playSfx, startMusic, stopMusic, toggleMusic, toggleSfx, musicEnabled, sfxEnabled, initAudio } = useGameAudio();
   const gameLoopRef = useRef<number | null>(null);
   const lastFrameRef = useRef<number>(0);
+  const prevStreakRef = useRef<number>(0);
 
   const [gameState, setGameState] = useState<GameState>({
     score: 0,
@@ -85,10 +89,11 @@ export const DesertRunnerGame = () => {
   const handleJump = useCallback(() => {
     if (!gameState.isPlaying || gameState.isPaused || player.isJumping) return;
     setPlayer(prev => ({ ...prev, isJumping: true }));
+    playSfx('jump');
     setTimeout(() => {
       setPlayer(prev => ({ ...prev, isJumping: false }));
     }, GAME_CONFIG.jumpDuration);
-  }, [gameState.isPlaying, gameState.isPaused, player.isJumping]);
+  }, [gameState.isPlaying, gameState.isPaused, player.isJumping, playSfx]);
 
   // Touch controls hook
   useTouchControls({
@@ -131,6 +136,12 @@ export const DesertRunnerGame = () => {
       const streakBonus = Math.floor(gameState.streak * GAME_CONFIG.streakMultiplier);
       const points = GAME_CONFIG.pointsPerCorrect + (streakBonus * 10);
       
+      // Play collect sound, and streak sound for milestones
+      playSfx('collect');
+      if ((gameState.streak + 1) % 5 === 0) {
+        setTimeout(() => playSfx('streak'), 150);
+      }
+      
       setGameState(prev => ({
         ...prev,
         score: prev.score + points,
@@ -143,6 +154,7 @@ export const DesertRunnerGame = () => {
       setTimeout(generateNewQuestion, 500);
     } else {
       // Wrong answer
+      playSfx('wrong');
       setGameState(prev => ({
         ...prev,
         streak: 0,
@@ -151,7 +163,7 @@ export const DesertRunnerGame = () => {
         isGameOver: prev.lives <= 1,
       }));
     }
-  }, [gameState.isPlaying, gameState.isPaused, gameState.currentQuestion, gameState.streak, generateNewQuestion]);
+  }, [gameState.isPlaying, gameState.isPaused, gameState.currentQuestion, gameState.streak, generateNewQuestion, playSfx]);
 
   // Game loop
   const gameLoop = useCallback((timestamp: number) => {
@@ -269,6 +281,7 @@ export const DesertRunnerGame = () => {
 
   // Start game with custom speed
   const startGame = useCallback((initialSpeed: number) => {
+    initAudio(); // Initialize audio context on user interaction
     setGameState({
       score: 0,
       distance: 0,
@@ -295,20 +308,26 @@ export const DesertRunnerGame = () => {
     setCollectibles([]);
     setObstacles([]);
     generateNewQuestion();
-  }, [generateNewQuestion]);
+    startMusic();
+  }, [generateNewQuestion, startMusic, initAudio]);
 
   // Handle game over
   useEffect(() => {
-    if (gameState.isGameOver && gameState.score > gameState.highScore) {
-      setStoredHighScore(gameState.score);
-      setGameState(prev => ({ ...prev, highScore: gameState.score }));
+    if (gameState.isGameOver) {
+      stopMusic();
+      playSfx('gameOver');
+      if (gameState.score > gameState.highScore) {
+        setStoredHighScore(gameState.score);
+        setGameState(prev => ({ ...prev, highScore: gameState.score }));
+      }
     }
-  }, [gameState.isGameOver, gameState.score, gameState.highScore]);
+  }, [gameState.isGameOver, gameState.score, gameState.highScore, stopMusic, playSfx]);
 
   // Go home
   const handleHome = useCallback(() => {
+    stopMusic();
     setGameState(prev => ({ ...prev, isPlaying: false, isGameOver: false }));
-  }, []);
+  }, [stopMusic]);
 
   return (
     <div 
@@ -354,6 +373,14 @@ export const DesertRunnerGame = () => {
             onMoveDown={handleMoveDown}
             onJump={handleJump}
             isJumping={player.isJumping}
+          />
+
+          {/* Audio controls */}
+          <AudioControls
+            musicEnabled={musicEnabled}
+            sfxEnabled={sfxEnabled}
+            onToggleMusic={toggleMusic}
+            onToggleSfx={toggleSfx}
           />
         </>
       )}
