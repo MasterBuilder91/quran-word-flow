@@ -20,7 +20,7 @@ import PracticePlaygroundPage from "./pages/PracticePlaygroundPage";
 import AdminChatPage from "./pages/AdminChatPage";
 import AskAboutIslamPage from "./pages/AskAboutIslamPage";
 import FlashcardsPage from "./pages/FlashcardsPage";
-import CoachingPage from "./pages/CoachingPage";
+
 import CareersPage from "./pages/CareersPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import QuranInsightPage from "./pages/QuranInsightPage";
@@ -55,7 +55,7 @@ const App = () => (
           <Route path="/forum/:categorySlug/:threadSlug" element={<ForumThreadPage />} />
           <Route path="/admin/chat" element={<AdminChatPage />} />
           <Route path="/admin/applications" element={<AdminApplicationsPage />} />
-          <Route path="/coaching" element={<CoachingPage />} />
+          
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/quran-insight" element={<QuranInsightPage />} />
           <Route path="/lab" element={<LabPage />} />
