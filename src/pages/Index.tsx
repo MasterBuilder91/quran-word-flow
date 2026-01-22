@@ -8,8 +8,6 @@ import { BuiltForOurBrainsSection } from "@/components/home/BuiltForOurBrainsSec
 import { ModulePreview } from "@/components/home/ModulePreview";
 import { CommunitySection } from "@/components/home/CommunitySection";
 import { OurCommunitySection } from "@/components/home/OurCommunitySection";
-import { PricingSection } from "@/components/home/PricingSection";
-import { ReferralSection } from "@/components/home/ReferralSection";
 import { AskAboutIslamCTA } from "@/components/home/AskAboutIslamCTA";
 import { FreeFlashcardsSection } from "@/components/home/FreeFlashcardsSection";
 import { FreeLabSection } from "@/components/home/FreeLabSection";
@@ -42,9 +40,7 @@ const Index = () => {
         <FreeFlashcardsSection />
         <FreeLabSection />
         <ModulePreview />
-        <ReferralSection />
         <CommunitySection />
-        <PricingSection />
         <AskAboutIslamCTA />
       </main>
       <Footer />

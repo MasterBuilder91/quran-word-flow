@@ -34,11 +34,6 @@ export const Footer = () => {
                   Our Method
                 </Link>
               </li>
-              <li>
-                <Link to="/subscribe" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Subscribe
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -49,16 +44,6 @@ export const Footer = () => {
               <li>
                 <Link to="/auth" className="text-muted-foreground hover:text-foreground transition-colors">
                   Sign In
-                </Link>
-              </li>
-              <li>
-                <Link to="/subscribe" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Get Started
-                </Link>
-              </li>
-              <li>
-                <Link to="/#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Pricing
                 </Link>
               </li>
               <li>

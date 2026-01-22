@@ -144,15 +144,6 @@ export const Header = () => {
                     >
                       Careers
                     </Link>
-                    <button
-                      onClick={() => {
-                        scrollToSection("pricing");
-                        setIsMoreOpen(false);
-                      }}
-                      className="block w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    >
-                      Pricing
-                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -172,7 +163,7 @@ export const Header = () => {
                 </Button>
               </Link>
             )}
-            <Link to="/subscribe">
+            <Link to="/modules">
               <Button className="font-ui bg-primary hover:bg-primary/90">
                 Start Learning
               </Button>
@@ -277,15 +268,6 @@ export const Header = () => {
               >
                 Free Mushaf
               </Link>
-              <button
-                onClick={() => {
-                  scrollToSection("pricing");
-                  setIsMenuOpen(false);
-                }}
-                className="text-lg text-foreground py-2 border-b border-border/50 text-left"
-              >
-                Pricing
-              </button>
               <div className="flex flex-col gap-3 pt-4">
                 {user ? (
                   <Button variant="outline" className="w-full" onClick={() => {
@@ -301,7 +283,7 @@ export const Header = () => {
                     </Button>
                   </Link>
                 )}
-                <Link to="/subscribe" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/modules" onClick={() => setIsMenuOpen(false)}>
                   <Button className="w-full">
                     Start Learning
                   </Button>
