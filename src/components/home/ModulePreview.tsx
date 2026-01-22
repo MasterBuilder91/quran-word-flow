@@ -1,14 +1,11 @@
 import { motion } from "framer-motion";
-import { Lock, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { modules } from "@/data/quranicWords";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 
 export const ModulePreview = () => {
-  // For demo purposes, show first module as accessible
-  const unlockedModules = [1];
-
   return (
     <section className="py-24 relative">
       <div className="container mx-auto px-4">
@@ -61,7 +58,6 @@ export const ModulePreview = () => {
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {modules.map((module, index) => {
-            const isUnlocked = unlockedModules.includes(module.id);
             const isCompleted = false; // Will be tracked via state/backend
 
             return (
@@ -73,14 +69,10 @@ export const ModulePreview = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <Link
-                  to={isUnlocked ? `/module/${module.id}` : "#"}
-                  className={`block ${!isUnlocked && 'cursor-not-allowed'}`}
+                  to={`/module/${module.id}`}
+                  className="block"
                 >
-                  <div className={`p-6 rounded-2xl border transition-all duration-300 h-full ${
-                    isUnlocked 
-                      ? 'bg-card border-border hover:border-primary/50 hover:shadow-medium' 
-                      : 'bg-muted/30 border-border/50 opacity-70'
-                  }`}>
+                  <div className="p-6 rounded-2xl border transition-all duration-300 h-full bg-card border-border hover:border-primary/50 hover:shadow-medium">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -98,11 +90,9 @@ export const ModulePreview = () => {
                       </div>
                       
                       {/* Status Icon */}
-                      {isCompleted ? (
+                      {isCompleted && (
                         <CheckCircle2 className="w-6 h-6 text-primary" />
-                      ) : !isUnlocked ? (
-                        <Lock className="w-5 h-5 text-muted-foreground" />
-                      ) : null}
+                      )}
                     </div>
 
                     {/* Description */}
@@ -128,7 +118,7 @@ export const ModulePreview = () => {
                         </div>
                       </div>
 
-                      {isUnlocked && !isCompleted && (
+                      {!isCompleted && (
                         <span className="text-sm text-primary font-ui">
                           Start →
                         </span>
@@ -148,9 +138,9 @@ export const ModulePreview = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Link to="/subscribe">
+          <Link to="/modules">
             <Button size="lg" className="px-8">
-              Unlock All Modules
+              View All Modules
             </Button>
           </Link>
         </motion.div>

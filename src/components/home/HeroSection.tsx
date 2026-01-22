@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 
 // Animated counter component
@@ -152,7 +152,7 @@ export const HeroSection = () => {
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-3xl">🎁</span>
                 <span className="text-gold text-xl md:text-2xl font-bold uppercase tracking-wide">
-                  Start Learning FREE — Right Now!
+                  100% Free — Forever!
                 </span>
                 <span className="text-3xl">🎁</span>
               </div>
@@ -160,8 +160,8 @@ export const HeroSection = () => {
                 Your journey to understanding the Qur'an begins TODAY.
               </p>
               <p className="text-muted-foreground text-base max-w-xl">
-                Access <span className="text-gold font-bold">Module 1 completely FREE</span> — no credit card, no signup hassle. 
-                Learn your first Quranic words and see the method that's helping English speakers finally connect with the Qur'an.
+                Access <span className="text-gold font-bold">all modules completely FREE</span> — no credit card, no signup hassle. 
+                Learn Quranic words and see the method that's helping English speakers finally connect with the Qur'an.
               </p>
               <p className="text-primary font-semibold mt-3 text-lg">
                 Stop waiting. Start understanding. ✨
@@ -169,24 +169,17 @@ export const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex justify-center"
           >
             <Link to="/modules">
               <Button size="lg" className="text-lg px-8 py-6 bg-gold hover:bg-gold/90 text-background font-bold glow-emerald">
                 <Sparkles className="mr-2 h-5 w-5" />
-                Start FREE Module Now
-              </Button>
-            </Link>
-            <Link to="/subscribe">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-primary/30 hover:bg-primary/5">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Unlock Full Course
-                <ArrowRight className="ml-2 h-5 w-5" />
+                Start Learning Now
               </Button>
             </Link>
           </motion.div>
