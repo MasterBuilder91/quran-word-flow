@@ -137,13 +137,6 @@ export const Header = () => {
                     >
                       Free Mushaf
                     </Link>
-                    <Link
-                      to="/careers"
-                      onClick={() => setIsMoreOpen(false)}
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    >
-                      Careers
-                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -239,13 +232,6 @@ export const Header = () => {
                 className="text-lg text-foreground py-2 border-b border-border/50"
               >
                 Forum
-              </Link>
-              <Link
-                to="/careers"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-lg text-foreground py-2 border-b border-border/50"
-              >
-                Careers
               </Link>
               <Link
                 to="/quran-insight"
