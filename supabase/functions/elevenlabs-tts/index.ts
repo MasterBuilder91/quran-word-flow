@@ -91,8 +91,8 @@ serve(async (req) => {
 
     console.log(`User ${user.id} generating TTS for text: "${text.substring(0, 50)}..." with voice: ${voiceId || "default"}`);
 
-    // Use Arabic-optimized voice - "River" is good for clear pronunciation
-    const selectedVoiceId = voiceId || "SAz9YHcvj6GT2YYXdXww"; // River voice
+    // Use George voice as default - clear and professional
+    const selectedVoiceId = voiceId || "JBFqnCBsd6RMkjVDRZzb"; // George voice
 
     const response = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoiceId}`,
