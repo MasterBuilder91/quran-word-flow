@@ -45,7 +45,7 @@ interface Pagination {
 }
 
 interface QuranBrowserProps {
-  onSelectVerse: (verseText: string, verseKey: string) => void;
+  onSelectVerse: (verseText: string, verseKey: string, translation?: string) => void;
 }
 
 // Static surah data for instant loading
@@ -217,7 +217,7 @@ export function QuranBrowser({ onSelectVerse }: QuranBrowserProps) {
   };
 
   const handleAnalyzeVerse = (verse: Verse) => {
-    onSelectVerse(verse.text_uthmani, verse.verse_key);
+    onSelectVerse(verse.text_uthmani, verse.verse_key, verse.translation);
     toast.success(`Verse ${verse.verse_key} sent to analyzer`);
   };
 
