@@ -158,12 +158,13 @@ const MushafPage = () => {
                   </div>
                 </div>
                 
-                {/* Iframe */}
+                {/* Iframe - Using Mushaf mode with RTL page navigation */}
                 <iframe
-                  src="https://quran.com/1"
+                  src="https://quran.com/1?reading=true"
                   title="Quran Mushaf"
                   className="w-full h-[65vh] md:h-[75vh] border-0 bg-white"
                   allow="fullscreen"
+                  style={{ direction: 'rtl' }}
                 />
               </div>
             </motion.div>
