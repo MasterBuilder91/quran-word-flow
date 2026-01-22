@@ -11,7 +11,8 @@ import {
   DIFFICULTY_CONFIG,
   CONTENT_SOURCE_LABELS,
 } from './types';
-import { BookOpen, Sparkles, Zap, Heart, Trophy, Target } from 'lucide-react';
+import { BookOpen, Sparkles, Zap, Heart, Trophy, Target, Gamepad2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface SessionSetupProps {
   config: SessionConfig;
@@ -245,6 +246,23 @@ export const SessionSetup = ({ config, onConfigChange, onStart, stats }: Session
         <p className="text-sm text-muted-foreground mt-4">
           {getActiveWordCount().toLocaleString()} words available · {config.exerciseCount} questions
         </p>
+
+        {/* Desert Runner Game Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-8 pt-8 border-t border-border"
+        >
+          <p className="text-sm text-muted-foreground mb-4">Or try our adventure game:</p>
+          <Link to="/games/desert-runner">
+            <Button variant="outline" size="lg" className="gap-2 border-gold/50 hover:bg-gold/10 hover:border-gold">
+              <Gamepad2 className="w-5 h-5 text-gold" />
+              <span className="text-gradient-gold font-semibold">Desert Word Runner</span>
+              <span className="text-xs text-muted-foreground ml-2">— Endless Adventure!</span>
+            </Button>
+          </Link>
+        </motion.div>
       </div>
     </motion.div>
   );
