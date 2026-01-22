@@ -69,14 +69,14 @@ export const LANE_POSITIONS = {
 };
 
 export const GAME_CONFIG = {
-  initialSpeed: 5,
-  maxSpeed: 15,
-  speedIncrement: 0.5,
+  initialSpeed: 1.5,  // Much slower default
+  maxSpeed: 6,        // Lower max speed
+  speedIncrement: 0.1, // Slower acceleration
   playerWidth: 60,
   playerHeight: 80,
   collectibleSize: 50,
-  obstacleSpawnRate: 0.02,
-  wordSpawnRate: 0.015,
+  obstacleSpawnRate: 0.008,  // Less frequent obstacles
+  wordSpawnRate: 0.012,
   powerUpSpawnRate: 0.005,
   jumpDuration: 600,
   slideDuration: 500,
