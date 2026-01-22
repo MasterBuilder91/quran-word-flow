@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.arabic-word-analysis]
 verify_jwt = false
+
+[functions.arabic-assistant]
+verify_jwt = false
