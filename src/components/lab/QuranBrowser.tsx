@@ -331,10 +331,17 @@ export function QuranBrowser({ onSelectVerse }: QuranBrowserProps) {
                         <p className="text-2xl font-arabic leading-loose text-foreground text-right mb-3" dir="rtl">
                           {verse.text_uthmani}
                         </p>
-                        {/* Translation */}
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {verse.translation}
-                        </p>
+                        {/* Translation - Sahih International */}
+                        <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-3">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-[10px] px-1.5 py-0">
+                              Sahih International
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-foreground/90 leading-relaxed italic">
+                            "{verse.translation}"
+                          </p>
+                        </div>
                         {/* Actions */}
                         <div className="flex items-center gap-2 mt-3">
                           <Button
