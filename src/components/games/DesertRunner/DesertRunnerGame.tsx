@@ -7,6 +7,8 @@ import { ObstacleSprite } from './ObstacleSprite';
 import { GameHUD } from './GameHUD';
 import { GameOverScreen } from './GameOverScreen';
 import { StartScreen } from './StartScreen';
+import { MobileControls } from './MobileControls';
+import { useTouchControls } from './useTouchControls';
 import { useGameWords } from './useGameWords';
 import { 
   GameState, 
@@ -15,7 +17,6 @@ import {
   Obstacle,
   LANE_POSITIONS,
   GAME_CONFIG,
-  GameWord,
 } from './types';
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
@@ -44,6 +45,7 @@ export const DesertRunnerGame = () => {
     correctWords: 0,
     totalWords: 0,
     speed: GAME_CONFIG.initialSpeed,
+    initialSpeed: GAME_CONFIG.initialSpeed,
     isPlaying: false,
     isPaused: false,
     isGameOver: false,
@@ -62,6 +64,39 @@ export const DesertRunnerGame = () => {
 
   const [collectibles, setCollectibles] = useState<CollectibleWord[]>([]);
   const [obstacles, setObstacles] = useState<Obstacle[]>([]);
+
+  // Mobile control handlers
+  const handleMoveUp = useCallback(() => {
+    if (!gameState.isPlaying || gameState.isPaused) return;
+    setPlayer(prev => ({
+      ...prev,
+      lane: Math.max(0, prev.lane - 1) as 0 | 1 | 2,
+    }));
+  }, [gameState.isPlaying, gameState.isPaused]);
+
+  const handleMoveDown = useCallback(() => {
+    if (!gameState.isPlaying || gameState.isPaused) return;
+    setPlayer(prev => ({
+      ...prev,
+      lane: Math.min(2, prev.lane + 1) as 0 | 1 | 2,
+    }));
+  }, [gameState.isPlaying, gameState.isPaused]);
+
+  const handleJump = useCallback(() => {
+    if (!gameState.isPlaying || gameState.isPaused || player.isJumping) return;
+    setPlayer(prev => ({ ...prev, isJumping: true }));
+    setTimeout(() => {
+      setPlayer(prev => ({ ...prev, isJumping: false }));
+    }, GAME_CONFIG.jumpDuration);
+  }, [gameState.isPlaying, gameState.isPaused, player.isJumping]);
+
+  // Touch controls hook
+  useTouchControls({
+    onSwipeUp: handleMoveUp,
+    onSwipeDown: handleMoveDown,
+    onTap: handleJump,
+    enabled: gameState.isPlaying && !gameState.isPaused,
+  });
 
   // Generate new question
   const generateNewQuestion = useCallback(() => {
@@ -211,27 +246,16 @@ export const DesertRunnerGame = () => {
         case 'ArrowUp':
         case 'w':
         case 'W':
-          setPlayer(prev => ({
-            ...prev,
-            lane: Math.max(0, prev.lane - 1) as 0 | 1 | 2,
-          }));
+          handleMoveUp();
           break;
         case 'ArrowDown':
         case 's':
         case 'S':
-          setPlayer(prev => ({
-            ...prev,
-            lane: Math.min(2, prev.lane + 1) as 0 | 1 | 2,
-          }));
+          handleMoveDown();
           break;
         case ' ':
           e.preventDefault();
-          if (!player.isJumping) {
-            setPlayer(prev => ({ ...prev, isJumping: true }));
-            setTimeout(() => {
-              setPlayer(prev => ({ ...prev, isJumping: false }));
-            }, GAME_CONFIG.jumpDuration);
-          }
+          handleJump();
           break;
         case 'Escape':
           setGameState(prev => ({ ...prev, isPaused: !prev.isPaused }));
@@ -241,10 +265,10 @@ export const DesertRunnerGame = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [gameState.isPlaying, gameState.isPaused, player.isJumping]);
+  }, [gameState.isPlaying, gameState.isPaused, handleMoveUp, handleMoveDown, handleJump]);
 
-  // Start game
-  const startGame = useCallback(() => {
+  // Start game with custom speed
+  const startGame = useCallback((initialSpeed: number) => {
     setGameState({
       score: 0,
       distance: 0,
@@ -252,7 +276,8 @@ export const DesertRunnerGame = () => {
       streak: 0,
       correctWords: 0,
       totalWords: 0,
-      speed: GAME_CONFIG.initialSpeed,
+      speed: initialSpeed,
+      initialSpeed: initialSpeed,
       isPlaying: true,
       isPaused: false,
       isGameOver: false,
@@ -286,7 +311,10 @@ export const DesertRunnerGame = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[600px] rounded-2xl overflow-hidden bg-stone-900 shadow-2xl">
+    <div 
+      data-game-container
+      className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-2xl overflow-hidden bg-stone-900 shadow-2xl touch-none"
+    >
       {/* Background */}
       <ParallaxBackground 
         speed={gameState.speed} 
@@ -319,6 +347,14 @@ export const DesertRunnerGame = () => {
             gameState={gameState} 
             currentQuestion={gameState.currentQuestion} 
           />
+
+          {/* Mobile controls */}
+          <MobileControls
+            onMoveUp={handleMoveUp}
+            onMoveDown={handleMoveDown}
+            onJump={handleJump}
+            isJumping={player.isJumping}
+          />
         </>
       )}
 
@@ -334,7 +370,7 @@ export const DesertRunnerGame = () => {
       {gameState.isGameOver && (
         <GameOverScreen
           gameState={gameState}
-          onRestart={startGame}
+          onRestart={() => startGame(gameState.initialSpeed)}
           onHome={handleHome}
         />
       )}
@@ -343,8 +379,8 @@ export const DesertRunnerGame = () => {
       {gameState.isPaused && (
         <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">Paused</h2>
-            <p className="text-white/60">Press ESC to continue</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Paused</h2>
+            <p className="text-white/60 text-sm sm:text-base">Press ESC or tap to continue</p>
           </div>
         </div>
       )}

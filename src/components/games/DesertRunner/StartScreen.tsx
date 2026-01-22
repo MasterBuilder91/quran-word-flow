@@ -1,13 +1,26 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Play, Trophy, Keyboard } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import { Play, Trophy, Keyboard, Gauge, Smartphone } from 'lucide-react';
+import { GAME_CONFIG } from './types';
 
 interface StartScreenProps {
   highScore: number;
-  onStart: () => void;
+  onStart: (initialSpeed: number) => void;
 }
 
 export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
+  const [speed, setSpeed] = useState(GAME_CONFIG.initialSpeed);
+
+  const getSpeedLabel = (value: number) => {
+    if (value <= 3) return 'Relaxed';
+    if (value <= 5) return 'Normal';
+    if (value <= 8) return 'Fast';
+    if (value <= 11) return 'Intense';
+    return 'Extreme';
+  };
+
   return (
     <motion.div
       className="absolute inset-0 z-50 flex items-center justify-center"
@@ -18,7 +31,7 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
 
       <motion.div
-        className="relative z-10 text-center px-4"
+        className="relative z-10 text-center px-4 max-w-md w-full"
         initial={{ y: 30 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', damping: 20 }}
@@ -29,28 +42,28 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-2">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2">
             <span className="text-gradient-gold">رحلة الصحراء</span>
           </h1>
-          <p className="text-2xl text-white/90 font-light tracking-wide">
+          <p className="text-xl sm:text-2xl text-white/90 font-light tracking-wide">
             Desert Word Runner
           </p>
         </motion.div>
 
         {/* Animated runner silhouette */}
         <motion.div
-          className="my-8 flex justify-center"
+          className="my-6 flex justify-center"
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.4, type: 'spring' }}
         >
-          <div className="text-8xl">🏃‍♂️</div>
+          <div className="text-6xl sm:text-8xl">🏃‍♂️</div>
         </motion.div>
 
         {/* High score */}
         {highScore > 0 && (
           <motion.div
-            className="flex items-center justify-center gap-2 mb-6"
+            className="flex items-center justify-center gap-2 mb-4"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -60,6 +73,36 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
           </motion.div>
         )}
 
+        {/* Speed slider */}
+        <motion.div
+          className="bg-black/40 backdrop-blur-sm rounded-xl p-4 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55 }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Gauge className="w-4 h-4 text-emerald-400" />
+              <span className="text-white/80 text-sm">Starting Speed</span>
+            </div>
+            <span className="text-emerald-400 font-medium text-sm">
+              {getSpeedLabel(speed)}
+            </span>
+          </div>
+          <Slider
+            value={[speed]}
+            onValueChange={(value) => setSpeed(value[0])}
+            min={2}
+            max={12}
+            step={1}
+            className="w-full"
+          />
+          <div className="flex justify-between text-xs text-white/40 mt-1">
+            <span>Slow</span>
+            <span>Fast</span>
+          </div>
+        </motion.div>
+
         {/* Start button */}
         <motion.div
           initial={{ scale: 0 }}
@@ -67,18 +110,18 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
           transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
         >
           <Button
-            onClick={onStart}
+            onClick={() => onStart(speed)}
             size="lg"
-            className="text-xl px-10 py-6 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 shadow-lg shadow-emerald-500/30"
+            className="text-lg sm:text-xl px-8 sm:px-10 py-5 sm:py-6 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 shadow-lg shadow-emerald-500/30 w-full sm:w-auto"
           >
-            <Play className="w-6 h-6 mr-2 fill-current" />
+            <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 fill-current" />
             Start Running
           </Button>
         </motion.div>
 
-        {/* Controls hint */}
+        {/* Controls hint - Desktop */}
         <motion.div
-          className="mt-8 space-y-2"
+          className="mt-6 space-y-2 hidden sm:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -94,9 +137,27 @@ export const StartScreen = ({ highScore, onStart }: StartScreenProps) => {
           </div>
         </motion.div>
 
+        {/* Controls hint - Mobile */}
+        <motion.div
+          className="mt-6 space-y-2 sm:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          <div className="flex items-center justify-center gap-2 text-white/60">
+            <Smartphone className="w-4 h-4" />
+            <span className="text-sm">Touch Controls</span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2 text-xs text-white/50">
+            <span className="bg-white/10 px-2 py-1 rounded">⬆️ ⬇️ Switch lanes</span>
+            <span className="bg-white/10 px-2 py-1 rounded">🚀 Jump</span>
+            <span className="bg-white/10 px-2 py-1 rounded">Tap words</span>
+          </div>
+        </motion.div>
+
         {/* Objective */}
         <motion.p
-          className="mt-6 text-white/70 max-w-md mx-auto"
+          className="mt-4 text-white/70 text-sm sm:text-base max-w-md mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
