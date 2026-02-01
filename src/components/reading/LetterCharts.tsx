@@ -1,7 +1,7 @@
 import { arabicLetters, ArabicLetter } from "@/data/arabicReadingCourse";
 import { motion } from "framer-motion";
-import { Volume2, Loader2 } from "lucide-react";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
+import { Volume2 } from "lucide-react";
+import { useInstantAudio } from "@/hooks/useInstantAudio";
 
 interface LetterFormsChartProps {
   letterIds?: string[];
@@ -9,14 +9,14 @@ interface LetterFormsChartProps {
 }
 
 export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChartProps) => {
-  const { speak, stop, isPlaying, isLoading, currentText } = useElevenLabsTTS();
+  const { speak, stop, isTextPlaying } = useInstantAudio();
   
   const letters = showAll 
     ? arabicLetters.filter(l => !['taa-marbuta', 'hamza'].includes(l.id))
     : arabicLetters.filter(l => letterIds?.includes(l.id));
 
   const handleLetterClick = async (arabic: string) => {
-    if (isPlaying && currentText === arabic) {
+    if (isTextPlaying(arabic)) {
       stop();
     } else {
       try {
@@ -26,9 +26,6 @@ export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChart
       }
     }
   };
-
-  const isLetterPlaying = (arabic: string) => isPlaying && currentText === arabic;
-  const isLetterLoading = (arabic: string) => isLoading && currentText === arabic;
 
   return (
     <div className="overflow-x-auto">
@@ -45,7 +42,7 @@ export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChart
         </thead>
         <tbody>
           {letters.map((letter, index) => {
-            const isCurrentlyPlaying = isLetterPlaying(letter.arabic);
+            const isCurrentlyPlaying = isTextPlaying(letter.arabic);
             return (
               <motion.tr
                 key={letter.id}
@@ -90,8 +87,8 @@ interface LetterCardProps {
 }
 
 export const LetterCard = ({ letter, showDetails = true }: LetterCardProps) => {
-  const { speak, stop, isPlaying, isLoading, currentText } = useElevenLabsTTS();
-  const isCurrentlyPlaying = isPlaying && currentText === letter.arabic;
+  const { speak, stop, isTextPlaying } = useInstantAudio();
+  const isCurrentlyPlaying = isTextPlaying(letter.arabic);
 
   const handleClick = async () => {
     if (isCurrentlyPlaying) {
@@ -117,11 +114,7 @@ export const LetterCard = ({ letter, showDetails = true }: LetterCardProps) => {
         <span className={`font-arabic text-6xl text-gold text-glow-gold ${isCurrentlyPlaying ? 'animate-pulse' : ''}`}>
           {letter.arabic}
         </span>
-        {isLoading ? (
-          <Loader2 className="absolute top-0 right-0 w-5 h-5 text-primary animate-spin" />
-        ) : (
-          <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
-        )}
+        <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
       </div>
 
       {/* Name and transliteration */}

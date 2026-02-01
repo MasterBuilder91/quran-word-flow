@@ -1,7 +1,7 @@
-import { Volume2, Loader2 } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FlashcardWord } from '@/data/flashcardVocabulary';
-import { useElevenLabsTTS } from '@/hooks/useElevenLabsTTS';
+import { useInstantAudio } from '@/hooks/useInstantAudio';
 
 interface FlashCardProps {
   word: FlashcardWord;
@@ -9,7 +9,8 @@ interface FlashCardProps {
 }
 
 export const FlashCard = ({ word, showImage = true }: FlashCardProps) => {
-  const { speak, isPlaying, isLoading } = useElevenLabsTTS();
+  const { speak, isTextPlaying } = useInstantAudio();
+  const isPlaying = isTextPlaying(word.arabic);
 
   const handleSpeak = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -81,14 +82,9 @@ export const FlashCard = ({ word, showImage = true }: FlashCardProps) => {
             variant="outline"
             size="sm"
             onClick={handleSpeak}
-            disabled={isPlaying || isLoading}
             className="gap-2"
           >
-            {isLoading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Volume2 className={`w-4 h-4 ${isPlaying ? 'text-primary animate-pulse' : ''}`} />
-            )}
+            <Volume2 className={`w-4 h-4 ${isPlaying ? 'text-primary animate-pulse' : ''}`} />
             Listen
           </Button>
         </div>
