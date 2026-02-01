@@ -4,7 +4,6 @@ import { Check, X, ArrowRight, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuranicWord } from "@/data/quranicWords";
 import { AudioButton } from "@/components/ui/AudioButton";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface PracticeModeProps {
   words: QuranicWord[];

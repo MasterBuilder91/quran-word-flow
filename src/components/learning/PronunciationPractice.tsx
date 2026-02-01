@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, Volume2, RotateCcw, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
+import { Mic, MicOff, Volume2, RotateCcw, CheckCircle2, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useSpeechRecognition, calculatePronunciationScore } from '@/hooks/useSpeechRecognition';
-import { useElevenLabsTTS } from '@/hooks/useElevenLabsTTS';
+import { useInstantAudio } from '@/hooks/useInstantAudio';
 import { cn } from '@/lib/utils';
 
 interface PronunciationPracticeProps {
@@ -30,7 +30,8 @@ export const PronunciationPractice = ({
   const [hasListenedFirst, setHasListenedFirst] = useState(!autoPlayFirst);
   const [attempts, setAttempts] = useState(0);
 
-  const { speak, isPlaying, isLoading: ttsLoading } = useElevenLabsTTS();
+  const { speak, isTextPlaying } = useInstantAudio();
+  const isPlaying = isTextPlaying(arabicText);
   
   const {
     isListening,
@@ -120,14 +121,9 @@ export const PronunciationPractice = ({
           variant="ghost"
           size="sm"
           onClick={handleListen}
-          disabled={isPlaying || ttsLoading}
           className="mt-4 gap-2"
         >
-          {ttsLoading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : (
-            <Volume2 className={cn("w-4 h-4", isPlaying && "text-primary animate-pulse")} />
-          )}
+          <Volume2 className={cn("w-4 h-4", isPlaying && "text-primary animate-pulse")} />
           {hasListenedFirst ? 'Listen Again' : 'Listen First'}
         </Button>
       </div>

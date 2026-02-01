@@ -23,7 +23,7 @@ import {
   Eye,
   EyeOff
 } from "lucide-react";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
+import { useInstantAudio } from "@/hooks/useInstantAudio";
 import { cn } from "@/lib/utils";
 
 type PageMode = "list" | "story";
@@ -40,7 +40,7 @@ const ImmersiveListeningPage = () => {
   const [quizScore, setQuizScore] = useState(0);
 
   const story = storyId ? getStoryById(storyId) : null;
-  const { speak, stop, isPlaying } = useElevenLabsTTS();
+  const { speak, stop, isPlaying } = useInstantAudio();
 
   // Story list view
   if (!storyId) {

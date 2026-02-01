@@ -1,6 +1,6 @@
-import { Volume2, Loader2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { Button, ButtonProps } from '@/components/ui/button';
-import { useElevenLabsTTS } from '@/hooks/useElevenLabsTTS';
+import { useInstantAudio } from '@/hooks/useInstantAudio';
 import { cn } from '@/lib/utils';
 
 interface AudioButtonProps extends Omit<ButtonProps, 'onClick'> {
@@ -26,9 +26,9 @@ export const AudioButton = ({
   size = "sm",
   ...props 
 }: AudioButtonProps) => {
-  const { speak, stop, isPlaying, isLoading, currentText, usingFallback } = useElevenLabsTTS();
+  const { speak, stop, isTextPlaying } = useInstantAudio();
   
-  const isCurrentlyPlaying = isPlaying && currentText === text;
+  const isCurrentlyPlaying = isTextPlaying(text);
   
   const handleClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -53,24 +53,18 @@ export const AudioButton = ({
     return (
       <button
         onClick={handleClick}
-        disabled={isLoading}
         className={cn(
           "p-2 rounded-full transition-all hover:bg-primary/10",
           isCurrentlyPlaying && "bg-primary/20 text-primary",
           className
         )}
-        title={usingFallback ? "Playing with browser voice" : "Listen to pronunciation"}
+        title="Listen to pronunciation"
         {...props}
       >
-        {isLoading ? (
-          <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
-        ) : isCurrentlyPlaying ? (
+        {isCurrentlyPlaying ? (
           <VolumeX className="w-5 h-5 text-primary animate-pulse" />
         ) : (
-          <Volume2 className={cn(
-            "w-5 h-5 transition-colors",
-            usingFallback ? "text-yellow-500" : "text-muted-foreground hover:text-primary"
-          )} />
+          <Volume2 className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
         )}
       </button>
     );
@@ -81,7 +75,6 @@ export const AudioButton = ({
       variant={variant}
       size={size}
       onClick={handleClick}
-      disabled={isLoading}
       className={cn(
         "gap-2",
         isCurrentlyPlaying && "border-primary text-primary",
@@ -89,15 +82,10 @@ export const AudioButton = ({
       )}
       {...props}
     >
-      {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
-      ) : isCurrentlyPlaying ? (
+      {isCurrentlyPlaying ? (
         <VolumeX className="w-4 h-4 animate-pulse" />
       ) : (
-        <Volume2 className={cn(
-          "w-4 h-4",
-          usingFallback && "text-yellow-500"
-        )} />
+        <Volume2 className="w-4 h-4" />
       )}
       {showLabel && <span>{isCurrentlyPlaying ? "Stop" : label}</span>}
     </Button>
@@ -112,8 +100,8 @@ export const InlineAudioIcon = ({
   text: string; 
   className?: string;
 }) => {
-  const { speak, stop, isPlaying, isLoading, currentText } = useElevenLabsTTS();
-  const isCurrentlyPlaying = isPlaying && currentText === text;
+  const { speak, stop, isTextPlaying } = useInstantAudio();
+  const isCurrentlyPlaying = isTextPlaying(text);
 
   const handleClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -131,7 +119,6 @@ export const InlineAudioIcon = ({
   return (
     <button
       onClick={handleClick}
-      disabled={isLoading}
       className={cn(
         "inline-flex items-center justify-center w-6 h-6 rounded-full transition-all",
         "hover:bg-primary/20 active:scale-95",
@@ -139,14 +126,10 @@ export const InlineAudioIcon = ({
         className
       )}
     >
-      {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
-      ) : (
-        <Volume2 className={cn(
-          "w-4 h-4",
-          isCurrentlyPlaying ? "text-primary animate-pulse" : "text-muted-foreground"
-        )} />
-      )}
+      <Volume2 className={cn(
+        "w-4 h-4",
+        isCurrentlyPlaying ? "text-primary animate-pulse" : "text-muted-foreground"
+      )} />
     </button>
   );
 };

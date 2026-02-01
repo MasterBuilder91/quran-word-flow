@@ -23,7 +23,7 @@ import {
   HeritageModule,
   AddresseeType
 } from "@/data/heritagePhrasesData";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
+import { useInstantAudio } from "@/hooks/useInstantAudio";
 
 type ViewMode = 'modules' | 'phrases';
 type GenderMode = 'masculine' | 'feminine';
@@ -37,7 +37,7 @@ const HeritagePage = () => {
   const [genderMode, setGenderMode] = useState<GenderMode>('masculine');
   const [addresseeMode, setAddresseeMode] = useState<AddresseeType>('masculine_singular');
   
-  const { speak, isPlaying, stop } = useElevenLabsTTS();
+  const { speak, isPlaying, stop } = useInstantAudio();
   
   const coreModules = getCoreModules();
   const functionalModules = getFunctionalModules();

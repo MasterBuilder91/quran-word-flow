@@ -7,8 +7,7 @@ import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
 import { AudioButton } from "@/components/ui/AudioButton";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
-
+import { useInstantAudio } from "@/hooks/useInstantAudio";
 interface LearnModeProps {
   words: QuranicWord[];
   onComplete: () => void;
@@ -20,7 +19,7 @@ export const LearnMode = ({ words, onComplete }: LearnModeProps) => {
   const [direction, setDirection] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
   
-  const { speak, stop } = useElevenLabsTTS();
+  const { speak, stop } = useInstantAudio();
 
   const currentWord = words[currentIndex];
   const progress = ((currentIndex + 1) / words.length) * 100;

@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AudioButton } from "@/components/ui/AudioButton";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
+import { useInstantAudio } from "@/hooks/useInstantAudio";
 
 interface GrammarLearnModeProps {
   words: GrammarWord[];
@@ -20,7 +20,7 @@ export const GrammarLearnMode = ({ words, onComplete }: GrammarLearnModeProps) =
   const [direction, setDirection] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
   
-  const { speak, stop } = useElevenLabsTTS();
+  const { speak, stop } = useInstantAudio();
 
   const currentWord = words[currentIndex];
   const progress = ((currentIndex + 1) / words.length) * 100;

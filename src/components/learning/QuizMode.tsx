@@ -6,7 +6,6 @@ import { QuranicWord } from "@/data/quranicWords";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
 import { AudioButton } from "@/components/ui/AudioButton";
-import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface QuizModeProps {
   words: QuranicWord[];
