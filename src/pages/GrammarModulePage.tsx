@@ -5,11 +5,12 @@ import { grammarModules, getGrammarModuleWords, getGrammarModuleById } from "@/d
 import { GrammarLearnMode } from "@/components/learning/GrammarLearnMode";
 import { GrammarPracticeMode } from "@/components/learning/GrammarPracticeMode";
 import { GrammarQuizMode } from "@/components/learning/GrammarQuizMode";
+import { PronunciationMode } from "@/components/learning/PronunciationMode";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookOpen, Repeat, Award, Languages } from "lucide-react";
+import { ArrowLeft, BookOpen, Repeat, Award, Languages, Mic } from "lucide-react";
 import { motion } from "framer-motion";
 
-type Phase = "overview" | "learn" | "practice" | "quiz" | "complete";
+type Phase = "overview" | "learn" | "practice" | "pronunciation" | "quiz" | "complete";
 
 const GrammarModulePage = () => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const GrammarModulePage = () => {
   const phases = [
     { id: "learn", label: "Learn", icon: BookOpen },
     { id: "practice", label: "Practice", icon: Repeat },
+    { id: "pronunciation", label: "Speak", icon: Mic },
     { id: "quiz", label: "Quiz", icon: Award },
   ];
 
@@ -111,7 +113,14 @@ const GrammarModulePage = () => {
         )}
 
         {phase === "practice" && (
-          <GrammarPracticeMode words={words} onComplete={() => setPhase("quiz")} />
+          <GrammarPracticeMode words={words} onComplete={() => setPhase("pronunciation")} />
+        )}
+
+        {phase === "pronunciation" && (
+          <PronunciationMode 
+            words={words.map(w => ({ arabic: w.arabic, transliteration: w.transliteration, english: w.english }))} 
+            onComplete={() => setPhase("quiz")} 
+          />
         )}
 
         {phase === "quiz" && (

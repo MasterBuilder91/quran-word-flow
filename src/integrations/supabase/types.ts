@@ -464,6 +464,39 @@ export type Database = {
         }
         Relationships: []
       }
+      study_sessions: {
+        Row: {
+          correct_answers: number
+          duration_seconds: number
+          ended_at: string | null
+          id: string
+          session_type: string
+          started_at: string
+          user_id: string
+          words_reviewed: number
+        }
+        Insert: {
+          correct_answers?: number
+          duration_seconds?: number
+          ended_at?: string | null
+          id?: string
+          session_type: string
+          started_at?: string
+          user_id: string
+          words_reviewed?: number
+        }
+        Update: {
+          correct_answers?: number
+          duration_seconds?: number
+          ended_at?: string | null
+          id?: string
+          session_type?: string
+          started_at?: string
+          user_id?: string
+          words_reviewed?: number
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           created_at: string
@@ -651,6 +684,60 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      user_word_progress: {
+        Row: {
+          correct_reviews: number
+          created_at: string
+          ease_factor: number
+          id: string
+          interval_days: number
+          last_reviewed_at: string | null
+          mastery_level: number
+          next_review_at: string
+          pronunciation_score_avg: number | null
+          repetitions: number
+          total_reviews: number
+          updated_at: string
+          user_id: string
+          word_key: string
+          word_type: string
+        }
+        Insert: {
+          correct_reviews?: number
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          interval_days?: number
+          last_reviewed_at?: string | null
+          mastery_level?: number
+          next_review_at?: string
+          pronunciation_score_avg?: number | null
+          repetitions?: number
+          total_reviews?: number
+          updated_at?: string
+          user_id: string
+          word_key: string
+          word_type?: string
+        }
+        Update: {
+          correct_reviews?: number
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          interval_days?: number
+          last_reviewed_at?: string | null
+          mastery_level?: number
+          next_review_at?: string
+          pronunciation_score_avg?: number | null
+          repetitions?: number
+          total_reviews?: number
+          updated_at?: string
+          user_id?: string
+          word_key?: string
+          word_type?: string
         }
         Relationships: []
       }

@@ -5,11 +5,12 @@ import { modules, getModuleWords } from "@/data/quranicWords";
 import { LearnMode } from "@/components/learning/LearnMode";
 import { PracticeMode } from "@/components/learning/PracticeMode";
 import { QuizMode } from "@/components/learning/QuizMode";
+import { PronunciationMode } from "@/components/learning/PronunciationMode";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookOpen, Repeat, Award } from "lucide-react";
+import { ArrowLeft, BookOpen, Repeat, Award, Mic } from "lucide-react";
 import { motion } from "framer-motion";
 
-type Phase = "overview" | "learn" | "practice" | "quiz" | "complete";
+type Phase = "overview" | "learn" | "practice" | "pronunciation" | "quiz" | "complete";
 
 const ModulePage = () => {
   const { id } = useParams();
@@ -30,6 +31,7 @@ const ModulePage = () => {
   const phases = [
     { id: "learn", label: "Learn", icon: BookOpen },
     { id: "practice", label: "Practice", icon: Repeat },
+    { id: "pronunciation", label: "Speak", icon: Mic },
     { id: "quiz", label: "Quiz", icon: Award },
   ];
 
@@ -93,7 +95,14 @@ const ModulePage = () => {
         )}
 
         {phase === "practice" && (
-          <PracticeMode words={words} onComplete={() => setPhase("quiz")} />
+          <PracticeMode words={words} onComplete={() => setPhase("pronunciation")} />
+        )}
+
+        {phase === "pronunciation" && (
+          <PronunciationMode 
+            words={words.map(w => ({ arabic: w.arabic, transliteration: w.transliteration, english: w.english }))} 
+            onComplete={() => setPhase("quiz")} 
+          />
         )}
 
         {phase === "quiz" && (
