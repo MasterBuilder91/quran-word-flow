@@ -1,5 +1,6 @@
 import { harakat, Harakah } from "@/data/arabicReadingCourse";
 import { motion } from "framer-motion";
+import { AudioButton } from "@/components/ui/AudioButton";
 
 export const HarakatChart = () => {
   const mainHarakat = harakat.filter(h => ['fatha', 'kasra', 'damma', 'sukun', 'shadda'].includes(h.id));
@@ -59,7 +60,13 @@ const HarakahCard = ({ harakah, index, compact = false }: HarakahCardProps) => {
     >
       {/* Example with vowel */}
       <div className="text-center mb-4">
-        <span className="font-arabic text-5xl text-gold">{harakah.example.arabic}</span>
+        <div className="flex items-center justify-center gap-2">
+          <span className="font-arabic text-5xl text-gold">{harakah.example.arabic}</span>
+          <AudioButton 
+            text={harakah.example.arabic} 
+            iconOnly 
+          />
+        </div>
         <p className="text-sm text-primary font-mono mt-2">{harakah.example.transliteration}</p>
       </div>
 

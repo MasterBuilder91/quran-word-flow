@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { Check, X, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AudioButton } from "@/components/ui/AudioButton";
 
 interface GrammarQuizModeProps {
   words: GrammarWord[];
@@ -143,9 +144,15 @@ export const GrammarQuizMode = ({ words, onComplete, passingScore = 70 }: Gramma
             <p className="text-5xl md:text-6xl font-arabic text-primary mb-2">
               {currentQuestion.word.arabic}
             </p>
-            <p className="text-sm text-muted-foreground italic">
-              {currentQuestion.word.transliteration}
-            </p>
+            <div className="flex items-center justify-center gap-3">
+              <p className="text-sm text-muted-foreground italic">
+                {currentQuestion.word.transliteration}
+              </p>
+              <AudioButton 
+                text={currentQuestion.word.arabic} 
+                iconOnly 
+              />
+            </div>
           </div>
 
           {/* Options */}

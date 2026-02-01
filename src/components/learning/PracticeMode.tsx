@@ -1,8 +1,10 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuranicWord } from "@/data/quranicWords";
+import { AudioButton } from "@/components/ui/AudioButton";
+import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface PracticeModeProps {
   words: QuranicWord[];
@@ -141,9 +143,15 @@ export const PracticeMode = ({ words, onComplete }: PracticeModeProps) => {
                     <h2 className="font-arabic text-5xl md:text-7xl text-foreground">
                       {currentExercise.question.arabic}
                     </h2>
-                    <p className="text-gold font-ui italic mt-2">
-                      {currentExercise.question.transliteration}
-                    </p>
+                    <div className="flex items-center justify-center gap-3 mt-2">
+                      <p className="text-gold font-ui italic">
+                        {currentExercise.question.transliteration}
+                      </p>
+                      <AudioButton 
+                        text={currentExercise.question.arabic} 
+                        iconOnly 
+                      />
+                    </div>
                   </>
                 ) : (
                   <>

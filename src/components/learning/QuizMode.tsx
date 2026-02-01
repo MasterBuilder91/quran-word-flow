@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, Trophy } from "lucide-react";
+import { Check, X, Trophy, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuranicWord } from "@/data/quranicWords";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
+import { AudioButton } from "@/components/ui/AudioButton";
+import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface QuizModeProps {
   words: QuranicWord[];
@@ -232,6 +234,14 @@ export const QuizMode = ({ words, onComplete, passingScore = 70 }: QuizModeProps
                 <h2 className="font-arabic text-5xl md:text-7xl text-foreground">
                   {currentQuestion.word.arabic}
                 </h2>
+                <div className="flex items-center justify-center gap-3 mt-2">
+                  <AudioButton 
+                    text={currentQuestion.word.arabic} 
+                    showLabel
+                    label="Listen"
+                    variant="ghost"
+                  />
+                </div>
               </div>
 
               {/* Options */}

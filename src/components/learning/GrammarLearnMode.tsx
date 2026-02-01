@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ChevronLeft, ChevronRight, Eye, EyeOff, Volume2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AudioButton } from "@/components/ui/AudioButton";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface GrammarLearnModeProps {
   words: GrammarWord[];
@@ -14,9 +18,25 @@ export const GrammarLearnMode = ({ words, onComplete }: GrammarLearnModeProps) =
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
   const [direction, setDirection] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  
+  const { speak, stop } = useElevenLabsTTS();
 
   const currentWord = words[currentIndex];
   const progress = ((currentIndex + 1) / words.length) * 100;
+
+  // Auto-play audio when word changes
+  useEffect(() => {
+    if (autoPlay && currentWord) {
+      const timer = setTimeout(() => {
+        speak(currentWord.arabic);
+      }, 400);
+      return () => {
+        clearTimeout(timer);
+        stop();
+      };
+    }
+  }, [currentIndex, autoPlay, currentWord?.arabic]);
 
   const goNext = () => {
     if (currentIndex < words.length - 1) {
@@ -72,12 +92,25 @@ export const GrammarLearnMode = ({ words, onComplete }: GrammarLearnModeProps) =
   return (
     <div className="max-w-2xl mx-auto">
       {/* Progress */}
-      <div className="mb-8">
+      <div className="mb-6">
         <div className="flex justify-between text-sm text-muted-foreground mb-2">
           <span>Learning Progress</span>
           <span>{currentIndex + 1} of {words.length}</span>
         </div>
         <Progress value={progress} className="h-2" />
+      </div>
+
+      {/* Auto-play Toggle */}
+      <div className="flex items-center justify-end gap-2 mb-4">
+        <Switch 
+          id="grammar-autoplay" 
+          checked={autoPlay} 
+          onCheckedChange={setAutoPlay}
+        />
+        <Label htmlFor="grammar-autoplay" className="text-sm text-muted-foreground cursor-pointer">
+          <Volume2 className="w-4 h-4 inline mr-1" />
+          Auto-play
+        </Label>
       </div>
 
       {/* Word Card */}
@@ -104,9 +137,15 @@ export const GrammarLearnMode = ({ words, onComplete }: GrammarLearnModeProps) =
             <p className="text-5xl md:text-6xl font-arabic text-primary leading-relaxed mb-2">
               {currentWord.arabic}
             </p>
-            <p className="text-lg text-muted-foreground italic">
-              {currentWord.transliteration}
-            </p>
+            <div className="flex items-center justify-center gap-3">
+              <p className="text-lg text-muted-foreground italic">
+                {currentWord.transliteration}
+              </p>
+              <AudioButton 
+                text={currentWord.arabic} 
+                iconOnly 
+              />
+            </div>
           </div>
 
           {/* English */}
