@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eye, EyeOff, ChevronLeft, ChevronRight } from "lucide-react";
+import { Eye, EyeOff, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuranicWord } from "@/data/quranicWords";
 import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
+import { AudioButton } from "@/components/ui/AudioButton";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface LearnModeProps {
   words: QuranicWord[];
@@ -14,9 +18,26 @@ export const LearnMode = ({ words, onComplete }: LearnModeProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showEnglish, setShowEnglish] = useState(false);
   const [direction, setDirection] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  
+  const { speak, stop } = useElevenLabsTTS();
 
   const currentWord = words[currentIndex];
   const progress = ((currentIndex + 1) / words.length) * 100;
+
+  // Auto-play audio when word changes
+  useEffect(() => {
+    if (autoPlay && currentWord) {
+      // Small delay for animation to complete
+      const timer = setTimeout(() => {
+        speak(currentWord.arabic);
+      }, 400);
+      return () => {
+        clearTimeout(timer);
+        stop();
+      };
+    }
+  }, [currentIndex, autoPlay, currentWord?.arabic]);
 
   const goNext = () => {
     if (currentIndex < words.length - 1) {
@@ -78,11 +99,22 @@ export const LearnMode = ({ words, onComplete }: LearnModeProps) => {
         />
       </div>
 
-      {/* Word Counter */}
-      <div className="text-center mb-4">
+      {/* Word Counter & Auto-play Toggle */}
+      <div className="flex items-center justify-between mb-4 px-4">
         <span className="text-muted-foreground font-ui">
           Word {currentIndex + 1} of {words.length}
         </span>
+        <div className="flex items-center gap-2">
+          <Switch 
+            id="autoplay" 
+            checked={autoPlay} 
+            onCheckedChange={setAutoPlay}
+          />
+          <Label htmlFor="autoplay" className="text-sm text-muted-foreground cursor-pointer">
+            <Volume2 className="w-4 h-4 inline mr-1" />
+            Auto-play
+          </Label>
+        </div>
       </div>
 
       {/* Main Content */}
@@ -110,15 +142,24 @@ export const LearnMode = ({ words, onComplete }: LearnModeProps) => {
                 {currentWord.arabic}
               </motion.h1>
 
-              {/* Transliteration */}
-              <motion.p
+              {/* Transliteration + Audio Button */}
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg text-gold font-ui italic mb-4"
+                className="flex items-center justify-center gap-3 mb-4"
               >
-                {currentWord.transliteration}
-              </motion.p>
+                <p className="text-lg text-gold font-ui italic">
+                  {currentWord.transliteration}
+                </p>
+                <AudioButton 
+                  text={currentWord.arabic} 
+                  showLabel 
+                  label="Listen"
+                  variant="ghost"
+                  size="sm"
+                />
+              </motion.div>
 
               {/* English (toggleable) */}
               <AnimatePresence>

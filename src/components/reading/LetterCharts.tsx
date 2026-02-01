@@ -1,7 +1,7 @@
 import { arabicLetters, ArabicLetter } from "@/data/arabicReadingCourse";
 import { motion } from "framer-motion";
-import { Volume2 } from "lucide-react";
-import { useArabicAudio } from "@/hooks/useArabicAudio";
+import { Volume2, Loader2 } from "lucide-react";
+import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 interface LetterFormsChartProps {
   letterIds?: string[];
@@ -9,15 +9,26 @@ interface LetterFormsChartProps {
 }
 
 export const LetterFormsChart = ({ letterIds, showAll = true }: LetterFormsChartProps) => {
-  const { playLetter, isLetterPlaying } = useArabicAudio();
+  const { speak, stop, isPlaying, isLoading, currentText } = useElevenLabsTTS();
   
   const letters = showAll 
     ? arabicLetters.filter(l => !['taa-marbuta', 'hamza'].includes(l.id))
     : arabicLetters.filter(l => letterIds?.includes(l.id));
 
-  const handleLetterClick = (arabic: string) => {
-    playLetter(arabic, 'name');
+  const handleLetterClick = async (arabic: string) => {
+    if (isPlaying && currentText === arabic) {
+      stop();
+    } else {
+      try {
+        await speak(arabic);
+      } catch (error) {
+        console.error('Failed to play letter:', error);
+      }
+    }
   };
+
+  const isLetterPlaying = (arabic: string) => isPlaying && currentText === arabic;
+  const isLetterLoading = (arabic: string) => isLoading && currentText === arabic;
 
   return (
     <div className="overflow-x-auto">
@@ -79,22 +90,38 @@ interface LetterCardProps {
 }
 
 export const LetterCard = ({ letter, showDetails = true }: LetterCardProps) => {
-  const { playLetter, isLetterPlaying } = useArabicAudio();
-  const isCurrentlyPlaying = isLetterPlaying(letter.arabic);
+  const { speak, stop, isPlaying, isLoading, currentText } = useElevenLabsTTS();
+  const isCurrentlyPlaying = isPlaying && currentText === letter.arabic;
+
+  const handleClick = async () => {
+    if (isCurrentlyPlaying) {
+      stop();
+    } else {
+      try {
+        await speak(letter.arabic);
+      } catch (error) {
+        console.error('Failed to play letter:', error);
+      }
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       className="p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all discovery-card cursor-pointer"
-      onClick={() => playLetter(letter.arabic, 'name')}
+      onClick={handleClick}
     >
       {/* Main letter */}
       <div className="text-center mb-4 relative">
         <span className={`font-arabic text-6xl text-gold text-glow-gold ${isCurrentlyPlaying ? 'animate-pulse' : ''}`}>
           {letter.arabic}
         </span>
-        <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
+        {isLoading ? (
+          <Loader2 className="absolute top-0 right-0 w-5 h-5 text-primary animate-spin" />
+        ) : (
+          <Volume2 className={`absolute top-0 right-0 w-5 h-5 transition-colors ${isCurrentlyPlaying ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
+        )}
       </div>
 
       {/* Name and transliteration */}

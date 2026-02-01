@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Check, X, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AudioButton } from "@/components/ui/AudioButton";
 
 interface GrammarPracticeModeProps {
   words: GrammarWord[];
@@ -112,9 +113,16 @@ export const GrammarPracticeMode = ({ words, onComplete }: GrammarPracticeModePr
             {currentExercise.type === "match-arabic" ? (
               <>
                 <p className="text-sm text-muted-foreground mb-2">What does this mean?</p>
-                <p className="text-5xl font-arabic text-primary">
+                <p className="text-5xl font-arabic text-primary mb-2">
                   {currentExercise.question}
                 </p>
+                <AudioButton 
+                  text={currentExercise.question} 
+                  showLabel
+                  label="Listen"
+                  variant="ghost"
+                  size="sm"
+                />
               </>
             ) : (
               <>

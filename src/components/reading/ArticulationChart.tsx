@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Volume2 } from "lucide-react";
-import { useArabicAudio } from "@/hooks/useArabicAudio";
+import { Volume2, Loader2 } from "lucide-react";
+import { useElevenLabsTTS } from "@/hooks/useElevenLabsTTS";
 
 // Import articulation chart images
 import throatLettersImg from "@/assets/articulation/throat-letters.png";
@@ -89,16 +89,26 @@ interface ArticulationChartProps {
 
 export const ArticulationChart = ({ selectedGroup, onGroupSelect }: ArticulationChartProps) => {
   const [activeGroup, setActiveGroup] = useState<string | null>(selectedGroup || null);
-  const { playLetter, isLetterPlaying } = useArabicAudio();
+  const { speak, stop, isPlaying, isLoading, currentText } = useElevenLabsTTS();
 
   const handleGroupClick = (groupId: string) => {
     setActiveGroup(activeGroup === groupId ? null : groupId);
     onGroupSelect?.(groupId);
   };
 
-  const handleLetterClick = (letter: string) => {
-    playLetter(letter, 'sound');
+  const handleLetterClick = async (letter: string) => {
+    if (isPlaying && currentText === letter) {
+      stop();
+    } else {
+      try {
+        await speak(letter);
+      } catch (error) {
+        console.error('Failed to play letter:', error);
+      }
+    }
   };
+
+  const isLetterPlaying = (letter: string) => isPlaying && currentText === letter;
 
   return (
     <div className="space-y-6">
@@ -175,15 +185,17 @@ export const ArticulationChart = ({ selectedGroup, onGroupSelect }: Articulation
                     <div className="grid gap-3">
                       {group.letters.map((letter, i) => {
                         const isCurrentlyPlaying = isLetterPlaying(letter.arabic);
+                        const isCurrentlyLoading = isLoading && currentText === letter.arabic;
                         return (
                           <button 
                             key={i}
                             onClick={() => handleLetterClick(letter.arabic)}
+                            disabled={isLoading}
                             className={`flex items-center gap-4 p-3 rounded-lg w-full text-left transition-all hover:scale-[1.02] ${
                               letter.english.includes('✓') 
                                 ? 'bg-green-500/10 border border-green-500/20 hover:bg-green-500/20' 
                                 : 'bg-card border border-border/50 hover:bg-card/80'
-                            } ${isCurrentlyPlaying ? 'ring-2 ring-primary' : ''}`}
+                            } ${isCurrentlyPlaying ? 'ring-2 ring-primary' : ''} ${isLoading ? 'opacity-75' : ''}`}
                           >
                             <span className={`font-arabic text-3xl text-gold w-12 text-center transition-transform ${
                               isCurrentlyPlaying ? 'scale-110' : ''
@@ -194,11 +206,15 @@ export const ArticulationChart = ({ selectedGroup, onGroupSelect }: Articulation
                               <span className="font-semibold text-foreground">{letter.name}</span>
                               <p className="text-sm text-muted-foreground">{letter.english}</p>
                             </div>
-                            <Volume2 className={`w-5 h-5 transition-colors ${
-                              isCurrentlyPlaying 
-                                ? 'text-primary animate-pulse' 
-                                : 'text-muted-foreground'
-                            }`} />
+                            {isCurrentlyLoading ? (
+                              <Loader2 className="w-5 h-5 text-primary animate-spin" />
+                            ) : (
+                              <Volume2 className={`w-5 h-5 transition-colors ${
+                                isCurrentlyPlaying 
+                                  ? 'text-primary animate-pulse' 
+                                  : 'text-muted-foreground'
+                              }`} />
+                            )}
                           </button>
                         );
                       })}
