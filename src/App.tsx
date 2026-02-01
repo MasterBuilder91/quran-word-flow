@@ -28,6 +28,7 @@ import LabPage from "./pages/LabPage";
 import MushafPage from "./pages/MushafPage";
 import HeritagePage from "./pages/HeritagePage";
 import DesertRunnerPage from "./pages/DesertRunnerPage";
+import ImmersiveListeningPage from "./pages/ImmersiveListeningPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -63,6 +64,8 @@ const App = () => (
           <Route path="/mushaf" element={<MushafPage />} />
           <Route path="/heritage" element={<HeritagePage />} />
           <Route path="/games/desert-runner" element={<DesertRunnerPage />} />
+          <Route path="/listening" element={<ImmersiveListeningPage />} />
+          <Route path="/listening/:storyId" element={<ImmersiveListeningPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
