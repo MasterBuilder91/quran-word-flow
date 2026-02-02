@@ -1,6 +1,5 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { DesertRunnerGame } from "@/components/games/DesertRunner";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,11 +34,11 @@ export default function DesertRunnerPage() {
             <div className="flex items-center justify-center gap-3 mb-3">
               <Gamepad2 className="w-8 h-8 text-gold" />
               <h1 className="text-4xl md:text-5xl font-bold">
-                <span className="text-gradient-gold">رحلة الصحراء</span>
+                <span className="text-gradient-gold">Desert Blaster Fury</span>
               </h1>
             </div>
             <p className="text-xl text-muted-foreground">
-              Desert Word Runner — Learn Arabic through adventure!
+              Take a break with this action-packed desert adventure!
             </p>
           </motion.div>
 
@@ -50,7 +49,15 @@ export default function DesertRunnerPage() {
             transition={{ delay: 0.2 }}
             className="max-w-5xl mx-auto"
           >
-            <DesertRunnerGame />
+            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-black shadow-2xl">
+              <iframe
+                src="https://stickygames.com/game/desert-blaster-fury"
+                className="absolute inset-0 w-full h-full"
+                allow="fullscreen; autoplay; clipboard-write"
+                allowFullScreen
+                title="Desert Blaster Fury"
+              />
+            </div>
           </motion.div>
 
           {/* Instructions */}
@@ -60,21 +67,9 @@ export default function DesertRunnerPage() {
             transition={{ delay: 0.4 }}
             className="max-w-2xl mx-auto mt-8 text-center"
           >
-            <h3 className="text-lg font-semibold text-foreground mb-3">How to Play</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground">
-              <div className="bg-muted/30 rounded-xl p-4">
-                <span className="text-2xl block mb-2">🎯</span>
-                <p>Click Arabic words that match the English translation shown at the top</p>
-              </div>
-              <div className="bg-muted/30 rounded-xl p-4">
-                <span className="text-2xl block mb-2">⬆️⬇️</span>
-                <p>Use arrow keys or W/S to change lanes and avoid obstacles</p>
-              </div>
-              <div className="bg-muted/30 rounded-xl p-4">
-                <span className="text-2xl block mb-2">🔥</span>
-                <p>Build streaks for bonus points! Wrong words cost you a life</p>
-              </div>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              Game provided by <a href="https://stickygames.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">StickyGames</a>
+            </p>
           </motion.div>
         </div>
       </main>
