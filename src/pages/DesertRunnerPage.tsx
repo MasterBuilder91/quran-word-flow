@@ -42,14 +42,14 @@ export default function DesertRunnerPage() {
             </p>
           </motion.div>
 
-          {/* Game container */}
+          {/* Game container - Full screen */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="max-w-5xl mx-auto"
+            className="w-full"
           >
-            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-black shadow-2xl">
+            <div className="relative w-full h-[calc(100vh-200px)] min-h-[500px] rounded-2xl overflow-hidden border border-border bg-black shadow-2xl">
               <iframe
                 src="https://stickygames.com/game/desert-blaster-fury"
                 className="absolute inset-0 w-full h-full"
