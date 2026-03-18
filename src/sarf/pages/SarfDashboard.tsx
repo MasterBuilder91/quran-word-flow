@@ -2,8 +2,11 @@ import { STAGES, STARTER_VERBS } from '@/sarf/data/seed';
 import { useDrillStore } from '@/sarf/store/drillStore';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Flame, BookOpen, Shuffle, Library, Star, ChevronRight, Lock, Sparkles, ArrowLeft } from 'lucide-react';
+import { Flame, BookOpen, Shuffle, Library, Star, ChevronRight, Lock, Sparkles } from 'lucide-react';
 import { playWhoosh } from '@/sarf/lib/sounds';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { PageSEO } from '@/components/layout/PageSEO';
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 30 } } };
@@ -15,20 +18,17 @@ const SarfDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="relative overflow-hidden">
+      <PageSEO title="Sarf Trainer" description="Master Arabic verb morphology with interactive conjugation drills. Practice past, present, and imperative forms across 120+ verbs." path="/sarf" />
+      <Header />
+      <div className="relative overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-transparent to-transparent" />
-        <div className="container max-w-lg mx-auto pt-6 px-5 relative">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg bg-secondary text-foreground hover:bg-secondary/80 transition-colors mb-4">
-            <ArrowLeft className="w-4 h-4" /> Back to Main Site
-          </Link>
-        </div>
-        <div className="container max-w-lg mx-auto pb-8 px-5 relative">
+        <div className="container max-w-lg mx-auto pb-8 px-5 pt-8 relative">
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 200, damping: 20 }} className="text-center">
             <div className="arabic-xl text-gradient-gold leading-none mb-2 animate-float">صَرْف</div>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-muted-foreground text-base tracking-widest uppercase font-light">Master the Arabic Verb</motion.p>
           </motion.div>
         </div>
-      </header>
+      </div>
       <main className="container max-w-lg mx-auto px-5 pb-12">
         <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-3 gap-3 mb-8">
           <motion.div variants={item} className="glass-card rounded-2xl p-4 text-center"><div className="text-3xl font-bold text-foreground">{totalDrills}</div><div className="text-xs text-muted-foreground mt-1 flex items-center justify-center gap-1"><BookOpen className="w-3 h-3" /> Drills</div></motion.div>
@@ -61,6 +61,7 @@ const SarfDashboard = () => {
           </motion.div>
         </motion.div>
       </main>
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Button } from "@/components/ui/button";
 import { BookOpen, ExternalLink, Maximize2, Minimize2, Moon, Sparkles, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -27,6 +28,7 @@ const MushafPage = () => {
 
   return (
     <div className="min-h-screen bg-background pattern-stars">
+      <PageSEO title="Mushaf Reader" description="Read the Holy Quran online with a clean, distraction-free digital Mushaf." path="/mushaf" />
       <Header />
       
       <main className="pt-20 md:pt-24">

@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { motion } from "framer-motion";
 import { MessageCircle, Clock, Heart, Book, Users, Coins, Moon, Star, Shield, FileText, Scale, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -92,6 +93,7 @@ const AskAboutIslamPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Ask About Islam" description="Learn about the five pillars of Islam, the six articles of faith, and more. A respectful guide for the curious." path="/ask-about-islam" />
       <Header />
       
       <main className="pt-20">

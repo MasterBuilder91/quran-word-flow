@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -106,6 +107,7 @@ export default function LearnToReadPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Learn to Read Arabic" description="Start reading Arabic from scratch. Learn the alphabet, harakat, and letter forms with interactive lessons." path="/learn-to-read" />
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-16">
         {/* Home Button */}

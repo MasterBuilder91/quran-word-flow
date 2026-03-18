@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { supabase } from "@/integrations/supabase/client";
 import { BookOpen, Scroll, Feather, Heart, Languages, MessageCircle, Users, MessageSquare, TrendingUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -122,6 +123,7 @@ export default function ForumPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Forum" description="Join the Quranic Arabic learning community. Discuss topics, share insights, and ask questions." path="/forum" />
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-16">
         {/* Hero Section */}

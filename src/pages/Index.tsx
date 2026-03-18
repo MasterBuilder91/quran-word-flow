@@ -12,6 +12,8 @@ import { AskAboutIslamCTA } from "@/components/home/AskAboutIslamCTA";
 import { FreeFlashcardsSection } from "@/components/home/FreeFlashcardsSection";
 import { FreeLabSection } from "@/components/home/FreeLabSection";
 import { CheatSheetModal } from "@/components/modals/CheatSheetModal";
+import { OnboardingBanner } from "@/components/home/OnboardingBanner";
+import { PageSEO } from "@/components/layout/PageSEO";
 
 const Index = () => {
   const [showCheatSheet, setShowCheatSheet] = useState(false);
@@ -30,8 +32,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Home" description="Master 125 high-frequency Quranic words covering 50% of the Qur'an's vocabulary. Learn Quranic Arabic through structured repetition designed for absolute beginners." path="/" />
       <Header />
       <main>
+        <OnboardingBanner />
         <HeroSection />
         <OurCommunitySection />
         <BuiltForOurBrainsSection />

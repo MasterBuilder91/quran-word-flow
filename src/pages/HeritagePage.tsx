@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -176,6 +177,7 @@ const HeritagePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Heritage Phrases" description="Learn beautiful Quranic Arabic phrases and expressions rooted in Islamic heritage." path="/heritage" />
       <Header />
       
       <main className="pt-24 pb-12 container mx-auto px-4">

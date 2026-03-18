@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ChevronLeft, ChevronRight, Shuffle, Layers, LayoutGrid } from 'lucide-react';
@@ -101,6 +102,7 @@ export default function FlashcardsPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <PageSEO title="Flashcards" description="Learn Quranic Arabic vocabulary with interactive flashcards organized by category." path="/flashcards" />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-8 max-w-6xl">

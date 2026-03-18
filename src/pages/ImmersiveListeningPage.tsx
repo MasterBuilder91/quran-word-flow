@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,6 +47,7 @@ const ImmersiveListeningPage = () => {
   if (!storyId) {
     return (
       <div className="min-h-screen bg-background">
+        <PageSEO title="Immersive Listening" description="Improve Arabic listening skills with immersive audio stories and comprehension exercises." path="/listening" />
         <Header />
         <main className="pt-24 pb-16 container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -169,6 +171,7 @@ const ImmersiveListeningPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Immersive Listening" description="Improve Arabic listening skills with immersive audio stories and comprehension exercises." path="/listening" />
       <Header />
       <main className="pt-24 pb-16 container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
