@@ -98,9 +98,9 @@ function getEmojiForWord(wordId: string): string {
   const emojiMap: Record<string, string> = {
     // ========== FRUITS ==========
     apple: '🍎', banana: '🍌', orange: '🍊', grape: '🍇', watermelon: '🍉',
-    strawberry: '🍓', mango: '🥭', pomegranate: '🍎', date: '🌴', fig: '🫐',
-    pear: '🍐', peach: '🍑', apricot: '🍑', cherry: '🍒', plum: '🍑',
-    lemon: '🍋', lime: '🍋', pineapple: '🍍', coconut: '🥥', kiwi: '🥝',
+    strawberry: '🍓', mango: '🥭', pomegranate: '🫐', date: '🫘', fig: '🍈',
+    pear: '🍐', peach: '🍑', apricot: '🟠', cherry: '🍒', plum: '🟣',
+    lemon: '🍋', lime: '🍈', pineapple: '🍍', coconut: '🥥', kiwi: '🥝',
     melon: '🍈', cantaloupe: '🍈', papaya: '🥭', guava: '🍐', avocado: '🥑',
     blackberry: '🫐', raspberry: '🍇', blueberry: '🫐', olive: '🫒', grapefruit: '🍊',
 
@@ -110,7 +110,7 @@ function getEmojiForWord(wordId: string): string {
     zucchini: '🥒', pumpkin: '🎃', spinach: '🥬', parsley: '🌿', mint: '🌿',
     celery: '🥬', broccoli: '🥦', cauliflower: '🥦', corn: '🌽', peas: '🫛',
     beans: '🫘', lentils: '🫘', chickpeas: '🫘', radish: '🥕', turnip: '🥔',
-    beet: '🫒', 'sweet-potato': '🍠', ginger: '🫚', mushroom: '🍄', artichoke: '🌿',
+    beet: '🟣', 'sweet-potato': '🍠', ginger: '🫚', mushroom: '🍄', artichoke: '🌿',
     asparagus: '🌿', okra: '🫑', leek: '🧅', 'green-onion': '🧅',
 
     // ========== ANIMALS ==========
@@ -136,8 +136,8 @@ function getEmojiForWord(wordId: string): string {
     // ========== SEA CREATURES ==========
     fish: '🐟', whale: '🐋', dolphin: '🐬', shark: '🦈', octopus: '🐙',
     squid: '🦑', crab: '🦀', lobster: '🦞', shrimp: '🦐', oyster: '🦪',
-    clam: '🦪', starfish: '⭐', jellyfish: '🪼', seal: '🦭', walrus: '🦭',
-    seahorse: '🐴', eel: '🐍', stingray: '🐟', coral: '🪸', salmon: '🐟',
+    clam: '🦪', starfish: '🌟', jellyfish: '🪼', seal: '🦭', walrus: '🦭',
+    seahorse: '🐡', eel: '🐍', stingray: '🐟', coral: '🪸', salmon: '🐟',
     tuna: '🐟', sardine: '🐟', mussel: '🦪',
 
     // ========== INSECTS ==========
@@ -147,9 +147,9 @@ function getEmojiForWord(wordId: string): string {
     snail: '🐌', scorpion: '🦂', wasp: '🐝', moth: '🦋', flea: '🦟',
 
     // ========== HOME & FURNITURE ==========
-    house: '🏠', door: '🚪', window: '🪟', table: '🪑', chair: '🪑',
-    bed: '🛏️', room: '🛋️', key: '🔑', lamp: '💡', mirror: '🪞',
-    sofa: '🛋️', carpet: '🧶', curtain: '🪟', ceiling: '⬆️', floor: '⬇️',
+    house: '🏠', door: '🚪', window: '🪟', table: '🪑', chair: '💺',
+    bed: '🛏️', room: '🛋️', key: '🔑', lamp: '🪔', mirror: '🪞',
+    sofa: '🛋️', carpet: '🧶', curtain: '🪟', ceiling: '🏠', floor: '🏠',
     wall: '🧱', stairs: '🪜', roof: '🏠', balcony: '🏠', garage: '🚗',
     'garden-home': '🌷', fence: '🏡', shelf: '📚', wardrobe: '🚪', drawer: '🗄️',
     desk: '🖥️', pillow: '🛏️', blanket: '🛏️', mattress: '🛏️', clock: '🕐',
@@ -176,16 +176,16 @@ function getEmojiForWord(wordId: string): string {
     earrings: '💎', purse: '👛', wallet: '👝', backpack: '🎒', umbrella: '☂️',
 
     // ========== BODY PARTS ==========
-    head: '🗣️', eye: '👁️', ear: '👂', nose: '👃', mouth: '👄',
+    head: '👤', eye: '👁️', ear: '👂', nose: '👃', mouth: '👄',
     hand: '🤚', foot: '🦶', heart: '❤️', finger: '☝️', tongue: '👅',
     hair: '💇', face: '😊', tooth: '🦷', lip: '👄', neck: '🦢',
-    shoulder: '🙆', arm: '💪', leg: '🦵', knee: '🦵', back: '🔙',
+    shoulder: '🙆', arm: '💪', leg: '🦵', knee: '🦵', back: '🧍',
     stomach: '🤰', chest: '🫁', brain: '🧠', blood: '🩸', bone: '🦴',
     skin: '🖐️', muscle: '💪', nail: '💅', eyebrow: '🤨', eyelash: '👁️',
     beard: '🧔', mustache: '👨', elbow: '💪', wrist: '⌚', palm: '🖐️',
     thumb: '👍', ankle: '🦶', heel: '🦶', toe: '🦶', waist: '👗',
     hip: '🧍', liver: '🫀', kidney: '🫘', lung: '🫁', cheek: '😊',
-    chin: '🗣️', forehead: '🧠',
+    chin: '😶', forehead: '🧠',
 
     // ========== HEALTH & MEDICINE ==========
     doctor: '👨‍⚕️', nurse: '👩‍⚕️', patient: '🤒', 'hospital-health': '🏥', medicine: '💊',
@@ -206,8 +206,8 @@ function getEmojiForWord(wordId: string): string {
 
     // ========== FOOD & DRINK ==========
     bread: '🍞', rice: '🍚', meat: '🥩', milk: '🥛', egg: '🥚',
-    cheese: '🧀', honey: '🍯', tea: '🍵', coffee: '☕', sugar: '🧂',
-    salt: '🧂', butter: '🧈', oil: '🛢️', soup: '🍲', salad: '🥗',
+    cheese: '🧀', honey: '🍯', tea: '🍵', coffee: '☕', sugar: '🍬',
+    salt: '🧂', butter: '🧈', oil: '🫒', soup: '🍲', salad: '🥗',
     pizza: '🍕', burger: '🍔', sandwich: '🥪', pasta: '🍝', 'chicken-food': '🍗',
     'fish-food': '🐟', cake: '🎂', chocolate: '🍫', ice: '🧊', 'ice-cream': '🍦',
     juice: '🧃', soda: '🥤', 'water-drink': '💧', yogurt: '🥛', cereal: '🥣',
