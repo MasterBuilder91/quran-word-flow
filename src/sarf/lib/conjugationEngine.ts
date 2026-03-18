@@ -1,18 +1,6 @@
 import { KATABA_CONJUGATIONS, CONJUGATION_SLOTS } from '@/sarf/data/seed';
+import { FORM_TEMPLATE_VERBS, ALL_FORM_CONJUGATIONS } from '@/sarf/data/formTemplates';
 import type { Conjugation, Verb, Tense, Voice } from '@/sarf/data/types';
-
-const KATABA_TEMPLATE_VERB: Verb = {
-  id: 'v1',
-  root: 'ك-ت-ب',
-  form: 1,
-  madi: 'كَتَبَ',
-  mudari: 'يَكْتُبُ',
-  masdar: 'كِتَابَة',
-  meaningEn: 'he wrote',
-  verbType: 'salim',
-  isTransitive: true,
-  isQuranic: true,
-};
 
 function stripDiacritics(text: string): string {
   return text.replace(/[\u064B-\u065F\u0670]/g, '');
@@ -22,18 +10,37 @@ function extractRootLetters(verb: Verb): string[] {
   return verb.root.split('-').map(l => l.trim());
 }
 
-export function generateConjugationsForVerb(verb: Verb, tense: Tense, voice: Voice): Conjugation[] {
-  const templates = KATABA_CONJUGATIONS.filter(
-    c => c.verbId === 'v1' && c.tense === tense && c.voice === voice
-  );
+// Get the right template verb and conjugation data based on verb form
+function getTemplateData(form: number): { templateVerb: Verb; conjugations: Conjugation[] } | null {
+  if (form === 1) {
+    return {
+      templateVerb: FORM_TEMPLATE_VERBS[1],
+      conjugations: KATABA_CONJUGATIONS,
+    };
+  }
+  const templateVerb = FORM_TEMPLATE_VERBS[form];
+  if (!templateVerb) return null;
+  return {
+    templateVerb,
+    conjugations: ALL_FORM_CONJUGATIONS.filter(c => c.verbId === templateVerb.id),
+  };
+}
 
-  if (verb.id === 'v1') return templates;
+export function generateConjugationsForVerb(verb: Verb, tense: Tense, voice: Voice): Conjugation[] {
+  const data = getTemplateData(verb.form);
+  if (!data) return [];
+
+  const { templateVerb, conjugations } = data;
+  const templates = conjugations.filter(c => c.tense === tense && c.voice === voice);
+
+  // If this IS the template verb, return directly
+  if (verb.id === templateVerb.id) return templates;
 
   const targetRoot = extractRootLetters(verb);
   if (targetRoot.length !== 3) return [];
 
   return templates.map((template) => {
-    const segments = decomposeForm(template.formText, KATABA_TEMPLATE_VERB);
+    const segments = decomposeForm(template.formText, templateVerb);
     let rootLetterIndex = 0;
 
     const newText = segments
