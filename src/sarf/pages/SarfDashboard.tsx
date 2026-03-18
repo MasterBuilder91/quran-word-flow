@@ -61,6 +61,7 @@ const SarfDashboard = () => {
           </motion.div>
         </motion.div>
       </main>
+      <Footer />
     </div>
   );
 };
