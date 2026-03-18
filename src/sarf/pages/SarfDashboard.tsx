@@ -46,7 +46,7 @@ const SarfDashboard = () => {
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2"><span className="h-px flex-1 bg-border" />Curriculum Path<span className="h-px flex-1 bg-border" /></h2>
           <motion.div variants={container} initial="hidden" animate="show" className="space-y-3">
             {STAGES.map((stage, i) => {
-              const isUnlocked = totalDrills >= stage.unlockThreshold;
+              const isUnlocked = true;
               return (
                 <motion.button key={stage.id} variants={item} whileHover={isUnlocked ? { scale: 1.01, x: 4 } : {}} whileTap={isUnlocked ? { scale: 0.99 } : {}} onClick={() => isUnlocked && navigate(`/sarf/stage/${stage.id}`)} disabled={!isUnlocked} className={`group relative w-full text-left rounded-2xl p-5 transition-all duration-300 ${isUnlocked ? 'glass-card hover:glow-emerald cursor-pointer' : 'bg-muted/20 border border-border/30 cursor-not-allowed opacity-40'}`}>
                   <div className="flex items-center gap-4">
