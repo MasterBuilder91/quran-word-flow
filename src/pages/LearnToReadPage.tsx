@@ -107,6 +107,7 @@ export default function LearnToReadPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Learn to Read Arabic" description="Start reading Arabic from scratch. Learn the alphabet, harakat, and letter forms with interactive lessons." path="/learn-to-read" />
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-16">
         {/* Home Button */}
