@@ -30,6 +30,11 @@ import HeritagePage from "./pages/HeritagePage";
 import DesertRunnerPage from "./pages/DesertRunnerPage";
 import ImmersiveListeningPage from "./pages/ImmersiveListeningPage";
 import NotFound from "./pages/NotFound";
+import SarfDashboard from "./sarf/pages/SarfDashboard";
+import SarfVerbSelection from "./sarf/pages/SarfVerbSelection";
+import SarfScaleDrill from "./sarf/pages/SarfScaleDrill";
+import SarfStageHub from "./sarf/pages/SarfStageHub";
+import SarfDrillMode from "./sarf/pages/SarfDrillMode";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +71,11 @@ const App = () => (
           <Route path="/games/desert-runner" element={<DesertRunnerPage />} />
           <Route path="/listening" element={<ImmersiveListeningPage />} />
           <Route path="/listening/:storyId" element={<ImmersiveListeningPage />} />
+          <Route path="/sarf" element={<SarfDashboard />} />
+          <Route path="/sarf/verbs" element={<SarfVerbSelection />} />
+          <Route path="/sarf/scale-drill" element={<SarfScaleDrill />} />
+          <Route path="/sarf/stage/:stageId" element={<SarfStageHub />} />
+          <Route path="/sarf/drill/:verbId" element={<SarfDrillMode />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
