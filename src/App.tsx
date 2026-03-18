@@ -30,6 +30,11 @@ import HeritagePage from "./pages/HeritagePage";
 import DesertRunnerPage from "./pages/DesertRunnerPage";
 import ImmersiveListeningPage from "./pages/ImmersiveListeningPage";
 import NotFound from "./pages/NotFound";
+import SarfDashboard from "./sarf/pages/SarfDashboard";
+import SarfVerbSelection from "./sarf/pages/SarfVerbSelection";
+import SarfScaleDrill from "./sarf/pages/SarfScaleDrill";
+import SarfStageHub from "./sarf/pages/SarfStageHub";
+import SarfDrillMode from "./sarf/pages/SarfDrillMode";
 
 const queryClient = new QueryClient();
 
