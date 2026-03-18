@@ -232,11 +232,12 @@ function getEmojiForWord(wordId: string): string {
     zero: '0️⃣', eleven: '1️⃣', twelve: '1️⃣', twenty: '2️⃣', thirty: '3️⃣',
     forty: '4️⃣', fifty: '5️⃣', sixty: '6️⃣', seventy: '7️⃣', eighty: '8️⃣',
     ninety: '9️⃣', hundred: '💯', thousand: '🔢', million: '🔢', half: '½',
-    quarter: '¼', third: '⅓',
+    quarter: '¼',
 
     // ========== ORDINAL NUMBERS ==========
-    first: '🥇', second: '🥈', 'third-ord': '🥉', 'fourth-ord': '4️⃣', 'fifth-ord': '5️⃣',
-    'sixth-ord': '6️⃣', 'seventh-ord': '7️⃣', 'eighth-ord': '8️⃣', 'ninth-ord': '9️⃣', 'tenth-ord': '🔟',
+    first: '🥇', second: '🥈', third: '🥉', fourth: '4️⃣', fifth: '5️⃣',
+    sixth: '6️⃣', seventh: '7️⃣', eighth: '8️⃣', ninth: '9️⃣', tenth: '🔟',
+    last: '🔚', next: '⏭️',
 
     // ========== FAMILY ==========
     father: '👨', mother: '👩', son: '👦', daughter: '👧', brother: '👬',
