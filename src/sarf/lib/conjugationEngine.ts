@@ -1,7 +1,18 @@
 import { KATABA_CONJUGATIONS, CONJUGATION_SLOTS } from '@/sarf/data/seed';
 import type { Conjugation, Verb, Tense, Voice } from '@/sarf/data/types';
 
-const KATABA_ROOT = ['ك', 'ت', 'ب'];
+const KATABA_TEMPLATE_VERB: Verb = {
+  id: 'v1',
+  root: 'ك-ت-ب',
+  form: 1,
+  madi: 'كَتَبَ',
+  mudari: 'يَكْتُبُ',
+  masdar: 'كِتَابَة',
+  meaningEn: 'he wrote',
+  verbType: 'salim',
+  isTransitive: true,
+  isQuranic: true,
+};
 
 function stripDiacritics(text: string): string {
   return text.replace(/[\u064B-\u065F\u0670]/g, '');
@@ -15,22 +26,30 @@ export function generateConjugationsForVerb(verb: Verb, tense: Tense, voice: Voi
   const templates = KATABA_CONJUGATIONS.filter(
     c => c.verbId === 'v1' && c.tense === tense && c.voice === voice
   );
+
   if (verb.id === 'v1') return templates;
+
   const targetRoot = extractRootLetters(verb);
   if (targetRoot.length !== 3) return [];
-  return templates.map(template => {
-    let newText = template.formText;
-    for (let i = 0; i < 3; i++) {
-      newText = replaceRootLetter(newText, KATABA_ROOT[i], targetRoot[i]);
-    }
+
+  return templates.map((template) => {
+    const segments = decomposeForm(template.formText, KATABA_TEMPLATE_VERB);
+    let rootLetterIndex = 0;
+
+    const newText = segments
+      .map((segment) => {
+        if (segment.type !== 'root') return segment.text;
+
+        const targetLetter = targetRoot[rootLetterIndex];
+        rootLetterIndex += 1;
+
+        if (!targetLetter) return segment.text;
+        return `${targetLetter}${segment.text.slice(1)}`;
+      })
+      .join('');
+
     return { ...template, verbId: verb.id, formText: newText };
   });
-}
-
-function replaceRootLetter(text: string, source: string, target: string): string {
-  const idx = text.indexOf(source);
-  if (idx === -1) return text;
-  return text.substring(0, idx) + target + text.substring(idx + source.length);
 }
 
 export interface FormSegment {
