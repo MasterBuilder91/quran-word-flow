@@ -322,7 +322,7 @@ function getEmojiForWord(wordId: string): string {
     november: '🍁', december: '🎄',
 
     // ========== SEASONS ==========
-    'spring-season': '🌸', spring: '🌸', summer: '☀️', autumn: '🍂', winter: '❄️',
+    'spring-season': '🌸', summer: '☀️', autumn: '🍂', winter: '❄️',
 
     // ========== EMOTIONS ==========
     happy: '😊', sad: '😢', angry: '😠', scared: '😨', surprised: '😲',
