@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { SessionSetup } from "@/components/playground/SessionSetup";
 import { ExercisePlayer } from "@/components/playground/ExercisePlayer";
 import { SessionResults } from "@/components/playground/SessionResults";
