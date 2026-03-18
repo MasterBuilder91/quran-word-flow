@@ -18,7 +18,7 @@ const SarfDashboard = () => {
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-transparent to-transparent" />
         <div className="container max-w-lg mx-auto pt-6 px-5 relative">
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm mb-4">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg bg-secondary text-foreground hover:bg-secondary/80 transition-colors mb-4">
             <ArrowLeft className="w-4 h-4" /> Back to Main Site
           </Link>
         </div>
