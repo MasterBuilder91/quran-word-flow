@@ -13,6 +13,7 @@ import { ArrowLeft, Check, Eye, EyeOff, Shuffle, Sparkles } from 'lucide-react';
 import type { Tense, Voice } from '@/sarf/data/types';
 import { useState, useEffect } from 'react';
 import { playTap, playSuccess, playWhoosh } from '@/sarf/lib/sounds';
+import { PageSEO } from '@/components/layout/PageSEO';
 
 const TENSE_LABELS: Record<Tense, { ar: string; en: string }> = { madi: { ar: 'الماضي', en: 'Past' }, mudari: { ar: 'المضارع', en: 'Present' }, amr: { ar: 'الأمر', en: 'Imperative' } };
 const PATTERN_MESSAGES = [(verb: string) => `You drilled ${verb}. Next: different verb, same pattern.`, () => `The verb changes. The pattern does not. That is Sarf.`, (verb: string) => `Form I always follows the same wazn — you drilled ${verb} today.`];
