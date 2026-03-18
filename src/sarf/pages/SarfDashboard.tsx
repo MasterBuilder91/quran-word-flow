@@ -1,8 +1,8 @@
 import { STAGES, STARTER_VERBS } from '@/sarf/data/seed';
 import { useDrillStore } from '@/sarf/store/drillStore';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Flame, BookOpen, Shuffle, Library, Star, ChevronRight, Lock, Sparkles } from 'lucide-react';
+import { Flame, BookOpen, Shuffle, Library, Star, ChevronRight, Lock, Sparkles, ArrowLeft } from 'lucide-react';
 import { playWhoosh } from '@/sarf/lib/sounds';
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
@@ -17,7 +17,12 @@ const SarfDashboard = () => {
     <div className="min-h-screen bg-background">
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-transparent to-transparent" />
-        <div className="container max-w-lg mx-auto pt-12 pb-8 px-5 relative">
+        <div className="container max-w-lg mx-auto pt-6 px-5 relative">
+          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm mb-4">
+            <ArrowLeft className="w-4 h-4" /> Back to Main Site
+          </Link>
+        </div>
+        <div className="container max-w-lg mx-auto pb-8 px-5 relative">
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 200, damping: 20 }} className="text-center">
             <div className="arabic-xl text-gradient-gold leading-none mb-2 animate-float">صَرْف</div>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-muted-foreground text-base tracking-widest uppercase font-light">Master the Arabic Verb</motion.p>
