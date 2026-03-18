@@ -12,6 +12,8 @@ import { AskAboutIslamCTA } from "@/components/home/AskAboutIslamCTA";
 import { FreeFlashcardsSection } from "@/components/home/FreeFlashcardsSection";
 import { FreeLabSection } from "@/components/home/FreeLabSection";
 import { CheatSheetModal } from "@/components/modals/CheatSheetModal";
+import { OnboardingBanner } from "@/components/home/OnboardingBanner";
+import { PageSEO } from "@/components/layout/PageSEO";
 
 const Index = () => {
   const [showCheatSheet, setShowCheatSheet] = useState(false);
