@@ -2,8 +2,11 @@ import { STAGES, STARTER_VERBS } from '@/sarf/data/seed';
 import { useDrillStore } from '@/sarf/store/drillStore';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Flame, BookOpen, Shuffle, Library, Star, ChevronRight, Lock, Sparkles, ArrowLeft } from 'lucide-react';
+import { Flame, BookOpen, Shuffle, Library, Star, ChevronRight, Lock, Sparkles } from 'lucide-react';
 import { playWhoosh } from '@/sarf/lib/sounds';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { PageSEO } from '@/components/layout/PageSEO';
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 30 } } };
