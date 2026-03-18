@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ChevronLeft, ChevronRight, Shuffle, Layers, LayoutGrid } from 'lucide-react';
