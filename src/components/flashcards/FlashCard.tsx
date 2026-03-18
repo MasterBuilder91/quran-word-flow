@@ -206,9 +206,9 @@ function getEmojiForWord(wordId: string): string {
     forest: '🌲', ocean: '🌊', lake: '🏞️', island: '🏝️', valley: '🏞️',
     hill: '⛰️', rock: '🪨', sand: '🏖️', grass: '🌿', leaf: '🍃',
     branch: '🌿', root: '🌱', seed: '🌱',
-    wave: '🌊', sunrise: '🌅', sunset: '🌇',
+    wave: '🌊', sunrise: '🌅', sunset: '🌇', horizon: '🌅',
     cave: '🕳️', waterfall: '💧', shadow: '🌑', plant: '🌱', rose: '🌹',
-    'palm-tree': '🌴',
+    'palm-tree': '🌴', spring: '💧',
 
     // ========== FOOD & DRINK ==========
     bread: '🍞', rice: '🍚', meat: '🥩', milk: '🥛', egg: '🥚',
