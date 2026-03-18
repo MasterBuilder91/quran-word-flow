@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { modules } from "@/data/quranicWords";
