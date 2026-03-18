@@ -46,6 +46,7 @@ const SarfDrillMode = () => {
 
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
+      <PageSEO title={`Drill: ${verb?.madi || 'Verb'}`} description="Interactive Arabic verb conjugation drill with all pronoun slots." path={`/sarf/drill/${verbId}`} noIndex />
       <header className="border-b border-border/50 glass-card shrink-0">
         <div className="container max-w-lg mx-auto py-3 px-5">
           <div className="flex items-center justify-between mb-3">
