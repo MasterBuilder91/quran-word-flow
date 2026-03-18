@@ -320,7 +320,6 @@ function getEmojiForWord(wordId: string): string {
     january: '❄️', february: '💝', march: '🌸', april: '🌷', may: '🌺',
     june: '☀️', july: '🏖️', august: '🌴', september: '🍂', october: '🎃',
     november: '🍁', december: '🎄',
-    ramadan: '🌙',
 
     // ========== SEASONS ==========
     'spring-season': '🌸', spring: '🌸', summer: '☀️', autumn: '🍂', winter: '❄️',
