@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { Button } from "@/components/ui/button";
 import { BookOpen, ExternalLink, Maximize2, Minimize2, Moon, Sparkles, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
