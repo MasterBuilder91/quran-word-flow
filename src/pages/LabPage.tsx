@@ -32,6 +32,7 @@ const LabPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Arabic Lab" description="Free AI-powered Arabic language tools: assistant, word analyzer, and Quran browser. Explore Arabic morphology and grammar." path="/lab" />
       <Header />
       
       <main className="container mx-auto px-4 pt-24 pb-8 max-w-7xl">
