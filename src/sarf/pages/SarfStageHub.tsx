@@ -1,22 +1,52 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { STAGES } from '@/sarf/data/seed';
+import { FORM_LABELS } from '@/sarf/data/formTemplates';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { PageSEO } from '@/components/layout/PageSEO';
+import { motion } from 'framer-motion';
+import { Lock, ChevronRight } from 'lucide-react';
 
-const STAGE_MODULES: Record<number, { name: string; nameAr: string; path: string }[]> = {
+const STAGE_MODULES: Record<number, { name: string; nameAr: string; path: string; available: boolean }[]> = {
   1: [
-    { name: 'Past Tense (Active)', nameAr: 'الماضي المعلوم', path: '/sarf/verbs?tense=madi&voice=active' },
-    { name: 'Past Tense (Passive)', nameAr: 'الماضي المجهول', path: '/sarf/verbs?tense=madi&voice=passive' },
-    { name: 'Present Tense (Active)', nameAr: 'المضارع المعلوم', path: '/sarf/verbs?tense=mudari&voice=active' },
-    { name: 'Present Tense (Passive)', nameAr: 'المضارع المجهول', path: '/sarf/verbs?tense=mudari&voice=passive' },
-    { name: 'Imperative', nameAr: 'الأمر', path: '/sarf/verbs?tense=amr' },
+    { name: 'Past Tense (Active)', nameAr: 'الماضي المعلوم', path: '/sarf/verbs?tense=madi&voice=active&form=1', available: true },
+    { name: 'Past Tense (Passive)', nameAr: 'الماضي المجهول', path: '/sarf/verbs?tense=madi&voice=passive&form=1', available: true },
+    { name: 'Present Tense (Active)', nameAr: 'المضارع المعلوم', path: '/sarf/verbs?tense=mudari&voice=active&form=1', available: true },
+    { name: 'Present Tense (Passive)', nameAr: 'المضارع المجهول', path: '/sarf/verbs?tense=mudari&voice=passive&form=1', available: true },
+    { name: 'Imperative', nameAr: 'الأمر', path: '/sarf/verbs?tense=amr&form=1', available: true },
   ],
-  2: Array.from({ length: 10 }, (_, i) => ({ name: `Form ${['I','II','III','IV','V','VI','VII','VIII','IX','X'][i]}`, nameAr: `الوزن ${i+1}`, path: `/sarf/stage/2/form/${i+1}` })),
-  3: [{ name: 'Coming soon', nameAr: 'قريبًا', path: '#' }],
-  4: [{ name: 'Coming soon', nameAr: 'قريبًا', path: '#' }],
-  5: [{ name: 'Coming soon', nameAr: 'قريبًا', path: '#' }],
+  2: [2,3,4,5,6,7,8,10].map(f => {
+    const label = FORM_LABELS[f];
+    return {
+      name: `Form ${['','I','II','III','IV','V','VI','VII','VIII','IX','X'][f]} — ${label?.meaning || ''}`,
+      nameAr: label?.ar || '',
+      path: `/sarf/verbs?form=${f}`,
+      available: [2,3,4,5,6,7,8,10].includes(f),
+    };
+  }),
+  3: [
+    { name: 'Jussive Particles (لَمْ، لَمَّا)', nameAr: 'حُرُوف الجَزْم', path: '#', available: false },
+    { name: 'Subjunctive Particles (أَنْ، لَنْ)', nameAr: 'حُرُوف النَّصْب', path: '#', available: false },
+    { name: 'Emphatic Nūn (نون التوكيد)', nameAr: 'نُون التَّوكيد', path: '#', available: false },
+    { name: 'Negation Particles (لا، ما، لن)', nameAr: 'حُرُوف النَّفي', path: '#', available: false },
+  ],
+  4: [
+    { name: 'Active Participle (اسم الفاعل)', nameAr: 'اِسْم الفَاعِل', path: '#', available: false },
+    { name: 'Passive Participle (اسم المفعول)', nameAr: 'اِسْم المَفْعُول', path: '#', available: false },
+    { name: 'Verbal Noun (المصدر)', nameAr: 'المَصْدَر', path: '#', available: false },
+    { name: 'Noun of Place & Time', nameAr: 'اِسْم المَكَان والزَّمَان', path: '#', available: false },
+    { name: 'Noun of Instrument', nameAr: 'اِسْم الآلَة', path: '#', available: false },
+  ],
+  5: [
+    { name: 'Subject & Object Agreement', nameAr: 'المُطَابَقَة', path: '#', available: false },
+    { name: 'Verb–Sentence Integration', nameAr: 'الجُمْلَة الفِعْلِيَّة', path: '#', available: false },
+    { name: 'Conditional Sentences (لَوْ، إِنْ)', nameAr: 'الشَّرْط', path: '#', available: false },
+    { name: 'Qur\'anic Verb Patterns', nameAr: 'أَوزان القُرآن', path: '#', available: false },
+  ],
 };
+
+const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.05 } } };
+const item = { hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } };
 
 const SarfStageHub = () => {
   const { stageId } = useParams();
@@ -38,14 +68,33 @@ const SarfStageHub = () => {
         </div>
       </div>
       <main className="flex-1 container max-w-4xl mx-auto px-4 py-8">
-        <div className="space-y-3">
+        <motion.div variants={container} initial="hidden" animate="show" className="space-y-3">
           {modules.map((mod, i) => (
-            <button key={i} onClick={() => mod.path !== '#' && navigate(mod.path)} className="w-full text-left bg-card border border-border rounded-lg p-5 hover:border-primary transition-colors flex items-center justify-between">
-              <div><span className="arabic text-xl text-accent">{mod.nameAr}</span><p className="text-foreground font-medium">{mod.name}</p></div>
-              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-sm font-bold text-muted-foreground">{i+1}</div>
-            </button>
+            <motion.button
+              key={i}
+              variants={item}
+              whileHover={mod.available ? { scale: 1.01, x: 4 } : {}}
+              whileTap={mod.available ? { scale: 0.99 } : {}}
+              onClick={() => mod.available && mod.path !== '#' && navigate(mod.path)}
+              disabled={!mod.available}
+              className={`w-full text-left rounded-lg p-5 transition-colors flex items-center justify-between ${mod.available ? 'bg-card border border-border hover:border-primary/50 cursor-pointer' : 'bg-muted/20 border border-border/30 cursor-not-allowed opacity-50'}`}
+            >
+              <div className="flex items-center gap-4">
+                <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${mod.available ? 'bg-gradient-to-br from-primary to-emerald-light text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
+                  {mod.available ? i + 1 : <Lock className="w-3.5 h-3.5" />}
+                </div>
+                <div>
+                  <span className="arabic text-lg text-accent">{mod.nameAr}</span>
+                  <p className="text-foreground font-medium text-sm">{mod.name}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {!mod.available && <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">Coming Soon</span>}
+                {mod.available && <ChevronRight className="w-4 h-4 text-muted-foreground" />}
+              </div>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
       </main>
       <Footer />
     </div>

@@ -146,6 +146,57 @@ export const STARTER_VERBS: Verb[] = [
   { id: 'v118', root: 'ق-ل-ب', form: 1, madi: 'قَلَبَ', mudari: 'يَقْلِبُ', masdar: 'قَلْب', ismFail: 'قَالِب', ismMafool: 'مَقْلُوب', meaningEn: 'he turned over', verbType: 'salim', isTransitive: true, isQuranic: true },
   { id: 'v119', root: 'ع-ل-ق', form: 1, madi: 'عَلَقَ', mudari: 'يَعْلُقُ', masdar: 'عَلَق', ismFail: 'عَالِق', meaningEn: 'he clung', verbType: 'salim', isTransitive: false, isQuranic: true, quranicReference: '96:2' },
   { id: 'v120', root: 'خ-ش-ع', form: 1, madi: 'خَشَعَ', mudari: 'يَخْشَعُ', masdar: 'خُشُوع', ismFail: 'خَاشِع', meaningEn: 'he humbled himself', verbType: 'salim', isTransitive: false, isQuranic: true },
+  // ─── Form II (فَعَّلَ) ───
+  { id: 'f2t', root: 'ع-ل-م', form: 2, madi: 'عَلَّمَ', mudari: 'يُعَلِّمُ', masdar: 'تَعْلِيم', ismFail: 'مُعَلِّم', ismMafool: 'مُعَلَّم', meaningEn: 'he taught', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v1', root: 'ن-ز-ل', form: 2, madi: 'نَزَّلَ', mudari: 'يُنَزِّلُ', masdar: 'تَنْزِيل', ismFail: 'مُنَزِّل', ismMafool: 'مُنَزَّل', meaningEn: 'he sent down', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v2', root: 'ق-د-م', form: 2, madi: 'قَدَّمَ', mudari: 'يُقَدِّمُ', masdar: 'تَقْدِيم', ismFail: 'مُقَدِّم', ismMafool: 'مُقَدَّم', meaningEn: 'he presented', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v3', root: 'ب-ش-ر', form: 2, madi: 'بَشَّرَ', mudari: 'يُبَشِّرُ', masdar: 'تَبْشِير', ismFail: 'مُبَشِّر', ismMafool: 'مُبَشَّر', meaningEn: 'he gave glad tidings', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v4', root: 'س-ب-ح', form: 2, madi: 'سَبَّحَ', mudari: 'يُسَبِّحُ', masdar: 'تَسْبِيح', ismFail: 'مُسَبِّح', meaningEn: 'he glorified', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v5', root: 'ك-ب-ر', form: 2, madi: 'كَبَّرَ', mudari: 'يُكَبِّرُ', masdar: 'تَكْبِير', ismFail: 'مُكَبِّر', ismMafool: 'مُكَبَّر', meaningEn: 'he magnified', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v6', root: 'ح-ر-م', form: 2, madi: 'حَرَّمَ', mudari: 'يُحَرِّمُ', masdar: 'تَحْرِيم', ismFail: 'مُحَرِّم', ismMafool: 'مُحَرَّم', meaningEn: 'he forbade', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f2v7', root: 'ك-ل-م', form: 2, madi: 'كَلَّمَ', mudari: 'يُكَلِّمُ', masdar: 'تَكْلِيم', ismFail: 'مُكَلِّم', ismMafool: 'مُكَلَّم', meaningEn: 'he spoke to', verbType: 'salim', isTransitive: true, isQuranic: true },
+  // ─── Form III (فَاعَلَ) ───
+  { id: 'f3t', root: 'ق-ت-ل', form: 3, madi: 'قَاتَلَ', mudari: 'يُقَاتِلُ', masdar: 'مُقَاتَلَة', ismFail: 'مُقَاتِل', ismMafool: 'مُقَاتَل', meaningEn: 'he fought', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f3v1', root: 'ج-ه-د', form: 3, madi: 'جَاهَدَ', mudari: 'يُجَاهِدُ', masdar: 'مُجَاهَدَة', ismFail: 'مُجَاهِد', meaningEn: 'he strove', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f3v2', root: 'ن-ص-ر', form: 3, madi: 'نَاصَرَ', mudari: 'يُنَاصِرُ', masdar: 'مُنَاصَرَة', ismFail: 'مُنَاصِر', meaningEn: 'he supported', verbType: 'salim', isTransitive: true, isQuranic: false },
+  { id: 'f3v3', root: 'ح-س-ب', form: 3, madi: 'حَاسَبَ', mudari: 'يُحَاسِبُ', masdar: 'مُحَاسَبَة', ismFail: 'مُحَاسِب', meaningEn: 'he held accountable', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f3v4', root: 'ب-ر-ك', form: 3, madi: 'بَارَكَ', mudari: 'يُبَارِكُ', masdar: 'مُبَارَكَة', ismFail: 'مُبَارِك', meaningEn: 'he blessed', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f3v5', root: 'خ-ط-ب', form: 3, madi: 'خَاطَبَ', mudari: 'يُخَاطِبُ', masdar: 'مُخَاطَبَة', ismFail: 'مُخَاطِب', meaningEn: 'he addressed', verbType: 'salim', isTransitive: true, isQuranic: false },
+  // ─── Form IV (أَفْعَلَ) ───
+  { id: 'f4t', root: 'خ-ر-ج', form: 4, madi: 'أَخْرَجَ', mudari: 'يُخْرِجُ', masdar: 'إِخْرَاج', ismFail: 'مُخْرِج', ismMafool: 'مُخْرَج', meaningEn: 'he extracted', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f4v1', root: 'ن-ز-ل', form: 4, madi: 'أَنْزَلَ', mudari: 'يُنْزِلُ', masdar: 'إِنْزَال', ismFail: 'مُنْزِل', ismMafool: 'مُنْزَل', meaningEn: 'he sent down', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f4v2', root: 'ر-س-ل', form: 4, madi: 'أَرْسَلَ', mudari: 'يُرْسِلُ', masdar: 'إِرْسَال', ismFail: 'مُرْسِل', ismMafool: 'مُرْسَل', meaningEn: 'he sent', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f4v3', root: 'س-ل-م', form: 4, madi: 'أَسْلَمَ', mudari: 'يُسْلِمُ', masdar: 'إِسْلَام', ismFail: 'مُسْلِم', meaningEn: 'he submitted', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f4v4', root: 'ح-س-ن', form: 4, madi: 'أَحْسَنَ', mudari: 'يُحْسِنُ', masdar: 'إِحْسَان', ismFail: 'مُحْسِن', meaningEn: 'he did good', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f4v5', root: 'د-خ-ل', form: 4, madi: 'أَدْخَلَ', mudari: 'يُدْخِلُ', masdar: 'إِدْخَال', ismFail: 'مُدْخِل', ismMafool: 'مُدْخَل', meaningEn: 'he admitted', verbType: 'salim', isTransitive: true, isQuranic: true },
+  // ─── Form V (تَفَعَّلَ) ───
+  { id: 'f5t', root: 'ع-ل-م', form: 5, madi: 'تَعَلَّمَ', mudari: 'يَتَعَلَّمُ', masdar: 'تَعَلُّم', ismFail: 'مُتَعَلِّم', meaningEn: 'he learned', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f5v1', root: 'ك-ل-م', form: 5, madi: 'تَكَلَّمَ', mudari: 'يَتَكَلَّمُ', masdar: 'تَكَلُّم', ismFail: 'مُتَكَلِّم', meaningEn: 'he spoke', verbType: 'salim', isTransitive: false, isQuranic: false },
+  { id: 'f5v2', root: 'ق-د-م', form: 5, madi: 'تَقَدَّمَ', mudari: 'يَتَقَدَّمُ', masdar: 'تَقَدُّم', ismFail: 'مُتَقَدِّم', meaningEn: 'he advanced', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f5v3', root: 'ف-ك-ر', form: 5, madi: 'تَفَكَّرَ', mudari: 'يَتَفَكَّرُ', masdar: 'تَفَكُّر', ismFail: 'مُتَفَكِّر', meaningEn: 'he contemplated', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f5v4', root: 'ذ-ك-ر', form: 5, madi: 'تَذَكَّرَ', mudari: 'يَتَذَكَّرُ', masdar: 'تَذَكُّر', ismFail: 'مُتَذَكِّر', meaningEn: 'he remembered', verbType: 'salim', isTransitive: false, isQuranic: true },
+  // ─── Form VI (تَفَاعَلَ) ───
+  { id: 'f6t', root: 'ب-ع-د', form: 6, madi: 'تَبَاعَدَ', mudari: 'يَتَبَاعَدُ', masdar: 'تَبَاعُد', ismFail: 'مُتَبَاعِد', meaningEn: 'they distanced', verbType: 'salim', isTransitive: false, isQuranic: false },
+  { id: 'f6v1', root: 'ب-ر-ك', form: 6, madi: 'تَبَارَكَ', mudari: 'يَتَبَارَكُ', masdar: 'تَبَارُك', ismFail: 'مُتَبَارِك', meaningEn: 'he was blessed', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f6v2', root: 'ن-ص-ر', form: 6, madi: 'تَنَاصَرَ', mudari: 'يَتَنَاصَرُ', masdar: 'تَنَاصُر', ismFail: 'مُتَنَاصِر', meaningEn: 'they helped each other', verbType: 'salim', isTransitive: false, isQuranic: false },
+  { id: 'f6v3', root: 'ب-د-ل', form: 6, madi: 'تَبَادَلَ', mudari: 'يَتَبَادَلُ', masdar: 'تَبَادُل', ismFail: 'مُتَبَادِل', meaningEn: 'they exchanged', verbType: 'salim', isTransitive: false, isQuranic: false },
+  // ─── Form VII (اِنْفَعَلَ) ───
+  { id: 'f7t', root: 'ك-س-ر', form: 7, madi: 'اِنْكَسَرَ', mudari: 'يَنْكَسِرُ', masdar: 'اِنْكِسَار', ismFail: 'مُنْكَسِر', meaningEn: 'it broke', verbType: 'salim', isTransitive: false, isQuranic: false },
+  { id: 'f7v1', root: 'ف-ت-ح', form: 7, madi: 'اِنْفَتَحَ', mudari: 'يَنْفَتِحُ', masdar: 'اِنْفِتَاح', ismFail: 'مُنْفَتِح', meaningEn: 'it opened', verbType: 'salim', isTransitive: false, isQuranic: false },
+  { id: 'f7v2', root: 'ق-ل-ب', form: 7, madi: 'اِنْقَلَبَ', mudari: 'يَنْقَلِبُ', masdar: 'اِنْقِلَاب', ismFail: 'مُنْقَلِب', meaningEn: 'it overturned', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f7v3', root: 'ط-ل-ق', form: 7, madi: 'اِنْطَلَقَ', mudari: 'يَنْطَلِقُ', masdar: 'اِنْطِلَاق', ismFail: 'مُنْطَلِق', meaningEn: 'he set out', verbType: 'salim', isTransitive: false, isQuranic: true },
+  // ─── Form VIII (اِفْتَعَلَ) ───
+  { id: 'f8t', root: 'ج-م-ع', form: 8, madi: 'اِجْتَمَعَ', mudari: 'يَجْتَمِعُ', masdar: 'اِجْتِمَاع', ismFail: 'مُجْتَمِع', meaningEn: 'he gathered', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f8v1', root: 'ك-س-ب', form: 8, madi: 'اِكْتَسَبَ', mudari: 'يَكْتَسِبُ', masdar: 'اِكْتِسَاب', ismFail: 'مُكْتَسِب', ismMafool: 'مُكْتَسَب', meaningEn: 'he earned', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f8v2', root: 'خ-ل-ف', form: 8, madi: 'اِخْتَلَفَ', mudari: 'يَخْتَلِفُ', masdar: 'اِخْتِلَاف', ismFail: 'مُخْتَلِف', meaningEn: 'he differed', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f8v3', root: 'ف-خ-ر', form: 8, madi: 'اِفْتَخَرَ', mudari: 'يَفْتَخِرُ', masdar: 'اِفْتِخَار', ismFail: 'مُفْتَخِر', meaningEn: 'he was proud', verbType: 'salim', isTransitive: false, isQuranic: false },
+  { id: 'f8v4', root: 'ح-ر-م', form: 8, madi: 'اِحْتَرَمَ', mudari: 'يَحْتَرِمُ', masdar: 'اِحْتِرَام', ismFail: 'مُحْتَرِم', ismMafool: 'مُحْتَرَم', meaningEn: 'he respected', verbType: 'salim', isTransitive: true, isQuranic: false },
+  // ─── Form X (اِسْتَفْعَلَ) ───
+  { id: 'f10t', root: 'غ-ف-ر', form: 10, madi: 'اِسْتَغْفَرَ', mudari: 'يَسْتَغْفِرُ', masdar: 'اِسْتِغْفَار', ismFail: 'مُسْتَغْفِر', meaningEn: 'he sought forgiveness', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f10v1', root: 'خ-ر-ج', form: 10, madi: 'اِسْتَخْرَجَ', mudari: 'يَسْتَخْرِجُ', masdar: 'اِسْتِخْرَاج', ismFail: 'مُسْتَخْرِج', ismMafool: 'مُسْتَخْرَج', meaningEn: 'he extracted', verbType: 'salim', isTransitive: true, isQuranic: true },
+  { id: 'f10v2', root: 'ك-ب-ر', form: 10, madi: 'اِسْتَكْبَرَ', mudari: 'يَسْتَكْبِرُ', masdar: 'اِسْتِكْبَار', ismFail: 'مُسْتَكْبِر', meaningEn: 'he was arrogant', verbType: 'salim', isTransitive: false, isQuranic: true },
+  { id: 'f10v3', root: 'ع-م-ل', form: 10, madi: 'اِسْتَعْمَلَ', mudari: 'يَسْتَعْمِلُ', masdar: 'اِسْتِعْمَال', ismFail: 'مُسْتَعْمِل', ismMafool: 'مُسْتَعْمَل', meaningEn: 'he used', verbType: 'salim', isTransitive: true, isQuranic: false },
+  { id: 'f10v4', root: 'ق-ب-ل', form: 10, madi: 'اِسْتَقْبَلَ', mudari: 'يَسْتَقْبِلُ', masdar: 'اِسْتِقْبَال', ismFail: 'مُسْتَقْبِل', ismMafool: 'مُسْتَقْبَل', meaningEn: 'he received', verbType: 'salim', isTransitive: true, isQuranic: false },
 ];
 
 // Pre-computed conjugations for كَتَبَ (kataba) — template for all Form I salim
