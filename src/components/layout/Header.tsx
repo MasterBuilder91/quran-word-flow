@@ -96,6 +96,9 @@ export const Header = () => {
             <Link to="/listening" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Listening
             </Link>
+            <Link to="/sarf" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
+              Sarf Trainer
+            </Link>
             <Link to="/lab" className="text-muted-foreground hover:text-foreground transition-colors font-ui text-sm">
               Free Lab
             </Link>
