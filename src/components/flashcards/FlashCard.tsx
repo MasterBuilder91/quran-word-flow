@@ -232,7 +232,7 @@ function getEmojiForWord(wordId: string): string {
     zero: '0️⃣', eleven: '1️⃣', twelve: '1️⃣', twenty: '2️⃣', thirty: '3️⃣',
     forty: '4️⃣', fifty: '5️⃣', sixty: '6️⃣', seventy: '7️⃣', eighty: '8️⃣',
     ninety: '9️⃣', hundred: '💯', thousand: '🔢', million: '🔢', half: '½',
-    quarter: '¼', third: '⅓',
+    quarter: '¼',
 
     // ========== ORDINAL NUMBERS ==========
     first: '🥇', second: '🥈', third: '🥉', fourth: '4️⃣', fifth: '5️⃣',
