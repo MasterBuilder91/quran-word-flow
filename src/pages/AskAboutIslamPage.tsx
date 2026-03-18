@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/layout/PageSEO";
 import { motion } from "framer-motion";
 import { MessageCircle, Clock, Heart, Book, Users, Coins, Moon, Star, Shield, FileText, Scale, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
