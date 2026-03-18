@@ -452,7 +452,7 @@ function getEmojiForWord(wordId: string): string {
     // ========== SHAPES ==========
     circle: '⭕', square: '⬛', triangle: '🔺', rectangle: '▬', oval: '⭕',
     'diamond-shape': '🔷', 'star-shape': '⭐', 'heart-shape': '❤️',
-    hexagon: '⬡', pentagon: '⬠', cube: '🧊', sphere: '⚽', diamond: '🔷',
+    hexagon: '⬡', pentagon: '⬠', cube: '🧊', sphere: '⚽',
   };
   return emojiMap[wordId] || '📝';
 }
