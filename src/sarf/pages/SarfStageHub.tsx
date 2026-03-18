@@ -25,23 +25,23 @@ const STAGE_MODULES: Record<number, { name: string; nameAr: string; path: string
     };
   }),
   3: [
-    { name: 'Jussive Particles (لَمْ، لَمَّا)', nameAr: 'حُرُوف الجَزْم', path: '#', available: false },
-    { name: 'Subjunctive Particles (أَنْ، لَنْ)', nameAr: 'حُرُوف النَّصْب', path: '#', available: false },
-    { name: 'Emphatic Nūn (نون التوكيد)', nameAr: 'نُون التَّوكيد', path: '#', available: false },
-    { name: 'Negation Particles (لا، ما، لن)', nameAr: 'حُرُوف النَّفي', path: '#', available: false },
+    { name: 'Jussive Particles (لَمْ، لَمَّا)', nameAr: 'حُرُوف الجَزْم', path: '/sarf/lesson/jussive-particles', available: true },
+    { name: 'Subjunctive Particles (أَنْ، لَنْ)', nameAr: 'حُرُوف النَّصْب', path: '/sarf/lesson/subjunctive-particles', available: true },
+    { name: 'Emphatic Nūn (نون التوكيد)', nameAr: 'نُون التَّوكيد', path: '/sarf/lesson/emphatic-nun', available: true },
+    { name: 'Negation Particles (لا، ما، لن)', nameAr: 'حُرُوف النَّفي', path: '/sarf/lesson/negation-particles', available: true },
   ],
   4: [
-    { name: 'Active Participle (اسم الفاعل)', nameAr: 'اِسْم الفَاعِل', path: '#', available: false },
-    { name: 'Passive Participle (اسم المفعول)', nameAr: 'اِسْم المَفْعُول', path: '#', available: false },
-    { name: 'Verbal Noun (المصدر)', nameAr: 'المَصْدَر', path: '#', available: false },
-    { name: 'Noun of Place & Time', nameAr: 'اِسْم المَكَان والزَّمَان', path: '#', available: false },
-    { name: 'Noun of Instrument', nameAr: 'اِسْم الآلَة', path: '#', available: false },
+    { name: 'Active Participle (اسم الفاعل)', nameAr: 'اِسْم الفَاعِل', path: '/sarf/lesson/active-participle', available: true },
+    { name: 'Passive Participle (اسم المفعول)', nameAr: 'اِسْم المَفْعُول', path: '/sarf/lesson/passive-participle', available: true },
+    { name: 'Verbal Noun (المصدر)', nameAr: 'المَصْدَر', path: '/sarf/lesson/verbal-noun', available: true },
+    { name: 'Noun of Place & Time', nameAr: 'اِسْم المَكَان والزَّمَان', path: '/sarf/lesson/noun-of-place-time', available: true },
+    { name: 'Noun of Instrument', nameAr: 'اِسْم الآلَة', path: '/sarf/lesson/noun-of-instrument', available: true },
   ],
   5: [
-    { name: 'Subject & Object Agreement', nameAr: 'المُطَابَقَة', path: '#', available: false },
-    { name: 'Verb–Sentence Integration', nameAr: 'الجُمْلَة الفِعْلِيَّة', path: '#', available: false },
-    { name: 'Conditional Sentences (لَوْ، إِنْ)', nameAr: 'الشَّرْط', path: '#', available: false },
-    { name: 'Qur\'anic Verb Patterns', nameAr: 'أَوزان القُرآن', path: '#', available: false },
+    { name: 'Subject & Object Agreement', nameAr: 'المُطَابَقَة', path: '/sarf/lesson/subject-object-agreement', available: true },
+    { name: 'Verb–Sentence Integration', nameAr: 'الجُمْلَة الفِعْلِيَّة', path: '/sarf/lesson/verbal-sentence', available: true },
+    { name: 'Conditional Sentences (لَوْ، إِنْ)', nameAr: 'الشَّرْط', path: '/sarf/lesson/conditional-sentences', available: true },
+    { name: 'Qur\'anic Verb Patterns', nameAr: 'أَوزان القُرآن', path: '/sarf/lesson/quranic-verb-patterns', available: true },
   ],
 };
 
