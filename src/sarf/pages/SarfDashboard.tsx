@@ -28,7 +28,7 @@ const SarfDashboard = () => {
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-muted-foreground text-base tracking-widest uppercase font-light">Master the Arabic Verb</motion.p>
           </motion.div>
         </div>
-      </header>
+      </div>
       <main className="container max-w-lg mx-auto px-5 pb-12">
         <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-3 gap-3 mb-8">
           <motion.div variants={item} className="glass-card rounded-2xl p-4 text-center"><div className="text-3xl font-bold text-foreground">{totalDrills}</div><div className="text-xs text-muted-foreground mt-1 flex items-center justify-center gap-1"><BookOpen className="w-3 h-3" /> Drills</div></motion.div>
