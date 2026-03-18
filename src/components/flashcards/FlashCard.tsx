@@ -270,7 +270,7 @@ function getEmojiForWord(wordId: string): string {
     carpenter: '🪚', tailor: '🪡', barber: '💈', dentist: '🦷', pharmacist: '💊',
     veterinarian: '🐾', translator: '🌐', imam: '🕌', businessman: '💼', shopkeeper: '🏪',
     baker: '🍞', butcher: '🥩', fisherman: '🎣', driver: '🚗', designer: '🎨',
-    professor: '👨‍🏫',
+    professor: '👨‍🏫', student: '👨‍🎓',
 
     // ========== PLACES ==========
     city: '🏙️', village: '🏘️', mosque: '🕌', school: '🏫', market: '🏪',
