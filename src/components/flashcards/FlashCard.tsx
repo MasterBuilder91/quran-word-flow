@@ -240,10 +240,16 @@ function getEmojiForWord(wordId: string): string {
 
     // ========== FAMILY ==========
     father: '👨', mother: '👩', son: '👦', daughter: '👧', brother: '👬',
-    sister: '👭', grandfather: '👴', grandmother: '👵', uncle: '👨', aunt: '👩',
-    cousin: '🧑', nephew: '👦', niece: '👧', husband: '👨', wife: '👩',
-    baby: '👶', child: '🧒', 'teenager-family': '🧑', adult: '🧑', parents: '👫',
-    family: '👨‍👩‍👧‍👦', 'twins-family': '👯', stepfather: '👨', stepmother: '👩', 'in-laws': '👫',
+    sister: '👭', grandfather: '👴', grandmother: '👵',
+    'uncle-paternal': '👨', 'aunt-paternal': '👩', 'uncle-maternal': '👨', 'aunt-maternal': '👩',
+    uncle: '👨', aunt: '👩',
+    'cousin-male': '👦', 'cousin-female': '👧', cousin: '🧑',
+    nephew: '👦', niece: '👧', husband: '🤵', wife: '👰',
+    baby: '👶', child: '🧒', children: '👧', 'teenager-family': '🧑', adult: '🧑', parents: '👫',
+    'family-unit': '👨‍👩‍👧‍👦', family: '👨‍👩‍👧‍👦',
+    grandson: '👦', granddaughter: '👧',
+    'father-in-law': '👴', 'mother-in-law': '👵', 'in-laws': '👫',
+    twins: '👯', 'twins-family': '👯', stepfather: '👨', stepmother: '👩',
 
     // ========== PROFESSIONS ==========
     teacher: '👨‍🏫', 'doctor-prof': '👨‍⚕️', engineer: '👷', lawyer: '⚖️', judge: '⚖️',
