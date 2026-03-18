@@ -128,7 +128,7 @@ function getEmojiForWord(wordId: string): string {
     // ========== BIRDS ==========
     'bird-general': '🐦', eagle: '🦅', hawk: '🦅', owl: '🦉', crow: '🐦‍⬛',
     sparrow: '🐦', pigeon: '🕊️', parrot: '🦜', peacock: '🦚', duck: '🦆',
-    goose: '🦢', swan: '🦢', rooster: '🐓', hen: '🐔', turkey: '🦃',
+    goose: '🦢', swan: '🦢', rooster: '🐓', hen: '🐔',
     ostrich: '🦤', penguin: '🐧', flamingo: '🦩', pelican: '🦤', heron: '🦢',
     stork: '🦤', vulture: '🦅', seagull: '🐦', woodpecker: '🐦', hummingbird: '🐦',
     canary: '🐤', nightingale: '🐦', raven: '🐦‍⬛', kingfisher: '🐦',
