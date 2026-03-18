@@ -232,7 +232,7 @@ function getEmojiForWord(wordId: string): string {
     // ========== COLORS ==========
     red: '🔴', blue: '🔵', green: '🟢', yellow: '🟡', white: '⚪',
     black: '⚫', 'orange-color': '🟠', purple: '🟣', brown: '🟤', pink: '💗',
-    gray: '⚫', beige: '🟤',
+    gray: '⚫', beige: '🟤', turquoise: '🔵',
     violet: '🟣',
 
     // ========== NUMBERS ==========
