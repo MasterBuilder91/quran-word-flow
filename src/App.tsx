@@ -71,6 +71,11 @@ const App = () => (
           <Route path="/games/desert-runner" element={<DesertRunnerPage />} />
           <Route path="/listening" element={<ImmersiveListeningPage />} />
           <Route path="/listening/:storyId" element={<ImmersiveListeningPage />} />
+          <Route path="/sarf" element={<SarfDashboard />} />
+          <Route path="/sarf/verbs" element={<SarfVerbSelection />} />
+          <Route path="/sarf/scale-drill" element={<SarfScaleDrill />} />
+          <Route path="/sarf/stage/:stageId" element={<SarfStageHub />} />
+          <Route path="/sarf/drill/:verbId" element={<SarfDrillMode />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
