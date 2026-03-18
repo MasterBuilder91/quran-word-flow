@@ -35,6 +35,7 @@ import SarfVerbSelection from "./sarf/pages/SarfVerbSelection";
 import SarfScaleDrill from "./sarf/pages/SarfScaleDrill";
 import SarfStageHub from "./sarf/pages/SarfStageHub";
 import SarfDrillMode from "./sarf/pages/SarfDrillMode";
+import SarfLessonPage from "./sarf/pages/SarfLessonPage";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +77,7 @@ const App = () => (
           <Route path="/sarf/scale-drill" element={<SarfScaleDrill />} />
           <Route path="/sarf/stage/:stageId" element={<SarfStageHub />} />
           <Route path="/sarf/drill/:verbId" element={<SarfDrillMode />} />
+          <Route path="/sarf/lesson/:lessonSlug" element={<SarfLessonPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
