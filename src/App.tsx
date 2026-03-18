@@ -77,6 +77,7 @@ const App = () => (
           <Route path="/sarf/scale-drill" element={<SarfScaleDrill />} />
           <Route path="/sarf/stage/:stageId" element={<SarfStageHub />} />
           <Route path="/sarf/drill/:verbId" element={<SarfDrillMode />} />
+          <Route path="/sarf/lesson/:lessonSlug" element={<SarfLessonPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VisitorChatWidget />
