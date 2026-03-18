@@ -264,6 +264,13 @@ export const Header = () => {
                 Free Arabic Lab
               </Link>
               <Link
+                to="/sarf"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground py-2 border-b border-border/50"
+              >
+                Sarf Trainer
+              </Link>
+              <Link
                 to="/mushaf"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground py-2 border-b border-border/50"
