@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const ModulesPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Vocabulary Modules" description="Structured Quranic Arabic vocabulary modules. Master 125 high-frequency words covering 50% of the Qur'an." path="/modules" />
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-16">
         <motion.div

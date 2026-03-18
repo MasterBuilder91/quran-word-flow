@@ -102,6 +102,7 @@ export default function FlashcardsPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <PageSEO title="Flashcards" description="Learn Quranic Arabic vocabulary with interactive flashcards organized by category." path="/flashcards" />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-8 max-w-6xl">
