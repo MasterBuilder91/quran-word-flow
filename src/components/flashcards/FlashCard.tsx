@@ -216,7 +216,7 @@ function getEmojiForWord(wordId: string): string {
     salt: '🧂', butter: '🧈', oil: '🫒', soup: '🍲', salad: '🥗',
     pizza: '🍕', sandwich: '🥪', pasta: '🍝', 'chicken-food': '🍗',
     'fish-food': '🐟', cake: '🎂', chocolate: '🍫', 'ice-cream': '🍦',
-    juice: '🧃', yogurt: '🥛',
+    juice: '🧃', yogurt: '🥛', cream: '🥛', 'water-drink': '💧',
     nuts: '🥜', falafel: '🧆', hummus: '🫕', kebab: '🍢',
     lamb: '🍖', beef: '🥩', pita: '🫓', shawarma: '🌯',
     breakfast: '🥞', lunch: '🍱', dinner: '🍽️', snack: '🍪',
