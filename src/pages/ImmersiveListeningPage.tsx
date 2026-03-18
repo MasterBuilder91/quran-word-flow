@@ -171,6 +171,7 @@ const ImmersiveListeningPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Immersive Listening" description="Improve Arabic listening skills with immersive audio stories and comprehension exercises." path="/listening" />
       <Header />
       <main className="pt-24 pb-16 container mx-auto px-4">
         <div className="max-w-3xl mx-auto">

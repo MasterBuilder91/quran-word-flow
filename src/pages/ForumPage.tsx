@@ -123,6 +123,7 @@ export default function ForumPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Forum" description="Join the Quranic Arabic learning community. Discuss topics, share insights, and ask questions." path="/forum" />
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-16">
         {/* Hero Section */}

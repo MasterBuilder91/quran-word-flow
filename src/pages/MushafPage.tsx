@@ -28,6 +28,7 @@ const MushafPage = () => {
 
   return (
     <div className="min-h-screen bg-background pattern-stars">
+      <PageSEO title="Mushaf Reader" description="Read the Holy Quran online with a clean, distraction-free digital Mushaf." path="/mushaf" />
       <Header />
       
       <main className="pt-20 md:pt-24">

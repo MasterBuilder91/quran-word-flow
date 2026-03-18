@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 export default function DesertRunnerPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <PageSEO title="Desert Runner" description="Learn Arabic vocabulary while playing an exciting endless runner game. Collect words and dodge obstacles!" path="/games/desert-runner" />
       <Header />
       <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-4">

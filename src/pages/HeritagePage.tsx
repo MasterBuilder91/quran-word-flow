@@ -177,6 +177,7 @@ const HeritagePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageSEO title="Heritage Phrases" description="Learn beautiful Quranic Arabic phrases and expressions rooted in Islamic heritage." path="/heritage" />
       <Header />
       
       <main className="pt-24 pb-12 container mx-auto px-4">
