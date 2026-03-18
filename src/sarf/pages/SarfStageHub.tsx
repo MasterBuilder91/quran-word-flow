@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { STAGES } from '@/sarf/data/seed';
-import { ArrowLeft } from 'lucide-react';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { PageSEO } from '@/components/layout/PageSEO';
 
 const STAGE_MODULES: Record<number, { name: string; nameAr: string; path: string }[]> = {
   1: [
@@ -23,14 +25,19 @@ const SarfStageHub = () => {
   const modules = STAGE_MODULES[Number(stageId)] || [];
   if (!stage) return <div className="p-8 text-center">Stage not found</div>;
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b-2 border-border bg-card/80 backdrop-blur-sm">
-        <div className="container max-w-4xl mx-auto py-4 px-4">
-          <button onClick={() => navigate('/sarf')} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-3"><ArrowLeft className="w-4 h-4" /> Back</button>
-          <div className="text-center"><h1 className="arabic text-2xl text-accent">{stage.nameAr}</h1><p className="text-foreground font-semibold text-lg">{stage.nameEn}</p><p className="text-muted-foreground text-sm mt-1">{stage.description}</p></div>
+    <div className="min-h-screen bg-background flex flex-col">
+      <PageSEO title={`${stage.nameEn} — Sarf`} description={stage.description} path={`/sarf/stage/${stageId}`} />
+      <Header />
+      <div className="pt-20">
+        <div className="border-b border-border bg-card/80">
+          <div className="container max-w-4xl mx-auto py-6 px-4 text-center">
+            <h1 className="arabic text-2xl text-accent">{stage.nameAr}</h1>
+            <p className="text-foreground font-semibold text-lg">{stage.nameEn}</p>
+            <p className="text-muted-foreground text-sm mt-1">{stage.description}</p>
+          </div>
         </div>
-      </header>
-      <main className="container max-w-4xl mx-auto px-4 py-8">
+      </div>
+      <main className="flex-1 container max-w-4xl mx-auto px-4 py-8">
         <div className="space-y-3">
           {modules.map((mod, i) => (
             <button key={i} onClick={() => mod.path !== '#' && navigate(mod.path)} className="w-full text-left bg-card border border-border rounded-lg p-5 hover:border-primary transition-colors flex items-center justify-between">
@@ -40,6 +47,7 @@ const SarfStageHub = () => {
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
