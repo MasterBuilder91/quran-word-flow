@@ -1,8 +1,47 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Sparkles } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Sparkles, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import heroVideo from "@/assets/hero-video.mp4";
+
+// Video player component with unmute button
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  return (
+    <div className="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-primary/30 glow-emerald shadow-2xl bg-black">
+      <video
+        ref={videoRef}
+        src={heroVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-auto"
+      />
+      <button
+        onClick={toggleMute}
+        className="absolute bottom-4 right-4 p-3 rounded-full bg-black/60 hover:bg-black/80 transition-colors border border-white/20"
+        aria-label={isMuted ? "Unmute video" : "Mute video"}
+      >
+        {isMuted ? (
+          <VolumeX className="w-5 h-5 text-white" />
+        ) : (
+          <Volume2 className="w-5 h-5 text-white" />
+        )}
+      </button>
+    </div>
+  );
+};
 
 // Animated counter component
 const AnimatedCounter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
