@@ -146,7 +146,17 @@ export const HeroSection = () => {
             No assumed knowledge. Just clear, structured learning that actually works.
           </motion.p>
 
-          {/* The Viral Hook - 125 Words = 50% */}
+          {/* Hero Video */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mb-10"
+          >
+            <VideoPlayer />
+          </motion.div>
+
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
