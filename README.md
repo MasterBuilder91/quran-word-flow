@@ -1,73 +1,135 @@
-# Welcome to your Lovable project
+# Quran Word Flow
 
-## Project info
+A comprehensive Quranic Arabic learning platform. Covers reading fundamentals, vocabulary, grammar (Sarf/morphology), an interactive Mushaf, a community forum, flashcards, and AI-assisted tools — all in one progressive web app.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live site:** *(add Netlify/Vercel URL in repo Settings → About once deployed)*
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## What it does
 
-**Use Lovable**
+| Feature | Description |
+|---|---|
+| **Learn to Read** | Step-by-step Arabic letter and reading lessons |
+| **Quran Browser (Mushaf)** | Full Quran with word-by-word lookup |
+| **Quran Word Lookup** | AI-powered word analysis (root, grammar, translation) |
+| **Sarf (Morphology)** | Generative verb conjugation drills across patterns |
+| **Flashcards** | Vocabulary flashcards with audio |
+| **Practice Playground** | Free-form Arabic writing and reading practice |
+| **Modules** | Structured grammar modules with progression |
+| **Forum** | Community discussion board |
+| **Ask About Islam** | AI Q&A for Islamic questions |
+| **Heritage / Desert Runner** | Cultural enrichment features |
+| **Admin Dashboard** | Visitor chat management and location analytics |
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Screenshot
 
-**Use your preferred IDE**
+![Quran Word Flow screenshot placeholder](docs/screenshot.png)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+*(replace with an actual screenshot)*
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## Tech stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + TypeScript |
+| Build tool | Vite |
+| Styling | Tailwind CSS + shadcn/ui (Radix UI) |
+| Routing | React Router v6 |
+| State | Zustand + TanStack React Query |
+| Backend / Auth | Supabase (PostgreSQL, Auth, Edge Functions, Realtime) |
+| Maps | Mapbox GL |
+| AI features | Supabase Edge Functions calling Anthropic Claude |
+| TTS | ElevenLabs (via Supabase Edge Function) |
+| PWA | vite-plugin-pwa |
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Architecture
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```
+src/
+  pages/            ← Route-level page components
+  components/       ← Shared UI components (nav, chat widget, admin, flashcards…)
+  sarf/             ← Sarf (morphology) drill sub-app
+  App.tsx           ← Router and global providers
+  App.css           ← Global styles
+
+supabase/
+  functions/        ← Edge Functions (AI features, TTS, Quran API calls)
+    arabic-assistant/     ← Arabic grammar assistant
+    arabic-word-analysis/ ← Word-level Quranic analysis
+    chat-api/             ← Visitor chat backend
+    elevenlabs-tts/       ← Text-to-speech proxy
+    get-mapbox-token/     ← Secure Mapbox token delivery
+    quran-browser/        ← Quran text and verse data
+    quran-word-lookup/    ← Word-by-word lookup
+    send-cheatsheet/      ← Cheatsheet email delivery
+  migrations/       ← SQL migration files
+  config.toml       ← Supabase project config
+
+public/             ← Static assets (images, audio, PDFs, fonts)
+```
+
+---
+
+## Run locally
+
+**Prerequisites:** Node.js 18+, a Supabase project (free tier works).
+
+```bash
+git clone https://github.com/MasterBuilder91/quran-word-flow.git
+cd quran-word-flow
+npm install
+```
+
+Create a `.env` file (do **not** commit it):
+
+```env
+VITE_SUPABASE_URL=https://<your-project>.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=<your-anon-key>
+```
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+**Deploy Edge Functions:**
 
-**Use GitHub Codespaces**
+```bash
+npx supabase functions deploy
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Set any secret keys (Anthropic, ElevenLabs, Mapbox) in the Supabase dashboard under Edge Functions → Secrets.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## Environment variables
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+| Variable | Where | Purpose |
+|---|---|---|
+| `VITE_SUPABASE_URL` | `.env` | Supabase project URL |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | `.env` | Supabase anon/public key |
+| `ANTHROPIC_API_KEY` | Supabase secrets | Claude API for AI features |
+| `ELEVENLABS_API_KEY` | Supabase secrets | TTS audio generation |
+| `MAPBOX_ACCESS_TOKEN` | Supabase secrets | Maps (admin dashboard) |
 
-## How can I deploy this project?
+> **Important:** Keep secret keys in Supabase Edge Function secrets — never commit them. The `.env` file contains only the public Supabase URL and anon key (safe for browser use, governed by Row Level Security), but it should still be added to `.gitignore` to avoid accidental commits.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## Database
 
-Yes, you can!
+Migrations live in `supabase/migrations/`. Run them against your Supabase project with:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+npx supabase db push
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Row Level Security policies control access — anonymous users can read public content; authenticated users can post to the forum and save progress.
